@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A free AFL trade simulator with projected live-ladder draft picks, multi-club trades and indicative trade values." />
+  <title>AFL Trade Machine</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-wrap">
+      <div class="ball-mark" aria-hidden="true">◖</div>
+      <div>
+        <div class="brand">AFL TRADE MACHINE</div>
+        <div class="subbrand">Build it. Check it. Debate it.</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span id="ladderStatus" class="status-pill">Loading live ladder…</span>
+      <button id="shareBtn" class="ghost-btn">Share trade</button>
+      <button id="resetBtn" class="ghost-btn danger">Reset</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">FREE AFL TRADE SIMULATOR</div>
+        <h1>Build an AFL trade that actually makes sense.</h1>
+        <p>Trade players and draft selections between 2–4 clubs. 2026 selections are projected from the current ladder, so their indicative pick numbers move with club position.</p>
+      </div>
+      <div class="hero-note">
+        <strong>Independent simulator</strong>
+        <span>Not affiliated with or endorsed by the AFL. Trade values are indicative, not official.</span>
+      </div>
+    </section>
+
+    <section class="panel club-picker-panel">
+      <div class="section-head">
+        <div>
+          <h2>1. Choose clubs</h2>
+          <p>Select between two and four clubs.</p>
+        </div>
+        <div id="selectedCount" class="counter">2 / 4</div>
+      </div>
+      <div id="clubPicker" class="club-picker"></div>
+    </section>
+
+    <section class="panel board-panel">
+      <div class="section-head">
+        <div>
+          <h2>2. Build the trade</h2>
+          <p>Add players or picks from each club, then choose their destination.</p>
+        </div>
+      </div>
+      <div id="tradeBoard" class="trade-board"></div>
+    </section>
+
+    <section class="analysis-grid">
+      <section class="panel">
+        <div class="section-head compact">
+          <div>
+            <h2>3. Trade balance</h2>
+            <p>Indicative asset-value comparison.</p>
+          </div>
+        </div>
+        <div id="balancePanel" class="balance-panel"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-head compact">
+          <div>
+            <h2>4. AFL rule check</h2>
+            <p>Automated checks plus items requiring manual confirmation.</p>
+          </div>
+        </div>
+        <div id="rulesPanel" class="rules-panel"></div>
+      </section>
+    </section>
+
+    <section class="panel trade-summary-panel">
+      <div class="section-head compact">
+        <div>
+          <h2>Trade summary</h2>
+          <p id="tradeSummaryText">No assets have been added yet.</p>
+        </div>
+      </div>
+      <div id="tradeSummary" class="trade-summary"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
