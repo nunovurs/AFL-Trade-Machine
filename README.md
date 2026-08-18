@@ -1,21 +1,24 @@
 # AFL Trade Machine
 
-Independent, free AFL trade simulator MVP.
+Independent AFL trade simulator MVP, owned by the repository owner.
 
-## Ownership
-This repository is intended to be owned and controlled by the project owner. No proprietary backend or platform lock-in is required for this static MVP.
+## Current features
+- 18 AFL clubs shown alphabetically with club marks
+- Expanded current 2026 player squads
+- 2-, 3- and 4-club trades
+- 2/3/4 club desktop column layout
+- In-column destination selectors for multi-club trades
+- Current 2026 draft-pick ownership and Draft Value Index points
+- 2027 future-pick ownership
+- 2028 future selections (points TBD)
+- Indicative player values and trade-balance display
+- Indicative list-size overflow checks
+- AFL rule / player-consent / future-pick warnings
 
-## Run locally
-Open `index.html` in a modern browser, or serve the folder with any static file server.
+## Data sources
+- Draft order, pick ownership and 2026 DVI points: Zero Hanger draft-order pages (snapshot checked 18 Aug 2026)
+- Player squads / list changes: AFL.com.au and official AFL club squad pages
+- Future-pick rule framework and DVI framework: AFL.com.au
 
-## Current MVP
-- 18 AFL clubs
-- current 2026 player seed data
-- 2–4 club trades
-- players and projected 2026 picks
-- ladder-linked projected pick numbers
-- indicative trade value balance
-- AFL rule-warning panel
-- copy/share summary
-
-Player values are indicative only. The project is not affiliated with or endorsed by the AFL.
+## Important
+This is an independent simulator and is not affiliated with or endorsed by the AFL. Player trade values are indicative only. List-size and rule checks are planning aids, not official AFL determinations.
