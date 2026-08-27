@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 132" role="img" aria-label="GEE independent club mark">
+<defs><filter id="s"><feDropShadow dx="0" dy="3" stdDeviation="2" flood-opacity=".28"/></filter></defs>
+<path d="M12 14 Q60 2 108 14 L102 88 Q91 112 60 126 Q29 112 18 88 Z" fill="#002B5C" stroke="#ffffff" stroke-width="3" filter="url(#s)"/>
+<path d="M19 22 Q60 12 101 22 L96 84 Q86 103 60 116 Q34 103 24 84 Z" fill="none" stroke="#8EB6D8" stroke-width="3" opacity=".85"/>
+<path d="M28 38h64M24 54h72M22 70h76" stroke="#FFFFFF" stroke-width="10"/><path d="M31 30h58" stroke="#8EB6D8" stroke-width="3"/>
+<rect x="25" y="91" width="70" height="22" rx="8" fill="#002B5C" stroke="#FFFFFF" stroke-width="2"/>
+<text x="60" y="107" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="17" font-weight="900" fill="#FFFFFF" letter-spacing=".5">GEE</text>
+</svg>

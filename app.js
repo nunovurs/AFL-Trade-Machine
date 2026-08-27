@@ -134,7 +134,12 @@
   function renderAll(){renderPicker();renderBoard();renderBalance();renderRules();renderSummary();}
 
   window.ATMToast = toast;
-  window.TradeMachine = { render: renderAll, reset(){ trade=[]; selected=['fre','ric']; renderAll(); toast('Trade reset'); } };
+  window.TradeMachine = {
+    render: renderAll,
+    getTrade(){ return trade.map(t=>({from:t.from,to:t.to,asset:{...t.asset}})); },
+    getIncomingPlayers(clubId){ return trade.filter(t=>t.to===clubId&&t.asset.type==='player').map(t=>({...t.asset,from:t.from})); },
+    reset(){ trade=[]; selected=['fre','ric']; renderAll(); toast('Trade reset'); }
+  };
   $('#resetBtn').onclick=()=>window.TradeMachine.reset();
   $('#shareBtn').onclick=async()=>{const text=trade.length?trade.map(t=>`${club(t.from).abbr} → ${club(t.to).abbr}: ${t.asset.name}`).join('\n'):'AFL Trade Machine';try{await navigator.clipboard.writeText(text);toast('Trade copied to clipboard');}catch{toast('Copy unavailable in this browser');}};
   if($('#ladderStatus'))$('#ladderStatus').textContent=`Draft order • ${D.updated||'2026'}`;

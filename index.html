@@ -40,9 +40,9 @@
         <p>Move players and owned selections between two to four AFL clubs. Known 2026 picks carry DVI points, future picks remain club-tied, and player contract context is shown where public information is available.</p>
       </div>
       <div class="hero-note">
-        <div class="hero-note-title">DATA SOURCES</div>
-        <strong>Draft order: Zero Hanger</strong>
-        <span>Squads: AFL.com.au and club lists. Contract and salary information is shown only where publicly supportable; salary figures are estimates unless disclosed.</span>
+        <div class="hero-note-title">TRADE CONTEXT</div>
+        <strong>Value + list + contract context</strong>
+        <span>Known draft points, current pick ownership, list-size checks and publicly supportable contract information are combined in one trade view. Salary figures are labelled as estimates where applicable.</span>
       </div>
     </section>
 
@@ -83,7 +83,7 @@
       <div>
         <div class="eyebrow">2026 AFL MOCK DRAFT</div>
         <h1>YOU'RE ON<br><span>THE CLOCK.</span></h1>
-        <p>Run the current 2026 order, select prospects, trade the live pick and simulate club-tied bids. The starting ownership is synced to the current Zero Hanger draft order.</p>
+        <p>Run the current 2026 order, select prospects, trade the live pick and simulate club-tied bids. Switch to My Mock Draft to build and publish your own club-by-club selections and explanations.</p>
       </div>
       <div class="hero-note">
         <div class="hero-note-title">2026 BID ENGINE</div>
@@ -92,6 +92,12 @@
       </div>
     </section>
 
+    <nav class="draft-subnav" aria-label="Mock draft views">
+      <button class="draft-view-btn active" data-draft-view="live">LIVE SIMULATOR</button>
+      <button class="draft-view-btn" data-draft-view="featured">MY MOCK DRAFT</button>
+    </nav>
+
+    <div id="liveDraftView">
     <section class="draft-layout">
       <div class="draft-main">
         <section class="panel on-clock-panel"><div id="onClock"></div></section>
@@ -116,6 +122,18 @@
         </section>
       </aside>
     </section>
+    </div>
+
+    <section id="featuredMockView" class="featured-mock-view" hidden>
+      <section class="panel featured-intro">
+        <div class="section-head">
+          <div><span class="section-number">MY</span><h2>FEATURED 2026 MOCK DRAFT</h2><p>Your selections, your reasoning and an editable board that can grow as more picks are ready.</p></div>
+          <div class="draft-actions"><button id="addFeaturedPickBtn" class="primary-btn">ADD PICK</button><button id="resetFeaturedMockBtn" class="ghost-btn danger">RESET IMPORTED NOTES</button></div>
+        </div>
+        <div class="featured-notice">The starting notes currently include the club-player assignments recovered from the draft work available in this project. Pick numbers and explanations remain editable so nothing is invented where your original notes were not available.</div>
+      </section>
+      <div id="featuredMockList" class="featured-mock-list"></div>
+    </section>
   </main>
 
   <main class="shell app-mode best23-shell" id="best23Mode" data-mode-panel="best23" hidden>
@@ -138,6 +156,11 @@
         <select id="best23Club"></select>
       </div>
       <div class="builder-selected-club" id="best23ClubIdentity"></div>
+      <div class="builder-hypo-actions">
+        <button id="addBest23PlayerBtn" class="primary-btn">+ ADD PLAYER</button>
+        <button id="importTradePlayersBtn" class="ghost-btn">IMPORT TRADE</button>
+        <button id="addDraftProspectBtn" class="ghost-btn">ADD DRAFT PROSPECT</button>
+      </div>
       <div class="builder-actions">
         <span class="counter" id="best23Count">0 / 23</span>
         <button id="copyBest23Btn" class="ghost-btn">COPY TEAM</button>
@@ -152,7 +175,7 @@
       </section>
 
       <aside class="panel squad-panel">
-        <div class="section-head compact"><div><span class="section-number">02</span><h2>SQUAD POOL</h2><p>Click ADD to fill the next empty position.</p></div></div>
+        <div class="section-head compact"><div><span class="section-number">02</span><h2>SQUAD POOL</h2><p>Current list players plus any trade, draft or custom assumptions you add.</p></div></div>
         <div class="prospect-tools"><input id="best23Search" class="asset-search" placeholder="Search club players…"></div>
         <div id="best23Pool" class="squad-pool"></div>
       </aside>
@@ -167,6 +190,7 @@
   <script src="app.js"></script>
   <script src="mock-draft.js"></script>
   <script src="best23.js"></script>
+  <script src="featured-mock.js"></script>
   <script src="ui.js"></script>
 </body>
 </html>
