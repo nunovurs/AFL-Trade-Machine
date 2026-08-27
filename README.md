@@ -1,50 +1,44 @@
-# AFL Trade Machine v3
+# AFL Trade Machine — v4
 
-Independent AFL simulator owned by the repository owner.
+Independent AFL list-management simulator.
 
-## Trade Machine
-- 18 clubs alphabetically with club marks
-- expanded 2026 player lists
-- 2-, 3- and 4-club desktop layouts
-- current 2026 pick ownership and DVI points
-- 2027 / 2028 future selections
-- list-size overflow checks
-- **Incoming and Outgoing shown together in every club panel**
-- player contract context where verified
-- estimated salary movement where credible public reporting exists
-- Sean Darcy example: contracted to 2030, publicly reported estimate $700k-$800k p.a., plus 2026 WAFL context
+## v4 modes
 
-## Mock Draft (new)
-- Trade Machine / Mock Draft mode switch
-- starts from current Zero Hanger 2026 pick ownership/order snapshot
-- prospect board with club-tied labels
-- make selections pick-by-pick
-- trade the on-clock pick
+### Trade Machine
+- 2–4 club trades
+- alphabetical club selector
+- brighter club logo treatment
+- full current player lists
+- current 2026 owned picks with DVI points
+- 2027/2028 future picks
+- Incoming + Outgoing shown together
+- indicative list-size checks
+- contract/salary context where public information is supportable
+
+### 2026 Mock Draft
+- current Zero Hanger starting pick ownership/order
+- prospect board
+- on-the-clock selection workflow
+- live on-clock pick trades
 - father-son / Academy / NGA bid prompts
-- 2026 ladder-based bid loading/discount
-- maximum two current picks to match bids through Pick 36
-- 412-point deficit cap logic
-- live draft order and draft log
+- 2026 two-pick matching limit through Pick 36
+- finishing-position loading/discount
+- 412-point maximum deficit with following-year first-round-pick check
+- live draft log
 
-## Important mock-draft limitation
-The first mock-draft release implements the main 2026 bid cost, two-pick and deficit rules. The AFL's most complex surplus-pick reshuffling and new first-round slide compensation mechanics are approximated in this MVP and should not yet be treated as an exact official draft-night calculator.
+Complex surplus-pick movement and the new second-round compensation mechanism remain marked as approximations rather than presented as exact AFL draft-night accounting.
 
-## Data sources
-- Draft order / pick ownership / DVI: Zero Hanger 2026 Draft Order
-- Prospect seed board: Zero Hanger 2026 Draft Hub / Top 100
-- Bidding framework: AFL.com.au 2026 player-movement rule changes
-- Player list data: existing AFL Trade Machine v2 dataset
-- Contract context: club/AFL confirmations and clearly labelled media salary estimates
+### Build Your Best 23
+- all 18 AFL clubs
+- 18 starting field slots
+- five interchange slots (23-player 2026 format)
+- full club player pool
+- duplicate prevention
+- click-to-add, direct position selection, search, reset and copy
 
-## Uploading v3
-Upload/replace these files in the existing GitHub repository:
-- `index.html`
-- `styles.css`
-- `app.js`
-- `README.md`
-- `draft-data.js` (new)
-- `mock-draft.js` (new)
+A VFL/WAFL/SANFL companion-side builder is planned as the next Team Builder expansion.
 
-**Keep the existing `data.js` file in the repository.** v3 uses the current v2 `data.js` dataset.
+## Data notes
+Draft order/ownership is based on Zero Hanger. Squads are based on AFL.com.au and official club lists. Contract and salary information is incomplete by design; salary figures are estimates unless publicly disclosed.
 
-The project is not affiliated with or endorsed by the AFL. Trade values and salary estimates are indicative only.
+This project is independent and is not affiliated with or endorsed by the AFL. Player values are indicative only.
