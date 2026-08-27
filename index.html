@@ -16,14 +16,18 @@
         <div class="subbrand">Build it. Check it. Debate it.</div>
       </div>
     </div>
-    <div class="top-actions">
+    <div class="mode-switch" role="tablist" aria-label="Simulator mode">
+      <button id="tradeModeBtn" class="mode-btn active" role="tab" aria-selected="true">Trade Machine</button>
+      <button id="draftModeBtn" class="mode-btn" role="tab" aria-selected="false">Mock Draft</button>
+    </div>
+    <div class="top-actions" id="tradeTopActions">
       <span id="ladderStatus" class="status-pill">Draft order • 18 Aug 2026</span>
       <button id="shareBtn" class="ghost-btn">Share trade</button>
       <button id="resetBtn" class="ghost-btn danger">Reset</button>
     </div>
   </header>
 
-  <main class="shell">
+  <main class="shell" id="tradeMode">
     <section class="hero">
       <div>
         <div class="eyebrow">FREE AFL TRADE SIMULATOR</div>
@@ -74,8 +78,56 @@
     </section>
   </main>
 
+
+  <main class="shell mock-shell" id="draftMode" hidden>
+    <section class="draft-hero">
+      <div>
+        <div class="eyebrow">2026 AFL MOCK DRAFT</div>
+        <h1>Run the draft. Trade picks. Place bids.</h1>
+        <p>Start from the current 2026 draft order, make every selection, trade live picks and simulate father-son, Northern Academy and NGA bids under the 2026 bidding rules.</p>
+      </div>
+      <div class="draft-source-note">
+        <strong>Draft room data</strong>
+        <span>Pick order/ownership: Zero Hanger. Prospect seed board: current Zero Hanger top prospects plus its 2026 Top 100 depth pool. Bidding rules: AFL.com.au 2026 rules. Complex surplus-pick movement and compensation are MVP approximations.</span>
+      </div>
+    </section>
+
+    <section class="draft-layout">
+      <div class="draft-main">
+        <section class="panel on-clock-panel">
+          <div id="onClock"></div>
+        </section>
+
+        <section class="panel draft-order-panel">
+          <div class="section-head compact">
+            <div><h2>Live draft order</h2><p>Matched bids and pick trades update this order.</p></div>
+            <div class="draft-actions"><button id="draftTradePickBtn" class="ghost-btn">Trade on-clock pick</button><button id="resetDraftBtn" class="ghost-btn danger">Reset draft</button></div>
+          </div>
+          <div id="draftOrder" class="draft-order"></div>
+        </section>
+      </div>
+
+      <aside class="draft-side">
+        <section class="panel prospects-panel">
+          <div class="section-head compact"><div><h2>Prospect board</h2><p>Search and select an available prospect.</p></div></div>
+          <div class="prospect-tools"><input id="prospectSearch" class="asset-search" placeholder="Search prospect, position or pathway…"></div>
+          <div id="prospectBoard" class="prospect-board"></div>
+        </section>
+
+        <section class="panel draft-log-panel">
+          <div class="section-head compact"><div><h2>Draft log</h2><p>Selections, bids and live trades.</p></div></div>
+          <div id="draftLog" class="draft-log"></div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div id="draftModal" class="draft-modal" hidden><div class="draft-modal-card" id="draftModalCard"></div></div>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script src="draft-data.js"></script>
+  <script src="mock-draft.js"></script>
 </body>
 </html>
