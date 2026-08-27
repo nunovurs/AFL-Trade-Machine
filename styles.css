@@ -202,3 +202,142 @@ button:disabled{cursor:not-allowed;opacity:.38}
 }
 
 .logo-fallback{position:absolute;z-index:1;inset:0;display:grid;place-items:center;background:#fff;color:#111;font-family:"Arial Black",Arial,sans-serif;font-size:10px;font-weight:1000;letter-spacing:-.03em}
+
+/* ==========================================================================\n   V4.1 LIGHT SPORTS-MEDIA THEME\n   Layout direction inspired by clean AFL media/tool sites: light canvas,\n   white utility cards, compact spacing, dark header, red/navy accents.\n   ========================================================================== */
+:root{
+  --bg:#f4f6f8;
+  --panel:#ffffff;
+  --panel2:#f8fafc;
+  --panel3:#eef2f6;
+  --line:#dfe4ea;
+  --line2:#c9d1da;
+  --text:#17202b;
+  --muted:#667281;
+  --red:#c8102e;
+  --red2:#e31837;
+  --green:#148454;
+  --amber:#b86d00;
+  --blue:#1266a3;
+  --bad:#b42331;
+  --shadow:0 5px 18px rgba(18,32,47,.07);
+  --radius:9px;
+}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--text)}
+
+/* Header stays dark; the application itself does not. */
+.topbar{background:#111c2e;border-bottom:0;box-shadow:0 2px 10px rgba(16,24,40,.16);min-height:68px}
+.red-stripe{height:3px;background:var(--red)}
+.brand{color:#fff}.subbrand{color:#bcc6d3}.brand-mark{background:var(--red)}
+.mode-switch{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+.mode-btn{color:#dbe2ea;border-color:transparent}
+.mode-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.mode-btn.active{background:#fff;color:#111c2e;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.topbar .ghost-btn{color:#fff;border-color:rgba(255,255,255,.3);background:transparent}
+.topbar .ghost-btn:hover{background:rgba(255,255,255,.1)}
+.topbar .ghost-btn.danger{color:#ffd8df}
+.topbar .status-pill{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.17);color:#e5eaf0}
+
+.shell{width:min(1500px,calc(100% - 32px));padding-top:22px;padding-bottom:56px}
+.hero{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 28px;margin:0 0 16px;align-items:center;gap:28px}
+.hero h1{color:#132033;font-size:clamp(32px,4vw,54px);line-height:1.01;margin:6px 0 11px;letter-spacing:-.035em}
+.hero h1 span{color:var(--red)}
+.hero p{color:#596678;font-size:14px;line-height:1.55;max-width:840px}
+.eyebrow{color:var(--red);font-size:10px;letter-spacing:.16em}
+.hero-note{background:#f8fafc;border:1px solid var(--line);border-left:4px solid var(--red);box-shadow:none;color:var(--text)}
+.hero-note-title{color:var(--red)}
+.hero-note strong{color:#17202b}.hero-note span{color:#667281}
+
+.panel{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);color:var(--text)}
+.section-head{background:#fff;border-bottom:1px solid var(--line);padding:16px 18px}
+.section-head h2{color:#17202b;font-size:15px;letter-spacing:.015em}
+.section-head p{color:var(--muted)}
+.section-number{color:var(--red);background:#fff0f2;border-color:#f2c7cf}
+.counter,.status-pill{background:#f5f7fa;color:#465466;border-color:#d8dee6}
+.ghost-btn{background:#fff;color:#253246;border-color:#cbd3dc}
+.ghost-btn:hover{background:#f5f7fa;border-color:#aeb8c3}
+.ghost-btn.danger{color:#b42331;border-color:#e6bcc3}
+.primary-btn{background:var(--red);color:#fff;border-color:var(--red)}
+.primary-btn:hover{background:#a80d26}
+
+.club-picker{background:#f8fafc;padding:14px;gap:8px}
+.club-chip{background:#fff;color:#1f2a37;border:1px solid #dce2e8;box-shadow:0 1px 3px rgba(16,24,40,.04)}
+.club-chip:hover{background:#f9fafb;border-color:#aeb8c4;transform:translateY(-1px)}
+.club-chip.selected{background:#fff5f6;border-color:var(--red);outline:1px solid var(--red);box-shadow:0 0 0 2px rgba(200,16,46,.08)}
+.club-logo-wrap,.team-logo-box,.builder-logo-box{background:#fff;border:1px solid #e0e5ea}
+.club-logo,.team-logo,.builder-selected-club img{filter:saturate(1.35) contrast(1.08)}
+
+.trade-board{background:#f5f7f9}
+.team-card{background:#fff;border-color:#dbe1e7;box-shadow:0 2px 8px rgba(16,24,40,.05)}
+.team-card-head{background:linear-gradient(90deg,color-mix(in srgb,var(--club) 9%,#fff),#fff 72%);border-bottom-color:var(--club)}
+.team-name{color:#182332}.team-rank{color:#667281}.remove-team{color:#667281}.remove-team:hover{color:var(--red)}
+.team-tabs{background:#fafbfc;border-bottom-color:#dfe4ea}
+.team-tab{color:#677486}.team-tab.active{color:#17202b;background:#fff;box-shadow:inset 0 -3px 0 var(--red)}
+.asset-tools,.prospect-tools{background:#f8fafc;border-bottom-color:#e1e6ec}
+.asset-search{background:#fff;color:#17202b;border-color:#cfd7e0}
+.asset-search::placeholder{color:#8b96a3}
+.asset-search:focus{border-color:#7d8ea2;box-shadow:0 0 0 3px rgba(18,102,163,.08)}
+.asset-list{background:#fff}
+.asset-row{border-bottom-color:#edf0f3}
+.asset-row:hover{background:#f6f8fa}
+.asset-name{color:#17202b}.asset-meta{color:#6b7787}
+.asset-add{background:#fff;color:#223047;border-color:#bfc9d4}.asset-add:hover{background:#172a46;color:#fff;border-color:#172a46}
+.asset-destination,.modal-select,.builder-club-control select,.position-select{background:#fff;color:#17202b;border-color:#cbd4dd}
+.destination-fixed{color:#667281}
+.points-badge{background:#e9f7ef;color:#16704b}.points-badge.tbd{background:#fff5df;color:#976100}
+.contract-inline{color:#5d6978}.trade-contract{color:#5d6978}
+
+.movement-grid{background:#fafbfc;border-top-color:#e0e5ea}
+.movement-col{background:#fff}
+.movement-col + .movement-col{border-left-color:#e1e6eb}
+.outgoing-title{color:#667281}
+.trade-item{background:#f8fafc;border-color:#dce3e9;color:#17202b}
+.trade-item .name{color:#17202b}.trade-item .route{color:#667281}.trade-remove{color:#b42331}
+.empty-mini{color:#8a95a3}
+
+.analysis-grid{gap:14px}
+.balance-row{border-bottom-color:#edf0f3}.balance-team{color:#17202b}.balance-detail,.balance-footnote{color:#6a7685}
+.meter{background:#edf1f4}.meter-fill{background:linear-gradient(90deg,#164a78,#2c7ab8)}
+.rule{border-bottom-color:#edf0f3}.rule-title{color:#17202b}.rule-text{color:#667281}
+.rule.pass .rule-icon{background:#eaf7f0;color:#148454}.rule.warn .rule-icon{background:#fff5df;color:#9b6500}.rule.fail .rule-icon{background:#fff0f2;color:#b42331}
+.trade-summary{background:#fff}.summary-club{border-bottom-color:#edf0f3}.summary-club-name{color:#17202b}.summary-token{background:#f7f9fb;border-color:#dfe5eb;color:#2b3747}.summary-token strong{color:#1266a3}.summary-origin{color:#667281}.summary-direction{color:#667281}.salary-summary{color:#596678}
+
+/* Draft mode */
+.draft-layout{gap:14px}
+.on-clock-panel{background:#fff;border-top:4px solid var(--red)}
+.on-clock-row{background:#fff}
+.on-clock-label{color:var(--red)}
+.on-clock-pick,.on-clock-inner h2{color:#17202b}.on-clock-meta{color:#667281}
+.selected-prospect{background:#f8fafc;border-color:#dce3e9;border-left-color:var(--red)}
+.selected-prospect>span,.selected-prospect small{color:#667281}.selected-prospect strong{color:#17202b}
+.draft-order{background:#fff}
+.draft-order-row{border-bottom-color:#e8ecf0;color:#263242}
+.draft-order-row:hover{background:#f7f9fb}
+.draft-order-row.current{background:#fff3f5;box-shadow:inset 4px 0 0 var(--red)}
+.draft-order-row.used{background:#f6f7f9;opacity:.72}
+.draft-pick-no{color:#17202b}.draft-club span,.draft-player span,.draft-points{color:#6b7787}.draft-club strong,.draft-player strong{color:#17202b}
+.matched-badge{background:#fff0f2;color:#a70d25}
+.prospect-board{background:#fff}
+.prospect-row{background:#fff;color:#17202b;border-bottom-color:#e7ebef}
+.prospect-row:hover{background:#f6f8fa}.prospect-row.selected{background:#fff1f3;box-shadow:inset 3px 0 0 var(--red)}
+.prospect-rank{color:#334155}.prospect-copy strong{color:#17202b}.prospect-copy small{color:#6d7887}.prospect-copy em{color:#9b1c31}.prospect-select-label{color:#a30f29;border-color:#e5b9c1;background:#fff7f8}
+.draft-log{background:#fff}.log-item{border-bottom-color:#e8ecf0}.log-item span{color:#8a95a3}.log-item p{color:#465466}.empty-log{color:#8a95a3}
+.draft-modal{background:rgba(17,28,46,.42);backdrop-filter:blur(2px)}
+.draft-modal-card{background:#fff;color:#17202b;border-color:#d5dde5;box-shadow:0 30px 70px rgba(16,24,40,.2)}
+.draft-modal-card h3{color:#17202b}.draft-modal-card p,.modal-note{color:#667281!important}.modal-kicker{color:var(--red)}
+.bid-grid>div{background:#f8fafc;border-color:#dce3e9}.bid-grid span{color:#748091}.bid-grid strong{color:#17202b}.modal-label{color:#566273}
+
+/* Best 23 */
+.builder-toolbar{background:#fff;border-top-color:var(--red)}
+.builder-club-control label{color:#667281}.builder-selected-club{color:#17202b}
+.field-panel{background:#fff}
+.football-field{background:radial-gradient(ellipse at center,#3e985e 0,#2b7f4b 58%,#236d3f 100%)}
+.position-slot{background:rgba(255,255,255,.93);border-color:rgba(255,255,255,.95);border-top-color:var(--red);box-shadow:0 4px 12px rgba(14,40,25,.17)}
+.position-name{color:#516254;text-shadow:none}.position-select{background:#fff;color:#17202b;border-color:#bfcac2}
+.squad-panel{background:#fff}.squad-pool{background:#fff}.squad-row{border-bottom-color:#e8ecf0}.squad-row:hover{background:#f7f9fb}.squad-name{color:#17202b}.squad-status{color:#778393}.squad-add{background:#fff;color:#223047;border-color:#bdc7d1}.squad-add:hover{background:#172a46;border-color:#172a46;color:#fff}
+
+.toast{background:#172a46;color:#fff;border-left-color:var(--red);box-shadow:0 12px 30px rgba(16,24,40,.18)}
+
+@media(max-width:930px){
+  .topbar{background:#111c2e}.hero{padding:20px}.hero h1{font-size:40px}
+}
