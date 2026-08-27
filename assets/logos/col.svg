@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 132" role="img" aria-label="COL independent club mark">
+<defs><filter id="s"><feDropShadow dx="0" dy="3" stdDeviation="2" flood-opacity=".28"/></filter></defs>
+<path d="M12 14 Q60 2 108 14 L102 88 Q91 112 60 126 Q29 112 18 88 Z" fill="#111111" stroke="#ffffff" stroke-width="3" filter="url(#s)"/>
+<path d="M19 22 Q60 12 101 22 L96 84 Q86 103 60 116 Q34 103 24 84 Z" fill="none" stroke="#AAB0B6" stroke-width="3" opacity=".85"/>
+<path d="M25 36 L60 78 L95 36" fill="none" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 34 L60 64 L85 34" fill="none" stroke="#AAB0B6" stroke-width="4"/>
+<rect x="25" y="91" width="70" height="22" rx="8" fill="#111111" stroke="#FFFFFF" stroke-width="2"/>
+<text x="60" y="107" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="17" font-weight="900" fill="#FFFFFF" letter-spacing=".5">COL</text>
+</svg>
