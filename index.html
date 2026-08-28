@@ -57,23 +57,32 @@
     <section class="panel board-panel">
       <div class="section-head">
         <div><span class="section-number">02</span><h2>BUILD THE TRADE</h2><p>Two, three and four-team trades stay in columns on desktop. Each club shows incoming and outgoing assets.</p></div>
+        <div class="board-actions"><button id="runTradeBtn" class="primary-btn run-trade-btn">RUN TRADE</button></div>
       </div>
       <div id="tradeBoard" class="trade-board cols-2"></div>
     </section>
 
+    <section id="tradeVerdictSection" class="panel trade-verdict-panel" hidden>
+      <div class="section-head compact">
+        <div><span class="section-number">03</span><h2>TRADE VERDICT</h2><p>Indicative fairness, club-by-club balance and rule/list feedback.</p></div>
+        <button id="closeTradeVerdictBtn" class="ghost-btn">CLOSE</button>
+      </div>
+      <div id="tradeVerdict" class="trade-verdict"></div>
+    </section>
+
     <section class="analysis-grid">
       <section class="panel">
-        <div class="section-head compact"><div><span class="section-number">03</span><h2>TRADE BALANCE</h2><p>Indicative player value + known DVI.</p></div></div>
+        <div class="section-head compact"><div><span class="section-number">04</span><h2>TRADE BALANCE</h2><p>Indicative player value + known DVI.</p></div></div>
         <div id="balancePanel" class="balance-panel"></div>
       </section>
       <section class="panel">
-        <div class="section-head compact"><div><span class="section-number">04</span><h2>RULE & LIST CHECK</h2><p>List-size, consent and future-pick warnings.</p></div></div>
+        <div class="section-head compact"><div><span class="section-number">05</span><h2>RULE & LIST CHECK</h2><p>List-size, consent and future-pick warnings.</p></div></div>
         <div id="rulesPanel" class="rules-panel"></div>
       </section>
     </section>
 
     <section class="panel trade-summary-panel">
-      <div class="section-head compact"><div><span class="section-number">05</span><h2>TRADE SUMMARY</h2><p id="tradeSummaryText">No assets have been added yet.</p></div></div>
+      <div class="section-head compact"><div><span class="section-number">06</span><h2>TRADE SUMMARY</h2><p id="tradeSummaryText">No assets have been added yet.</p></div></div>
       <div id="tradeSummary" class="trade-summary"></div>
     </section>
   </main>

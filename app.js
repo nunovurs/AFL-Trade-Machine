@@ -131,7 +131,55 @@
     $('#tradeSummaryText').textContent=`${trade.length} asset${trade.length!==1?'s':''} in this proposal.`;
     $('#tradeSummary').innerHTML=selected.map(id=>{const c=club(id),incoming=trade.filter(t=>t.to===id),outgoing=trade.filter(t=>t.from===id),salIn=incoming.reduce((s,t)=>s+(t.asset.contract?.salaryEstimate||0),0),salOut=outgoing.reduce((s,t)=>s+(t.asset.contract?.salaryEstimate||0),0);return `<div class="summary-club"><div class="summary-club-name">${esc(c.name)}</div><div class="summary-assets"><div class="summary-direction"><strong>IN</strong>${incoming.length?incoming.map(t=>`<span class="summary-token">${esc(t.asset.name)} <span class="summary-origin">from ${esc(club(t.from).abbr)}</span></span>`).join(''):'<span class="empty-mini">Nothing</span>'}</div><div class="summary-direction"><strong>OUT</strong>${outgoing.length?outgoing.map(t=>`<span class="summary-token">${esc(t.asset.name)} <span class="summary-origin">to ${esc(club(t.to).abbr)}</span></span>`).join(''):'<span class="empty-mini">Nothing</span>'}</div>${salIn||salOut?`<div class="salary-summary">Known estimated annual salary movement: in ${money(salIn)} • out ${money(salOut)}</div>`:''}</div></div>`;}).join('');
   }
-  function renderAll(){renderPicker();renderBoard();renderBalance();renderRules();renderSummary();}
+  function tradeSignature(){
+    return trade.map(t=>`${t.from}>${t.to}:${t.asset.id}`).sort().join('|');
+  }
+  function tradeStats(){
+    return selected.map(id=>{
+      const incoming=trade.filter(t=>t.to===id),outgoing=trade.filter(t=>t.from===id);
+      const valueIn=incoming.reduce((s,t)=>s+t.asset.value,0),valueOut=outgoing.reduce((s,t)=>s+t.asset.value,0);
+      const salaryIn=incoming.reduce((s,t)=>s+(t.asset.contract?.salaryEstimate||0),0),salaryOut=outgoing.reduce((s,t)=>s+(t.asset.contract?.salaryEstimate||0),0);
+      return {id,incoming,outgoing,valueIn,valueOut,delta:valueIn-valueOut,salaryIn,salaryOut};
+    });
+  }
+  function runTradeEvaluation(){
+    if(!trade.length)return toast('Add players or picks before running the trade');
+    const section=$('#tradeVerdictSection'),out=$('#tradeVerdict');if(!section||!out)return;
+    const stats=tradeStats();
+    const active=stats.filter(s=>s.incoming.length||s.outgoing.length);
+    const inactive=stats.filter(s=>!s.incoming.length&&!s.outgoing.length);
+    const scored=active.map(s=>{const base=Math.max(750,(s.valueIn+s.valueOut)/2);return {...s,pressure:Math.abs(s.delta)/base};});
+    const maxPressure=Math.max(0,...scored.map(s=>s.pressure));
+    const winner=[...scored].sort((a,b)=>b.delta-a.delta)[0];
+    const loser=[...scored].sort((a,b)=>a.delta-b.delta)[0];
+    let fairness='BALANCED',fairClass='pass',fairCopy='The indicative value coming in and going out is reasonably close across the participating clubs.';
+    if(maxPressure>.45){fairness=`HEAVILY FAVOURS ${club(winner.id).abbr}`,fairClass='fail',fairCopy=`The current value model shows a large gap between what ${club(winner.id).name} receives and what it sends. ${club(loser.id).name} is giving up the most net indicative value.`;}
+    else if(maxPressure>.28){fairness=`FAVOURS ${club(winner.id).abbr}`,fairClass='warn',fairCopy=`The trade is workable as a concept, but the indicative value leans toward ${club(winner.id).name}. ${club(loser.id).name} would likely want more value or a different asset mix.`;}
+    else if(maxPressure>.15){fairness=`SLIGHT EDGE ${club(winner.id).abbr}`,fairClass='warn',fairCopy=`The trade is within a plausible negotiating range, with a modest indicative value edge to ${club(winner.id).name}.`;}
+    const listChecks=stats.map(s=>listRule(club(s.id)));
+    const listFails=listChecks.filter(r=>r.s==='fail');
+    const future=trade.filter(t=>t.asset.type==='pick'&&t.asset.year>2026);
+    const contracted=trade.filter(t=>t.asset.type==='player'&&t.asset.contract?.expiry);
+    let compliance='NO OBVIOUS LIST-SIZE BREACH',compClass='pass',compCopy='No indicative list-cap overflow is detected from the player movements in this proposal.';
+    if(listFails.length){compliance='LIST / COMPLIANCE ISSUE',compClass='fail',compCopy=listFails.map(r=>r.x).join(' ');}
+    else if(future.length){compliance='RULE CHECK REQUIRED',compClass='warn',compCopy='The proposal contains future selections. The simulator can show current ownership, but the applicable future-pick trading restrictions still require official AFL confirmation.';}
+    if(inactive.length){compClass=compClass==='fail'?'fail':'warn';compCopy+=` ${inactive.map(s=>club(s.id).name).join(', ')} ${inactive.length===1?'is':'are'} selected but not currently involved in an asset movement.`;}
+    const teamCards=stats.map(s=>{
+      const c=club(s.id),delta=s.delta,cls=Math.abs(delta)<250?'neutral':delta>0?'pos':'neg';
+      const playerIn=s.incoming.filter(t=>t.asset.type==='player').length,playerOut=s.outgoing.filter(t=>t.asset.type==='player').length,pickIn=s.incoming.filter(t=>t.asset.type==='pick').length,pickOut=s.outgoing.filter(t=>t.asset.type==='pick').length;
+      let note='Indicative value is close to even.';
+      if(delta>250)note=`Receives about ${delta.toLocaleString()} more indicative value than it sends.`;
+      if(delta<-250)note=`Sends about ${Math.abs(delta).toLocaleString()} more indicative value than it receives.`;
+      return `<article class="verdict-team" style="--club:${c.color}"><div class="verdict-team-head"><img src="${esc(c.logo)}" alt="${esc(c.name)} logo"><div><strong>${esc(c.name)}</strong><span>IN ${s.valueIn.toLocaleString()} • OUT ${s.valueOut.toLocaleString()}</span></div><b class="verdict-delta ${cls}">${delta>0?'+':''}${delta.toLocaleString()}</b></div><p>${esc(note)}</p><small>${playerIn} player${playerIn!==1?'s':''} in / ${playerOut} out • ${pickIn} pick${pickIn!==1?'s':''} in / ${pickOut} out${s.salaryIn||s.salaryOut?` • known est. salary ${money(s.salaryIn)} in / ${money(s.salaryOut)} out`:''}</small></article>`;
+    }).join('');
+    out.innerHTML=`<div class="trade-verdict-hero"><div class="verdict-score ${fairClass}"><span>FAIRNESS</span><strong>${esc(fairness)}</strong><p>${esc(fairCopy)}</p></div><div class="verdict-score ${compClass}"><span>COMPLIANCE</span><strong>${esc(compliance)}</strong><p>${esc(compCopy)}</p></div></div><div class="verdict-team-grid">${teamCards}</div><div class="verdict-notes"><strong>WHAT THIS CHECK MEANS</strong><span>Fairness uses the site's indicative player values plus known DVI points; it is not an official AFL valuation. Player consent is still required for player trades${contracted.length?`, including ${contracted.length} contracted player${contracted.length!==1?'s':''} in this proposal`:''}. AFL approval, final list categories, salary-cap treatment and any special draft/trade rules remain subject to official confirmation.</span></div>`;
+    section.hidden=false;section.dataset.signature=tradeSignature();
+    section.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  function syncEvaluationState(){
+    const section=$('#tradeVerdictSection');if(section&&!section.hidden&&section.dataset.signature!==tradeSignature()){section.hidden=true;section.removeAttribute('data-signature');}
+  }
+  function renderAll(){renderPicker();renderBoard();renderBalance();renderRules();renderSummary();syncEvaluationState();}
 
   window.ATMToast = toast;
   window.TradeMachine = {
@@ -141,6 +189,8 @@
     reset(){ trade=[]; selected=['fre','ric']; renderAll(); toast('Trade reset'); }
   };
   $('#resetBtn').onclick=()=>window.TradeMachine.reset();
+  $('#runTradeBtn')&&($('#runTradeBtn').onclick=runTradeEvaluation);
+  $('#closeTradeVerdictBtn')&&($('#closeTradeVerdictBtn').onclick=()=>{$('#tradeVerdictSection').hidden=true;});
   $('#shareBtn').onclick=async()=>{const text=trade.length?trade.map(t=>`${club(t.from).abbr} → ${club(t.to).abbr}: ${t.asset.name}`).join('\n'):'AFL Trade Machine';try{await navigator.clipboard.writeText(text);toast('Trade copied to clipboard');}catch{toast('Copy unavailable in this browser');}};
   if($('#ladderStatus'))$('#ladderStatus').textContent=`Draft order • ${D.updated||'2026'}`;
   renderAll();

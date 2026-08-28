@@ -6,8 +6,27 @@
   const toast=msg=>window.ATMToast?window.ATMToast(msg):console.log(msg);
   const clubs=[...D.clubs].sort((a,b)=>a.name.localeCompare(b.name));
   const club=id=>clubs.find(c=>c.id===id);
-  const CLUB_THEME={ade:{primary:'#f6c000',secondary:'#002b5c',text:'#111'},bri:{primary:'#f5c400',secondary:'#7b002c',text:'#111'},car:{primary:'#ffffff',secondary:'#071c3d',text:'#071c3d'},col:{primary:'#ffffff',secondary:'#111111',text:'#111'},ess:{primary:'#d71920',secondary:'#050505',text:'#fff'},fre:{primary:'#ffffff',secondary:'#5b2b82',text:'#5b2b82'},gee:{primary:'#ffffff',secondary:'#002b5c',text:'#002b5c'},gcs:{primary:'#ffd200',secondary:'#e7192d',text:'#111'},gws:{primary:'#f15a22',secondary:'#202020',text:'#111'},haw:{primary:'#f4c430',secondary:'#4d2004',text:'#111'},mel:{primary:'#d71920',secondary:'#061a33',text:'#fff'},nm:{primary:'#ffffff',secondary:'#00529b',text:'#00529b'},pa:{primary:'#00a2b8',secondary:'#111111',text:'#111'},ric:{primary:'#f2d318',secondary:'#050505',text:'#111'},stk:{primary:'#ed1b2f',secondary:'#111111',text:'#fff'},syd:{primary:'#e31b23',secondary:'#ffffff',text:'#fff'},wce:{primary:'#f4c430',secondary:'#003087',text:'#111'},wbd:{primary:'#e31b23',secondary:'#1b4f9c',text:'#fff'}};
-  const themeFor=id=>CLUB_THEME[id]||{primary:'#d6dce1',secondary:'#172337',text:'#111'};
+  const CLUB_THEME={
+    ade:{primary:'#f2c500',secondary:'#002b5c',text:'#111',selectorBg:'#002b5c',selectorText:'#fff',bands:['#002b5c','#d71920','#f2c500']},
+    bri:{primary:'#f5c400',secondary:'#7b002c',text:'#111',selectorBg:'#7b002c',selectorText:'#fff',bands:['#7b002c','#0055a4','#f5c400']},
+    car:{primary:'#071c3d',secondary:'#071c3d',text:'#fff',selectorBg:'#071c3d',selectorText:'#fff',bands:['#071c3d','#071c3d','#071c3d']},
+    col:{primary:'#ffffff',secondary:'#111111',text:'#111',selectorBg:'#ffffff',selectorText:'#111',bands:['#111111','#ffffff','#111111']},
+    ess:{primary:'#d71920',secondary:'#050505',text:'#fff',selectorBg:'#050505',selectorText:'#fff',bands:['#050505','#d71920','#050505']},
+    fre:{primary:'#5b2b82',secondary:'#ffffff',text:'#fff',selectorBg:'#5b2b82',selectorText:'#fff',bands:['#5b2b82','#ffffff','#5b2b82']},
+    gee:{primary:'#002b5c',secondary:'#ffffff',text:'#fff',selectorBg:'#002b5c',selectorText:'#fff',bands:['#002b5c','#ffffff','#002b5c']},
+    gcs:{primary:'#ffd200',secondary:'#e7192d',text:'#111',selectorBg:'#e7192d',selectorText:'#fff',bands:['#e7192d','#ffd200','#e7192d']},
+    gws:{primary:'#f15a22',secondary:'#172b49',text:'#172b49',selectorBg:'#f15a22',selectorText:'#172b49',bands:['#f15a22','#172b49','#f15a22']},
+    haw:{primary:'#f4c430',secondary:'#4d2004',text:'#111',selectorBg:'#f4c430',selectorText:'#4d2004',bands:['#4d2004','#f4c430','#4d2004']},
+    mel:{primary:'#d71920',secondary:'#061a33',text:'#fff',selectorBg:'#061a33',selectorText:'#fff',bands:['#061a33','#d71920','#061a33']},
+    nm:{primary:'#00529b',secondary:'#ffffff',text:'#fff',selectorBg:'#00529b',selectorText:'#fff',bands:['#00529b','#ffffff','#00529b']},
+    pa:{primary:'#00a2b8',secondary:'#111111',text:'#111',selectorBg:'#111111',selectorText:'#fff',bands:['#111111','#00a2b8','#111111']},
+    ric:{primary:'#f2d318',secondary:'#050505',text:'#111',selectorBg:'#f2d318',selectorText:'#050505',bands:['#050505','#f2d318','#050505']},
+    stk:{primary:'#ed1b2f',secondary:'#111111',text:'#fff',selectorBg:'#ffffff',selectorText:'#111111',bands:['#ed1b2f','#ffffff','#111111']},
+    syd:{primary:'#e31b23',secondary:'#ffffff',text:'#fff',selectorBg:'#e31b23',selectorText:'#fff',bands:['#e31b23','#ffffff','#e31b23']},
+    wce:{primary:'#d5a900',secondary:'#003087',text:'#003087',selectorBg:'#d5a900',selectorText:'#003087',bands:['#d5a900','#003087','#d5a900']},
+    wbd:{primary:'#e31b23',secondary:'#1b4f9c',text:'#fff',selectorBg:'#ffffff',selectorText:'#1b4f9c',bands:['#e31b23','#ffffff','#1b4f9c']}
+  };
+  const themeFor=id=>CLUB_THEME[id]||{primary:'#d6dce1',secondary:'#172337',text:'#111',selectorBg:'#172337',selectorText:'#fff',bands:['#172337','#d6dce1','#172337']};
 
   const groups=[
     {label:'BACKS',slots:[['BP','Back Pocket'],['FB','Full Back'],['BP2','Back Pocket']]},
@@ -41,7 +60,7 @@
   }
   function renderIdentity(){
     const c=club(clubId),el=$('#best23ClubIdentity'); if(!el)return;
-    const t=themeFor(clubId),mode=$('#best23Mode');if(mode){mode.style.setProperty('--teamPrimary',t.primary);mode.style.setProperty('--teamSecondary',t.secondary);mode.style.setProperty('--teamText',t.text);}
+    const t=themeFor(clubId),mode=$('#best23Mode');if(mode){mode.style.setProperty('--teamPrimary',t.primary);mode.style.setProperty('--teamSecondary',t.secondary);mode.style.setProperty('--teamText',t.text);mode.style.setProperty('--selectorBg',t.selectorBg);mode.style.setProperty('--selectorText',t.selectorText);mode.style.setProperty('--selectorA',t.bands[0]);mode.style.setProperty('--selectorB',t.bands[1]);mode.style.setProperty('--selectorC',t.bands[2]);}
     el.innerHTML=`<span class="builder-logo-box"><img src="${esc(c.logo)}" alt="${esc(c.name)} logo"></span><span><strong>${esc(c.name)}</strong><small>${customList().length?`${customList().length} hypothetical player${customList().length!==1?'s':''} added`:'Current club list'}</small></span>`;
     $('#best23Count').textContent=`${selectedCount()} / 23`;
   }
@@ -69,26 +88,13 @@
   }
   function renderField(){
     const el=$('#best23Field'); if(!el)return;
-    const t=themeFor(clubId);
-    const patterns={
-      ade:['#002b5c','#d71920','#f6c000'],bri:['#7b002c','#0055a4','#f5c400'],car:['#071c3d','#ffffff','#071c3d'],
-      col:['#111111','#ffffff','#111111'],ess:['#050505','#d71920','#050505'],fre:['#5b2b82','#ffffff','#5b2b82'],
-      gee:['#002b5c','#ffffff','#002b5c'],gcs:['#e7192d','#ffd200','#e7192d'],gws:['#202020','#f15a22','#202020'],
-      haw:['#4d2004','#f4c430','#4d2004'],mel:['#061a33','#d71920','#061a33'],nm:['#00529b','#ffffff','#00529b'],
-      pa:['#111111','#00a2b8','#111111'],ric:['#f2d318','#050505','#f2d318'],stk:['#ed1b2f','#ffffff','#111111'],
-      syd:['#e31b23','#ffffff','#e31b23'],wce:['#003087','#f4c430','#003087'],wbd:['#1b4f9c','#e31b23','#1b4f9c']
-    };
-    const stripe=patterns[clubId]||[t.primary,t.secondary,t.primary];
-    el.style.setProperty('--slotA',stripe[0]);
-    el.style.setProperty('--slotB',stripe[1]);
-    el.style.setProperty('--slotC',stripe[2]);
     el.innerHTML=groups.map(g=>`<div class="field-line ${g.interchange?'interchange':''}">
       <div class="field-line-label">${esc(g.label)}</div>
       <div class="field-line-slots">${g.slots.map(([key,label])=>{
         const value=lineup()[key],meta=value?playerMeta(value):null;
         return `<div class="position-slot ${meta&&meta.source!=='Club list'?'hypothetical':''} ${activeSlotKey===key?'active-slot':''}" data-slot-card="${key}" data-player-name="${esc(value)}" draggable="${value?'true':'false'}" tabindex="0" role="button" aria-label="${esc(label)}${value?`: ${esc(value)}`:': empty'}">
           <div class="position-name">${esc(label)}</div>
-          <select class="position-select" data-slot="${key}" aria-label="${esc(label)}">${slotOptions(key)}</select>
+          <div class="position-select-wrap"><select class="position-select" data-slot="${key}" aria-label="${esc(label)}">${slotOptions(key)}</select></div>
           ${meta&&meta.source!=='Club list'?`<span class="assumption-tag">${esc(meta.source)}</span>`:''}
           <span class="drag-slot-hint">${value?'DRAG TO MOVE / SWAP':'DROP PLAYER HERE'}</span>
         </div>`;
