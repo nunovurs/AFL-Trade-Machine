@@ -21,6 +21,8 @@
   const slotKeys=groups.flatMap(g=>g.slots.map(s=>s[0]));
   const lineups={}, extras={};
   let clubId='ric';
+  let activeSlotKey=null;
+  let dragState=null;
   const blank=()=>Object.fromEntries(slotKeys.map(k=>[k,'']));
   const lineup=()=>lineups[clubId] ||= blank();
   const customList=(id=clubId)=>extras[id] ||= [];
@@ -35,7 +37,7 @@
   function renderClubOptions(){
     const sel=$('#best23Club'); if(!sel)return;
     sel.innerHTML=clubs.map(c=>`<option value="${c.id}" ${c.id===clubId?'selected':''}>${esc(c.name)}</option>`).join('');
-    sel.onchange=()=>{clubId=sel.value;render();};
+    sel.onchange=()=>{clubId=sel.value;activeSlotKey=null;render();};
   }
   function renderIdentity(){
     const c=club(clubId),el=$('#best23ClubIdentity'); if(!el)return;
@@ -47,22 +49,76 @@
     const current=lineup()[key],used=selectedSet(key);
     return `<option value="">— SELECT PLAYER —</option>`+allPlayers().map(p=>`<option value="${esc(p.name)}" ${current===p.name?'selected':''} ${used.has(p.name)?'disabled':''}>${esc(p.name)}${p.source!=='Club list'?` • ${esc(p.source)}`:''}</option>`).join('');
   }
+  function setPlayerInSlot(key,name){
+    if(!slotKeys.includes(key)) return;
+    const current=lineup()[key];
+    if(!name){lineup()[key]='';render();return;}
+    const existingKey=Object.entries(lineup()).find(([k,v])=>k!==key&&v===name)?.[0];
+    if(existingKey) lineup()[existingKey]='';
+    lineup()[key]=name;
+    activeSlotKey=key;
+    render();
+  }
+  function moveOrSwapSlot(fromKey,toKey){
+    if(!fromKey||!toKey||fromKey===toKey)return;
+    const from=lineup()[fromKey],to=lineup()[toKey];
+    lineup()[toKey]=from;
+    lineup()[fromKey]=to;
+    activeSlotKey=toKey;
+    render();
+  }
   function renderField(){
     const el=$('#best23Field'); if(!el)return;
+    const t=themeFor(clubId);
+    const patterns={
+      ade:['#002b5c','#d71920','#f6c000'],bri:['#7b002c','#0055a4','#f5c400'],car:['#071c3d','#ffffff','#071c3d'],
+      col:['#111111','#ffffff','#111111'],ess:['#050505','#d71920','#050505'],fre:['#5b2b82','#ffffff','#5b2b82'],
+      gee:['#002b5c','#ffffff','#002b5c'],gcs:['#e7192d','#ffd200','#e7192d'],gws:['#202020','#f15a22','#202020'],
+      haw:['#4d2004','#f4c430','#4d2004'],mel:['#061a33','#d71920','#061a33'],nm:['#00529b','#ffffff','#00529b'],
+      pa:['#111111','#00a2b8','#111111'],ric:['#f2d318','#050505','#f2d318'],stk:['#ed1b2f','#ffffff','#111111'],
+      syd:['#e31b23','#ffffff','#e31b23'],wce:['#003087','#f4c430','#003087'],wbd:['#1b4f9c','#e31b23','#1b4f9c']
+    };
+    const stripe=patterns[clubId]||[t.primary,t.secondary,t.primary];
+    el.style.setProperty('--slotA',stripe[0]);
+    el.style.setProperty('--slotB',stripe[1]);
+    el.style.setProperty('--slotC',stripe[2]);
     el.innerHTML=groups.map(g=>`<div class="field-line ${g.interchange?'interchange':''}">
       <div class="field-line-label">${esc(g.label)}</div>
       <div class="field-line-slots">${g.slots.map(([key,label])=>{
         const value=lineup()[key],meta=value?playerMeta(value):null;
-        return `<div class="position-slot ${meta&&meta.source!=='Club list'?'hypothetical':''}">
+        return `<div class="position-slot ${meta&&meta.source!=='Club list'?'hypothetical':''} ${activeSlotKey===key?'active-slot':''}" data-slot-card="${key}" data-player-name="${esc(value)}" draggable="${value?'true':'false'}" tabindex="0" role="button" aria-label="${esc(label)}${value?`: ${esc(value)}`:': empty'}">
           <div class="position-name">${esc(label)}</div>
           <select class="position-select" data-slot="${key}" aria-label="${esc(label)}">${slotOptions(key)}</select>
           ${meta&&meta.source!=='Club list'?`<span class="assumption-tag">${esc(meta.source)}</span>`:''}
+          <span class="drag-slot-hint">${value?'DRAG TO MOVE / SWAP':'DROP PLAYER HERE'}</span>
         </div>`;
       }).join('')}</div></div>`).join('');
     document.querySelectorAll('[data-slot]').forEach(sel=>sel.onchange=()=>{
       const key=sel.dataset.slot,value=sel.value;
       if(value&&selectedSet(key).has(value)){toast(`${value} is already selected`);return renderField();}
-      lineup()[key]=value;render();
+      lineup()[key]=value;activeSlotKey=key;render();
+    });
+    document.querySelectorAll('[data-slot-card]').forEach(card=>{
+      const key=card.dataset.slotCard;
+      card.onclick=e=>{if(e.target.closest('select'))return;activeSlotKey=key;renderField();};
+      card.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('select')){e.preventDefault();activeSlotKey=key;renderField();}};
+      card.ondragstart=e=>{
+        const name=lineup()[key]; if(!name){e.preventDefault();return;}
+        dragState={type:'slot',slot:key,name};
+        e.dataTransfer.effectAllowed='move';
+        e.dataTransfer.setData('text/plain',name);
+        requestAnimationFrame(()=>card.classList.add('dragging'));
+      };
+      card.ondragend=()=>{dragState=null;document.querySelectorAll('.dragging,.drag-over').forEach(x=>x.classList.remove('dragging','drag-over'));};
+      card.ondragover=e=>{e.preventDefault();e.dataTransfer.dropEffect='move';card.classList.add('drag-over');};
+      card.ondragleave=e=>{if(!card.contains(e.relatedTarget))card.classList.remove('drag-over');};
+      card.ondrop=e=>{
+        e.preventDefault();card.classList.remove('drag-over');
+        if(!dragState)return;
+        if(dragState.type==='slot') moveOrSwapSlot(dragState.slot,key);
+        else if(dragState.type==='pool') setPlayerInSlot(key,dragState.name);
+        dragState=null;
+      };
     });
   }
   function addToNextEmpty(name){
@@ -74,11 +130,33 @@
     const el=$('#best23Pool'); if(!el)return;
     const q=($('#best23Search')?.value||'').toLowerCase().trim(),chosen=new Set(Object.values(lineup()).filter(Boolean));
     const list=allPlayers().filter(p=>(`${p.name} ${p.position} ${p.source}`).toLowerCase().includes(q));
-    el.innerHTML=list.map(p=>`<div class="squad-row ${chosen.has(p.name)?'selected':''} ${p.source!=='Club list'?'hypothetical-row':''}">
+    el.innerHTML=`<div class="pool-drop-hint">DRAG A PLAYER BACK HERE TO REMOVE FROM THE 23</div>`+list.map(p=>`<div class="squad-row ${chosen.has(p.name)?'selected':''} ${p.source!=='Club list'?'hypothetical-row':''}" data-pool-player="${esc(p.name)}" draggable="${chosen.has(p.name)?'false':'true'}">
       <div><div class="squad-name">${esc(p.name)}</div><div class="squad-status">${p.position?`${esc(p.position)} • `:''}${chosen.has(p.name)?'Selected in Best 23':esc(p.source)}</div></div>
       <button class="squad-add" data-add-player="${esc(p.name)}" ${chosen.has(p.name)?'disabled':''}>ADD</button>
     </div>`).join('');
-    document.querySelectorAll('[data-add-player]').forEach(b=>b.onclick=()=>addToNextEmpty(b.dataset.addPlayer));
+    document.querySelectorAll('[data-add-player]').forEach(b=>b.onclick=e=>{e.stopPropagation();addToNextEmpty(b.dataset.addPlayer);});
+    document.querySelectorAll('[data-pool-player]').forEach(row=>{
+      const name=row.dataset.poolPlayer;
+      row.onclick=e=>{
+        if(e.target.closest('button')||chosen.has(name))return;
+        if(activeSlotKey)setPlayerInSlot(activeSlotKey,name);else addToNextEmpty(name);
+      };
+      row.ondragstart=e=>{
+        if(chosen.has(name)){e.preventDefault();return;}
+        dragState={type:'pool',name};
+        e.dataTransfer.effectAllowed='copyMove';e.dataTransfer.setData('text/plain',name);
+        requestAnimationFrame(()=>row.classList.add('dragging'));
+      };
+      row.ondragend=()=>{dragState=null;document.querySelectorAll('.dragging,.drag-over').forEach(x=>x.classList.remove('dragging','drag-over'));};
+    });
+    el.ondragover=e=>{if(dragState?.type==='slot'){e.preventDefault();el.classList.add('drag-over');}};
+    el.ondragleave=e=>{if(!el.contains(e.relatedTarget))el.classList.remove('drag-over');};
+    el.ondrop=e=>{
+      e.preventDefault();el.classList.remove('drag-over');
+      if(dragState?.type==='slot'){
+        lineup()[dragState.slot]='';activeSlotKey=null;dragState=null;render();
+      }
+    };
   }
   function openModal(html){const m=$('#draftModal'),c=$('#draftModalCard');if(!m||!c)return;c.innerHTML=html;m.hidden=false;}
   function closeModal(){const m=$('#draftModal'),c=$('#draftModalCard');if(m)m.hidden=true;if(c)c.innerHTML='';}
@@ -125,7 +203,7 @@
     const text=`${c.name} Best 23\n${lines.join('\n')}`;
     if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>toast('Best 23 copied')).catch(()=>toast('Copy unavailable'));else toast('Copy unavailable');
   }
-  function clearTeam(){lineups[clubId]=blank();render();toast(`${club(clubId).name} team cleared`);}
+  function clearTeam(){lineups[clubId]=blank();activeSlotKey=null;render();toast(`${club(clubId).name} team cleared`);}
   function render(){renderClubOptions();renderIdentity();renderField();renderPool();}
   function init(){
     $('#best23Search')&&($('#best23Search').oninput=renderPool);

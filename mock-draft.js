@@ -14,6 +14,7 @@
   const toast = msg => window.ATMToast ? window.ATMToast(msg) : console.log(msg);
 
   let state;
+  let draggedProspectName=null;
   const currentLadder = {fre:1,syd:2,bri:3,haw:4,gee:5,ade:6,mel:7,wbd:8,col:9,car:10,stk:11,gws:12,gcs:13,nm:14,pa:15,wce:16,ric:17,ess:18};
 
   function initialOrder(){
@@ -167,31 +168,54 @@
     const oc=onClock();
     if(!oc){el.innerHTML='<div class="on-clock-inner"><div class="on-clock-label">DRAFT COMPLETE</div><h2>Every available selection has been used.</h2></div>';return;}
     const p=state.selectedProspect,c=club(oc.owner),t=themeFor(oc.owner);
-    el.innerHTML=`<div class="on-clock-inner club-themed-clock" style="--teamPrimary:${t.primary};--teamSecondary:${t.secondary};--teamText:${t.text}">
-      <div class="on-clock-label">ON THE CLOCK</div><div class="on-clock-row"><div><div class="on-clock-pick">PICK ${oc.pick}</div><div class="clock-club-name"><img src="${esc(c.logo)}" alt=""><h2>${esc(c.name)}</h2></div><div class="on-clock-meta">${dvi(oc.pick).toLocaleString()} DVI points • current owner</div></div>
-      <div class="selected-prospect">${p?`<span>Selected prospect</span><button class="selected-profile-name" id="selectedProfileBtn">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}${p.tiedClub?` • ${esc(p.tieType)}: ${esc(club(p.tiedClub).abbr)}`:''}</small><button id="draftPlayerBtn" class="primary-btn">USE PICK ${oc.pick}</button>`:'<span>NO PROSPECT SELECTED</span><strong>Choose a player from the prospect board</strong><small>The selected player will appear here before you confirm the pick.</small>'}</div></div></div>`;
+    el.innerHTML=`<div class="on-clock-inner club-themed-clock draft-drop-target" style="--teamPrimary:${t.primary};--teamSecondary:${t.secondary};--teamText:${t.text}">
+      <div class="on-clock-label">ON THE CLOCK</div><div class="on-clock-row"><div><div class="on-clock-pick">PICK ${oc.pick}</div><div class="clock-club-name"><img src="${esc(c.logo)}" alt=""><h2>${esc(c.name)}</h2></div><div class="on-clock-meta">${dvi(oc.pick).toLocaleString()} DVI points • current owner</div><div class="draft-drop-copy">DRAG A PROSPECT HERE TO SELECT</div></div>
+      <div class="selected-prospect">${p?`<span>Selected prospect</span><button class="selected-profile-name" id="selectedProfileBtn">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}${p.tiedClub?` • ${esc(p.tieType)}: ${esc(club(p.tiedClub).abbr)}`:''}</small><button id="draftPlayerBtn" class="primary-btn">USE PICK ${oc.pick}</button>`:'<span>NO PROSPECT SELECTED</span><strong>Choose or drag a player from the prospect board</strong><small>Drop a prospect on this on-clock card, or drag directly to the current pick in the live order.</small>'}</div></div></div>`;
     if(p){$('#draftPlayerBtn').onclick=usePick;$('#selectedProfileBtn').onclick=()=>window.ATMProfiles?.open?.(p.name,{clubId:oc.owner,pick:oc.pick});}
+    const target=el.querySelector('.draft-drop-target');
+    target.ondragover=e=>{if(!draggedProspectName)return;e.preventDefault();target.classList.add('drag-over');e.dataTransfer.dropEffect='copy';};
+    target.ondragleave=e=>{if(!target.contains(e.relatedTarget))target.classList.remove('drag-over');};
+    target.ondrop=e=>{e.preventDefault();target.classList.remove('drag-over');if(draggedProspectName)selectProspect(draggedProspectName);};
   }
 
   function renderOrder(){
     const el=$('#draftOrder'); if(!el) return;
     const oc=onClock();
-    el.innerHTML=state.order.map(x=>`<div class="draft-order-row ${x===oc?'current':''} ${x.player?'used':''}">
+    el.innerHTML=state.order.map(x=>{const c=club(x.owner);return `<div class="draft-order-row ${x===oc?'current draft-pick-drop-target':''} ${x.player?'used':''}" ${x===oc?'data-current-pick="true"':''}>
       <div class="draft-pick-no">${x.pick}</div>
-      <div class="draft-club"><strong>${esc(club(x.owner)?.abbr||x.owner)}</strong><span>${esc(club(x.owner)?.name||'')}</span></div>
+      <div class="draft-club-logo"><img src="${esc(c?.logo||'')}" alt="${esc(c?.name||x.owner)} logo"></div>
+      <div class="draft-club"><strong>${esc(c?.abbr||x.owner)}</strong><span>${esc(c?.name||'')}</span></div>
       <div class="draft-points">${dvi(x.pick).toLocaleString()} pts</div>
-      <div class="draft-player">${x.player?`<strong>${esc(x.player.name)}</strong><span>${esc(x.player.position)}</span>`:'—'}</div>
+      <div class="draft-player">${x.player?`<strong>${esc(x.player.name)}</strong><span>${esc(x.player.position)}</span>`:x===oc?'<span class="pick-drop-copy">DROP PROSPECT TO USE PICK</span>':'—'}</div>
       ${x.matched?'<span class="matched-badge">MATCHED BID</span>':''}
-    </div>`).join('');
+    </div>`}).join('');
+    const current=el.querySelector('[data-current-pick="true"]');
+    if(current){
+      current.ondragover=e=>{if(!draggedProspectName)return;e.preventDefault();current.classList.add('drag-over');e.dataTransfer.dropEffect='move';};
+      current.ondragleave=e=>{if(!current.contains(e.relatedTarget))current.classList.remove('drag-over');};
+      current.ondrop=e=>{
+        e.preventDefault();current.classList.remove('drag-over');
+        const name=draggedProspectName;if(!name)return;
+        state.selectedProspect=DD.prospects.find(p=>p.name===name)||null;
+        draggedProspectName=null;
+        usePick();
+      };
+    }
   }
 
   function renderProspects(){
     const el=$('#prospectBoard'); if(!el) return;
     const q=($('#prospectSearch')?.value||'').toLowerCase().trim();
     const list=available().filter(p=>(`${p.name} ${p.position} ${p.pathway} ${p.tieType||''}`).toLowerCase().includes(q));
-    el.innerHTML=list.map(p=>`<div class="prospect-row ${state.selectedProspect?.name===p.name?'selected':''}"><span class="prospect-rank">${p.rank}</span><span class="prospect-copy"><button class="prospect-name-link" data-profile-name="${esc(p.name)}">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}</small>${p.tiedClub?`<em>${esc(p.tieType)} • ${esc(club(p.tiedClub).name)}</em>`:''}</span><span class="prospect-actions-inline"><button class="prospect-profile-label" data-profile-name="${esc(p.name)}">PROFILE</button><button class="prospect-select-label" data-prospect="${esc(p.name)}">SELECT</button></span></div>`).join('');
-    document.querySelectorAll('[data-prospect]').forEach(b=>b.onclick=()=>selectProspect(b.dataset.prospect));
+    el.innerHTML=list.map(p=>`<div class="prospect-row ${state.selectedProspect?.name===p.name?'selected':''}" data-drag-prospect="${esc(p.name)}" draggable="true"><span class="prospect-rank">${p.rank}</span><span class="prospect-copy"><button class="prospect-name-link" data-profile-name="${esc(p.name)}">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}</small>${p.tiedClub?`<em>${esc(p.tieType)} • ${esc(club(p.tiedClub).name)}</em>`:''}</span><span class="prospect-actions-inline"><button class="prospect-profile-label" data-profile-name="${esc(p.name)}">PROFILE</button><button class="prospect-select-label" data-prospect="${esc(p.name)}">SELECT</button></span></div>`).join('');
+    document.querySelectorAll('[data-prospect]').forEach(b=>b.onclick=e=>{e.stopPropagation();selectProspect(b.dataset.prospect);});
     document.querySelectorAll('[data-profile-name]').forEach(b=>b.onclick=e=>{e.stopPropagation();const oc=onClock();window.ATMProfiles?.open?.(b.dataset.profileName,{clubId:oc?.owner||null,pick:oc?.pick||null});});
+    document.querySelectorAll('[data-drag-prospect]').forEach(row=>{
+      const name=row.dataset.dragProspect;
+      row.onclick=e=>{if(e.target.closest('button'))return;selectProspect(name);};
+      row.ondragstart=e=>{draggedProspectName=name;e.dataTransfer.effectAllowed='copyMove';e.dataTransfer.setData('text/plain',name);requestAnimationFrame(()=>row.classList.add('dragging'));};
+      row.ondragend=()=>{draggedProspectName=null;document.querySelectorAll('.dragging,.drag-over').forEach(x=>x.classList.remove('dragging','drag-over'));};
+    });
   }
 
   function renderLog(){

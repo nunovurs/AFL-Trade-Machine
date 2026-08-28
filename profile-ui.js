@@ -7,7 +7,8 @@
  function close(){const m=document.querySelector('#draftModal'),c=document.querySelector('#draftModalCard');if(m)m.hidden=true;if(c)c.innerHTML='';}
  function open(name,ctx={}){
    const p=get(name);if(!p)return window.ATMToast?.(`Profile coming soon for ${name}`);
-   const c=club(ctx.clubId||p.tiedClub), color=c?.color||'#172337', text=c?.clubText||'#fff';
+   const mockRow=M?.board?.find(r=>(ctx.pick&&Number(r.pick)===Number(ctx.pick))||(!r.absorbed&&resolve(r.player)===resolve(name)));
+   const c=club(ctx.clubId||mockRow?.clubId||p.tiedClub), color=c?.color||'#172337', text=c?.clubText||'#fff';
    const tie=p.tieType?(p.tiedClub?`${p.tieType} • ${club(p.tiedClub)?.name||''}`:p.tieType):'—';
    const img=p.photo||'assets/player-placeholder.svg';
    const m=document.querySelector('#draftModal'),card=document.querySelector('#draftModalCard'); if(!m||!card)return;
@@ -17,7 +18,7 @@
     <div class="profile-facts"><div><span>HEIGHT</span><strong>${esc(p.height)}</strong></div><div><span>WEIGHT</span><strong>${esc(p.weight)}</strong></div><div><span>POSITION</span><strong>${esc(p.position)}</strong></div><div><span>PATHWAY / CLUB</span><strong>${esc(p.pathway)}</strong></div><div><span>STATE</span><strong>${esc(p.state)}</strong></div><div><span>ACCESS</span><strong>${esc(tie)}</strong></div></div>
     <div class="profile-section comparison"><div class="profile-section-label">PLAYER COMPARISON</div><p>${esc(p.comparison||'—')}</p></div>
     <div class="profile-section"><div class="profile-section-label">MY SCOUTING PROFILE</div><p>${esc(p.description)}</p></div>
-    <div class="profile-section club-fit"><div class="profile-section-label">WHY THIS PICK?</div><p>${esc(p.why)}</p></div>
+    <div class="profile-section club-fit"><div class="profile-section-label">WHY THIS PICK?</div><p>${esc(p.why)}</p></div>${mockRow?.mechanism?`<div class="profile-section pick-mechanism"><div class="profile-section-label">HOW THE PICK HAPPENS</div><p>${esc(mockRow.mechanism)}</p></div>`:''}
     <div class="profile-actions"><a class="watch-btn" href="${esc(p.watch)}" target="_blank" rel="noopener">▶ WATCH • FOOTY STUFF HIGHLIGHTS</a></div>
     <div class="profile-data-note">Bio fields are reference data and may change as official measurements are updated. Where a reliable published measurement or photo is unavailable, the profile deliberately uses a blank/fallback rather than inventing one.</div>
    </div>`;

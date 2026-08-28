@@ -1,8 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 132" role="img" aria-label="ADE independent club mark">
-<defs><filter id="s"><feDropShadow dx="0" dy="3" stdDeviation="2" flood-opacity=".28"/></filter></defs>
-<path d="M12 14 Q60 2 108 14 L102 88 Q91 112 60 126 Q29 112 18 88 Z" fill="#002B5C" stroke="#ffffff" stroke-width="3" filter="url(#s)"/>
-<path d="M19 22 Q60 12 101 22 L96 84 Q86 103 60 116 Q34 103 24 84 Z" fill="none" stroke="#F4D03F" stroke-width="3" opacity=".85"/>
-<path d="M30 28 L42 28 L34 94 L22 94 Z" fill="#E31B23"/><path d="M54 28 L66 28 L58 94 L46 94 Z" fill="#F4D03F"/><path d="M78 28 L90 28 L82 94 L70 94 Z" fill="#E31B23"/>
-<rect x="25" y="91" width="70" height="22" rx="8" fill="#002B5C" stroke="#E31B23" stroke-width="2"/>
-<text x="60" y="107" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="17" font-weight="900" fill="#E31B23" letter-spacing=".5">ADE</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" role="img" aria-label="CROWS club mark">
+<defs><clipPath id="shield"><path d="M12 12 Q60 -2 108 12 V75 Q106 111 60 134 Q14 111 12 75 Z"/></clipPath><filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity=".28"/></filter></defs>
+<path d="M12 12 Q60 -2 108 12 V75 Q106 111 60 134 Q14 111 12 75 Z" fill="#fff" stroke="#172337" stroke-width="5" filter="url(#s)"/>
+<g clip-path="url(#shield)"><rect x="10" y="8" width="34" height="128" fill="#002b5c"/><rect x="44" y="8" width="32" height="128" fill="#d71920"/><rect x="76" y="8" width="34" height="128" fill="#f6c000"/><path d="M8 24 H112" stroke="rgba(255,255,255,.45)" stroke-width="3"/></g>
+<rect x="22" y="42" width="76" height="46" rx="12" fill="#101820" fill-opacity=".78" stroke="#fff" stroke-opacity=".82"/>
+<text x="60" y="73" text-anchor="middle" fill="#fff" font-family="Arial Black,Arial,sans-serif" font-size="25" font-weight="900" letter-spacing="1">ADE</text>
+<rect x="24" y="98" width="72" height="20" rx="10" fill="#fff" fill-opacity=".92"/>
+<text x="60" y="112" text-anchor="middle" fill="#172337" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="900" letter-spacing="1">CROWS</text>
 </svg>
