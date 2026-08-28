@@ -7,6 +7,9 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
   const clubs = [...D.clubs];
   const club = id => clubs.find(c => c.id === id);
+  const CLUB_THEME={ade:{primary:'#f6c000',secondary:'#002b5c',text:'#111'},bri:{primary:'#f5c400',secondary:'#7b002c',text:'#111'},car:{primary:'#ffffff',secondary:'#071c3d',text:'#071c3d'},col:{primary:'#ffffff',secondary:'#111111',text:'#111'},ess:{primary:'#d71920',secondary:'#050505',text:'#fff'},fre:{primary:'#ffffff',secondary:'#5b2b82',text:'#5b2b82'},gee:{primary:'#ffffff',secondary:'#002b5c',text:'#002b5c'},gcs:{primary:'#ffd200',secondary:'#e7192d',text:'#111'},gws:{primary:'#f15a22',secondary:'#202020',text:'#111'},haw:{primary:'#f4c430',secondary:'#4d2004',text:'#111'},mel:{primary:'#d71920',secondary:'#061a33',text:'#fff'},nm:{primary:'#ffffff',secondary:'#00529b',text:'#00529b'},pa:{primary:'#00a2b8',secondary:'#111111',text:'#111'},ric:{primary:'#f2d318',secondary:'#050505',text:'#111'},stk:{primary:'#ed1b2f',secondary:'#111111',text:'#fff'},syd:{primary:'#e31b23',secondary:'#ffffff',text:'#fff'},wce:{primary:'#f4c430',secondary:'#003087',text:'#111'},wbd:{primary:'#e31b23',secondary:'#1b4f9c',text:'#fff'}};
+  const themeFor=id=>CLUB_THEME[id]||{primary:'#ddd',secondary:'#172337',text:'#111'};
+
   const dvi = pick => D.dvi?.[pick] ?? 0;
   const toast = msg => window.ATMToast ? window.ATMToast(msg) : console.log(msg);
 
@@ -163,16 +166,13 @@
     const el=$('#onClock'); if(!el) return;
     const oc=onClock();
     if(!oc){el.innerHTML='<div class="on-clock-inner"><div class="on-clock-label">DRAFT COMPLETE</div><h2>Every available selection has been used.</h2></div>';return;}
-    const c=club(oc.owner),p=state.selectedProspect;
-    el.style.setProperty('--clockClub',c.color);el.style.setProperty('--clockText',c.clubText||'#fff');
-    el.innerHTML=`<div class="on-clock-inner">
-      <div class="on-clock-label">ON THE CLOCK</div>
-      <div class="on-clock-row">
-        <div class="clock-club-block"><img src="${esc(c.logo)}" alt=""><div><div class="on-clock-pick">PICK ${oc.pick}</div><h2>${esc(c.name)}</h2><div class="on-clock-meta">${dvi(oc.pick).toLocaleString()} DVI points • current owner</div></div></div>
-        <div class="selected-prospect">${p?`<span>SELECTED PROSPECT</span><button class="selected-prospect-name" id="selectedProspectProfile">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}${p.tiedClub?` • ${esc(p.tieType)}: ${esc(club(p.tiedClub).abbr)}`:''}</small><button id="draftPlayerBtn" class="primary-btn">USE PICK ${oc.pick}</button>`:'<span>NO PROSPECT SELECTED</span><strong>Choose a player from the prospect board</strong><small>Click the player name to open your profile before selecting them.</small>'}</div>
-      </div></div>`;
-    if(p){$('#draftPlayerBtn').onclick=usePick;$('#selectedProspectProfile').onclick=()=>window.ATMProfiles?.open(p.name,{pick:oc.pick,clubName:c.name});}
+    const p=state.selectedProspect,c=club(oc.owner),t=themeFor(oc.owner);
+    el.innerHTML=`<div class="on-clock-inner club-themed-clock" style="--teamPrimary:${t.primary};--teamSecondary:${t.secondary};--teamText:${t.text}">
+      <div class="on-clock-label">ON THE CLOCK</div><div class="on-clock-row"><div><div class="on-clock-pick">PICK ${oc.pick}</div><div class="clock-club-name"><img src="${esc(c.logo)}" alt=""><h2>${esc(c.name)}</h2></div><div class="on-clock-meta">${dvi(oc.pick).toLocaleString()} DVI points • current owner</div></div>
+      <div class="selected-prospect">${p?`<span>Selected prospect</span><button class="selected-profile-name" id="selectedProfileBtn">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}${p.tiedClub?` • ${esc(p.tieType)}: ${esc(club(p.tiedClub).abbr)}`:''}</small><button id="draftPlayerBtn" class="primary-btn">USE PICK ${oc.pick}</button>`:'<span>NO PROSPECT SELECTED</span><strong>Choose a player from the prospect board</strong><small>The selected player will appear here before you confirm the pick.</small>'}</div></div></div>`;
+    if(p){$('#draftPlayerBtn').onclick=usePick;$('#selectedProfileBtn').onclick=()=>window.ATMProfiles?.open?.(p.name,{clubId:oc.owner,pick:oc.pick});}
   }
+
   function renderOrder(){
     const el=$('#draftOrder'); if(!el) return;
     const oc=onClock();
@@ -189,13 +189,11 @@
     const el=$('#prospectBoard'); if(!el) return;
     const q=($('#prospectSearch')?.value||'').toLowerCase().trim();
     const list=available().filter(p=>(`${p.name} ${p.position} ${p.pathway} ${p.tieType||''}`).toLowerCase().includes(q));
-    el.innerHTML=list.map(p=>`<div class="prospect-row ${state.selectedProspect?.name===p.name?'selected':''}">
-      <span class="prospect-rank">${p.rank}</span>
-      <span class="prospect-copy"><button class="prospect-profile-name" data-open-profile="${esc(p.name)}">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}</small>${p.tiedClub?`<em>${esc(p.tieType)} • ${esc(club(p.tiedClub).name)}</em>`:''}${window.ATM_PLAYER_PROFILES?.[p.name]?'<i>MY PROFILE</i>':''}</span>
-      <button class="prospect-select-label" data-prospect="${esc(p.name)}">SELECT</button></div>`).join('');
-    el.querySelectorAll('[data-prospect]').forEach(b=>b.onclick=()=>selectProspect(b.dataset.prospect));
-    el.querySelectorAll('[data-open-profile]').forEach(b=>b.onclick=()=>window.ATMProfiles?.open(b.dataset.openProfile));
+    el.innerHTML=list.map(p=>`<div class="prospect-row ${state.selectedProspect?.name===p.name?'selected':''}"><span class="prospect-rank">${p.rank}</span><span class="prospect-copy"><button class="prospect-name-link" data-profile-name="${esc(p.name)}">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}</small>${p.tiedClub?`<em>${esc(p.tieType)} • ${esc(club(p.tiedClub).name)}</em>`:''}</span><span class="prospect-actions-inline"><button class="prospect-profile-label" data-profile-name="${esc(p.name)}">PROFILE</button><button class="prospect-select-label" data-prospect="${esc(p.name)}">SELECT</button></span></div>`).join('');
+    document.querySelectorAll('[data-prospect]').forEach(b=>b.onclick=()=>selectProspect(b.dataset.prospect));
+    document.querySelectorAll('[data-profile-name]').forEach(b=>b.onclick=e=>{e.stopPropagation();const oc=onClock();window.ATMProfiles?.open?.(b.dataset.profileName,{clubId:oc?.owner||null,pick:oc?.pick||null});});
   }
+
   function renderLog(){
     const el=$('#draftLog'); if(!el) return;
     el.innerHTML=state.log.length?state.log.map(l=>`<div class="log-item"><span>${esc(l.time)}</span><p>${esc(l.text)}</p></div>`).join(''):'<div class="empty-log">Selections, club-tied bids and live pick trades will appear here.</div>';
