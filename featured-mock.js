@@ -1,51 +1,24 @@
 (() => {
-  const D=window.ATM_DATA,DD=window.ATM_DRAFT_DATA;
-  if(!D?.clubs||!DD?.prospects)return;
-  const $=s=>document.querySelector(s);
+  const D=window.ATM_DATA,P=window.ATM_PLAYER_PROFILES||{};if(!D?.clubs)return;
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-  const toast=msg=>window.ATMToast?window.ATMToast(msg):console.log(msg);
-  const clubs=[...D.clubs].sort((a,b)=>a.name.localeCompare(b.name));
-  const club=id=>clubs.find(c=>c.id===id);
-  const KEY='atm-featured-mock-v1';
-  const seeds=[
-    {id:'seed-steed',pick:'',club:'ess',player:'Leo Steed',reason:''},
-    {id:'seed-chapman',pick:'',club:'ric',player:'Harrison Chapman',reason:''},
-    {id:'seed-harris',pick:'',club:'col',player:'Mitch Harris',reason:''}
+  const club=id=>D.clubs.find(c=>c.id===id);
+  const board=[
+    {pick:1,club:'pa',player:'Dougie Cochrane'},{pick:2,club:'car',player:'Cody Walker'},{pick:3,club:'ess',player:'Arki Butler'},{pick:4,club:'ric',player:'Harry Van Hattum'},{pick:5,club:'mel',player:'Ethan Drever'},
+    {club:'wce',player:'Heath Mellody'},{club:'gcs',player:'Gus Teixeira'},{club:'gws',player:'Ethan Matthews'},{club:'col',player:'Mitchell Harris'},{club:'wce',player:'George Gale'},{club:'nm',player:'Jake Eime'},
+    {club:'bri',player:'Caylen Murray'},{club:'wbd',player:'Khaled El Souki'},{club:'ess',player:'Leo Steed'},{club:'ric',player:'Harrison Chapman'},{club:'ade',player:'Ethan Herbert'},{club:'ade',player:'Harvie Cooke'},
+    {club:'ess',player:'Tyson Bradley'},{club:'ric',player:'Toby Krasna'},{club:'ric',player:'Billy Wigmore'},{club:'wce',player:'Koby LeCras'},{club:'car',player:'Jack Pickett'},{club:'car',player:'Albert MacGowan'},
+    {club:'gee',player:'Noah Williams'},{club:'haw',player:'Gabriel Patterson'},{club:'syd',player:'Lachie Burrows'},{club:'wce',player:'Garrison Kenh'},{club:'fre',player:'Benji Van Rooyen'},{club:'ade',player:'Archie Van Dyk'},{club:'ric',player:'Gus Kennedy'}
   ];
-  let rows;
-  try{rows=JSON.parse(localStorage.getItem(KEY)||'null')||seeds.map(x=>({...x}));}catch{rows=seeds.map(x=>({...x}));}
-  const prospect=name=>DD.prospects.find(p=>p.name===name);
-  const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(rows));}catch{}};
-  function render(){
-    const el=$('#featuredMockList');if(!el)return;
-    el.innerHTML=rows.length?rows.map((r,i)=>{
-      const c=club(r.club),p=prospect(r.player);
-      return `<article class="featured-pick-card" style="--club:${c?.color||'#506070'}">
-        <div class="featured-pick-head">
-          <div class="featured-pick-club"><img src="${esc(c?.logo||'')}" alt=""><span><small>${r.pick?`PICK ${esc(r.pick)}`:'PICK TBD'}</small><strong>${esc(c?.name||'Choose club')}</strong></span></div>
-          <button class="featured-delete" data-featured-delete="${esc(r.id)}">×</button>
-        </div>
-        <div class="featured-player"><strong>${esc(r.player||'Choose prospect')}</strong><span>${p?`${esc(p.position)} • ${esc(p.pathway)}`:'Player details can be edited below'}</span></div>
-        <div class="featured-edit-grid">
-          <label>PICK<input class="featured-input" data-field="pick" data-index="${i}" value="${esc(r.pick)}" placeholder="e.g. 2"></label>
-          <label>CLUB<select class="featured-input" data-field="club" data-index="${i}">${clubs.map(x=>`<option value="${x.id}" ${x.id===r.club?'selected':''}>${esc(x.name)}</option>`).join('')}</select></label>
-          <label class="featured-player-select">PLAYER<select class="featured-input" data-field="player" data-index="${i}">${DD.prospects.map(x=>`<option value="${esc(x.name)}" ${x.name===r.player?'selected':''}>${esc(x.name)}</option>`).join('')}</select></label>
-        </div>
-        <label class="featured-reason-label">WHY THIS PICK?
-          <textarea class="featured-reason" data-field="reason" data-index="${i}" placeholder="Add your explanation for why this player is the right pick for this club…">${esc(r.reason)}</textarea>
-        </label>
-      </article>`;
-    }).join(''):'<div class="featured-empty">No picks yet. Add the first pick in your mock draft.</div>';
-    document.querySelectorAll('[data-field]').forEach(elm=>{
-      elm.onchange=()=>{const i=Number(elm.dataset.index);rows[i][elm.dataset.field]=elm.value;save();if(elm.dataset.field!=='reason')render();};
-      if(elm.tagName==='TEXTAREA')elm.oninput=()=>{rows[Number(elm.dataset.index)].reason=elm.value;save();};
-    });
-    document.querySelectorAll('[data-featured-delete]').forEach(b=>b.onclick=()=>{rows=rows.filter(r=>r.id!==b.dataset.featuredDelete);save();render();});
-  }
-  function add(){rows.push({id:`pick-${Date.now()}`,pick:'',club:'ric',player:DD.prospects[0]?.name||'',reason:''});save();render();document.querySelector('#featuredMockList article:last-child')?.scrollIntoView({behavior:'smooth',block:'center'});}
-  function reset(){rows=seeds.map(x=>({...x}));save();render();toast('Featured mock reset to imported starting notes');}
-  $('#addFeaturedPickBtn')?.addEventListener('click',add);
-  $('#resetFeaturedMockBtn')?.addEventListener('click',reset);
-  window.FeaturedMock={render,add};
-  render();
+  function card(r,i){const c=club(r.club),p=P[r.player]||{};return `<article class="editorial-pick" style="--club:${c?.color||'#667085'};--clubText:${c?.clubText||'#fff'}" data-open-profile="${esc(r.player)}">
+    <div class="editorial-pick-number">${r.pick?`PICK ${r.pick}`:`LOCKED SELECTION`}</div>
+    <div class="editorial-card-top"><div class="editorial-player-photo"><div class="profile-photo-fallback">${esc(window.ATMProfiles?.initials?.(r.player)||r.player.slice(0,2).toUpperCase())}</div>${p.photo?`<img src="${esc(p.photo)}" alt="${esc(r.player)}">`:''}</div>
+      <div><div class="editorial-club"><img src="${esc(c?.logo||'')}" alt=""><span>${esc(c?.name||'')}</span></div><h3>${esc(r.player)}</h3><p>${esc(p.position||'')} • ${esc(p.pathway||'')}</p></div></div>
+    ${p.comparison&&p.comparison!=='—'?`<div class="editorial-comparison"><span>COMPARISON</span><strong>${esc(p.comparison)}</strong></div>`:''}
+    <div class="editorial-section"><h4>SCOUTING PROFILE</h4><p>${esc(p.description||'')}</p></div>
+    <div class="editorial-section why"><h4>WHY ${esc((c?.name||'THIS CLUB').toUpperCase())}</h4><p>${esc(p.why||'')}</p></div>
+    <div class="editorial-actions"><button data-profile-btn="${esc(r.player)}">VIEW FULL PROFILE</button><a href="${esc(p.watch||'#')}" target="_blank" rel="noopener">▶ WATCH</a></div></article>`;}
+  function render(){const el=document.querySelector('#featuredMockList');if(!el)return;el.innerHTML=board.map(card).join('');
+    el.querySelectorAll('[data-profile-btn]').forEach(b=>b.onclick=e=>{e.stopPropagation();const r=board.find(x=>x.player===b.dataset.profileBtn);window.ATMProfiles?.open(b.dataset.profileBtn,{pick:r?.pick,clubName:club(r?.club)?.name});});
+    el.querySelectorAll('[data-open-profile]').forEach(a=>a.onclick=e=>{if(e.target.closest('a,button'))return;const r=board.find(x=>x.player===a.dataset.openProfile);window.ATMProfiles?.open(a.dataset.openProfile,{pick:r?.pick,clubName:club(r?.club)?.name});});}
+  window.FeaturedMock={render,board};render();
 })();

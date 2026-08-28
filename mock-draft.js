@@ -163,19 +163,16 @@
     const el=$('#onClock'); if(!el) return;
     const oc=onClock();
     if(!oc){el.innerHTML='<div class="on-clock-inner"><div class="on-clock-label">DRAFT COMPLETE</div><h2>Every available selection has been used.</h2></div>';return;}
-    const p=state.selectedProspect;
+    const c=club(oc.owner),p=state.selectedProspect;
+    el.style.setProperty('--clockClub',c.color);el.style.setProperty('--clockText',c.clubText||'#fff');
     el.innerHTML=`<div class="on-clock-inner">
       <div class="on-clock-label">ON THE CLOCK</div>
       <div class="on-clock-row">
-        <div><div class="on-clock-pick">PICK ${oc.pick}</div><h2>${esc(club(oc.owner).name)}</h2><div class="on-clock-meta">${dvi(oc.pick).toLocaleString()} DVI points • current owner</div></div>
-        <div class="selected-prospect">
-          ${p?`<span>Selected prospect</span><strong>${esc(p.name)}</strong><small>${esc(p.position)} • ${esc(p.pathway)}${p.tiedClub?` • ${esc(p.tieType)}: ${esc(club(p.tiedClub).abbr)}`:''}</small><button id="draftPlayerBtn" class="primary-btn">USE PICK ${oc.pick}</button>`:'<span>NO PROSPECT SELECTED</span><strong>Choose a player from the prospect board</strong><small>The selected player will appear here before you confirm the pick.</small>'}
-        </div>
-      </div>
-    </div>`;
-    if(p) $('#draftPlayerBtn').onclick=usePick;
+        <div class="clock-club-block"><img src="${esc(c.logo)}" alt=""><div><div class="on-clock-pick">PICK ${oc.pick}</div><h2>${esc(c.name)}</h2><div class="on-clock-meta">${dvi(oc.pick).toLocaleString()} DVI points • current owner</div></div></div>
+        <div class="selected-prospect">${p?`<span>SELECTED PROSPECT</span><button class="selected-prospect-name" id="selectedProspectProfile">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}${p.tiedClub?` • ${esc(p.tieType)}: ${esc(club(p.tiedClub).abbr)}`:''}</small><button id="draftPlayerBtn" class="primary-btn">USE PICK ${oc.pick}</button>`:'<span>NO PROSPECT SELECTED</span><strong>Choose a player from the prospect board</strong><small>Click the player name to open your profile before selecting them.</small>'}</div>
+      </div></div>`;
+    if(p){$('#draftPlayerBtn').onclick=usePick;$('#selectedProspectProfile').onclick=()=>window.ATMProfiles?.open(p.name,{pick:oc.pick,clubName:c.name});}
   }
-
   function renderOrder(){
     const el=$('#draftOrder'); if(!el) return;
     const oc=onClock();
@@ -192,14 +189,13 @@
     const el=$('#prospectBoard'); if(!el) return;
     const q=($('#prospectSearch')?.value||'').toLowerCase().trim();
     const list=available().filter(p=>(`${p.name} ${p.position} ${p.pathway} ${p.tieType||''}`).toLowerCase().includes(q));
-    el.innerHTML=list.map(p=>`<button class="prospect-row ${state.selectedProspect?.name===p.name?'selected':''}" data-prospect="${esc(p.name)}">
+    el.innerHTML=list.map(p=>`<div class="prospect-row ${state.selectedProspect?.name===p.name?'selected':''}">
       <span class="prospect-rank">${p.rank}</span>
-      <span class="prospect-copy"><strong>${esc(p.name)}</strong><small>${esc(p.position)} • ${esc(p.pathway)}</small>${p.tiedClub?`<em>${esc(p.tieType)} • ${esc(club(p.tiedClub).name)}</em>`:''}</span>
-      <span class="prospect-select-label">SELECT</span>
-    </button>`).join('');
-    document.querySelectorAll('[data-prospect]').forEach(b=>b.onclick=()=>selectProspect(b.dataset.prospect));
+      <span class="prospect-copy"><button class="prospect-profile-name" data-open-profile="${esc(p.name)}">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}</small>${p.tiedClub?`<em>${esc(p.tieType)} • ${esc(club(p.tiedClub).name)}</em>`:''}${window.ATM_PLAYER_PROFILES?.[p.name]?'<i>MY PROFILE</i>':''}</span>
+      <button class="prospect-select-label" data-prospect="${esc(p.name)}">SELECT</button></div>`).join('');
+    el.querySelectorAll('[data-prospect]').forEach(b=>b.onclick=()=>selectProspect(b.dataset.prospect));
+    el.querySelectorAll('[data-open-profile]').forEach(b=>b.onclick=()=>window.ATMProfiles?.open(b.dataset.openProfile));
   }
-
   function renderLog(){
     const el=$('#draftLog'); if(!el) return;
     el.innerHTML=state.log.length?state.log.map(l=>`<div class="log-item"><span>${esc(l.time)}</span><p>${esc(l.text)}</p></div>`).join(''):'<div class="empty-log">Selections, club-tied bids and live pick trades will appear here.</div>';

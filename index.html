@@ -83,7 +83,7 @@
       <div>
         <div class="eyebrow">2026 AFL MOCK DRAFT</div>
         <h1>YOU'RE ON<br><span>THE CLOCK.</span></h1>
-        <p>Run the current 2026 order, select prospects, trade the live pick and simulate club-tied bids. Switch to My Mock Draft to build and publish your own club-by-club selections and explanations.</p>
+        <p>Run the current 2026 order, select prospects, trade the live pick and simulate club-tied bids. Switch to My Mock Draft to read my published club-by-club selections, player profiles, comparisons and reasoning.</p>
       </div>
       <div class="hero-note">
         <div class="hero-note-title">2026 BID ENGINE</div>
@@ -127,10 +127,9 @@
     <section id="featuredMockView" class="featured-mock-view" hidden>
       <section class="panel featured-intro">
         <div class="section-head">
-          <div><span class="section-number">MY</span><h2>FEATURED 2026 MOCK DRAFT</h2><p>Your selections, your reasoning and an editable board that can grow as more picks are ready.</p></div>
-          <div class="draft-actions"><button id="addFeaturedPickBtn" class="primary-btn">ADD PICK</button><button id="resetFeaturedMockBtn" class="ghost-btn danger">RESET IMPORTED NOTES</button></div>
+          <div><span class="section-number">MY</span><h2>MY 2026 MOCK DRAFT</h2><p>My selections, my player profiles, my comparisons and my club-selection reasoning.</p></div>
         </div>
-        <div class="featured-notice">The starting notes currently include the club-player assignments recovered from the draft work available in this project. Pick numbers and explanations remain editable so nothing is invented where your original notes were not available.</div>
+        <div class="featured-notice">This is my mock draft — not another simulator. The Live Simulator remains available above if you want to build your own.</div>
       </section>
       <div id="featuredMockList" class="featured-mock-list"></div>
     </section>
@@ -157,9 +156,9 @@
       </div>
       <div class="builder-selected-club" id="best23ClubIdentity"></div>
       <div class="builder-hypo-actions">
-        <button id="addBest23PlayerBtn" class="primary-btn">+ ADD PLAYER</button>
+        <button id="addBest23PlayerBtn" class="primary-btn">+ ADD ANY PLAYER</button>
         <button id="importTradePlayersBtn" class="ghost-btn">IMPORT TRADE</button>
-        <button id="addDraftProspectBtn" class="ghost-btn">ADD DRAFT PROSPECT</button>
+        <button id="addDraftProspectBtn" class="ghost-btn">ADD MY DRAFT PROSPECT</button>
       </div>
       <div class="builder-actions">
         <span class="counter" id="best23Count">0 / 23</span>
@@ -186,8 +185,11 @@
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script src="data.js"></script>
+  <script src="club-logos.js"></script>
   <script src="draft-data.js"></script>
+  <script src="player-profiles.js"></script>
   <script src="app.js"></script>
+  <script src="profile-ui.js"></script>
   <script src="mock-draft.js"></script>
   <script src="best23.js"></script>
   <script src="featured-mock.js"></script>
