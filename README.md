@@ -7,6 +7,7 @@ Independent AFL trade, draft, redraft and Best 23 simulator.
 - The squad pool now shows **only unselected players**. Selecting a player onto either field removes them from the pool; dragging them back returns them. Players can also be dragged directly AFL ↔ VFL.
 - Added separate clear controls for AFL 23, VFL 23 and both teams, while COPY TEAM now copies both sides.
 - Rebuilt the North Melbourne/Carlton mock trade wording: North send their natural 2026 first + **2027 third-round pick** for Carlton's natural 2026 first + the Sydney-origin 2026 first.
+- Added a dedicated **unnumbered North–Carlton pick-swap row** in My Mock so North's natural first is visibly tracked before Carlton consumes it in the Cody Walker bid match.
 - Cody Walker's Pick 2 match is now modelled using the North-origin first (baseline Pick 6) + Carlton's Gold Coast-origin second (baseline Pick 23), leaving an indicative 169-point deficit under the current DVI table.
 - Jake Eime is explicitly tied to the Carlton-natural first that North retain. The Sydney-origin first is then on-traded by North to Adelaide for **Nick Murray**, and Adelaide use that pick on Ethan Herbert.
 - Removed the erroneous second consecutive Carlton selection. Carlton take **Jack Pickett at 25**; every later live selection shifts up one.
