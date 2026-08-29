@@ -5,6 +5,8 @@
 
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  const profilePhoto=name=>window.ATM_PLAYER_PROFILES?.[window.ATM_MY_MOCK?.resolve?.(name)||name]?.photo||'assets/player-placeholder.svg';
+  const prospectPhoto=(name,cls='prospect-photo')=>`<img class="${cls}" src="${esc(profilePhoto(name))}" onerror="this.src='assets/player-placeholder.svg'" alt="${esc(name)}">`;
   const clubs = [...D.clubs];
   const club = id => clubs.find(c => c.id === id);
   const CLUB_THEME={ade:{primary:'#f6c000',secondary:'#002b5c',text:'#111'},bri:{primary:'#f5c400',secondary:'#7b002c',text:'#111'},car:{primary:'#ffffff',secondary:'#071c3d',text:'#071c3d'},col:{primary:'#ffffff',secondary:'#111111',text:'#111'},ess:{primary:'#d71920',secondary:'#050505',text:'#fff'},fre:{primary:'#ffffff',secondary:'#5b2b82',text:'#5b2b82'},gee:{primary:'#ffffff',secondary:'#002b5c',text:'#002b5c'},gcs:{primary:'#ffd200',secondary:'#e7192d',text:'#111'},gws:{primary:'#f15a22',secondary:'#202020',text:'#111'},haw:{primary:'#f4c430',secondary:'#4d2004',text:'#111'},mel:{primary:'#d71920',secondary:'#061a33',text:'#fff'},nm:{primary:'#ffffff',secondary:'#00529b',text:'#00529b'},pa:{primary:'#00a2b8',secondary:'#111111',text:'#111'},ric:{primary:'#f2d318',secondary:'#050505',text:'#111'},stk:{primary:'#ed1b2f',secondary:'#111111',text:'#fff'},syd:{primary:'#e31b23',secondary:'#ffffff',text:'#fff'},wce:{primary:'#f4c430',secondary:'#003087',text:'#111'},wbd:{primary:'#e31b23',secondary:'#1b4f9c',text:'#fff'}};
@@ -170,7 +172,7 @@
     const p=state.selectedProspect,c=club(oc.owner),t=themeFor(oc.owner);
     el.innerHTML=`<div class="on-clock-inner club-themed-clock draft-drop-target" style="--teamPrimary:${t.primary};--teamSecondary:${t.secondary};--teamText:${t.text}">
       <div class="on-clock-label">ON THE CLOCK</div><div class="on-clock-row"><div><div class="on-clock-pick">PICK ${oc.pick}</div><div class="clock-club-name"><img src="${esc(c.logo)}" alt=""><h2>${esc(c.name)}</h2></div><div class="on-clock-meta">${dvi(oc.pick).toLocaleString()} DVI points • current owner</div><div class="draft-drop-copy">DRAG A PROSPECT HERE TO SELECT</div></div>
-      <div class="selected-prospect">${p?`<span>Selected prospect</span><button class="selected-profile-name" id="selectedProfileBtn">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}${p.tiedClub?` • ${esc(p.tieType)}: ${esc(club(p.tiedClub).abbr)}`:''}</small><button id="draftPlayerBtn" class="primary-btn">USE PICK ${oc.pick}</button>`:'<span>NO PROSPECT SELECTED</span><strong>Choose or drag a player from the prospect board</strong><small>Drop a prospect on this on-clock card, or drag directly to the current pick in the live order.</small>'}</div></div></div>`;
+      <div class="selected-prospect">${p?`<span>Selected prospect</span><div class="selected-prospect-card">${prospectPhoto(p.name,'selected-prospect-photo')}<div><button class="selected-profile-name" id="selectedProfileBtn">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}${p.tiedClub?` • ${esc(p.tieType)}: ${esc(club(p.tiedClub).abbr)}`:''}</small></div></div><button id="draftPlayerBtn" class="primary-btn">USE PICK ${oc.pick}</button>`:'<span>NO PROSPECT SELECTED</span><strong>Choose or drag a player from the prospect board</strong><small>Drop a prospect on this on-clock card, or drag directly to the current pick in the live order.</small>'}</div></div></div>`;
     if(p){$('#draftPlayerBtn').onclick=usePick;$('#selectedProfileBtn').onclick=()=>window.ATMProfiles?.open?.(p.name,{clubId:oc.owner,pick:oc.pick});}
     const target=el.querySelector('.draft-drop-target');
     target.ondragover=e=>{if(!draggedProspectName)return;e.preventDefault();target.classList.add('drag-over');e.dataTransfer.dropEffect='copy';};
@@ -186,7 +188,7 @@
       <div class="draft-club-logo"><img src="${esc(c?.logo||'')}" alt="${esc(c?.name||x.owner)} logo"></div>
       <div class="draft-club"><strong>${esc(c?.abbr||x.owner)}</strong><span>${esc(c?.name||'')}</span></div>
       <div class="draft-points">${dvi(x.pick).toLocaleString()} pts</div>
-      <div class="draft-player">${x.player?`<strong>${esc(x.player.name)}</strong><span>${esc(x.player.position)}</span>`:x===oc?'<span class="pick-drop-copy">DROP PROSPECT TO USE PICK</span>':'—'}</div>
+      <div class="draft-player">${x.player?`<div class="draft-player-with-photo">${prospectPhoto(x.player.name,'draft-picked-photo')}<span><strong>${esc(x.player.name)}</strong><small>${esc(x.player.position)}</small></span></div>`:x===oc?'<span class="pick-drop-copy">DROP PROSPECT TO USE PICK</span>':'—'}</div>
       ${x.matched?'<span class="matched-badge">MATCHED BID</span>':''}
     </div>`}).join('');
     const current=el.querySelector('[data-current-pick="true"]');
@@ -207,7 +209,7 @@
     const el=$('#prospectBoard'); if(!el) return;
     const q=($('#prospectSearch')?.value||'').toLowerCase().trim();
     const list=available().filter(p=>(`${p.name} ${p.position} ${p.pathway} ${p.tieType||''}`).toLowerCase().includes(q));
-    el.innerHTML=list.map(p=>`<div class="prospect-row ${state.selectedProspect?.name===p.name?'selected':''}" data-drag-prospect="${esc(p.name)}" draggable="true"><span class="prospect-rank">${p.rank}</span><span class="prospect-copy"><button class="prospect-name-link" data-profile-name="${esc(p.name)}">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}</small>${p.tiedClub?`<em>${esc(p.tieType)} • ${esc(club(p.tiedClub).name)}</em>`:''}</span><span class="prospect-actions-inline"><button class="prospect-profile-label" data-profile-name="${esc(p.name)}">PROFILE</button><button class="prospect-select-label" data-prospect="${esc(p.name)}">SELECT</button></span></div>`).join('');
+    el.innerHTML=list.map(p=>`<div class="prospect-row ${state.selectedProspect?.name===p.name?'selected':''}" data-drag-prospect="${esc(p.name)}" draggable="true"><span class="prospect-rank">${p.rank}</span>${prospectPhoto(p.name)}<span class="prospect-copy"><button class="prospect-name-link" data-profile-name="${esc(p.name)}">${esc(p.name)}</button><small>${esc(p.position)} • ${esc(p.pathway)}</small>${p.tiedClub?`<em>${esc(p.tieType)} • ${esc(club(p.tiedClub).name)}</em>`:''}</span><span class="prospect-actions-inline"><button class="prospect-profile-label" data-profile-name="${esc(p.name)}">PROFILE</button><button class="prospect-select-label" data-prospect="${esc(p.name)}">SELECT</button></span></div>`).join('');
     document.querySelectorAll('[data-prospect]').forEach(b=>b.onclick=e=>{e.stopPropagation();selectProspect(b.dataset.prospect);});
     document.querySelectorAll('[data-profile-name]').forEach(b=>b.onclick=e=>{e.stopPropagation();const oc=onClock();window.ATMProfiles?.open?.(b.dataset.profileName,{clubId:oc?.owner||null,pick:oc?.pick||null});});
     document.querySelectorAll('[data-drag-prospect]').forEach(row=>{
@@ -216,6 +218,24 @@
       row.ondragstart=e=>{draggedProspectName=name;e.dataTransfer.effectAllowed='copyMove';e.dataTransfer.setData('text/plain',name);requestAnimationFrame(()=>row.classList.add('dragging'));};
       row.ondragend=()=>{draggedProspectName=null;document.querySelectorAll('.dragging,.drag-over').forEach(x=>x.classList.remove('dragging','drag-over'));};
     });
+  }
+
+
+  function compareWithMyMock(){
+    const mock=(window.ATM_MY_MOCK?.board||[]).filter(r=>!r.placeholder).slice(0,40);
+    if(!mock.length) return toast('My Mock Draft is unavailable');
+    const live=state.order.slice().sort((a,b)=>a.pick-b.pick).slice(0,40);
+    const rows=Array.from({length:40},(_,i)=>{
+      const pick=i+1, l=live.find(x=>x.pick===pick), m=mock.find(x=>Number(x.pick)===pick);
+      const liveName=l?.player?.name||''; const mockName=m?.player||'';
+      const same=liveName&&mockName&&liveName===mockName;
+      const lc=l?club(l.owner):null, mc=m?club(m.clubId):null;
+      return `<div class="current-compare-row ${same?'same':liveName?'different':'pending'}"><span class="compare-pick">${pick}</span><div class="compare-live">${l?`<span class="compare-club-mini">${lc?`<img src="${esc(lc.logo)}" alt="">`:''}<small>${esc(lc?.abbr||'')}</small></span>`:''}<span><strong>${liveName?esc(liveName):'—'}</strong><small>${liveName?'Your live simulator':'Not selected yet'}</small></span></div><div class="compare-status">${same?'<strong>MATCH</strong>':liveName?'<strong>DIFFERENT</strong>':'<strong>PENDING</strong>'}</div><div class="compare-mock">${m?`<span class="compare-club-mini">${mc?`<img src="${esc(mc.logo)}" alt="">`:''}<small>${esc(mc?.abbr||'')}</small></span><span><strong>${esc(mockName)}</strong><small>${esc(m.path||mc?.name||'My Mock')}</small></span>`:'<span><strong>—</strong></span>'}</div></div>`;
+    }).join('');
+    const selected=live.filter(x=>x.player).length;
+    const exact=live.filter(x=>x.player&&mock.find(m=>Number(m.pick)===x.pick)?.player===x.player.name).length;
+    openModal(`<div class="modal-kicker">2026 DRAFT COMPARISON</div><h3>Live Simulator vs My Mock Draft</h3><p>Compare the selections you have made in the current simulator directly against the published 2026 mock.</p><div class="current-compare-summary"><div><span>LIVE PICKS MADE</span><strong>${selected}</strong></div><div><span>EXACT MATCHES</span><strong>${exact}</strong></div><div><span>DIFFERENCES</span><strong>${Math.max(0,selected-exact)}</strong></div></div><div class="current-compare-head"><span>#</span><span>YOUR LIVE DRAFT</span><span>RESULT</span><span>MY MOCK DRAFT</span></div><div class="current-compare-list">${rows}</div><div class="modal-actions"><button id="closeCurrentCompare" class="primary-btn">CLOSE</button></div>`);
+    $('#closeCurrentCompare').onclick=closeModal;
   }
 
   function renderLog(){
@@ -229,10 +249,11 @@
     if($('#prospectSearch')) $('#prospectSearch').oninput=renderProspects;
     if($('#resetDraftBtn')) $('#resetDraftBtn').onclick=reset;
     if($('#draftTradePickBtn')) $('#draftTradePickBtn').onclick=tradeOnClock;
+    if($('#compareCurrentDraftBtn')) $('#compareCurrentDraftBtn').onclick=compareWithMyMock;
     if($('#draftModal')) $('#draftModal').onclick=e=>{ if(e.target.id==='draftModal') closeModal(); };
     render();
   }
 
-  window.MockDraft={render,reset};
+  window.MockDraft={render,reset,compareWithMyMock};
   init();
 })();

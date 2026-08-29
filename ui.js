@@ -5,12 +5,14 @@
   const draftViewButtons=[...document.querySelectorAll('[data-draft-view]')];
 
   function setDraftView(view){
-    const live=document.querySelector('#liveDraftView'),featured=document.querySelector('#featuredMockView');
+    const live=document.querySelector('#liveDraftView'),featured=document.querySelector('#featuredMockView'),redraft=document.querySelector('#redraftView');
     if(live)live.hidden=view!=='live';
     if(featured)featured.hidden=view!=='featured';
+    if(redraft)redraft.hidden=view!=='redraft';
     draftViewButtons.forEach(b=>b.classList.toggle('active',b.dataset.draftView===view));
     if(view==='live')window.MockDraft?.render?.();
     if(view==='featured')window.FeaturedMock?.render?.();
+    if(view==='redraft')window.Redraft?.render?.();
   }
   function setMode(mode){
     panels.forEach(p=>p.hidden=p.dataset.modePanel!==mode);

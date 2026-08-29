@@ -7,6 +7,8 @@
   const clubs = [...D.clubs].sort((a,b)=>a.name.localeCompare(b.name));
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  const playerPhoto=(name,cls='asset-player-photo')=>`<img class="${cls}" data-player-photo="${esc(name)}" src="assets/player-placeholder.svg" alt="${esc(name)}">`;
+  const hydratePhotos=(root=document)=>window.ATMPlayerPhotos?.hydrate?.(root);
   const money = n => n == null ? '' : new Intl.NumberFormat('en-AU',{style:'currency',currency:'AUD',maximumFractionDigits:0}).format(n);
   const elite = new Set(['Nick Daicos','Harley Reid','Will Ashcroft','Matt Rowell','Noah Anderson','Marcus Bontempelli','Zak Butters','Jason Horne-Francis','Chad Warner','Errol Gulden','Caleb Serong','Harry Sheezel','Sam Darcy','Max Holmes','Finn Callaghan','Jordan Dawson','Izak Rankine']);
   const stars = new Set(['Patrick Cripps','Sam Walsh','Jacob Weitering','Christian Petracca','Max Gawn','Kysaiah Pickett','Tom Green','Toby Greene','Isaac Heeney','Andrew Brayshaw','Luke Jackson','Shai Bolton','Hugh McCluggage','Josh Dunkley','Harris Andrews','Jai Newcombe','Will Day','James Sicily','Luke Davies-Uniacke','Colby McKercher','Connor Rozee','Mac Andrew','Bailey Smith','Jeremy Cameron']);
@@ -88,10 +90,11 @@
     const used=trade.some(t=>t.asset.id===a.id);
     const points=a.type==='pick'?(a.points==null?'<span class="points-badge tbd">PTS TBD</span>':`<span class="points-badge">${a.points.toLocaleString()} PTS</span>`):'';
     const contract=a.type==='player'&&a.contract?`<div class="contract-inline">${esc(contractText(a.name))}${a.contract.note?`<span title="${esc(a.contract.note)}">ⓘ</span>`:''}</div>`:'';
-    return `<div class="asset-row" data-name="${esc((a.name+' '+a.meta).toLowerCase())}"><div class="asset-copy"><div class="asset-name">${esc(a.name)} ${points}</div><div class="asset-meta">${esc(a.meta)}</div>${contract}</div><div class="asset-actions">${destinationControl(c.id,a.id)}<button class="asset-add" data-team="${c.id}" data-asset="${esc(a.id)}" ${used?'disabled':''}>ADD</button></div></div>`;
+    const main=a.type==='player'?`<div class="asset-player-main">${playerPhoto(a.name)}<div class="asset-copy"><div class="asset-name">${esc(a.name)} ${points}</div><div class="asset-meta">${esc(a.meta)}</div>${contract}</div></div>`:`<div class="asset-copy"><div class="asset-name">${esc(a.name)} ${points}</div><div class="asset-meta">${esc(a.meta)}</div>${contract}</div>`;
+    return `<div class="asset-row" data-name="${esc((a.name+' '+a.meta).toLowerCase())}">${main}<div class="asset-actions">${destinationControl(c.id,a.id)}<button class="asset-add" data-team="${c.id}" data-asset="${esc(a.id)}" ${used?'disabled':''}>ADD</button></div></div>`;
   }
   function movementColumn(title,items,direction){
-    return `<div class="movement-col"><div class="outgoing-title">${title}</div>${items.length?items.map(t=>`<div class="trade-item"><div class="trade-item-main"><div class="name">${esc(t.asset.name)}</div><div class="route">${direction==='in'?`from ${esc(club(t.from).name)}`:`to ${esc(club(t.to).name)}`}</div>${t.asset.contract?`<div class="trade-contract">${esc(contractText(t.asset.name))}</div>`:''}</div><button class="trade-remove" data-uid="${t.uid}">×</button></div>`).join(''):'<div class="empty-mini">Nothing yet.</div>'}</div>`;
+    return `<div class="movement-col"><div class="outgoing-title">${title}</div>${items.length?items.map(t=>`<div class="trade-item"><div class="trade-player-main">${t.asset.type==='player'?playerPhoto(t.asset.name,'trade-player-photo'):''}<div class="trade-item-main"><div class="name">${esc(t.asset.name)}</div><div class="route">${direction==='in'?`from ${esc(club(t.from).name)}`:`to ${esc(club(t.to).name)}`}</div>${t.asset.contract?`<div class="trade-contract">${esc(contractText(t.asset.name))}</div>`:''}</div></div><button class="trade-remove" data-uid="${t.uid}">×</button></div>`).join(''):'<div class="empty-mini">Nothing yet.</div>'}</div>`;
   }
   function teamCard(c){
     const tab=tabs[c.id]||'players'; tabs[c.id]=tab;
@@ -107,6 +110,7 @@
     document.querySelectorAll('.asset-add').forEach(b=>b.onclick=()=>addAsset(b.dataset.team,b.dataset.asset));
     document.querySelectorAll('.trade-remove').forEach(b=>b.onclick=()=>{trade=trade.filter(t=>t.uid!==b.dataset.uid);renderAll();});
     document.querySelectorAll('[data-remove-team]').forEach(b=>b.onclick=()=>toggleClub(b.dataset.removeTeam));
+    hydratePhotos(board);
   }
   function addAsset(from,aid){
     const opts=selected.filter(x=>x!==from); let dest=opts.length===1?opts[0]:document.querySelector(`[data-destination-for="${CSS.escape(aid)}"]`)?.value;

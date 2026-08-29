@@ -38,21 +38,28 @@
     {label:'INTERCHANGE',interchange:true,slots:[['INT1','Interchange 1'],['INT2','Interchange 2'],['INT3','Interchange 3'],['INT4','Interchange 4'],['INT5','Interchange 5']]}
   ];
   const slotKeys=groups.flatMap(g=>g.slots.map(s=>s[0]));
-  const lineups={}, extras={};
+  const lineups={}, extras={}, delisted={};
   let clubId='ric';
   let activeSlotKey=null;
   let dragState=null;
   const blank=()=>Object.fromEntries(slotKeys.map(k=>[k,'']));
   const lineup=()=>lineups[clubId] ||= blank();
   const customList=(id=clubId)=>extras[id] ||= [];
+  const delistedSet=(id=clubId)=>delisted[id] ||= new Set();
   const selectedSet=(exceptKey=null)=>new Set(Object.entries(lineup()).filter(([k,v])=>v&&k!==exceptKey).map(([,v])=>v));
   const selectedCount=()=>Object.values(lineup()).filter(Boolean).length;
-  function allPlayers(){
+  function rawAllPlayers(){
     const map=new Map(club(clubId).players.map(name=>[name,{name,position:'',source:'Club list'}]));
     customList().forEach(p=>map.set(p.name,p));
     return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name));
   }
+  function allPlayers(){
+    const gone=delistedSet();
+    return rawAllPlayers().filter(p=>!gone.has(p.name));
+  }
   const playerMeta=name=>allPlayers().find(p=>p.name===name)||{name,position:'',source:'Club list'};
+  const photoImg=(name,cls='player-thumb')=>`<img class="${cls}" data-player-photo="${esc(name)}" src="assets/player-placeholder.svg" alt="${esc(name)}">`;
+  const hydratePhotos=(root=document)=>window.ATMPlayerPhotos?.hydrate?.(root);
   function renderClubOptions(){
     const sel=$('#best23Club'); if(!sel)return;
     sel.innerHTML=clubs.map(c=>`<option value="${c.id}" ${c.id===clubId?'selected':''}>${esc(c.name)}</option>`).join('');
@@ -61,12 +68,8 @@
   function renderIdentity(){
     const c=club(clubId),el=$('#best23ClubIdentity'); if(!el)return;
     const t=themeFor(clubId),mode=$('#best23Mode');if(mode){mode.style.setProperty('--teamPrimary',t.primary);mode.style.setProperty('--teamSecondary',t.secondary);mode.style.setProperty('--teamText',t.text);mode.style.setProperty('--selectorBg',t.selectorBg);mode.style.setProperty('--selectorText',t.selectorText);mode.style.setProperty('--selectorA',t.bands[0]);mode.style.setProperty('--selectorB',t.bands[1]);mode.style.setProperty('--selectorC',t.bands[2]);}
-    el.innerHTML=`<span class="builder-logo-box"><img src="${esc(c.logo)}" alt="${esc(c.name)} logo"></span><span><strong>${esc(c.name)}</strong><small>${customList().length?`${customList().length} hypothetical player${customList().length!==1?'s':''} added`:'Current club list'}</small></span>`;
+    el.innerHTML=`<span class="builder-logo-box"><img src="${esc(c.logo)}" alt="${esc(c.name)} logo"></span><span><strong>${esc(c.name)}</strong><small>${customList().length?`${customList().length} hypothetical player${customList().length!==1?'s':''} added`:'Current club list'}${delistedSet().size?` • ${delistedSet().size} delisted`:''}</small></span>`;
     $('#best23Count').textContent=`${selectedCount()} / 23`;
-  }
-  function slotOptions(key){
-    const current=lineup()[key],used=selectedSet(key);
-    return `<option value="">— SELECT PLAYER —</option>`+allPlayers().map(p=>`<option value="${esc(p.name)}" ${current===p.name?'selected':''} ${used.has(p.name)?'disabled':''}>${esc(p.name)}${p.source!=='Club list'?` • ${esc(p.source)}`:''}</option>`).join('');
   }
   function setPlayerInSlot(key,name){
     if(!slotKeys.includes(key)) return;
@@ -92,22 +95,15 @@
       <div class="field-line-label">${esc(g.label)}</div>
       <div class="field-line-slots">${g.slots.map(([key,label])=>{
         const value=lineup()[key],meta=value?playerMeta(value):null;
-        return `<div class="position-slot ${meta&&meta.source!=='Club list'?'hypothetical':''} ${activeSlotKey===key?'active-slot':''}" data-slot-card="${key}" data-player-name="${esc(value)}" draggable="${value?'true':'false'}" tabindex="0" role="button" aria-label="${esc(label)}${value?`: ${esc(value)}`:': empty'}">
+        return `<div class="position-slot ${value?'occupied':'empty'} ${meta&&meta.source!=='Club list'?'hypothetical':''} ${activeSlotKey===key?'active-slot':''}" data-slot-card="${key}" data-player-name="${esc(value)}" draggable="${value?'true':'false'}" tabindex="0" role="button" aria-label="${esc(label)}${value?`: ${esc(value)}`:': empty'}">
           <div class="position-name">${esc(label)}</div>
-          <div class="position-select-wrap"><select class="position-select" data-slot="${key}" aria-label="${esc(label)}">${slotOptions(key)}</select></div>
-          ${meta&&meta.source!=='Club list'?`<span class="assumption-tag">${esc(meta.source)}</span>`:''}
-          <span class="drag-slot-hint">${value?'DRAG TO MOVE / SWAP':'DROP PLAYER HERE'}</span>
+          ${value?`<div class="position-player-tag">${photoImg(value,'position-player-photo')}<span><strong>${esc(value)}</strong>${meta&&meta.source!=='Club list'?`<small>${esc(meta.source)}</small>`:''}</span></div>`:`<div class="position-player-tag empty-tag"><span><strong>DROP PLAYER</strong></span></div>`}
         </div>`;
       }).join('')}</div></div>`).join('');
-    document.querySelectorAll('[data-slot]').forEach(sel=>sel.onchange=()=>{
-      const key=sel.dataset.slot,value=sel.value;
-      if(value&&selectedSet(key).has(value)){toast(`${value} is already selected`);return renderField();}
-      lineup()[key]=value;activeSlotKey=key;render();
-    });
     document.querySelectorAll('[data-slot-card]').forEach(card=>{
       const key=card.dataset.slotCard;
-      card.onclick=e=>{if(e.target.closest('select'))return;activeSlotKey=key;renderField();};
-      card.onkeydown=e=>{if((e.key==='Enter'||e.key===' ')&&!e.target.closest('select')){e.preventDefault();activeSlotKey=key;renderField();}};
+      card.onclick=()=>{activeSlotKey=key;renderField();};
+      card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activeSlotKey=key;renderField();}};
       card.ondragstart=e=>{
         const name=lineup()[key]; if(!name){e.preventDefault();return;}
         dragState={type:'slot',slot:key,name};
@@ -126,26 +122,42 @@
         dragState=null;
       };
     });
+    hydratePhotos(el);
   }
   function addToNextEmpty(name){
     if(Object.values(lineup()).includes(name)) return toast(`${name} is already in your 23`);
     const key=slotKeys.find(k=>!lineup()[k]); if(!key)return toast('Your Best 23 is already full');
     lineup()[key]=name;render();
   }
+  function delistPlayer(name){
+    if(!name)return;
+    Object.keys(lineup()).forEach(k=>{if(lineup()[k]===name)lineup()[k]='';});
+    delistedSet().add(name);
+    activeSlotKey=null;
+    render();
+    toast(`${name} delisted from ${club(clubId).name}`);
+  }
+  function restorePlayer(name){
+    delistedSet().delete(name);
+    render();
+    toast(`${name} restored to ${club(clubId).name} squad`);
+  }
   function renderPool(){
     const el=$('#best23Pool'); if(!el)return;
     const q=($('#best23Search')?.value||'').toLowerCase().trim(),chosen=new Set(Object.values(lineup()).filter(Boolean));
     const list=allPlayers().filter(p=>(`${p.name} ${p.position} ${p.source}`).toLowerCase().includes(q));
-    el.innerHTML=`<div class="pool-drop-hint">DRAG A PLAYER BACK HERE TO REMOVE FROM THE 23</div>`+list.map(p=>`<div class="squad-row ${chosen.has(p.name)?'selected':''} ${p.source!=='Club list'?'hypothetical-row':''}" data-pool-player="${esc(p.name)}" draggable="${chosen.has(p.name)?'false':'true'}">
-      <div><div class="squad-name">${esc(p.name)}</div><div class="squad-status">${p.position?`${esc(p.position)} • `:''}${chosen.has(p.name)?'Selected in Best 23':esc(p.source)}</div></div>
-      <button class="squad-add" data-add-player="${esc(p.name)}" ${chosen.has(p.name)?'disabled':''}>ADD</button>
-    </div>`).join('');
-    document.querySelectorAll('[data-add-player]').forEach(b=>b.onclick=e=>{e.stopPropagation();addToNextEmpty(b.dataset.addPlayer);});
+    const gone=[...delistedSet()].map(name=>rawAllPlayers().find(p=>p.name===name)||{name,position:'',source:'Club list'}).sort((a,b)=>a.name.localeCompare(b.name));
+    el.innerHTML=`<div class="pool-drop-hint">DRAG PLAYERS TO THE OVAL • CLICK A POSITION THEN A PLAYER • DELIST REMOVES THEM FROM THE ACTIVE SQUAD</div>`+list.map(p=>`<div class="squad-row ${chosen.has(p.name)?'selected':''} ${p.source!=='Club list'?'hypothetical-row':''}" data-pool-player="${esc(p.name)}" draggable="${chosen.has(p.name)?'false':'true'}">
+      <div class="squad-player-main">${photoImg(p.name,'squad-player-photo')}<div><div class="squad-name">${esc(p.name)}</div><div class="squad-status">${p.position?`${esc(p.position)} • `:''}${chosen.has(p.name)?'Selected in Best 23':esc(p.source)}</div></div></div>
+      <div class="squad-actions"><button class="squad-delist" data-delist-player="${esc(p.name)}">DELIST</button></div>
+    </div>`).join('')+(gone.length?`<div class="delisted-block"><div class="delisted-title">DELISTED PLAYERS <span>${gone.length}</span></div>${gone.map(p=>`<div class="squad-row delisted-row"><div class="squad-player-main">${photoImg(p.name,'squad-player-photo')}<div><div class="squad-name">${esc(p.name)}</div><div class="squad-status">Removed from active squad</div></div></div><button class="squad-restore" data-restore-player="${esc(p.name)}">RESTORE</button></div>`).join('')}</div>`:'');
+    document.querySelectorAll('[data-delist-player]').forEach(b=>b.onclick=e=>{e.stopPropagation();delistPlayer(b.dataset.delistPlayer);});
+    document.querySelectorAll('[data-restore-player]').forEach(b=>b.onclick=e=>{e.stopPropagation();restorePlayer(b.dataset.restorePlayer);});
     document.querySelectorAll('[data-pool-player]').forEach(row=>{
       const name=row.dataset.poolPlayer;
       row.onclick=e=>{
         if(e.target.closest('button')||chosen.has(name))return;
-        if(activeSlotKey)setPlayerInSlot(activeSlotKey,name);else addToNextEmpty(name);
+        if(activeSlotKey)setPlayerInSlot(activeSlotKey,name);else toast('Select a field position or drag the player onto the oval');
       };
       row.ondragstart=e=>{
         if(chosen.has(name)){e.preventDefault();return;}
@@ -163,6 +175,7 @@
         lineup()[dragState.slot]='';activeSlotKey=null;dragState=null;render();
       }
     };
+    hydratePhotos(el);
   }
   function openModal(html){const m=$('#draftModal'),c=$('#draftModalCard');if(!m||!c)return;c.innerHTML=html;m.hidden=false;}
   function closeModal(){const m=$('#draftModal'),c=$('#draftModalCard');if(m)m.hidden=true;if(c)c.innerHTML='';}
