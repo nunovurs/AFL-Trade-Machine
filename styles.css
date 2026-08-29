@@ -767,3 +767,42 @@ body{background:linear-gradient(180deg,#e2e7eb 0,#eaedf0 34%,#e4e8ec 100%);color
   #best23Mode .vfl-builder-actions{justify-content:flex-start}
   #best23Mode .vfl-football-field{min-height:auto}
 }
+
+/* v6.13: make traded/consumed draft assets impossible to miss in My Mock */
+.mock-asset-row{display:grid;grid-template-columns:70px 150px minmax(240px,.8fr) minmax(320px,1.4fr);align-items:stretch;border-left:5px solid var(--club);background:#f7f9fb;min-height:88px;border-top:1px solid #ccd4dc;border-bottom:1px solid #ccd4dc}
+.asset-marker{display:flex;align-items:center;justify-content:center;background:#172337;color:#fff;font-size:9px;letter-spacing:.08em;font-weight:950}
+.mock-asset-badge{display:flex;flex-direction:column;justify-content:center;padding:12px;background:#e6ebef;border-right:1px solid #cbd3da}
+.mock-asset-badge strong{font-size:14px;color:#111b29;letter-spacing:.02em}.mock-asset-badge span{margin-top:4px;font-size:9px;color:#607080;font-weight:800}
+.mock-asset-chain{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 14px;border-right:1px solid #cbd3da}.asset-club{display:flex;align-items:center;gap:8px;min-width:0}.asset-club img{width:34px;height:34px;object-fit:contain}.asset-club span{display:flex;flex-direction:column}.asset-club small{font-size:8px;letter-spacing:.08em;color:#788694;font-weight:900}.asset-club strong{font-size:10px;color:#182536}.asset-arrow{font-size:25px;font-weight:950;color:#536273}
+.mock-asset-status{padding:10px 14px;display:flex;flex-direction:column;justify-content:center}.mock-asset-status>span{display:inline-flex;width:max-content;padding:4px 7px;border-radius:4px;background:#111b29;color:#fff;font-size:8px;font-weight:950;letter-spacing:.08em}.mock-asset-status>strong{margin-top:6px;font-size:10px;color:#142234}.mock-asset-status p{margin:4px 0 0;font-size:9px;line-height:1.45;color:#566574}
+@media(max-width:900px){.mock-asset-row{grid-template-columns:52px 1fr}.mock-asset-badge,.mock-asset-chain,.mock-asset-status{grid-column:2}.mock-asset-chain{justify-content:flex-start;border-top:1px solid #d5dce2;border-right:0}.mock-asset-status{border-top:1px solid #d5dce2}}
+
+
+/* v6.14 true draft-night bid payment ledger */
+.mock-pick-no{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important}
+.mock-pick-no>strong{font-family:"Arial Black",Arial,sans-serif;font-size:22px;line-height:1}
+.mock-pick-no>small{font-family:Arial,sans-serif;font-size:7px;font-weight:900;color:#667482;line-height:1}
+.bid-payment-row{grid-template-columns:62px 1fr!important;background:#edf1f4!important;border-left-color:var(--club)!important;overflow:hidden}
+.payment-marker{background:#d4dbe1!important;color:#536270!important;font-size:24px!important}
+.bid-payment-copy{padding:12px 14px;min-width:0}
+.bid-payment-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:10px}
+.bid-payment-head strong{display:block;font-size:10px;letter-spacing:.08em;color:#172337}
+.bid-payment-head p{margin:4px 0 0;font-size:9px;line-height:1.42;color:#566575;max-width:900px}
+.bid-paid-chip{flex:0 0 auto;border:1px solid #b8c2cc;background:#fff;border-radius:999px;padding:5px 8px;font-size:7px;font-weight:1000;letter-spacing:.05em;color:#334252;white-space:nowrap}
+.bid-payment-assets{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bid-payment-asset{display:grid;grid-template-columns:110px minmax(180px,1fr) 150px 90px;gap:10px;align-items:center;border:1px solid #c8d0d7;border-left:5px solid #8a96a2;border-radius:6px;background:#fff;padding:8px 9px}
+.bid-payment-asset.moved{border-left-color:#16845a;background:#f3fbf7}
+.bid-payment-asset.absorbed{border-left-color:#b4232f;background:#fff5f5}
+.bid-payment-asset.provisional{border-left-color:#9a7b24;background:#fffaf0}
+.payment-status{font-size:7px;font-weight:1000;letter-spacing:.08em;text-align:center;border-radius:999px;padding:5px 7px;background:#e7ebee;color:#4e5b68}
+.bid-payment-asset.moved .payment-status{background:#dff3e8;color:#126a49}
+.bid-payment-asset.absorbed .payment-status{background:#f7dfe2;color:#96202a}
+.bid-payment-asset.provisional .payment-status{background:#f6edcf;color:#785f18}
+.payment-asset-main strong{display:block;font-size:9px;color:#172337}.payment-asset-main span{display:block;margin-top:2px;font-size:7.5px;color:#74818e}
+.payment-live small,.payment-points small,.bid-payment-totals small{display:block;font-size:6.5px;font-weight:1000;letter-spacing:.07em;color:#7a8793;margin-bottom:2px}
+.payment-live strong,.payment-points strong{font-size:9px;color:#253446}
+.bid-payment-totals{display:grid;grid-template-columns:170px 145px 135px 1fr;gap:10px;align-items:center;margin-top:8px;padding:8px 10px;border:1px solid #d0d7dd;border-radius:5px;background:#e7ecef}
+.bid-payment-totals>span>strong{font-size:10px;color:#172337}.payment-rule-note{font-size:7.5px;line-height:1.35;color:#64717e}
+.legend-moved,.legend-absorbed{display:inline-block;border-radius:999px;padding:2px 5px;font-size:8px;letter-spacing:.03em}.legend-moved{background:#dff3e8;color:#126a49}.legend-absorbed{background:#f7dfe2;color:#96202a}
+@media(max-width:980px){.bid-payment-assets{grid-template-columns:1fr}.bid-payment-asset{grid-template-columns:100px minmax(150px,1fr) 130px 80px}.bid-payment-totals{grid-template-columns:1fr 1fr 1fr}.payment-rule-note{grid-column:1/-1}}
+@media(max-width:700px){.bid-payment-row{grid-template-columns:48px 1fr!important}.bid-payment-copy{grid-column:2;padding:9px}.bid-payment-head{flex-direction:column}.bid-payment-asset{grid-template-columns:1fr 1fr}.payment-status,.payment-asset-main{grid-column:1/-1}.bid-payment-totals{grid-template-columns:1fr 1fr}.payment-rule-note{grid-column:1/-1}.bid-paid-chip{white-space:normal}}

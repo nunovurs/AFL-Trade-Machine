@@ -55,3 +55,10 @@ Independent AFL trade, draft, redraft and Best 23 simulator.
 
 ## Notes
 Trade fairness and draft mechanics are modelling tools, not official AFL rulings or valuations. Historical redraft data requires the deployed Vercel API route to access Wikipedia. Player-photo availability depends on the AFL Fantasy feed and supplied draft-prospect profile photos; missing images fall back safely rather than breaking the UI.
+
+
+## v6.14 mock draft display
+- Added true draft-night bid-payment ledgers.
+- Primary matching picks are shown as USED → BID (they move up to the bid selection).
+- Supporting point picks are shown as ABSORBED and do not appear later as live selections.
+- Live selection rows now show DVI points.
