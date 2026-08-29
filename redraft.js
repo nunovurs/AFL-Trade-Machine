@@ -69,10 +69,19 @@
   function renderBoard(){
     const el=$('#redraftBoard');if(!el)return;
     if(state.loading){el.innerHTML='<div class="redraft-loading">Loading historical draft class…</div>';return;}
-    el.innerHTML=state.slots.map((p,i)=>`<div class="redraft-slot ${p?'filled':'empty'}" data-redraft-slot="${i}" draggable="${p?'true':'false'}">
-      <span class="redraft-rank">${i+1}</span>
-      ${p?`${photo(p.name,'redraft-slot-photo')}<div class="redraft-slot-copy"><strong>${esc(p.name)}</strong><small>${esc(formatOrigin(p))}${p.originalClub?` • ${esc(p.originalClub)}`:''}</small></div><span class="redraft-delta ${deltaLabel(p,i+1).cls}">${deltaLabel(p,i+1).text}</span><button class="redraft-remove" data-redraft-remove="${i}" aria-label="Remove ${esc(p.name)}">×</button>`:`<div class="redraft-slot-empty">DROP PLAYER HERE</div>`}
-    </div>`).join('');
+    const actual=state.data?.actualTop30||[];
+    el.innerHTML=state.slots.map((p,i)=>{
+      const a=actual[i];
+      return `<div class="redraft-pair-row">
+        <span class="redraft-rank">${i+1}</span>
+        <div class="redraft-slot ${p?'filled':'empty'}" data-redraft-slot="${i}" draggable="${p?'true':'false'}">
+          ${p?`${photo(p.name,'redraft-slot-photo')}<div class="redraft-slot-copy"><strong>${esc(p.name)}</strong><small>${esc(formatOrigin(p))}${p.originalClub?` • ${esc(p.originalClub)}`:''}</small></div><span class="redraft-delta ${deltaLabel(p,i+1).cls}">${deltaLabel(p,i+1).text}</span><button class="redraft-remove" data-redraft-remove="${i}" aria-label="Remove ${esc(p.name)}">×</button>`:`<div class="redraft-slot-empty">DROP PLAYER HERE</div>`}
+        </div>
+        <div class="redraft-actual-slot">
+          ${a?`${photo(a.name,'redraft-slot-photo')}<div class="redraft-slot-copy"><strong>${esc(a.name)}</strong><small>Actual Pick ${a.originalPick}${a.originalClub?` • ${esc(a.originalClub)}`:''}</small></div>`:`<div class="redraft-slot-empty">ACTUAL PICK UNAVAILABLE</div>`}
+        </div>
+      </div>`;
+    }).join('');
     el.querySelectorAll('[data-redraft-slot]').forEach(slot=>{
       const idx=Number(slot.dataset.redraftSlot);
       slot.ondragstart=e=>{if(!state.slots[idx])return;state.drag={type:'slot',idx,player:state.slots[idx]};e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',state.slots[idx].name);requestAnimationFrame(()=>slot.classList.add('dragging'));};
@@ -123,11 +132,11 @@
     if(!state.data?.actualTop30?.length)return toast('Historical draft data is not loaded');
     const selected=state.slots.filter(Boolean);if(!selected.length)return toast('Add players to your redraft first');
     const actual=state.data.actualTop30;const actualMap=new Map(actual.map((p,i)=>[norm(p.name),i+1]));
-    const chosenMap=new Map(selected.map((p,i)=>[norm(p.name),i+1]));
-    const exact=selected.filter((p,i)=>actualMap.get(norm(p.name))===i+1).length;
+    const chosenMap=new Map(state.slots.flatMap((p,i)=>p?[[norm(p.name),i+1]]:[]));
+    const exact=state.slots.reduce((n,p,i)=>n+(p&&actualMap.get(norm(p.name))===i+1?1:0),0);
     const newEntries=selected.filter(p=>!actualMap.has(norm(p.name)));
     const dropped=actual.filter(p=>!chosenMap.has(norm(p.name)));
-    const biggestRise=selected.map((p,i)=>({p,rank:i+1,delta:p.draftType==='rookie'?999:Number(p.originalPick)-(i+1)})).sort((a,b)=>b.delta-a.delta)[0];
+    const biggestRise=state.slots.flatMap((p,i)=>p?[{p,rank:i+1,delta:p.draftType==='rookie'?999:Number(p.originalPick)-(i+1)}]:[]).sort((a,b)=>b.delta-a.delta)[0];
     const rows=state.slots.map((p,i)=>{
       const actualAt=actual[i];const actualRank=p?actualMap.get(norm(p.name)):null;const d=p?deltaLabel(p,i+1):null;
       return `<div class="redraft-compare-row"><span class="compare-rank">${i+1}</span><div class="compare-your">${p?`${photo(p.name,'compare-player-photo')}<span><strong>${esc(p.name)}</strong><small>${esc(formatOrigin(p))}</small></span>`:'<span><strong>—</strong><small>Not filled</small></span>'}</div><div class="compare-move">${p?`<strong class="${d.cls}">${d.text}</strong><small>${actualRank?`Actual top-30 rank: ${actualRank}`:'Not in actual top 30'}</small>`:'—'}</div><div class="compare-actual"><span><strong>${esc(actualAt?.name||'—')}</strong><small>${actualAt?`Actual Pick ${actualAt.originalPick}${actualAt.originalClub?` • ${esc(actualAt.originalClub)}`:''}`:''}</small></span></div></div>`;

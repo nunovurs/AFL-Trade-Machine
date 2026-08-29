@@ -146,16 +146,17 @@
         </div>
         <div class="redraft-toolbar">
           <label>YEAR <select id="redraftYear"></select></label>
-          <button id="redraftLoadActualBtn" class="ghost-btn">LOAD ACTUAL TOP 30</button>
-          <button id="redraftCompareBtn" class="primary-btn">COMPARE WITH ACTUAL DRAFT</button>
+          <button id="redraftLoadActualBtn" class="ghost-btn">COPY ACTUAL TOP 30 INTO MINE</button>
+          <button id="redraftCompareBtn" class="primary-btn">VIEW MOVEMENT SUMMARY</button>
           <button id="redraftResetBtn" class="ghost-btn danger">CLEAR REDRAFT</button>
         </div>
         <div id="redraftSource" class="redraft-source">Select a year to load the full draft class.</div>
       </section>
       <section class="redraft-layout">
         <section class="panel redraft-board-panel">
-          <div class="section-head compact"><div><span class="section-number">01</span><h2>YOUR HINDSIGHT TOP 30</h2><p>Drag players into slots, drag between slots to reorder, or drag back to the pool to remove.</p></div><div id="redraftCount" class="counter">0 / 30</div></div>
-          <div id="redraftBoard" class="redraft-board"></div>
+          <div class="section-head compact"><div><span class="section-number">01</span><h2>YOUR REDRAFT VS ACTUAL DRAFT</h2><p>Build your hindsight Top 30 in the left column while the real draft for that year remains alongside it pick-for-pick.</p></div><div id="redraftCount" class="counter">0 / 30</div></div>
+          <div class="redraft-dual-head"><span>PICK</span><span>YOUR REDRAFT</span><span>ACTUAL DRAFT</span></div>
+          <div id="redraftBoard" class="redraft-board redraft-paired-board"></div>
         </section>
         <aside class="panel redraft-pool-panel">
           <div class="section-head compact"><div><span class="section-number">02</span><h2>FULL DRAFT CLASS</h2><p>National Draft + first-time Rookie Draft selections, including players originally outside the top 30.</p></div></div>
@@ -180,7 +181,7 @@
       <div class="hero-note">
         <div class="hero-note-title">MATCH-DAY FORMAT</div>
         <strong>23 players • five interchange</strong>
-        <span>The substitute was removed for 2026. A reserves/VFL/WAFL/SANFL companion side remains on the roadmap for the next team-builder expansion.</span>
+        <span>The substitute was removed for 2026. Build the AFL Best 23 first, then build a VFL / reserves Best 23 underneath using the remaining unselected players.</span>
       </div>
     </section>
 
@@ -213,6 +214,14 @@
         <div class="prospect-tools"><input id="best23Search" class="asset-search" placeholder="Search club players…"></div>
         <div id="best23Pool" class="squad-pool"></div>
       </aside>
+    </section>
+
+    <section class="panel field-panel vfl-field-panel">
+      <div class="section-head compact">
+        <div><span class="section-number">03</span><h2>VFL / RESERVES BEST 23</h2><p>Build the reserves side from the remaining squad. A player can only be in the AFL 23, VFL 23, or unselected squad pool at one time.</p></div>
+        <div class="vfl-builder-actions"><span class="counter" id="vflBest23Count">VFL 0 / 23</span><button id="resetVfl23Btn" class="ghost-btn danger">CLEAR VFL 23</button></div>
+      </div>
+      <div id="vflBest23Field" class="football-field vfl-football-field"></div>
     </section>
   </main>
 

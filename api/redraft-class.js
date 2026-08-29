@@ -21,8 +21,12 @@ function norm(s=''){return decode(s).toLowerCase().replace(/[^a-z0-9]+/g,' ').tr
 function findClub(cells){
   for(const cell of cells){
     const n=norm(cell);
-    const hit=CLUBS.find(c=>n===norm(c) || n.includes(norm(c)));
-    if(hit) return hit;
+    const exact=CLUBS.find(c=>n===norm(c));
+    if(exact) return exact;
+    const partial=CLUBS
+      .filter(c=>n.includes(norm(c)))
+      .sort((a,b)=>norm(b).length-norm(a).length)[0];
+    if(partial) return partial;
   }
   return '';
 }
@@ -36,18 +40,37 @@ function tableRows(html){
   }
   return rows;
 }
+function draftTableScore(table,kind){
+  const text=norm(table);
+  let score=0;
+  if(/\bpick\b/.test(text)) score+=4;
+  if(/\bplayer\b/.test(text)) score+=5;
+  if(/\bclub\b/.test(text) || /\bdrafted to\b/.test(text)) score+=4;
+  if(/\bround\b/.test(text)) score+=2;
+  if(kind==='national' && /national draft selections/.test(text)) score+=5;
+  if(kind==='rookie' && /rookie draft selections/.test(text)) score+=5;
+  if(/denotes player|hall of fame|premiership player|all australian/.test(text)) score-=8;
+  return score;
+}
 function sectionTable(html, kind, year){
   const headings=[]; const hRe=/<h2\b[^>]*>([\s\S]*?)<\/h2>/gi; let m;
   while((m=hRe.exec(html))) headings.push({idx:m.index,end:hRe.lastIndex,text:norm(m[1])});
-  const target=headings.find(h=>{
-    if(kind==='national') return h.text.includes(String(year)) && h.text.includes('national draft');
-    return h.text.includes('rookie draft') && !h.text.includes('mid season') && (h.text.includes(String(year)) || h.text.includes(String(year+1)));
+  const candidates=headings.filter(h=>{
+    if(kind==='national') return h.text.includes('national draft');
+    return h.text.includes('rookie draft') && !h.text.includes('mid season');
   });
+  const target=(kind==='national'
+    ? candidates.find(h=>h.text.includes(String(year)))
+    : candidates.find(h=>h.text.includes(String(year+1))) || candidates.find(h=>h.text.includes(String(year)))
+  ) || candidates[0];
   if(!target) return '';
   const next=headings.find(h=>h.idx>target.idx);
   const section=html.slice(target.end,next?.idx||html.length);
-  const tm=section.match(/<table\b[^>]*>[\s\S]*?<\/table>/i);
-  return tm?.[0]||'';
+  const tables=[...section.matchAll(/<table\b[^>]*>[\s\S]*?<\/table>/gi)].map(x=>x[0]);
+  if(!tables.length) return '';
+  return tables
+    .map(table=>({table,score:draftTableScore(table,kind)}))
+    .sort((a,b)=>b.score-a.score)[0]?.table||'';
 }
 function parseSelections(table, draftType){
   const out=[];
