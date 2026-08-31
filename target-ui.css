@@ -1,0 +1,58 @@
+/* Mock Draft target UI — matches approved reference */
+#draftMode{--ink:#111a26;--navy:#111923;--paper:#f4f7f9;--card:#fff;--soft:#eef2f5;--rule:#d7dfe6;--muted2:#667486;color:var(--ink);background:linear-gradient(135deg,#f8fafb,#edf2f5)}
+body:has(#draftMode:not([hidden])){background:#eef3f6;color:#111a26}
+body:has(#draftMode:not([hidden])) .topbar{background:#111923;border-bottom:1px solid #303b48;box-shadow:none}
+body:has(#draftMode:not([hidden])) .brand-mark{background:#111923;border:2px solid #e31d2b;clip-path:none;border-radius:0 0 12px 12px}
+body:has(#draftMode:not([hidden])) .mode-switch{background:#1d2734;border-color:#334052}
+body:has(#draftMode:not([hidden])) .mode-btn{color:#fff}
+body:has(#draftMode:not([hidden])) .mode-btn.active{background:#f6f8fa;color:#111923}
+#draftMode.shell{width:min(1480px,calc(100% - 36px));padding-top:24px}
+#draftMode .hero{grid-template-columns:minmax(0,1fr) 310px;align-items:stretch;background:transparent;border:0;box-shadow:none;padding:0;gap:26px;margin-bottom:18px}
+#draftMode .hero>div:first-child{background:rgba(255,255,255,.78);border:1px solid #dde4e9;border-radius:10px;padding:24px 28px;box-shadow:0 8px 25px rgba(23,36,50,.08)}
+#draftMode .eyebrow{font-size:14px;color:#c91924;margin-bottom:10px}
+#draftMode .hero h1{font-size:clamp(48px,5.1vw,74px);line-height:.83;color:#111923;margin-bottom:18px}
+#draftMode .hero h1 span{color:#c91924}
+#draftMode .hero p{color:#536174;font-size:15px;line-height:1.45}
+#draftMode .hero-note{background:rgba(255,255,255,.66);border:1px solid #d6dee5;border-radius:10px;padding:24px 20px;color:#111923;box-shadow:none}
+#draftMode .hero-note-title{color:#78869a}.draft-hero .hero-note strong{font-size:14px}.draft-hero .hero-note span{color:#69778a;font-size:12px}
+#draftMode .draft-subnav{display:flex;width:max-content;min-width:620px;border:1px solid #cbd5dd;border-radius:6px;overflow:hidden;background:#edf1f4;margin-bottom:18px}
+#draftMode .draft-view-btn{min-width:190px;border:0;border-right:1px solid #d6dee5;background:transparent;color:#293647;padding:13px 20px;font-weight:900;font-size:12px}
+#draftMode .draft-view-btn.active{background:#111923;color:#fff}
+#draftMode .draft-layout{grid-template-columns:minmax(0,1fr) 310px;gap:20px}
+#draftMode .panel{background:#fff;border:1px solid #d8e0e6;border-radius:9px;box-shadow:0 5px 18px rgba(25,38,52,.06);color:#111923}
+#draftMode .on-clock-panel{background:#111923;border-color:#111923;margin-bottom:16px}
+#draftMode .club-themed-clock{border:0!important;border-radius:9px!important;background:#111923!important;box-shadow:none!important;color:#fff!important;overflow:hidden!important}
+#draftMode .clock-head{background:#111923!important;border-bottom:1px solid #40505f!important;padding:12px 18px!important}
+#draftMode .clock-head strong,#draftMode .clock-head span{color:#fff!important}
+#draftMode .on-clock-row{min-height:124px!important;display:grid!important;grid-template-columns:minmax(360px,1.35fr) minmax(260px,.85fr)!important;background:linear-gradient(130deg,color-mix(in srgb,var(--club) 52%,#111923) 0 31%,#111923 31% 100%)!important;padding:0!important}
+#draftMode .clock-team{padding:18px 24px!important;align-items:center!important}
+#draftMode .clock-logo-box{background:#111923!important;width:68px!important;height:68px!important;border-radius:7px!important}
+#draftMode .clock-team-name{font-size:30px!important;color:#fff!important}.clock-meta{color:#fff!important}
+#draftMode .selected-prospect{margin:16px!important;min-height:88px!important;height:auto!important;background:#263342!important;border:1px solid #344657!important;color:#fff!important;border-radius:7px!important}
+#draftMode .selected-prospect *{color:#fff!important}
+#draftMode .draft-order-panel{overflow:hidden}
+#draftMode .section-head{background:#fff;border-bottom:1px solid #d8e0e6;padding:13px 15px;color:#111923}
+#draftMode .section-head h2{font-size:17px;color:#111923}.section-head p{color:#718094!important;font-size:11px!important}
+#draftMode .ghost-btn{background:#f5f7f9;border-color:#cbd5dd;color:#263445;border-radius:5px;padding:9px 12px}
+#draftMode .ghost-btn:hover{background:#e8edf1}#draftMode .ghost-btn.danger{background:#c91f2b;color:#fff;border-color:#c91f2b}
+#draftMode .primary-btn{background:#d51e2a;border-color:#d51e2a;color:#fff}
+#draftMode .draft-order{background:#fff}
+#draftMode .draft-order-row{background:#fff!important;border-bottom:1px solid #dce3e8!important;color:#152130!important;min-height:54px!important;padding:8px 10px!important}
+#draftMode .draft-order-row:hover{background:#f6f8fa!important}
+#draftMode .draft-pick-no,#draftMode .draft-club-name,#draftMode .draft-order-row strong{color:#152130!important}
+#draftMode .draft-club-meta,#draftMode .draft-order-row .muted{color:#667486!important}
+#draftMode .draft-row-action{background:#f4f7f9!important;border-color:#cbd5dd!important;color:#263445!important}
+#draftMode .draft-row-action:first-child{background:#d51e2a!important;border-color:#d51e2a!important;color:#fff!important}
+#draftMode .draft-side{gap:16px}
+#draftMode .prospects-panel,#draftMode .draft-log-panel{background:#fff}
+#draftMode .prospect-tools{background:#fff!important;border-bottom:1px solid #dce3e8!important;padding:10px!important}
+#draftMode .asset-search{background:#fff!important;border-color:#cbd5dd!important;color:#152130!important;padding:10px 12px!important}
+#draftMode .prospect-board{background:#fff!important;max-height:650px;overflow:auto}
+#draftMode .prospect-row{background:#fff!important;color:#152130!important;border-bottom:1px solid #e0e6eb!important}
+#draftMode .prospect-row:hover{background:#f5f7f9!important}
+#draftMode .prospect-name{color:#152130!important}.prospect-meta{color:#667486!important}
+#draftMode .draft-log{background:#fff!important;color:#263445!important}
+#draftMode .draft-sandbox-bar{background:#fff;border:1px solid #d8e0e6;border-radius:8px;padding:9px;margin-bottom:12px!important}
+#draftMode .draft-sandbox-bar .source-chip{background:#eef2f5!important;color:#4c5a6a!important}
+#draftMode .draft-night-tabs button.active{background:#111923!important;color:#fff!important}
+@media(max-width:900px){#draftMode .hero,#draftMode .draft-layout{grid-template-columns:1fr}#draftMode .hero-note{display:none}#draftMode .draft-subnav{min-width:0;width:100%}#draftMode .draft-view-btn{min-width:0;flex:1;padding:12px 8px}#draftMode .on-clock-row{grid-template-columns:1fr!important}.draft-side{grid-template-columns:1fr!important}}
