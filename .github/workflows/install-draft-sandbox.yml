@@ -1,0 +1,59 @@
+name: Install draft sandbox
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'draft-sandbox.js'
+      - 'api/draft-order.js'
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: nunovurs/afl-trade-machine
+      - name: Wire simulator APIs and sandbox
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('mock-draft.js')
+          s=p.read_text()
+          old='window.MockDraft={render,reset,compareWithMyMock,reopenPick,openScenarioManager};'
+          new="""function getState(){return state;}
+          function setState(next){state=next;render();}
+          function findProspect(name){return DD.prospects.find(p=>p.name===name)||null;}
+          function mutateOrder(change){
+            if(change.type==='insert'){
+              state.order.forEach(x=>{if(x.pick>=change.pick)x.pick++;});
+              state.order.push({pick:change.pick,owner:change.owner,player:change.playerName?findProspect(change.playerName):null,matched:false,custom:true});
+            }else if(change.type==='remove'){
+              state.order=state.order.filter(x=>x.pick!==change.pick);renumber();
+            }else if(change.type==='owner'){
+              const x=state.order.find(x=>x.pick===change.pick);if(x){x.owner=change.owner;x.custom=true;}
+            }else if(change.type==='edit'){
+              const x=state.order.find(x=>x.pick===change.pick);if(x){x.owner=change.owner;x.player=change.playerName?findProspect(change.playerName):null;x.custom=true;}
+            }
+            if(change.note)recordChange(change.note);state.order.sort((a,b)=>a.pick-b.pick);render();
+          }
+          function applyBaseline(picks,opts={}){
+            const old=state.order, byPick=new Map(old.map(x=>[x.pick,x]));
+            state.order=picks.map(p=>{const prev=byPick.get(p.pick);return {pick:p.pick,owner:p.owner,player:opts.preserveSelections?prev?.player||null:null,matched:opts.preserveSelections?prev?.matched||false:false,custom:false};});
+            state.customChanges=[];addLog('Baseline refreshed from live published draft order.');render();
+          }
+          window.MockDraft={render,reset,compareWithMyMock,reopenPick,openScenarioManager,getState,setState,mutateOrder,applyBaseline};"""
+          if old in s:s=s.replace(old,new)
+          p.write_text(s)
+          i=Path('index.html');h=i.read_text()
+          tag='  <script src="draft-sandbox.js"></script>\n'
+          if tag not in h:h=h.replace('  <script src="mock-draft.js"></script>\n','  <script src="mock-draft.js"></script>\n'+tag)
+          i.write_text(h)
+          PY
+      - name: Commit generated wiring
+        run: |
+          git config user.name "AFL Trade Machine Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add mock-draft.js index.html
+          git diff --cached --quiet || git commit -m "Activate full draft sandbox"
+          git push origin HEAD:nunovurs/afl-trade-machine
