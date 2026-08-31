@@ -55,6 +55,27 @@
   function renderLog(){const el=$('#draftLog');if(!el)return;el.innerHTML=state.log.length?state.log.map(l=>`<div class="log-item"><span>${esc(l.time)}</span><p>${esc(l.text)}</p></div>`).join(''):'<div class="empty-log">Selections, club-tied bids, live pick trades and custom scenarios will appear here.</div>';}
   function render(){ensureScenarioButton();renderOnClock();renderOrder();renderProspects();renderLog();}
   function init(){state=freshState();installStyles();ensureScenarioButton();if($('#prospectSearch'))$('#prospectSearch').oninput=renderProspects;if($('#resetDraftBtn'))$('#resetDraftBtn').onclick=reset;if($('#draftTradePickBtn'))$('#draftTradePickBtn').onclick=tradeOnClock;if($('#compareCurrentDraftBtn'))$('#compareCurrentDraftBtn').onclick=compareWithMyMock;if($('#draftModal'))$('#draftModal').onclick=e=>{if(e.target.id==='draftModal')closeModal();};render();}
-  window.MockDraft={render,reset,compareWithMyMock,reopenPick,openScenarioManager};
+  function getState(){return state;}
+function setState(next){state=next;render();}
+function findProspect(name){return DD.prospects.find(p=>p.name===name)||null;}
+function mutateOrder(change){
+  if(change.type==='insert'){
+    state.order.forEach(x=>{if(x.pick>=change.pick)x.pick++;});
+    state.order.push({pick:change.pick,owner:change.owner,player:change.playerName?findProspect(change.playerName):null,matched:false,custom:true});
+  }else if(change.type==='remove'){
+    state.order=state.order.filter(x=>x.pick!==change.pick);renumber();
+  }else if(change.type==='owner'){
+    const x=state.order.find(x=>x.pick===change.pick);if(x){x.owner=change.owner;x.custom=true;}
+  }else if(change.type==='edit'){
+    const x=state.order.find(x=>x.pick===change.pick);if(x){x.owner=change.owner;x.player=change.playerName?findProspect(change.playerName):null;x.custom=true;}
+  }
+  if(change.note)recordChange(change.note);state.order.sort((a,b)=>a.pick-b.pick);render();
+}
+function applyBaseline(picks,opts={}){
+  const old=state.order, byPick=new Map(old.map(x=>[x.pick,x]));
+  state.order=picks.map(p=>{const prev=byPick.get(p.pick);return {pick:p.pick,owner:p.owner,player:opts.preserveSelections?prev?.player||null:null,matched:opts.preserveSelections?prev?.matched||false:false,custom:false};});
+  state.customChanges=[];addLog('Baseline refreshed from live published draft order.');render();
+}
+window.MockDraft={render,reset,compareWithMyMock,reopenPick,openScenarioManager,getState,setState,mutateOrder,applyBaseline};
   init();
 })();
