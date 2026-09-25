@@ -1,0 +1,244 @@
+/* Mobile-first interface overrides.
+   Loaded after the desktop styles so phones get an intentionally different UI. */
+
+@media (max-width: 760px){
+  :root{--mobile-nav-h:64px}
+  html{scroll-behavior:smooth}
+  body{padding-bottom:calc(var(--mobile-nav-h) + env(safe-area-inset-bottom));overflow-x:hidden}
+  button,select,input,textarea{font-size:16px}
+  button{touch-action:manipulation}
+  .shell,#draftMode.shell{width:100%;padding:10px 10px 26px;margin:0}
+  .red-stripe{height:3px}
+
+  /* Compact header + persistent app-style navigation. */
+  .topbar{
+    position:sticky;top:0;z-index:80;
+    display:flex;align-items:center;justify-content:space-between;
+    min-height:54px;padding:7px 10px;gap:8px;
+    background:#172337!important;
+  }
+  .brand-wrap{gap:8px;min-width:0}
+  .brand-mark{width:36px;height:36px;flex:0 0 36px;font-size:11px}
+  .brand{font-size:12px;letter-spacing:.035em;overflow:hidden;text-overflow:ellipsis}
+  .subbrand{display:none}
+  .top-actions{gap:5px;min-width:0}
+  .top-actions .status-pill{display:none!important}
+  .top-actions .ghost-btn{min-height:38px;padding:7px 9px;font-size:9px}
+
+  .mode-switch{
+    position:fixed!important;left:0;right:0;bottom:0;z-index:120;
+    display:grid!important;grid-template-columns:repeat(3,1fr);
+    width:100%;height:calc(var(--mobile-nav-h) + env(safe-area-inset-bottom));
+    margin:0;padding:5px 6px calc(5px + env(safe-area-inset-bottom));
+    border:0!important;border-top:1px solid rgba(255,255,255,.18)!important;
+    border-radius:0!important;background:#111923!important;
+    box-shadow:0 -8px 24px rgba(17,25,35,.18);
+  }
+  .mode-btn{
+    min-width:0;min-height:48px;padding:6px 3px!important;border-radius:7px!important;
+    white-space:normal;font-size:9px!important;line-height:1.15;letter-spacing:.025em;
+    color:#dce4ec!important;
+  }
+  .mode-btn.active{background:#f3f5f6!important;color:#111923!important}
+  .mode-btn.active::after{display:none!important}
+
+  /* Stop hero blocks dominating a phone screen. */
+  .hero,#draftMode .hero{
+    display:block!important;margin:0 0 10px!important;padding:15px 14px!important;
+    border-radius:8px!important;background:#edf0f2!important;border:1px solid #c9d1d8!important;
+    box-shadow:none!important;
+  }
+  #draftMode .hero>div:first-child{padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+  .hero-note,#draftMode .hero-note{display:none!important}
+  .eyebrow,#draftMode .eyebrow{font-size:9px!important;margin-bottom:5px!important}
+  .hero h1,#draftMode .hero h1{
+    font-size:30px!important;line-height:.95!important;margin:0 0 8px!important;
+    letter-spacing:-.025em!important;
+  }
+  .hero p,#draftMode .hero p{font-size:11px!important;line-height:1.45!important}
+
+  /* Panels and section headers. */
+  .panel,#draftMode .panel{border-radius:8px!important;box-shadow:none!important}
+  .section-head,#draftMode .section-head{
+    padding:11px 12px!important;align-items:flex-start;gap:8px;flex-wrap:wrap;
+  }
+  .section-head h2,#draftMode .section-head h2{font-size:13px!important}
+  .section-head p,#draftMode .section-head p{font-size:9px!important}
+  .ghost-btn,.primary-btn{min-height:42px;padding:8px 10px;font-size:10px}
+  .counter{min-height:34px}
+
+  /* Club picker is fast to scan with thumb-sized tiles. */
+  .club-picker{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px!important;padding:8px!important;background:#e2e7eb!important;
+  }
+  .club-chip{min-height:58px;padding:7px!important}
+  .club-logo-wrap{width:42px!important;height:42px!important;flex-basis:42px!important}
+  .club-chip-name{font-size:10px!important;white-space:normal!important;line-height:1.15}
+
+  /* Trades: one club at a time, no microscopic four-column layout. */
+  .trade-board,.trade-board.cols-2,.trade-board.cols-3,.trade-board.cols-4{
+    grid-template-columns:1fr!important;gap:9px!important;padding:7px!important;
+  }
+  .team-card{border-radius:8px!important}
+  .team-card-head{min-height:62px;padding:8px 10px!important}
+  .team-logo-box,.trade-board.cols-4 .team-logo-box{width:46px!important;height:46px!important;flex-basis:46px!important}
+  .team-name,.trade-board.cols-4 .team-name{font-size:12px!important}
+  .team-tabs{position:sticky;top:54px;z-index:4}
+  .team-tab{min-height:42px;font-size:9px!important}
+  .asset-search{min-height:44px;padding:10px!important;font-size:16px!important}
+  .asset-list,.trade-board.cols-4 .asset-list{height:min(43vh,360px)!important}
+  .asset-row,.trade-board.cols-4 .asset-row{min-height:52px;padding:8px 6px!important;gap:6px!important}
+  .asset-name,.trade-board.cols-4 .asset-name{font-size:10px!important}
+  .asset-meta,.trade-board.cols-4 .asset-meta,.contract-inline{font-size:8px!important}
+  .asset-add{min-width:48px;min-height:38px;font-size:9px!important}
+  .asset-destination,.trade-board.cols-4 .asset-destination{max-width:92px!important;min-height:38px;font-size:10px!important}
+  .movement-grid,.trade-board.cols-4 .movement-grid{grid-template-columns:1fr 1fr!important}
+  .movement-col+.movement-col,.trade-board.cols-4 .movement-col+.movement-col{border-left:1px solid #d7dde2!important;border-top:0!important}
+  .trade-item{min-height:42px}
+  .analysis-grid{grid-template-columns:1fr!important;gap:9px!important}
+  .summary-club{grid-template-columns:1fr!important}
+  .summary-assets{grid-template-columns:1fr!important}
+
+  /* Draft: tabs and controls stay reachable, board becomes phone-readable. */
+  #draftMode .draft-subnav{
+    position:sticky;top:54px;z-index:70;
+    width:calc(100% + 20px)!important;min-width:0!important;
+    margin:0 -10px 10px!important;padding:5px 7px!important;
+    overflow-x:auto;display:flex!important;border-radius:0!important;
+    background:#dfe5e9!important;border-left:0!important;border-right:0!important;
+    scrollbar-width:none;
+  }
+  #draftMode .draft-subnav::-webkit-scrollbar{display:none}
+  #draftMode .draft-view-btn{
+    flex:0 0 auto!important;min-width:128px!important;min-height:42px;
+    padding:8px 10px!important;font-size:9px!important;
+  }
+  #draftMode .draft-layout{grid-template-columns:1fr!important;gap:10px!important}
+  #draftMode .draft-main,#draftMode .draft-side{gap:10px!important}
+  #draftMode .on-clock-panel{margin-bottom:0!important}
+  #draftMode .on-clock-row{
+    grid-template-columns:1fr!important;min-height:0!important;padding:0!important;
+    background:linear-gradient(145deg,color-mix(in srgb,var(--teamPrimary,var(--club,#333)) 72%,#111923) 0 44%,#111923 44% 100%)!important;
+  }
+  #draftMode .on-clock-inner{padding:0!important}
+  #draftMode .on-clock-pick{font-size:23px!important}
+  #draftMode .clock-team-name,#draftMode .on-clock-inner h2{font-size:21px!important}
+  #draftMode .selected-prospect{margin:9px!important;min-height:72px!important;padding:9px!important}
+  #draftMode .draft-actions{width:100%;display:grid!important;grid-template-columns:1fr 1fr;gap:6px!important}
+  #draftMode .draft-actions button{width:100%;min-height:40px;padding:7px!important;font-size:8px!important}
+  #draftMode .draft-order{max-height:58vh!important}
+  #draftMode .draft-order-row{
+    grid-template-columns:34px 38px minmax(74px,.65fr) 52px minmax(100px,1.4fr)!important;
+    gap:5px!important;min-height:56px!important;padding:6px!important;font-size:8px!important;
+  }
+  #draftMode .draft-club-logo img{width:30px!important;height:30px!important;object-fit:contain}
+  #draftMode .draft-pick-no{font-size:13px!important}
+  #draftMode .draft-club strong{font-size:9px!important}
+  #draftMode .draft-club span{font-size:7px!important}
+  #draftMode .draft-points{font-size:7px!important}
+  #draftMode .draft-player strong{font-size:8px!important}
+  #draftMode .draft-player span{font-size:7px!important}
+  #draftMode .draft-edit-btn{min-height:34px;padding:5px;font-size:7px}
+  #draftMode .prospect-board{height:min(52vh,520px)!important;max-height:none!important}
+  #draftMode .prospect-row{
+    min-height:64px!important;grid-template-columns:28px 48px minmax(0,1fr) auto!important;
+    gap:6px!important;padding:7px!important;
+  }
+  #draftMode .prospect-photo{width:44px!important;height:52px!important}
+  #draftMode .prospect-name-link{font-size:11px!important;text-align:left}
+  #draftMode .prospect-actions-inline{display:flex;flex-direction:column;gap:3px}
+  #draftMode .prospect-profile-label,#draftMode .prospect-select-label{min-height:30px;padding:4px 5px!important;font-size:7px!important}
+  #draftMode .draft-log{max-height:220px!important}
+
+  /* My Mock: editorial cards rather than a desktop table squeezed to 360px. */
+  #featuredMockList .my-mock-board{display:block!important}
+  #featuredMockList .my-mock-row{
+    display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;
+    gap:7px!important;margin-bottom:9px!important;padding:9px!important;
+  }
+  #featuredMockList .mock-pick-no{grid-row:1 / span 6;min-width:0!important}
+  #featuredMockList .mock-club-band,
+  #featuredMockList .mock-player-summary,
+  #featuredMockList .mock-comparison,
+  #featuredMockList .mock-why,
+  #featuredMockList .mock-mechanism,
+  #featuredMockList .profile-link-btn{grid-column:2!important;width:100%!important}
+  #featuredMockList .mock-player-summary{min-height:72px}
+  #featuredMockList .mock-player-summary img{width:58px!important;height:68px!important;object-fit:cover!important}
+  #featuredMockList .mock-why p,#featuredMockList .mock-mechanism p{font-size:10px!important;line-height:1.45!important}
+  #featuredMockList .bid-payment-row,#featuredMockList .mock-mechanics-row{grid-template-columns:38px 1fr!important}
+  #featuredMockList .bid-payment-assets{grid-template-columns:1fr!important}
+  #featuredMockList .bid-payment-totals{grid-template-columns:1fr 1fr!important}
+  .mock-audit-note{font-size:9px!important;line-height:1.45!important;padding:10px!important}
+
+  /* Best 23: club colour controls + list-style field on mobile. */
+  .builder-toolbar{
+    position:relative;display:grid!important;grid-template-columns:1fr!important;
+    gap:8px!important;padding:10px!important;margin-bottom:10px!important;
+  }
+  .builder-club-control{display:grid!important;grid-template-columns:52px 1fr;align-items:center!important}
+  .builder-club-control select{
+    width:100%!important;min-width:0!important;min-height:46px!important;
+    font-size:16px!important;background:var(--teamPrimary,#f7f8f8)!important;
+    color:var(--teamText,#162131)!important;border:2px solid var(--teamSecondary,#b7c1ca)!important;
+  }
+  .builder-selected-club{min-height:52px;padding:5px 7px;border-radius:7px;background:color-mix(in srgb,var(--teamPrimary,#ddd) 20%,#eef1f3)}
+  .builder-hypo-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+  .builder-hypo-actions .primary-btn{grid-column:1/-1}
+  .builder-actions{display:grid!important;grid-template-columns:auto 1fr 1fr!important;gap:6px!important}
+  .best23-layout{grid-template-columns:1fr!important;gap:10px!important}
+  .football-field{min-height:0!important;padding:8px!important;background:#dfe8e2!important}
+  .football-field::before,.football-field::after{display:none!important}
+  .field-line{margin:0 0 7px!important}
+  .field-line-label{
+    padding:5px 7px;margin:0!important;background:#2e6947;color:#fff!important;
+    text-align:left!important;border-radius:5px 5px 0 0;text-shadow:none!important;
+  }
+  .field-line-slots,.field-line.interchange .field-line-slots{grid-template-columns:1fr!important;gap:4px!important}
+  .position-slot{
+    display:grid!important;grid-template-columns:88px minmax(0,1fr)!important;
+    align-items:center;gap:6px!important;padding:5px 6px!important;border-radius:4px!important;
+    border-top:0!important;border-left:4px solid var(--teamPrimary,#bd1733)!important;
+    background:color-mix(in srgb,var(--teamPrimary,#fff) 14%,#f4f6f5)!important;
+  }
+  .position-name{font-size:8px!important;margin:0!important}
+  .position-select{
+    min-height:42px!important;padding:7px!important;font-size:15px!important;
+    background:var(--teamPrimary,#fff)!important;color:var(--teamText,#162131)!important;
+    border:2px solid var(--teamSecondary,#bfcac2)!important;
+  }
+  .assumption-tag{grid-column:2;font-size:7px!important}
+  .squad-pool{height:min(55vh,520px)!important}
+  .squad-row{min-height:54px!important;padding:8px!important}
+  .squad-add{min-height:38px;min-width:50px;font-size:9px!important}
+  .vfl-field-panel{margin-top:10px}
+
+  /* Redraft becomes a simple vertical workflow. */
+  .redraft-layout{grid-template-columns:1fr!important}
+  .redraft-toolbar{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+  .redraft-toolbar label{grid-column:1/-1}
+  .redraft-dual-head,.redraft-row{grid-template-columns:42px minmax(0,1fr) minmax(0,1fr)!important;font-size:8px!important}
+
+  /* Modals/profile views need to fit the viewport and remain scrollable. */
+  .draft-modal{padding:8px!important;align-items:flex-end!important}
+  .draft-modal-card{
+    width:100%!important;max-width:none!important;max-height:88vh!important;overflow:auto!important;
+    border-radius:12px 12px 0 0!important;padding:14px!important;
+  }
+  .modal-actions{position:sticky;bottom:-14px;background:inherit;padding:9px 0 4px;z-index:3}
+  .modal-actions button{min-height:44px}
+
+  /* General mobile hygiene. */
+  img{max-width:100%}
+  select,input,textarea{max-width:100%}
+}
+
+@media (max-width: 390px){
+  .brand{font-size:11px}
+  .top-actions .ghost-btn{padding:6px 7px;font-size:8px}
+  .club-picker{grid-template-columns:1fr 1fr!important}
+  #draftMode .draft-order-row{grid-template-columns:30px 34px 64px 44px minmax(84px,1fr)!important}
+  .builder-hypo-actions{grid-template-columns:1fr!important}
+  .builder-hypo-actions .primary-btn{grid-column:auto}
+}
