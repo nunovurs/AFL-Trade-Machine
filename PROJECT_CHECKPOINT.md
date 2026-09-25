@@ -125,3 +125,32 @@ Provisional next selections after the current 17 drafted players, assuming no ad
 40 Richmond
 
 Further matched bids can consume picks and shift this numbering again.
+
+
+## 25 Sep update — next 17 drafted players supplied by user
+After the first 17 actual drafted players already in the working mock, the user added these next actual player selections:
+- Billy Wigmore
+- Toby Krasna
+- Jackson Phillips
+- Sam Gayfer
+- Leo Steed
+- Archie Van Dyk
+- Ethan Herbert
+- Khaled El Souki — Western Bulldogs NGA matched bid
+- Harvie Cooke
+- Jack Pickett
+- Darcy Szerszyn
+- Cody Templeton
+- Xavier Ladbrook
+- Wil Malady
+- Lachie Burrows
+- Jack Slattery
+- Koby LeCras
+
+Also include a Western Bulldogs pick as ABSORBED for the El Souki bid match. This absorbed pick is not a drafted player.
+
+Count status:
+- 17 earlier actual drafted players
+- +17 new actual drafted players
+- =34 actual drafted players
+- therefore 6 more actual players are needed to reach a genuine Top 40, subject to any further bid matches/absorptions changing the live numbering.
