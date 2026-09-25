@@ -82,3 +82,46 @@ Harrison Chapman to Brisbane is one selection worth scrutinising against the rem
 3. Preserve user's preferred player sequence unless discussion changes it.
 4. Update My Mock Draft only once user is happy.
 5. Continue TrueFooty functionality-gap work and News/Intel planning.
+
+
+## 25 Sep update — start-of-second-round compensation
+Under the 2026 matched-bid compensation rule, the current mock should award start-of-second-round compensation selections to:
+- Essendon
+- Richmond
+- North Melbourne
+
+Reasoning for this mock:
+- Essendon uses its natural first after it is pushed back by matched bids.
+- Richmond uses its natural first after it is pushed back by matched bids.
+- North Melbourne uses its natural first after it is pushed back by matched bids.
+- West Coast does not receive the compensation in this scenario if it trades its natural first-round pick to Melbourne rather than using it itself.
+- Port Adelaide does not receive it in this scenario because its natural first-round asset is used in the Cochrane bid match.
+
+These compensation selections activate at the start of Round 2 and do not affect first-round bid matching/points.
+
+Provisional next selections after the current 17 drafted players, assuming no additional matched bids:
+18 Essendon — start-R2 compensation
+19 Richmond — start-R2 compensation
+20 North Melbourne — start-R2 compensation
+21 Essendon — ordinary R2 asset
+22 Richmond — ordinary R2 asset
+23 West Coast — ordinary R2 asset
+24 Port Adelaide — ordinary R2 asset
+25 Carlton via North Melbourne
+26 Carlton via Gold Coast
+27 Essendon via Hawthorn/GWS (Merrett trade assumption)
+28 Essendon via Hawthorn/St Kilda (Merrett trade assumption)
+29 Collingwood
+30 GWS via Melbourne
+31 Port Adelaide via Carlton
+32 Western Bulldogs
+33 Adelaide
+34 Geelong
+35 Hawthorn
+36 Sydney
+37 Brisbane
+38 Fremantle
+39 Adelaide via Essendon
+40 Richmond
+
+Further matched bids can consume picks and shift this numbering again.
