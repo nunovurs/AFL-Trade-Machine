@@ -154,3 +154,18 @@ Count status:
 - +17 new actual drafted players
 - =34 actual drafted players
 - therefore 6 more actual players are needed to reach a genuine Top 40, subject to any further bid matches/absorptions changing the live numbering.
+
+
+## 25 Sep update — final six players complete the Top 40
+
+The final six actual drafted players in the current working mock are:
+35. Sydney — Noah Williams
+36. Brisbane — Hugh McCallum
+37. Fremantle — Gus Kennedy
+38. Adelaide via Essendon — Gabriel Patterson
+39. Richmond — Jordan Knapp
+40. West Coast — Garrison Kenh
+
+This replaces the earlier provisional duplicate placements of Lachie Burrows and Koby LeCras in the final six. Burrows and LeCras remain earlier selections in the mock.
+
+Status: the working mock now contains 40 actual drafted players, plus separate absorbed/bid-payment rows that do not count as player selections.
