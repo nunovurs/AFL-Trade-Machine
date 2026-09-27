@@ -130,6 +130,47 @@
     if(!isAdmin)return {error:new Error('Admin access required')};
     return client.from('news_posts').update({...patch,updated_at:new Date().toISOString()}).eq('id',dbId);
   }
+  async function loadMockOverrides(){
+    const [{data:rows,error:e1},{data:profiles,error:e2}]=await Promise.all([
+      client.from('mock_draft_overrides').select('*'),
+      client.from('mock_profile_overrides').select('*')
+    ]);
+    if(e1||e2){console.warn(e1||e2);return {rows:[],profiles:[]}}
+    return {rows:rows||[],profiles:profiles||[]};
+  }
+  async function saveMockRow(pick,patch){
+    if(!isAdmin)return {error:new Error('Admin access required')};
+    return client.from('mock_draft_overrides').upsert({
+      pick:Number(pick),
+      club_id:patch.club_id||null,
+      player:patch.player||null,
+      path:patch.path||null,
+      mechanism:patch.mechanism||null,
+      updated_by:session.user.id,
+      updated_at:new Date().toISOString()
+    },{onConflict:'pick'});
+  }
+  async function saveMockProfile(player,patch){
+    if(!isAdmin)return {error:new Error('Admin access required')};
+    return client.from('mock_profile_overrides').upsert({
+      player,
+      comparison:patch.comparison??null,
+      why:patch.why??null,
+      description:patch.description??null,
+      position:patch.position??null,
+      pathway:patch.pathway??null,
+      updated_by:session.user.id,
+      updated_at:new Date().toISOString()
+    },{onConflict:'player'});
+  }
+  async function clearMockRow(pick){
+    if(!isAdmin)return {error:new Error('Admin access required')};
+    return client.from('mock_draft_overrides').delete().eq('pick',Number(pick));
+  }
+  async function clearMockProfile(player){
+    if(!isAdmin)return {error:new Error('Admin access required')};
+    return client.from('mock_profile_overrides').delete().eq('player',player);
+  }
   async function createGlobalNews(item){
     if(!isAdmin)return {error:new Error('Admin access required')};
     const slug=(String(item.title||'story').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,70)||'story')+'-'+Date.now().toString(36);
@@ -146,7 +187,7 @@
       created_by:session.user.id
     }).select().single();
   }
-  window.ATMCloud={client,get session(){return session},get isAdmin(){return isAdmin},fanConsensus,myVotes,signIn,signOut,saveCurrent,openSaves,voteProspect,loadFanConsensus,loadGlobalNews,updateGlobalNews,createGlobalNews};
+  window.ATMCloud={client,get session(){return session},get isAdmin(){return isAdmin},fanConsensus,myVotes,signIn,signOut,saveCurrent,openSaves,voteProspect,loadFanConsensus,loadGlobalNews,updateGlobalNews,createGlobalNews,loadMockOverrides,saveMockRow,saveMockProfile,clearMockRow,clearMockProfile};
   client.auth.onAuthStateChange(()=>setTimeout(refreshSession,0));
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{refreshSession();loadFanConsensus()});else{refreshSession();loadFanConsensus()}
 })();
