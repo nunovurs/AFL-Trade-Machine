@@ -130,7 +130,23 @@
     if(!isAdmin)return {error:new Error('Admin access required')};
     return client.from('news_posts').update({...patch,updated_at:new Date().toISOString()}).eq('id',dbId);
   }
-  window.ATMCloud={client,get session(){return session},get isAdmin(){return isAdmin},fanConsensus,myVotes,signIn,signOut,saveCurrent,openSaves,voteProspect,loadFanConsensus,loadGlobalNews,updateGlobalNews};
+  async function createGlobalNews(item){
+    if(!isAdmin)return {error:new Error('Admin access required')};
+    const slug=(String(item.title||'story').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,70)||'story')+'-'+Date.now().toString(36);
+    return client.from('news_posts').insert({
+      slug,
+      title:item.title,
+      summary:item.summary||null,
+      source:item.source||item.feed||null,
+      source_url:item.link||null,
+      status:item.tag||'REPORTED',
+      clubs:item.clubs||[],
+      published_at:item.publishedAt||new Date().toISOString(),
+      is_published:true,
+      created_by:session.user.id
+    }).select().single();
+  }
+  window.ATMCloud={client,get session(){return session},get isAdmin(){return isAdmin},fanConsensus,myVotes,signIn,signOut,saveCurrent,openSaves,voteProspect,loadFanConsensus,loadGlobalNews,updateGlobalNews,createGlobalNews};
   client.auth.onAuthStateChange(()=>setTimeout(refreshSession,0));
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{refreshSession();loadFanConsensus()});else{refreshSession();loadFanConsensus()}
 })();
