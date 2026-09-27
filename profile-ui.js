@@ -3,7 +3,7 @@
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
  const club=id=>D?.clubs?.find(c=>c.id===id);
  const resolve=n=>M?.resolve?.(n)||n;
- function get(name){const key=resolve(name);if(P[key])return P[key];const d=DD?.prospects?.find(x=>x.name===name||x.name===key);if(!d)return null;return {height:'—',weight:'—',position:d.position||'—',pathway:d.pathway||'—',state:'—',comparison:'—',description:'My scouting profile has not been added yet.',why:'Not selected in my published mock draft.',photo:'assets/player-placeholder.svg',watch:`https://www.youtube.com/results?search_query=${encodeURIComponent(name+' Footy Stuff')}`,tiedClub:d.tiedClub||null,tieType:d.tieType||null};}
+ function get(name){const key=resolve(name);const published=window.FeaturedMock?.getProfile?.(key);if(published)return published;if(P[key])return P[key];const d=DD?.prospects?.find(x=>x.name===name||x.name===key);if(!d)return null;return {height:'—',weight:'—',position:d.position||'—',pathway:d.pathway||'—',state:'—',comparison:'—',description:'My scouting profile has not been added yet.',why:'Not selected in my published mock draft.',photo:'assets/player-placeholder.svg',watch:`https://www.youtube.com/results?search_query=${encodeURIComponent(name+' Footy Stuff')}`,tiedClub:d.tiedClub||null,tieType:d.tieType||null};}
  function close(){const m=document.querySelector('#draftModal'),c=document.querySelector('#draftModalCard');if(m)m.hidden=true;if(c)c.innerHTML='';}
  function open(name,ctx={}){
    const p=get(name);if(!p)return window.ATMToast?.(`Profile coming soon for ${name}`);
