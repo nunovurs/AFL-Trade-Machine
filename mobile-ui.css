@@ -27,7 +27,7 @@
 
   .mode-switch{
     position:fixed!important;left:0;right:0;bottom:0;z-index:120;
-    display:grid!important;grid-template-columns:repeat(3,1fr);
+    display:grid!important;grid-template-columns:repeat(4,1fr);
     width:100%;height:calc(var(--mobile-nav-h) + env(safe-area-inset-bottom));
     margin:0;padding:5px 6px calc(5px + env(safe-area-inset-bottom));
     border:0!important;border-top:1px solid rgba(255,255,255,.18)!important;
@@ -241,4 +241,20 @@
   #draftMode .draft-order-row{grid-template-columns:30px 34px 64px 44px minmax(84px,1fr)!important}
   .builder-hypo-actions{grid-template-columns:1fr!important}
   .builder-hypo-actions .primary-btn{grid-column:auto}
+}
+
+
+@media (max-width:760px){
+  .hub-subnav{position:sticky;top:54px;z-index:70;width:calc(100% + 20px);margin:0 -10px 10px;padding:5px 7px;overflow-x:auto;flex-wrap:nowrap;border-radius:0}
+  .hub-view-btn{flex:0 0 auto;min-height:42px;padding:8px 10px;font-size:8px}
+  .hub-toolbar{display:grid;grid-template-columns:1fr;align-items:start;padding:10px}
+  .hub-controls{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .hub-controls select,.hub-controls button,#hubClubSelect{width:100%;min-width:0;min-height:42px}
+  .news-feed{grid-template-columns:1fr}
+  .news-card{padding:11px}.news-card h3{font-size:15px!important}
+  .hub-order-head,.hub-draft-row{grid-template-columns:42px 58px minmax(0,1fr)!important}.hub-draft-row{padding:6px 8px}.hub-draft-row>div img{width:30px;height:30px}
+  .club-hub-hero{grid-template-columns:56px 1fr;padding:12px;gap:10px}.club-hub-hero>img{width:52px;height:52px}.club-hub-hero h3{font-size:22px!important}.club-hub-actions{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}
+  .club-hub-grid{grid-template-columns:1fr}.club-list-grid{grid-template-columns:1fr 1fr}
+  .ladder-row{grid-template-columns:34px 34px minmax(0,1fr) auto;padding:5px}.ladder-row>img{width:30px;height:30px}.ladder-row>span{font-size:10px}
+  .fan-row{grid-template-columns:32px minmax(0,1fr) 40px 34px 34px;padding:5px;gap:4px}.fan-row span{display:none}.fan-score{font-size:11px}
 }
