@@ -189,6 +189,7 @@
   window.TradeMachine = {
     render: renderAll,
     getTrade(){ return trade.map(t=>({from:t.from,to:t.to,asset:{...t.asset}})); },
+    setTrade(next){ trade=Array.isArray(next)?next.map(t=>({from:t.from,to:t.to,asset:{...t.asset}})):[]; const ids=[...new Set(trade.flatMap(t=>[t.from,t.to]).filter(Boolean))]; if(ids.length>=2)selected=ids.slice(0,4); renderAll(); },
     getIncomingPlayers(clubId){ return trade.filter(t=>t.to===clubId&&t.asset.type==='player').map(t=>({...t.asset,from:t.from})); },
     reset(){ trade=[]; selected=['fre','ric']; renderAll(); toast('Trade reset'); }
   };
