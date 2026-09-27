@@ -258,3 +258,13 @@
   .ladder-row{grid-template-columns:34px 34px minmax(0,1fr) auto;padding:5px}.ladder-row>img{width:30px;height:30px}.ladder-row>span{font-size:10px}
   .fan-row{grid-template-columns:32px minmax(0,1fr) 40px 34px 34px;padding:5px;gap:4px}.fan-row span{display:none}.fan-score{font-size:11px}
 }
+
+
+@media (max-width:760px){
+  .account-controls{gap:3px;margin-left:0}
+  .account-controls .ghost-btn{min-height:36px;padding:6px 7px;font-size:7px}
+  .saved-item{display:grid;grid-template-columns:1fr;align-items:start}
+  .saved-item>div:last-child{justify-content:flex-start}
+  .fan-board-note{display:grid;gap:4px}
+  .fan-score small{display:block!important;font-size:6px!important}
+}
