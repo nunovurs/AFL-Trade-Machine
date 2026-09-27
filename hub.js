@@ -84,10 +84,25 @@
     var drag=null;qa('.ladder-row',host).forEach(function(row){row.ondragstart=function(){drag=row.dataset.ladder};row.ondragover=function(e){e.preventDefault()};row.ondrop=function(e){e.preventDefault();var a=ladderState(),from=a.indexOf(drag),to=a.indexOf(row.dataset.ladder);if(from<0||to<0||from===to)return;a.splice(to,0,a.splice(from,1)[0]);save('atm-ladder-2027-v1',a);renderLadder()}});
   }
   function fanState(){return load('atm-fan-board-v1',{})}
-  function vote(name,d){var s=fanState();s[name]=(s[name]||0)+d;save('atm-fan-board-v1',s);renderFan()}
+  async function vote(name,d){
+    if(window.ATMCloud?.session){
+      var ok=await window.ATMCloud.voteProspect(name,d);
+      if(ok)renderFan();
+      return;
+    }
+    var s=fanState();s[name]=(s[name]||0)+d;save('atm-fan-board-v1',s);renderFan();
+  }
   function renderFan(){
-    var host=q('#fanBoard');if(!host)return;var s=fanState(),pool=((DD&&DD.prospects)||[]).slice(0,60).sort(function(a,b){return (s[b.name]||0)-(s[a.name]||0)||a.rank-b.rank}).slice(0,30);
-    host.innerHTML=pool.map(function(p,i){return '<div class="fan-row"><strong>'+(i+1)+'</strong><div><b>'+esc(p.name)+'</b><span>'+esc(p.position)+' • '+esc(p.pathway)+'</span></div><div class="fan-score">'+(s[p.name]||0)+'</div><button data-vote-up="'+esc(p.name)+'">+1</button><button data-vote-down="'+esc(p.name)+'">−1</button></div>'}).join('');
+    var host=q('#fanBoard');if(!host)return;
+    var local=fanState(),cloud=window.ATMCloud?.fanConsensus||{},mine=window.ATMCloud?.myVotes||{};
+    var signedIn=!!window.ATMCloud?.session;
+    var scoreOf=function(name){return signedIn?(cloud[name]?.score||0):(local[name]||0)};
+    var pool=((DD&&DD.prospects)||[]).slice(0,60).sort(function(a,b){return scoreOf(b.name)-scoreOf(a.name)||a.rank-b.rank}).slice(0,30);
+    host.innerHTML=(signedIn?'<div class="fan-board-note"><strong>COMMUNITY CONSENSUS</strong><span>Scores combine signed-in fan votes. Your own current vote is shown on each row.</span></div>':'<div class="fan-board-note"><strong>LOCAL BALLOT</strong><span>Sign in to contribute to the shared community ranking.</span></div>')+
+      pool.map(function(p,i){
+        var cons=cloud[p.name]||{score:0,votes:0},your=mine[p.name]||0,score=signedIn?cons.score:(local[p.name]||0);
+        return '<div class="fan-row"><strong>'+(i+1)+'</strong><div><b>'+esc(p.name)+'</b><span>'+esc(p.position)+' • '+esc(p.pathway)+'</span></div><div class="fan-score"><b>'+score+'</b><small>'+(signedIn?(cons.votes+' voter'+(cons.votes===1?'':'s')+' • you '+(your>0?'+':'')+your):'local')+'</small></div><button data-vote-up="'+esc(p.name)+'">+1</button><button data-vote-down="'+esc(p.name)+'">−1</button></div>';
+      }).join('');
     qa('[data-vote-up]',host).forEach(function(b){b.onclick=function(){vote(b.dataset.voteUp,1)}});
     qa('[data-vote-down]',host).forEach(function(b){b.onclick=function(){vote(b.dataset.voteDown,-1)}});
   }
@@ -103,7 +118,12 @@
     if(q('#ladderResetBtn'))q('#ladderResetBtn').onclick=function(){localStorage.removeItem('atm-ladder-2027-v1');renderLadder()};
     if(q('#ladderCopyBtn'))q('#ladderCopyBtn').onclick=function(){var t=ladderState().map(function(id,i){return (i+1)+'. '+club(id).name}).join('\n');navigator.clipboard&&navigator.clipboard.writeText(t);toast('Ladder copied')};
     if(q('#fanResetBtn'))q('#fanResetBtn').onclick=function(){localStorage.removeItem('atm-fan-board-v1');renderFan()};
-    if(q('#fanCopyBtn'))q('#fanCopyBtn').onclick=function(){var s=fanState(),t=Object.entries(s).sort(function(a,b){return b[1]-a[1]}).map(function(x,i){return (i+1)+'. '+x[0]+' ('+(x[1]>0?'+':'')+x[1]+')'}).join('\n');navigator.clipboard&&navigator.clipboard.writeText(t||'No fan votes yet');toast('Fan ballot copied')};
+    if(q('#fanCopyBtn'))q('#fanCopyBtn').onclick=function(){
+      var signedIn=!!window.ATMCloud?.session,src=signedIn?(window.ATMCloud?.myVotes||{}):fanState();
+      var t=Object.entries(src).sort(function(a,b){return b[1]-a[1]}).map(function(x,i){return (i+1)+'. '+x[0]+' ('+(x[1]>0?'+':'')+x[1]+')'}).join('\n');
+      navigator.clipboard&&navigator.clipboard.writeText(t||'No fan votes yet');toast('Fan ballot copied');
+    };
+    document.addEventListener('atm-cloud-votes',renderFan);document.addEventListener('atm-auth-change',function(){renderFan();renderNews()});
     setView('news');loadNews(true);setInterval(function(){loadNews(true)},300000);
   }
   window.AFLHub={render:function(){renderNews();renderDraftOrder();renderClubHub();renderLadder();renderFan()},setView:setView,loadNews:loadNews};
