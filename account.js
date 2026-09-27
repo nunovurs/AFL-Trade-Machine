@@ -138,6 +138,17 @@
     if(e1||e2){console.warn(e1||e2);return {rows:[],profiles:[]}}
     return {rows:rows||[],profiles:profiles||[]};
   }
+  async function saveMockPlayerOrder(rows){
+    if(!isAdmin)return {error:new Error('Admin access required')};
+    const payload=(rows||[]).map(r=>({
+      pick:Number(r.pick),
+      player:r.player,
+      updated_by:session.user.id,
+      updated_at:new Date().toISOString()
+    }));
+    if(!payload.length)return {data:[]};
+    return client.from('mock_draft_overrides').upsert(payload,{onConflict:'pick'});
+  }
   async function saveMockRow(pick,patch){
     if(!isAdmin)return {error:new Error('Admin access required')};
     return client.from('mock_draft_overrides').upsert({
@@ -187,7 +198,7 @@
       created_by:session.user.id
     }).select().single();
   }
-  window.ATMCloud={client,get session(){return session},get isAdmin(){return isAdmin},fanConsensus,myVotes,signIn,signOut,saveCurrent,openSaves,voteProspect,loadFanConsensus,loadGlobalNews,updateGlobalNews,createGlobalNews,loadMockOverrides,saveMockRow,saveMockProfile,clearMockRow,clearMockProfile};
+  window.ATMCloud={client,get session(){return session},get isAdmin(){return isAdmin},fanConsensus,myVotes,signIn,signOut,saveCurrent,openSaves,voteProspect,loadFanConsensus,loadGlobalNews,updateGlobalNews,createGlobalNews,loadMockOverrides,saveMockPlayerOrder,saveMockRow,saveMockProfile,clearMockRow,clearMockProfile};
   client.auth.onAuthStateChange(()=>setTimeout(refreshSession,0));
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{refreshSession();loadFanConsensus()});else{refreshSession();loadFanConsensus()}
 })();
