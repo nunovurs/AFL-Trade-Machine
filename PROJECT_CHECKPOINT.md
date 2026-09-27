@@ -623,3 +623,34 @@ Vercel production deployments for account/backend integration commits were repor
    - shared fan vote
    - global news edit
 5. Verify latest Vercel deployment is READY.
+
+
+# 27 Sep 2026 — Site admin activated
+
+The user successfully signed into the live AFL Trade Machine site via Supabase magic-link authentication.
+
+Supabase auth state:
+- newest successfully signed-in account was identified
+- one older unused signup record existed with no successful sign-in; it was left untouched
+- successfully signed-in account was added to public.admin_users
+- admin activation completed successfully
+
+Admin implications:
+- account.js should now detect SITE ADMIN after session/auth refresh
+- global News & Intel edits can now write to Supabase
+- admin can promote an aggregated feed item into a global curated story by editing it
+- admin can update or hide global curated stories
+- RLS still protects all non-admin user data
+
+Latest Supabase security advisor:
+- one warning: leaked-password protection disabled
+- current site uses passwordless magic-link authentication, so no password is used by this login flow
+- no RLS/admin-policy security issue was reported
+
+Immediate test steps:
+1. Refresh or reopen the live AFL Trade Machine site.
+2. Open ACCOUNT and confirm SITE ADMIN appears.
+3. Open AFL HUB -> NEWS & INTEL -> EDIT NEWS.
+4. Edit one test story and confirm it persists globally after refresh.
+5. Test SAVE / MY SAVES for a trade or mock.
+6. Test one signed-in Fan Board vote and confirm shared consensus updates.
