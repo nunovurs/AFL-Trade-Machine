@@ -106,14 +106,74 @@
   ];
 
   const events=[
-    {afterPick:1,clubId:'pa',title:'COCHRANE MATCH — PORT BID PAYMENT',detail:'Port’s natural first moves up to the bid. Supporting Port points are consumed and disappear from the later order.'},
+    {afterPick:1,clubId:'pa',title:'COCHRANE MATCH — PORT BID PAYMENT',detail:'Essendon bid on Cochrane at Pick 1. Port Adelaide receive a 10% discount because they finished 15th, so the 3000-point bid costs 2700 DVI. Port use their natural first and the projected Zak Butters Band 1 compensation asset. The unused value of the second asset is converted into a later selection rather than disappearing.',payment:{
+      bidPick:1,bidValue:3000,required:2700,total:3757,deficit:-1057,
+      rule:'2026 rule: maximum two picks may be used to match a bid through Pick 36. Port receive the 10% lower-ladder discount. Surplus value on the final matching asset converts into a later live selection.',
+      assets:[
+        {label:'ORIGINAL PICK 4 — PORT NATURAL FIRST',origin:'Port Adelaide • 1962 DVI',liveAtMatch:'4',points:1962,status:'ABSORBED',statusLabel:'USED → COCHRANE BID'},
+        {label:'ORIGINAL PICK 5 — PROJECTED BUTTERS BAND 1 COMPENSATION',origin:'Port Adelaide • 1795 DVI',liveAtMatch:'5',points:738,status:'MOVED_TO_BID',statusLabel:'PART USED → COCHRANE BID'},
+        {label:'PORT RESIDUAL SELECTION',origin:'1057 DVI remains from the Pick 5 asset; equivalent to about Pick 14 (1024 DVI) before later bid/selection renumbering',liveAtMatch:'PROVISIONAL ~14',points:1057,status:'RESIDUAL',statusLabel:'RETURNED VALUE'}
+      ]
+    }},
     {afterPick:2,clubId:'car',title:'WALKER MATCH — CARLTON BID PAYMENT',detail:'Carlton’s primary matching first moves up to Pick 2. Supporting Carlton assets are consumed for points and do not become later live selections.'},
     {afterPick:8,clubId:'bri',title:'MURRAY BID — BRISBANE CANNOT COMPLETE MATCH',detail:'This mock assumes the Gold Coast compensation selection is used to bid on Caylen Murray and Brisbane cannot complete the match under the 2026 matching constraints.'},
     {afterPick:25,clubId:'wbd',title:'EL SOUKI MATCH — BULLDOGS PICK ABSORBED',detail:'Western Bulldogs match the NGA bid on Khaled El Souki. Their later points selection is absorbed and does not appear as a numbered live selection.'}
   ];
 
+  const assetLedger={
+    updated:'27 Sep 2026',
+    assumptions:[
+      'Brisbane won the 2026 Grand Final, so its natural first-round selection is Pick 18 before free-agency compensation or bid matching; Fremantle is Pick 17.',
+      'This scenario applies projected Band 1 compensation for Zak Butters and Ben King if their reported free-agency moves proceed. Those insertions move Brisbane’s pre-bid live slot from 18 to 20.',
+      'Lachie Neale and Toby Greene are currently treated as projected Band 3 cases for planning, but their exact live second-round insertion points are not hard-coded until free agency compensation is formally known.',
+      'Possible Band 2 compensation for Jordon Butts and Joel Amartey is not applied to the numbered ledger yet.'
+    ],
+    rows:[
+      {pick:1,clubId:'ess',origin:'Essendon natural R1',status:'BID',detail:'Essendon use the opening selection to bid on Dougie Cochrane.'},
+      {pick:2,clubId:'ric',origin:'Richmond natural R1',status:'LIVE',detail:'Slides as matched bids are inserted ahead.'},
+      {pick:3,clubId:'wce',origin:'West Coast natural R1',status:'TRADE',detail:'Mock assumption: traded to Melbourne for later first-round assets.'},
+      {pick:4,clubId:'pa',origin:'Port Adelaide natural R1',status:'ABSORBED',detail:'1962 DVI. Used in Port’s Pick 1 match for Dougie Cochrane.'},
+      {pick:5,clubId:'pa',origin:'Projected Zak Butters Band 1 compensation',status:'PART USED',detail:'1795 DVI. 738 points complete the Cochrane match; 1057 DVI remains and converts into a later live selection.'},
+      {pick:6,clubId:'nm',origin:'North Melbourne natural R1',status:'LIVE',detail:'Pre-bid / pre-trade slot after the Butters compensation insertion.'},
+      {pick:7,clubId:'mel',origin:'Gold Coast natural R1 → Melbourne',status:'LIVE',detail:'Gold Coast’s traded natural first.'},
+      {pick:8,clubId:'gcs',origin:'Projected Ben King Band 1 compensation',status:'COMPO',detail:'Gold Coast compensation immediately after its natural first-round position.'},
+      {pick:9,clubId:'gws',origin:'GWS natural R1',status:'LIVE',detail:''},
+      {pick:10,clubId:'stk',origin:'St Kilda natural R1',status:'LIVE',detail:''},
+      {pick:11,clubId:'col',origin:'Collingwood natural R1',status:'LIVE',detail:''},
+      {pick:12,clubId:'mel',origin:'Melbourne natural R1',status:'LIVE',detail:''},
+      {pick:13,clubId:'car',origin:'Carlton natural R1',status:'LIVE',detail:'Carlton’s matching/trade package for Cody Walker can alter this asset.'},
+      {pick:14,clubId:'wbd',origin:'Western Bulldogs natural R1',status:'LIVE',detail:''},
+      {pick:15,clubId:'ade',origin:'Adelaide natural R1',status:'LIVE',detail:''},
+      {pick:16,clubId:'gee',origin:'Geelong natural R1',status:'LIVE',detail:''},
+      {pick:17,clubId:'haw',origin:'Hawthorn natural R1',status:'LIVE',detail:''},
+      {pick:18,clubId:'car',origin:'Sydney natural R1 → Carlton',status:'LIVE',detail:''},
+      {pick:19,clubId:'fre',origin:'Fremantle natural R1',status:'LIVE',detail:'Runner-up selection after Brisbane won the Grand Final.'},
+      {pick:20,clubId:'bri',origin:'Brisbane natural R1',status:'LIVE',detail:'Brisbane’s premiership Pick 18 shifted to projected Pick 20 here by the applied Butters + King Band 1 compensation insertions.'},
+      {pick:21,clubId:'ess',origin:'Projected start-of-Round-2 bid-slide compensation',status:'COMPO',detail:'Activated after night one if Essendon’s natural first is pushed back by a matched bid and then used.'},
+      {pick:22,clubId:'ric',origin:'Projected start-of-Round-2 bid-slide compensation',status:'COMPO',detail:'Activated after night one if Richmond meets the 2026 compensation conditions.'},
+      {pick:23,clubId:'nm',origin:'Projected start-of-Round-2 bid-slide compensation',status:'COMPO',detail:'Activated after night one if North Melbourne meets the 2026 compensation conditions.'},
+      {pick:24,clubId:'ess',origin:'Essendon natural R2',status:'LIVE',detail:'Original Pick 19 shifted by the two applied Band 1 picks and three projected start-R2 compensation picks.'},
+      {pick:25,clubId:'ric',origin:'Richmond natural R2',status:'LIVE',detail:'Original Pick 20 shifted under the same assumptions.'},
+      {pick:26,clubId:'wce',origin:'West Coast natural R2',status:'LIVE',detail:''},
+      {pick:27,clubId:'pa',origin:'Port Adelaide natural R2',status:'LIVE',detail:''},
+      {pick:28,clubId:'car',origin:'North Melbourne R2 → Carlton',status:'LIVE',detail:''},
+      {pick:29,clubId:'car',origin:'Gold Coast R2 → Carlton',status:'LIVE',detail:''},
+      {pick:30,clubId:'haw',origin:'GWS R2 → Hawthorn',status:'LIVE',detail:''},
+      {pick:31,clubId:'haw',origin:'St Kilda R2 → Hawthorn',status:'LIVE',detail:''},
+      {pick:32,clubId:'col',origin:'Collingwood natural R2',status:'LIVE',detail:''},
+      {pick:33,clubId:'gws',origin:'Melbourne R2 → GWS',status:'LIVE',detail:''},
+      {pick:34,clubId:'pa',origin:'Carlton R2 → Port Adelaide',status:'LIVE',detail:''},
+      {pick:35,clubId:'wbd',origin:'Western Bulldogs natural R2',status:'LIVE',detail:''},
+      {pick:36,clubId:'ade',origin:'Adelaide natural R2',status:'LIVE',detail:''},
+      {pick:37,clubId:'gee',origin:'Geelong natural R2',status:'LIVE',detail:''},
+      {pick:38,clubId:'haw',origin:'Hawthorn natural R2',status:'LIVE',detail:''},
+      {pick:39,clubId:'syd',origin:'Sydney natural R2',status:'LIVE',detail:''},
+      {pick:40,clubId:'fre',origin:'Fremantle natural R2',status:'LIVE',detail:''}
+    ]
+  };
+
   const aliases={...(window.ATM_MY_MOCK?.aliases||{}),'Lochie Burrows':'Lachie Burrows','Albert Macgowan':'Albert MacGowan','Garrison Kehn':'Garrison Kenh'};
   const resolve=n=>aliases[n]||n;
   window.ATM_PLAYER_PROFILES=P;
-  window.ATM_MY_MOCK={updated:'27 Sep 2026',board,events,pool:Object.keys(P),resolve,aliases};
+  window.ATM_MY_MOCK={updated:'27 Sep 2026',board,events,assetLedger,pool:Object.keys(P),resolve,aliases};
 })();
