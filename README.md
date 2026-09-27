@@ -62,3 +62,17 @@ Trade fairness and draft mechanics are modelling tools, not official AFL rulings
 - Primary matching picks are shown as USED → BID (they move up to the bid selection).
 - Supporting point picks are shown as ABSORBED and do not appear later as live selections.
 - Live selection rows now show DVI points.
+
+
+## v7 AFL Hub — 27 Sep 2026
+- Added **AFL HUB** as a fourth main mode without changing the established visual identity.
+- Added **News & Intel** with a live server-side feed from leading AFL reporting sources, source attribution, original-source links and CONFIRMED / REPORTED / RUMOUR / ANALYSIS status tags.
+- Added an editable editorial overlay and in-browser article editing/hiding. Browser edits are device-local; global admin editing requires the planned authenticated backend.
+- Added a dedicated **Current Draft Order** view and removed the prior runtime dependency on TrueFooty's draft-order page.
+- Updated the post-Grand Final factual baseline: Fremantle runner-up natural selections at 17/35 and Brisbane premier natural selections at 18/36.
+- Added **Club Hubs** combining current list, draft picks, My Mock selections, relevant news/intel and shortcuts into the Trade Machine / Best 23.
+- Added a **2027 Ladder Predictor** with drag/reorder, local save, reset and copy.
+- Added a **Fan Draft Board** with local prospect up/down voting and copy/reset.
+- Published the user's current **40-player 2026 mock draft**, including Cochrane/Walker/El Souki bid mechanics and Essendon/Richmond/North start-of-Round-2 compensation assumptions.
+- Fixed stale club-fit text and added profile coverage for every player in the current Top 40. Integrity check: 40 unique players, zero missing profiles.
+- Added an hourly AFL news watch workflow outside the site to catch meaningful new stories and social-media developments for the editable news layer.
