@@ -27,21 +27,40 @@
       var r=await fetch('/api/news',{headers:{accept:'application/json'}});
       if(!r.ok)throw new Error('news '+r.status);
       var data=await r.json(), editorial=Array.isArray(window.ATM_EDITORIAL_NEWS)?window.ATM_EDITORIAL_NEWS:[];
-      var seen={}, merged=editorial.concat(data.items||[]).filter(function(n){var k=n.id||n.link||n.title;if(seen[k])return false;seen[k]=1;return true});
+      var globalNews=window.ATMCloud?.loadGlobalNews?await window.ATMCloud.loadGlobalNews():[];
+      var seen={}, merged=globalNews.concat(editorial,data.items||[]).filter(function(n){
+        var k=String(n.title||n.link||n.id||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+        if(seen[k])return false;seen[k]=1;return true;
+      });
       if(newsLoaded && !silent && merged[0] && newsItems[0] && merged[0].id!==newsItems[0].id && 'Notification' in window && Notification.permission==='granted'){
         new Notification('AFL News & Intel',{body:merged[0].title});
       }
       newsItems=merged;newsLoaded=true;renderNews();
     }catch(e){console.warn(e);if(!silent)toast('News feed could not refresh')}
   }
-  function editNews(id){
+  async function editNews(id){
     var n=newsItems.find(function(x){return x.id===id});if(!n)return;
     var cur=applyEdit(n), title=prompt('Headline',cur.title);if(title===null)return;
     var summary=prompt('Your summary / note',cur.summary||'');if(summary===null)return;
     var tag=(prompt('Status: CONFIRMED / REPORTED / RUMOUR / ANALYSIS',cur.tag||'REPORTED')||'REPORTED').toUpperCase();
+    if(window.ATMCloud?.isAdmin){
+      var result=n.global
+        ? await window.ATMCloud.updateGlobalNews(n.dbId,{title:title,summary:summary,status:tag})
+        : await window.ATMCloud.createGlobalNews({...n,title:title,summary:summary,tag:tag});
+      if(result?.error){toast(result.error.message||'Unable to publish global edit');return}
+      toast('Global news edit published');await loadNews(true);return;
+    }
     var e=edits();e[id]=Object.assign({},e[id]||{},{title:title,summary:summary,tag:tag});save('atm-news-edits-v1',e);renderNews();
   }
-  function hideNews(id){var e=edits();e[id]=Object.assign({},e[id]||{},{hidden:true});save('atm-news-edits-v1',e);renderNews()}
+  async function hideNews(id){
+    var n=newsItems.find(function(x){return x.id===id});
+    if(n?.global&&window.ATMCloud?.isAdmin){
+      var r=await window.ATMCloud.updateGlobalNews(n.dbId,{is_published:false});
+      if(r?.error)return toast(r.error.message||'Unable to hide story');
+      toast('Story hidden globally');await loadNews(true);return;
+    }
+    var e=edits();e[id]=Object.assign({},e[id]||{},{hidden:true});save('atm-news-edits-v1',e);renderNews();
+  }
   function renderNews(){
     var host=q('#newsFeed');if(!host)return;
     var tag=q('#newsTagFilter')?q('#newsTagFilter').value:'ALL', cf=q('#newsClubFilter')?q('#newsClubFilter').value:'ALL';
@@ -110,7 +129,11 @@
     var cf=q('#newsClubFilter');if(cf&&!cf.options.length){cf.add(new Option('All clubs','ALL'));D.clubs.forEach(function(c){cf.add(new Option(c.name,c.name))})}
     qa('[data-hub-view]').forEach(function(b){b.onclick=function(){setView(b.dataset.hubView)}});
     if(q('#newsRefreshBtn'))q('#newsRefreshBtn').onclick=function(){loadNews(false)};
-    if(q('#newsEditModeBtn'))q('#newsEditModeBtn').onclick=function(){editMode=!editMode;q('#newsEditModeBtn').classList.toggle('active',editMode);q('#newsEditModeBtn').textContent=editMode?'DONE EDITING':'EDIT NEWS';renderNews()};
+    if(q('#newsEditModeBtn'))q('#newsEditModeBtn').onclick=function(){
+      editMode=!editMode;q('#newsEditModeBtn').classList.toggle('active',editMode);
+      q('#newsEditModeBtn').textContent=editMode?'DONE EDITING':(window.ATMCloud?.isAdmin?'EDIT NEWS (GLOBAL)':'EDIT NEWS');
+      renderNews();
+    };
     if(q('#newsResetEditsBtn'))q('#newsResetEditsBtn').onclick=function(){localStorage.removeItem('atm-news-edits-v1');renderNews()};
     if(q('#newsTagFilter'))q('#newsTagFilter').onchange=renderNews;
     if(cf)cf.onchange=renderNews;
