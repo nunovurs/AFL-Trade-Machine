@@ -882,3 +882,46 @@ body{background:linear-gradient(180deg,#e2e7eb 0,#eaedf0 34%,#e4e8ec 100%);color
 .mock-admin-form .wide{grid-column:1/-1}
 .mock-admin-textarea{min-height:88px;resize:vertical;line-height:1.45}
 @media(max-width:700px){.mock-admin-form{grid-template-columns:1fr}.mock-admin-form .wide{grid-column:auto}.mock-row-actions{justify-content:flex-start}}
+
+
+/* Mock draft asset ledger + admin drag reorder */
+.mock-asset-ledger{margin:14px 0 18px;border:1px solid #cbd3da;border-radius:8px;background:#f4f6f8;overflow:hidden}
+.mock-asset-ledger>summary{display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:pointer;padding:12px 14px;background:#e8edf1}
+.mock-asset-ledger>summary span{display:flex;flex-direction:column;gap:3px}
+.mock-asset-ledger>summary strong{font-size:10px;letter-spacing:.08em;color:#172337}
+.mock-asset-ledger>summary small{font-size:8px;color:#687681}
+.mock-asset-ledger>summary b{font-size:10px;color:#172337}
+.mock-ledger-assumptions{padding:12px 14px;border-top:1px solid #d2d8de;border-bottom:1px solid #d2d8de;background:#fff}
+.mock-ledger-assumptions>strong{font-size:8px;letter-spacing:.08em;color:#172337}
+.mock-ledger-assumptions ul{margin:7px 0 0 17px;padding:0}
+.mock-ledger-assumptions li{margin:4px 0;font-size:8px;line-height:1.45;color:#586671}
+.mock-asset-head,.mock-asset-row{display:grid;grid-template-columns:58px 88px minmax(0,1fr) 104px;gap:8px;align-items:center}
+.mock-asset-head{padding:8px 12px;background:#dce3e8;font-size:7px;font-weight:1000;letter-spacing:.08em;color:#65727d}
+.mock-asset-row{padding:8px 12px;border-top:1px solid #dde2e6;background:#fff}
+.mock-asset-row.absorbed{background:#fff0f0}
+.mock-asset-row.part-used{background:#fff7e6}
+.mock-asset-row.compo{background:#f4f1ff}
+.mock-asset-row.bid{background:#eef5ff}
+.mock-asset-pick{font-size:13px;font-weight:1000;color:#172337}
+.mock-asset-club{display:flex;align-items:center;gap:7px}
+.mock-asset-club img{width:24px;height:24px;object-fit:contain}
+.mock-asset-club strong{font-size:8px;color:#172337}
+.mock-asset-origin{display:flex;flex-direction:column;gap:3px;min-width:0}
+.mock-asset-origin strong{font-size:8px;color:#172337}
+.mock-asset-origin span{font-size:7.5px;line-height:1.35;color:#6b7882}
+.mock-asset-status{justify-self:end;font-size:7px;font-weight:1000;letter-spacing:.06em;padding:4px 7px;border-radius:999px;background:#dfe5ea;color:#394651;text-align:center}
+.mock-asset-row.absorbed .mock-asset-status{background:#f6caca;color:#8b2020}
+.mock-asset-row.part-used .mock-asset-status{background:#f6dfae;color:#7b5600}
+.mock-asset-row.compo .mock-asset-status{background:#ddd4ff;color:#4f3c92}
+.mock-asset-row.bid .mock-asset-status{background:#cadcff;color:#244f8b}
+.bid-payment-asset.residual{border-color:#9ec7ad;background:#eef8f1}
+.mock-admin-drop{transition:transform .12s ease,box-shadow .12s ease,outline-color .12s ease}
+.mock-admin-drop.drag-over{outline:3px solid rgba(23,35,55,.25);outline-offset:-3px;box-shadow:0 8px 20px rgba(23,35,55,.14)}
+.mock-admin-drop.dragging{opacity:.55;transform:scale(.995)}
+.mock-player-summary[draggable="true"]{cursor:grab}
+.mock-player-summary[draggable="true"]:active{cursor:grabbing}
+@media(max-width:760px){
+  .mock-asset-head{display:none}
+  .mock-asset-row{grid-template-columns:42px 70px 1fr;gap:7px}
+  .mock-asset-status{grid-column:3;justify-self:start}
+}
