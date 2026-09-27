@@ -823,3 +823,19 @@ Expected:
 5. Brisbane displayed at projected Pick 20 under current Band 1 assumptions.
 6. Picks 16–18 shown open/TBC.
 7. As admin, drag a player card onto another occupied or empty slot and confirm it persists after refresh.
+
+
+# 27 Sep 2026 — My Mock presentation correction
+
+User reported the previous asset-ledger overhaul made the My Mock Draft section unusable because the predicted selections were no longer immediately visible.
+
+Correction:
+- Predicted player selections are restored as the PRIMARY content at the top of My Mock Draft.
+- The draft asset / absorbed-pick ledger remains available but is now SECONDARY and COLLAPSED underneath the predicted selection board.
+- Admin drag-to-reorder remains enabled.
+- No predicted-selection data was deleted by this UI correction.
+
+Commit:
+- 3cc5830519b44bcae4b57169ba4bde396ac009d5 — Restore predicted selections as primary My Mock view
+
+Vercel production deployment for this correction: READY.
