@@ -8,7 +8,7 @@ const FEEDS=[
 const CLUBS=['Adelaide','Brisbane','Carlton','Collingwood','Essendon','Fremantle','Geelong','Gold Coast','GWS','Hawthorn','Melbourne','North Melbourne','Port Adelaide','Richmond','St Kilda','Sydney','West Coast','Western Bulldogs'];
 function decode(s=''){const e={amp:'&',quot:'"',apos:"'",lt:'<',gt:'>',nbsp:' '};return String(s).replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g,'$1').replace(/&#(\d+);/g,(_,n)=>String.fromCodePoint(Number(n))).replace(/&#x([0-9a-f]+);/gi,(_,n)=>String.fromCodePoint(parseInt(n,16))).replace(/&([a-z]+);/gi,(m,n)=>e[n]??m).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();}
 function field(block,tag){const m=block.match(new RegExp('<'+tag+'(?:\\s[^>]*)?>([\\s\\S]*?)<\\/'+tag+'>','i'));return m?decode(m[1]):'';}
-function attr(block,tag,attr){const m=block.match(new RegExp('<'+tag+'[^>]*\\s'+attr+'=["\\']([^"\\']+)["\\'][^>]*>','i'));return m?decode(m[1]):'';}
+function attr(block,tag,attrName){const m=block.match(new RegExp('<'+tag+'[^>]*\\s'+attrName+'="([^"]+)"[^>]*>','i'));return m?decode(m[1]):'';}
 function classify(title='',source=''){const t=(title+' '+source).toLowerCase();if(/official|confirmed|has signed|re-signed|re-sign|joins|traded|trade completed|retires|retired|delisted|appointed/.test(t))return 'CONFIRMED';if(/rumour|linked to|linked with|could move|could join|may move|watch on/.test(t))return 'RUMOUR';if(/analysis|ranking|power ranking|phantom|explainer|preview|review/.test(t))return 'ANALYSIS';return 'REPORTED';}
 function clubs(title=''){const t=title.toLowerCase();return CLUBS.filter(c=>t.includes(c.toLowerCase()));}
 function idFor(s=''){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return 'n'+(h>>>0).toString(36);}
