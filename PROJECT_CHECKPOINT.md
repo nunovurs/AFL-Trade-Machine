@@ -711,3 +711,115 @@ Relevant commits:
 4. Each pick should display EDIT PICK.
 5. Edit a test pick and click PUBLISH CHANGES.
 6. Refresh page (or use an incognito/non-admin window) and confirm the published change remains visible.
+
+
+# 27 Sep 2026 — My Mock asset ledger + Brisbane/Port mechanics overhaul
+
+The My Mock Draft display was rebuilt to expose starting draft assets and bid-payment mechanics instead of hiding consumed picks.
+
+## Brisbane correction
+Fresh 2026 Grand Final verification:
+- Brisbane defeated Fremantle 96–89 on 26 Sep 2026 and are premiers.
+- Therefore Brisbane's natural first-round asset is Pick 18 before free-agency compensation / bid matching.
+- Fremantle's natural first is Pick 17.
+
+Current mock assumptions apply projected Band 1 free-agency compensation for:
+- Zak Butters -> Port Adelaide
+- Ben King -> Gold Coast
+
+Those two first-round insertions move Brisbane's pre-bid first-round slot from natural Pick 18 to projected Pick 20 in the mock.
+
+The published player board now:
+- leaves Picks 16–18 deliberately open/TBC rather than inventing club/player assignments
+- places Jake Eime at Pick 19 via the Fremantle/Richmond Sean Darcy scenario
+- places Harrison Chapman / Brisbane at Pick 20
+- moves the projected start-of-Round-2 compensation selections to:
+  - Pick 21 Essendon
+  - Pick 22 Richmond
+  - Pick 23 North Melbourne
+- shifts the previous later player sequence from Pick 21 onward by +3, so the 40-player published mock now extends to Pick 43.
+
+## Full 1–40 draft asset ledger
+My Mock now includes an open-by-default DRAFT ASSET LEDGER showing every starting selection / compensation asset through Pick 40 under the current applied assumptions.
+
+It distinguishes:
+- LIVE
+- BID
+- TRADE
+- COMPO
+- ABSORBED
+- PART USED
+
+Key assumptions are displayed on-site so projections are not presented as confirmed facts.
+
+Not hard-coded into the numbered ledger yet:
+- possible Band 2 compensation for Jordon Butts
+- possible Band 2 compensation for Joel Amartey
+
+User preference recorded:
+- Lachie Neale projected Band 3
+- Toby Greene projected Band 3
+Their precise second-round insertion points are not yet hard-coded pending compensation confirmation / full round-two mechanics.
+
+## Dougie Cochrane / Port Adelaide Pick 1 match
+2026 DVI:
+- Pick 1 = 3000
+- Port finished 15th -> 10% matching discount
+- Required = 2700 DVI
+- Port natural Pick 4 = 1962 DVI
+- projected Butters Band 1 Pick 5 = 1795 DVI
+- total supplied = 3757 DVI
+- residual after match = 1057 DVI
+
+The site now explicitly displays:
+- ORIGINAL PICK 4 — Port natural first — USED -> COCHRANE BID
+- ORIGINAL PICK 5 — projected Butters Band 1 compensation — PART USED -> COCHRANE BID
+- only 738 points from the second asset are required after Pick 4 is exhausted
+- 1057 DVI remains from that second asset
+- that residual converts into a later live selection (roughly Pick 14-equivalent / 1024 DVI before later live bid/trade renumbering)
+- explicit totals: 2700 required / 3757 supplied / 1057 residual
+
+This replaces the old vague wording that Port's supporting assets simply disappeared.
+
+## Admin drag reorder completed
+Site admin can now drag a player/profile card from one My Mock pick to another.
+
+Behaviour:
+- player + profile move together
+- pick/club/path/mechanism stay attached to the pick slot
+- intervening players shift automatically when reordering
+- empty Picks 16–18 are valid drop targets
+- dropping into an empty slot fills it
+- the previous slot becomes empty/sequence shifts appropriately
+- changes publish globally through Supabase, not localStorage
+
+Supabase helper:
+- saveMockPlayerOrder(rows)
+
+## Relevant commits
+- 585e1ec50d1f70118d7169827fd82df84e2a3eb0 — Add bulk mock reorder publishing
+- cc759df500b5c708015a754c49ea91ef1ab70d9b — Add full mock draft asset ledger and Port bid accounting
+- f98a78c5edb22e186be45bfd06879b6fd0ad267e — Show full draft asset ledger and enable admin drag reorder
+- 69f43d5007a3694a9f7daaa4cec2771b4a358289 — Correct Brisbane mock slot and expose all compensation gaps
+- 234d804d0705cec97ca9fdc5b205da0ee7e8bb1d — Style mock asset ledger and drag reorder
+- 327be4a0673e20828ea55699076453f17e6d7349 — Allow drag reorder into empty mock slots
+- a0d9dd7f5e35b010ea79c8149a633b65ef9dbc63 — Show explicit bid payment totals and residual value
+
+## Verification
+- mock-2026-current.js syntax OK
+- featured-mock.js syntax OK
+- account.js syntax OK
+- latest Vercel deployment for these changes: READY
+- existing runtime warning is an older Node url.parse() deprecation on /api/redraft-class and is unrelated to this mock-draft work
+
+## Immediate user test
+Refresh live site -> MOCK DRAFT -> MY MOCK DRAFT.
+
+Expected:
+1. Full DRAFT ASSET LEDGER 1–40 visible.
+2. Pick 4 Port shown as consumed in Cochrane bid.
+3. Projected Pick 5 Butters comp shown as part-used.
+4. 1057 residual DVI shown explicitly.
+5. Brisbane displayed at projected Pick 20 under current Band 1 assumptions.
+6. Picks 16–18 shown open/TBC.
+7. As admin, drag a player card onto another occupied or empty slot and confirm it persists after refresh.
