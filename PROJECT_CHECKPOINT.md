@@ -654,3 +654,60 @@ Immediate test steps:
 4. Edit one test story and confirm it persists globally after refresh.
 5. Test SAVE / MY SAVES for a trade or mock.
 6. Test one signed-in Fan Board vote and confirm shared consensus updates.
+
+
+# 27 Sep 2026 — Admin-editable published mock draft
+
+The signed-in site admin can now edit the published **My Mock Draft** directly from the website.
+
+## Supabase tables added
+- public.mock_draft_overrides
+- public.mock_profile_overrides
+
+Security:
+- both tables are publicly readable so all visitors see the published overrides
+- only authenticated users listed in public.admin_users can insert/update/delete overrides
+- RLS is enabled on both tables
+
+## Admin UI
+Each numbered row in MY MOCK DRAFT now shows an **EDIT PICK** button to the site admin.
+
+Admin can edit:
+- selected player
+- club
+- pick / trade path label
+- HOW THE PICK HAPPENS
+- WHY THIS PICK?
+- player comparison
+- position
+- pathway / club
+- MY SCOUTING PROFILE
+
+**PUBLISH CHANGES** writes the override to Supabase and the new version becomes public for everyone.
+
+**RESET OVERRIDE** removes the database override and returns that pick/profile to the code/default version.
+
+Published profile overrides also feed into the full player-profile modal, so the row and profile view remain consistent.
+
+## Implementation
+Relevant commits:
+- cd89560cc4845d1ea38c5062932c6427bfb981b5 — Add published mock admin storage helpers
+- 7f54a3b3570edaae58b28eef6fda4c2b78b189de — Add global admin editor for published mock draft
+- c2886891e13521ad1d1317a90785d081b5632087 — Refresh published mock overrides on cloud init
+- d6d6cbff0a9314db43dda47609f8041c31225a87 — Show published mock profile overrides everywhere
+- 7414093f947ab91f122522e55b25d62eda6b4a44 — Style published mock admin editor
+
+## Verification
+- account.js syntax OK
+- featured-mock.js syntax OK
+- profile-ui.js syntax OK
+- latest Vercel deployment for admin mock editor reported READY
+- Supabase security advisor still only reports leaked-password-protection warning; current site login is passwordless magic-link auth
+
+## User test
+1. Refresh live site.
+2. Stay signed in.
+3. MOCK DRAFT -> MY MOCK DRAFT.
+4. Each pick should display EDIT PICK.
+5. Edit a test pick and click PUBLISH CHANGES.
+6. Refresh page (or use an incognito/non-admin window) and confirm the published change remains visible.
