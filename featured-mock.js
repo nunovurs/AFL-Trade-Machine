@@ -10,15 +10,24 @@
 
   const resolve=n=>M.resolve?.(n)||n;
   const eventsAfter=pick=>(M.events||[]).filter(e=>Number(e.afterPick)===Number(pick));
-  const mergedRow=r=>({...r,...(rowOverrides[Number(r.pick)]||{})});
+  const mergedRow=r=>{
+    const o=rowOverrides[Number(r.pick)]||{},out={...r,...o};
+    if(Object.prototype.hasOwnProperty.call(o,'player'))out.placeholder=!o.player;
+    return out;
+  };
   const mergedProfile=name=>({...P[resolve(name)],...(profileOverrides[resolve(name)]||profileOverrides[name]||{})});
 
   async function loadOverrides(){
     if(!window.ATMCloud?.loadMockOverrides){loaded=true;return;}
     const data=await window.ATMCloud.loadMockOverrides();
-    rowOverrides=Object.fromEntries((data.rows||[]).map(r=>[Number(r.pick),{
-      clubId:r.club_id||undefined,player:r.player||undefined,path:r.path||undefined,mechanism:r.mechanism||undefined
-    }]));
+    rowOverrides=Object.fromEntries((data.rows||[]).map(r=>{
+      const o={};
+      if(r.club_id!=null)o.clubId=r.club_id;
+      if(Object.prototype.hasOwnProperty.call(r,'player'))o.player=r.player;
+      if(r.path!=null)o.path=r.path;
+      if(r.mechanism!=null)o.mechanism=r.mechanism;
+      return [Number(r.pick),o];
+    }));
     profileOverrides=Object.fromEntries((data.profiles||[]).map(p=>[p.player,{
       comparison:p.comparison??undefined,why:p.why??undefined,description:p.description??undefined,
       position:p.position??undefined,pathway:p.pathway??undefined
@@ -41,7 +50,10 @@
 
   function playerRow(base){
     const r=mergedRow(base);
-    if(r.placeholder)return '<article class="my-mock-row mock-tbd-row"><div class="mock-pick-no">'+r.pick+'</div><div class="mock-tbd-copy"><strong>PICK '+r.pick+' — TO BE ADDED</strong><span>'+esc(r.path||'Club / selection TBC')+'</span><p>'+esc(r.mechanism||'')+'</p></div></article>';
+    if(r.placeholder||!r.player){
+      const admin=!!window.ATMCloud?.isAdmin;
+      return '<article class="my-mock-row mock-tbd-row '+(admin?'mock-admin-drop':'')+'" data-mock-row="'+r.pick+'"><div class="mock-pick-no">'+r.pick+'</div><div class="mock-tbd-copy"><strong>PICK '+r.pick+' — '+(admin?'DROP A PLAYER HERE':'TO BE ADDED')+'</strong><span>'+esc(r.path||'Club / selection TBC')+'</span><p>'+esc(r.mechanism||'')+'</p></div></article>';
+    }
     const p=mergedProfile(r.player)||{},c=club(r.clubId),clubLabel=r.path||c?.name||r.note||'Club TBC',clubColor=c?.color||'#657281',clubText=c?.clubText||'#fff';
     const admin=!!window.ATMCloud?.isAdmin;
     return '<article class="my-mock-row '+(admin?'mock-admin-drop':'')+'" data-mock-row="'+r.pick+'" style="--club:'+clubColor+';--clubText:'+clubText+'">'+
@@ -67,13 +79,14 @@
 
   async function reorderPlayers(fromPick,toPick){
     if(!window.ATMCloud?.isAdmin||Number(fromPick)===Number(toPick))return;
-    const rows=M.board.filter(r=>!r.placeholder).map(mergedRow).sort((a,b)=>Number(a.pick)-Number(b.pick));
+    const rows=M.board.map(mergedRow).sort((a,b)=>Number(a.pick)-Number(b.pick));
     const from=rows.findIndex(r=>Number(r.pick)===Number(fromPick)),to=rows.findIndex(r=>Number(r.pick)===Number(toPick));
     if(from<0||to<0)return;
-    const players=rows.map(r=>r.player);
+    const players=rows.map(r=>r.player||null);
     const moved=players.splice(from,1)[0];
+    if(!moved)return;
     players.splice(to,0,moved);
-    const payload=rows.map((r,i)=>({pick:r.pick,player:players[i]}));
+    const payload=rows.map((r,i)=>({pick:r.pick,player:players[i]||null}));
     const res=await window.ATMCloud.saveMockPlayerOrder(payload);
     if(res?.error)return toast(res.error.message||'Unable to reorder mock');
     loaded=false;await loadOverrides();await render();toast(moved+' moved to Pick '+toPick+' • published globally');
