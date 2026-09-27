@@ -871,3 +871,14 @@ body{background:linear-gradient(180deg,#e2e7eb 0,#eaedf0 34%,#e4e8ec 100%);color
 .fan-score{display:flex;flex-direction:column;align-items:center;justify-content:center}
 .fan-score b{font-size:13px;color:#172337}
 .fan-score small{font-size:6.5px;color:#788591;white-space:nowrap}
+
+
+/* Admin published mock editor */
+.mock-row-actions{display:flex;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.mock-admin-edit{white-space:nowrap}
+.mock-admin-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.mock-admin-form label{display:grid;gap:5px}
+.mock-admin-form label>span{font-size:8px;font-weight:1000;letter-spacing:.08em;color:#667481}
+.mock-admin-form .wide{grid-column:1/-1}
+.mock-admin-textarea{min-height:88px;resize:vertical;line-height:1.45}
+@media(max-width:700px){.mock-admin-form{grid-template-columns:1fr}.mock-admin-form .wide{grid-column:auto}.mock-row-actions{justify-content:flex-start}}
