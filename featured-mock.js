@@ -109,7 +109,7 @@
     document.querySelectorAll('#featuredMockList [data-edit-mock]').forEach(b=>b.onclick=()=>openEditor(Number(b.dataset.editMock)));
   }
 
-  window.FeaturedMock={render,reload:async()=>{loaded=false;await render()}};
-  document.addEventListener('atm-auth-change',()=>render());
+  window.FeaturedMock={render,reload:async()=>{loaded=false;await render()},getProfile:name=>mergedProfile(name),getRow:pick=>{const b=M.board.find(r=>Number(r.pick)===Number(pick));return b?mergedRow(b):null}};
+  document.addEventListener('atm-auth-change',()=>{loaded=false;render()});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>render());else render();
 })();
