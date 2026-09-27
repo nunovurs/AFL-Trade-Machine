@@ -75,7 +75,7 @@
       const c=club(r.clubId),cls=String(r.status||'LIVE').toLowerCase().replace(/\s+/g,'-');
       return '<div class="mock-asset-row '+cls+'"><div class="mock-asset-pick">'+esc(r.pick)+'</div><div class="mock-asset-club">'+(c?'<img src="'+esc(c.logo)+'" alt="">':'')+'<strong>'+esc(c?.abbr||r.clubId||'—')+'</strong></div><div class="mock-asset-origin"><strong>'+esc(r.origin||'')+'</strong><span>'+esc(r.detail||'')+'</span></div><div class="mock-asset-status">'+esc(r.status||'LIVE')+'</div></div>';
     }).join('');
-    return '<details class="mock-asset-ledger" open><summary><span><strong>DRAFT ASSET LEDGER</strong><small>All starting selections and compensation assets are shown, including picks later consumed by bids.</small></span><b>1–40</b></summary><div class="mock-ledger-assumptions"><strong>CURRENT MOCK ASSUMPTIONS</strong><ul>'+assumptions+'</ul></div><div class="mock-asset-head"><span>PICK</span><span>CLUB</span><span>ASSET / WHAT HAPPENS</span><span>STATUS</span></div><div class="mock-asset-rows">'+rows+'</div></details>';
+    return '<details class="mock-asset-ledger"><summary><span><strong>DRAFT ASSET LEDGER</strong><small>All starting selections and compensation assets are shown, including picks later consumed by bids.</small></span><b>1–40</b></summary><div class="mock-ledger-assumptions"><strong>CURRENT MOCK ASSUMPTIONS</strong><ul>'+assumptions+'</ul></div><div class="mock-asset-head"><span>PICK</span><span>CLUB</span><span>ASSET / WHAT HAPPENS</span><span>STATUS</span></div><div class="mock-asset-rows">'+rows+'</div></details>';
   }
 
   async function reorderPlayers(fromPick,toPick){
@@ -143,7 +143,7 @@
     const el=document.querySelector('#featuredMockList');if(!el)return;
     if(!loaded)await loadOverrides();
     const rows=[];M.board.forEach(base=>{rows.push(playerRow(base));eventsAfter(base.pick).forEach(e=>rows.push(eventRow(e)))});
-    el.innerHTML='<div class="mock-audit-note"><strong>DRAFT-NIGHT VIEW</strong><span><b>Asset ledger:</b> shows every starting pick, including absorbed/converted picks. <b>Player board:</b> shows the published player sequence and bid mechanics.</span>'+(window.ATMCloud?.isAdmin?'<span class="admin-badge">ADMIN • DRAG PLAYER CARDS TO REORDER</span>':'')+'</div>'+renderAssetLedger()+'<div class="my-mock-board">'+rows.join('')+'</div>';
+    el.innerHTML='<div class="mock-audit-note"><strong>PREDICTED SELECTIONS</strong><span>This is the published mock draft. Player selections stay front and centre; the detailed absorbed/compo pick accounting is available underneath.</span>'+(window.ATMCloud?.isAdmin?'<span class="admin-badge">ADMIN • DRAG PLAYER CARDS TO REORDER</span>':'')+'</div><div class="my-mock-board">'+rows.join('')+'</div>'+renderAssetLedger();
     document.querySelectorAll('#featuredMockList [data-profile]').forEach(b=>b.onclick=()=>window.ATMProfiles?.open?.(b.dataset.profile,{clubId:b.dataset.club||null,pick:b.dataset.pick}));
     document.querySelectorAll('#featuredMockList [data-edit-mock]').forEach(b=>b.onclick=()=>openEditor(Number(b.dataset.editMock)));
     if(window.ATMCloud?.isAdmin){
