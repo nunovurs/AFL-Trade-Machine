@@ -1,46 +1,115 @@
 (() => {
- const D=window.ATM_DATA,M=window.ATM_MY_MOCK,P=window.ATM_PLAYER_PROFILES||{}; if(!D?.clubs||!M)return;
- const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
- const DVI=[0,3000,2481,2178,1962,1795,1659,1543,1443,1355,1276,1205,1140,1080,1024,973,924,879,836,796,757,721,686,653,621,590,561,533,505,479,454,429,405,382,360,338,317,297,277,257,238];
- const dvi=n=>DVI[Number(n)]??0;
- const club=id=>D.clubs.find(c=>c.id===id);
- const eventsAfter=pick=>(M.events||[]).filter(e=>Number(e.afterPick)===Number(pick));
- function eventRow(e){
-   const c=club(e.clubId);
-   if(e.payment){
-     const pay=e.payment;
-     const assets=(pay.assets||[]).map(a=>{
-       const cls=a.status==='ABSORBED'?'absorbed':a.status==='MOVED_TO_BID'?'moved':'provisional';
-       return `<div class="bid-payment-asset ${cls}">
-         <div class="payment-status">${esc(a.statusLabel||a.status||'PAYMENT')}</div>
-         <div class="payment-asset-main"><strong>${esc(a.label||'Draft pick')}</strong><span>${esc(a.origin||'')}</span></div>
-         <div class="payment-live"><small>LIVE AT MATCH</small><strong>${esc(a.liveAtMatch||'TBC')}</strong></div>
-         <div class="payment-points"><small>DVI USED</small><strong>${a.points==null?'TBC':esc(a.points)+' pts'}</strong></div>
-       </div>`;
-     }).join('');
-     const total=pay.total==null?'TBC':`${esc(pay.total)} pts`;
-     const required=pay.required==null?'TBC':`${esc(pay.required)} pts`;
-     const deficit=pay.deficit==null?'TBC':`${esc(pay.deficit)} pts`;
-     return `<article class="my-mock-row bid-payment-row" style="--club:${c?.color||'#8995a1'};--clubText:${c?.clubText||'#fff'}">
-       <div class="mock-pick-no payment-marker">↳</div>
-       <div class="bid-payment-copy">
-         <div class="bid-payment-head"><div><strong>${esc(e.title||'BID PAYMENT')}</strong><p>${esc(e.detail||'')}</p></div><span class="bid-paid-chip">PICK ${esc(pay.bidPick||'—')} BID • ${esc(pay.bidValue||'—')} DVI</span></div>
-         <div class="bid-payment-assets">${assets}</div>
-         <div class="bid-payment-totals"><span><small>REQUIRED AFTER DISCOUNT / LOADING</small><strong>${required}</strong></span><span><small>POINTS SUPPLIED</small><strong>${total}</strong></span><span><small>DEFICIT / SURPLUS</small><strong>${deficit}</strong></span><span class="payment-rule-note">${esc(pay.rule||'')}</span></div>
-       </div>
-     </article>`;
-   }
-   return `<article class="my-mock-row mock-mechanics-row" style="--club:${c?.color||'#8995a1'};--clubText:${c?.clubText||'#fff'}"><div class="mock-pick-no mechanics-marker">↳</div><div class="mock-mechanics-copy"><strong>${esc(e.title||'PICK MECHANICS')}</strong><p>${esc(e.detail||'')}</p></div></article>`;
- }
- function playerRow(r){
-   if(r.placeholder){return `<article class="my-mock-row mock-tbd-row"><div class="mock-pick-no">${r.pick}</div><div class="mock-tbd-copy"><strong>PICK ${r.pick} — TO BE ADDED</strong><span>${esc(r.path||'Club / selection TBC')}</span><p>${esc(r.mechanism||'')}</p></div></article>`;}
-   const p=P[M.resolve(r.player)]||{},c=club(r.clubId); const clubLabel=r.path||c?.name||r.note||'Club TBC'; const clubColor=c?.color||'#657281',clubText=c?.clubText||'#fff';
-   return `<article class="my-mock-row" style="--club:${clubColor};--clubText:${clubText}"><div class="mock-pick-no"><strong>${r.pick}</strong><small>${dvi(r.pick)} pts</small></div><div class="mock-club-band">${c?`<img src="${esc(c.logo)}" alt="">`:''}<span>${esc(clubLabel)}</span></div><button class="mock-player-summary" data-profile="${esc(r.player)}" data-club="${esc(r.clubId||'')}" data-pick="${r.pick}"><img src="${esc(p.photo||'assets/player-placeholder.svg')}" onerror="this.src='assets/player-placeholder.svg'" alt="${esc(r.player)}"><span><strong>${esc(r.player)}</strong><small>${esc(p.position||'')} • ${esc(p.pathway||r.note||'')}</small></span></button><div class="mock-comparison"><span>PLAYER COMPARISON</span><strong>${esc(p.comparison||'—')}</strong></div><div class="mock-why"><span>WHY THIS PICK?</span><p>${esc(p.why||r.note||'')}</p></div><div class="mock-mechanism"><span>HOW THE PICK HAPPENS</span><p>${esc(r.mechanism||r.note||'Direct selection')}</p></div><button class="profile-link-btn" data-profile="${esc(r.player)}" data-club="${esc(r.clubId||'')}" data-pick="${r.pick}">VIEW FULL PROFILE</button></article>`;
- }
- function render(){const el=document.querySelector('#featuredMockList');if(!el)return;
-  const rows=[]; M.board.forEach(r=>{rows.push(playerRow(r));eventsAfter(r.pick).forEach(e=>rows.push(eventRow(e)));});
-  el.innerHTML=`<div class="mock-audit-note"><strong>DRAFT-NIGHT VIEW</strong><span><b>Numbered rows</b> are live player selections. <b class="legend-moved">USED → BID</b> means the club's first matching pick moves up to select the tied player. <b class="legend-absorbed">ABSORBED</b> means an additional pick is spent for points and disappears from the later order. Each bid ledger shows the live pick number and DVI used at the time of the match.</span></div><div class="my-mock-board">${rows.join('')}</div>`;
-  document.querySelectorAll('#featuredMockList [data-profile]').forEach(b=>b.onclick=()=>window.ATMProfiles?.open?.(b.dataset.profile,{clubId:b.dataset.club||null,pick:b.dataset.pick}));
- }
- window.FeaturedMock={render};render();
+  const D=window.ATM_DATA,P=window.ATM_PLAYER_PROFILES||{}; if(!D?.clubs||!window.ATM_MY_MOCK)return;
+  const M=window.ATM_MY_MOCK;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  const DVI=[0,3000,2481,2178,1962,1795,1659,1543,1443,1355,1276,1205,1140,1080,1024,973,924,879,836,796,757,721,686,653,621,590,561,533,505,479,454,429,405,382,360,338,317,297,277,257,238];
+  const dvi=n=>DVI[Number(n)]??0;
+  const club=id=>D.clubs.find(c=>c.id===id);
+  const toast=msg=>window.ATMToast?window.ATMToast(msg):alert(msg);
+  let rowOverrides={},profileOverrides={},loaded=false;
+
+  const resolve=n=>M.resolve?.(n)||n;
+  const eventsAfter=pick=>(M.events||[]).filter(e=>Number(e.afterPick)===Number(pick));
+  const mergedRow=r=>({...r,...(rowOverrides[Number(r.pick)]||{})});
+  const mergedProfile=name=>({...P[resolve(name)],...(profileOverrides[resolve(name)]||profileOverrides[name]||{})});
+
+  async function loadOverrides(){
+    if(!window.ATMCloud?.loadMockOverrides){loaded=true;return;}
+    const data=await window.ATMCloud.loadMockOverrides();
+    rowOverrides=Object.fromEntries((data.rows||[]).map(r=>[Number(r.pick),{
+      clubId:r.club_id||undefined,player:r.player||undefined,path:r.path||undefined,mechanism:r.mechanism||undefined
+    }]));
+    profileOverrides=Object.fromEntries((data.profiles||[]).map(p=>[p.player,{
+      comparison:p.comparison??undefined,why:p.why??undefined,description:p.description??undefined,
+      position:p.position??undefined,pathway:p.pathway??undefined
+    }]));
+    loaded=true;
+  }
+
+  function eventRow(e){
+    const c=club(e.clubId);
+    if(e.payment){
+      const pay=e.payment;
+      const assets=(pay.assets||[]).map(a=>{
+        const cls=a.status==='ABSORBED'?'absorbed':a.status==='MOVED_TO_BID'?'moved':'provisional';
+        return '<div class="bid-payment-asset '+cls+'"><div class="payment-status">'+esc(a.statusLabel||a.status||'PAYMENT')+'</div><div class="payment-asset-main"><strong>'+esc(a.label||'Draft pick')+'</strong><span>'+esc(a.origin||'')+'</span></div><div class="payment-live"><small>LIVE AT MATCH</small><strong>'+esc(a.liveAtMatch||'TBC')+'</strong></div><div class="payment-points"><small>DVI USED</small><strong>'+(a.points==null?'TBC':esc(a.points)+' pts')+'</strong></div></div>';
+      }).join('');
+      return '<article class="my-mock-row bid-payment-row" style="--club:'+(c?.color||'#8995a1')+';--clubText:'+(c?.clubText||'#fff')+'"><div class="mock-pick-no payment-marker">↳</div><div class="bid-payment-copy"><div class="bid-payment-head"><div><strong>'+esc(e.title||'BID PAYMENT')+'</strong><p>'+esc(e.detail||'')+'</p></div><span class="bid-paid-chip">PICK '+esc(pay.bidPick||'—')+' BID • '+esc(pay.bidValue||'—')+' DVI</span></div><div class="bid-payment-assets">'+assets+'</div></div></article>';
+    }
+    return '<article class="my-mock-row mock-mechanics-row" style="--club:'+(c?.color||'#8995a1')+';--clubText:'+(c?.clubText||'#fff')+'"><div class="mock-pick-no mechanics-marker">↳</div><div class="mock-mechanics-copy"><strong>'+esc(e.title||'PICK MECHANICS')+'</strong><p>'+esc(e.detail||'')+'</p></div></article>';
+  }
+
+  function playerRow(base){
+    const r=mergedRow(base);
+    if(r.placeholder)return '<article class="my-mock-row mock-tbd-row"><div class="mock-pick-no">'+r.pick+'</div><div class="mock-tbd-copy"><strong>PICK '+r.pick+' — TO BE ADDED</strong><span>'+esc(r.path||'Club / selection TBC')+'</span><p>'+esc(r.mechanism||'')+'</p></div></article>';
+    const p=mergedProfile(r.player)||{},c=club(r.clubId),clubLabel=r.path||c?.name||r.note||'Club TBC',clubColor=c?.color||'#657281',clubText=c?.clubText||'#fff';
+    const admin=!!window.ATMCloud?.isAdmin;
+    return '<article class="my-mock-row" style="--club:'+clubColor+';--clubText:'+clubText+'">'+
+      '<div class="mock-pick-no"><strong>'+r.pick+'</strong><small>'+dvi(r.pick)+' pts</small></div>'+
+      '<div class="mock-club-band">'+(c?'<img src="'+esc(c.logo)+'" alt="">':'')+'<span>'+esc(clubLabel)+'</span></div>'+
+      '<button class="mock-player-summary" data-profile="'+esc(r.player)+'" data-club="'+esc(r.clubId||'')+'" data-pick="'+r.pick+'"><img src="'+esc(p.photo||'assets/player-placeholder.svg')+'" onerror="this.src=\'assets/player-placeholder.svg\'" alt="'+esc(r.player)+'"><span><strong>'+esc(r.player)+'</strong><small>'+esc(p.position||'')+' • '+esc(p.pathway||r.note||'')+'</small></span></button>'+
+      '<div class="mock-comparison"><span>PLAYER COMPARISON</span><strong>'+esc(p.comparison||'—')+'</strong></div>'+
+      '<div class="mock-why"><span>WHY THIS PICK?</span><p>'+esc(p.why||r.note||'')+'</p></div>'+
+      '<div class="mock-mechanism"><span>HOW THE PICK HAPPENS</span><p>'+esc(r.mechanism||r.note||'Direct selection')+'</p></div>'+
+      '<div class="mock-row-actions"><button class="profile-link-btn" data-profile="'+esc(r.player)+'" data-club="'+esc(r.clubId||'')+'" data-pick="'+r.pick+'">VIEW FULL PROFILE</button>'+(admin?'<button class="ghost-btn mock-admin-edit" data-edit-mock="'+r.pick+'">EDIT PICK</button>':'')+'</div></article>';
+  }
+
+  function openEditor(pick){
+    if(!window.ATMCloud?.isAdmin)return;
+    const base=M.board.find(r=>Number(r.pick)===Number(pick));if(!base)return;
+    const r=mergedRow(base),p=mergedProfile(r.player)||{};
+    const modal=document.querySelector('#draftModal'),card=document.querySelector('#draftModalCard');if(!modal||!card)return;
+    const clubOpts=D.clubs.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>'<option value="'+esc(c.id)+'" '+(c.id===r.clubId?'selected':'')+'>'+esc(c.name)+'</option>').join('');
+    const players=[...new Set([...(M.pool||[]),...Object.keys(P),r.player])].sort((a,b)=>a.localeCompare(b)).map(n=>'<option value="'+esc(n)+'" '+(n===r.player?'selected':'')+'>'+esc(n)+'</option>').join('');
+    card.innerHTML='<div class="modal-kicker">SITE ADMIN • PUBLISHED MOCK</div><h3>Edit Pick '+pick+'</h3>'+
+      '<div class="mock-admin-form"><label><span>PLAYER</span><select id="mockEditPlayer" class="modal-select">'+players+'</select></label>'+
+      '<label><span>CLUB</span><select id="mockEditClub" class="modal-select">'+clubOpts+'</select></label>'+
+      '<label class="wide"><span>PICK / TRADE PATH</span><input id="mockEditPath" class="modal-input" value="'+esc(r.path||'')+'"></label>'+
+      '<label class="wide"><span>HOW THE PICK HAPPENS</span><textarea id="mockEditMechanism" class="modal-input mock-admin-textarea">'+esc(r.mechanism||'')+'</textarea></label>'+
+      '<label class="wide"><span>WHY THIS PICK?</span><textarea id="mockEditWhy" class="modal-input mock-admin-textarea">'+esc(p.why||'')+'</textarea></label>'+
+      '<label><span>PLAYER COMPARISON</span><input id="mockEditComparison" class="modal-input" value="'+esc(p.comparison||'')+'"></label>'+
+      '<label><span>POSITION</span><input id="mockEditPosition" class="modal-input" value="'+esc(p.position||'')+'"></label>'+
+      '<label class="wide"><span>PATHWAY / CLUB</span><input id="mockEditPathway" class="modal-input" value="'+esc(p.pathway||'')+'"></label>'+
+      '<label class="wide"><span>MY SCOUTING PROFILE</span><textarea id="mockEditDescription" class="modal-input mock-admin-textarea">'+esc(p.description||'')+'</textarea></label></div>'+
+      '<div class="modal-actions"><button id="mockEditCancel" class="ghost-btn">CANCEL</button><button id="mockEditReset" class="ghost-btn danger">RESET OVERRIDE</button><button id="mockEditSave" class="primary-btn">PUBLISH CHANGES</button></div>';
+    modal.hidden=false;
+    document.querySelector('#mockEditCancel').onclick=()=>{modal.hidden=true;card.innerHTML=''};
+    document.querySelector('#mockEditSave').onclick=async()=>{
+      const player=document.querySelector('#mockEditPlayer').value;
+      const rowRes=await window.ATMCloud.saveMockRow(pick,{
+        player,club_id:document.querySelector('#mockEditClub').value,
+        path:document.querySelector('#mockEditPath').value.trim(),
+        mechanism:document.querySelector('#mockEditMechanism').value.trim()
+      });
+      if(rowRes?.error)return toast(rowRes.error.message||'Unable to publish pick');
+      const profRes=await window.ATMCloud.saveMockProfile(player,{
+        why:document.querySelector('#mockEditWhy').value.trim(),
+        comparison:document.querySelector('#mockEditComparison').value.trim(),
+        description:document.querySelector('#mockEditDescription').value.trim(),
+        position:document.querySelector('#mockEditPosition').value.trim(),
+        pathway:document.querySelector('#mockEditPathway').value.trim()
+      });
+      if(profRes?.error)return toast(profRes.error.message||'Unable to publish profile');
+      modal.hidden=true;card.innerHTML='';await loadOverrides();render();toast('Mock draft changes published globally');
+    };
+    document.querySelector('#mockEditReset').onclick=async()=>{
+      if(!confirm('Reset this pick to the code/default version?'))return;
+      await window.ATMCloud.clearMockRow(pick);
+      await window.ATMCloud.clearMockProfile(r.player);
+      modal.hidden=true;card.innerHTML='';await loadOverrides();render();toast('Mock override reset');
+    };
+  }
+
+  async function render(){
+    const el=document.querySelector('#featuredMockList');if(!el)return;
+    if(!loaded)await loadOverrides();
+    const rows=[];M.board.forEach(base=>{rows.push(playerRow(base));eventsAfter(base.pick).forEach(e=>rows.push(eventRow(e)))});
+    el.innerHTML='<div class="mock-audit-note"><strong>DRAFT-NIGHT VIEW</strong><span><b>Numbered rows</b> are live player selections. Bid/payment mechanics are shown separately.</span>'+(window.ATMCloud?.isAdmin?'<span class="admin-badge">ADMIN EDITING ENABLED</span>':'')+'</div><div class="my-mock-board">'+rows.join('')+'</div>';
+    document.querySelectorAll('#featuredMockList [data-profile]').forEach(b=>b.onclick=()=>window.ATMProfiles?.open?.(b.dataset.profile,{clubId:b.dataset.club||null,pick:b.dataset.pick}));
+    document.querySelectorAll('#featuredMockList [data-edit-mock]').forEach(b=>b.onclick=()=>openEditor(Number(b.dataset.editMock)));
+  }
+
+  window.FeaturedMock={render,reload:async()=>{loaded=false;await render()}};
+  document.addEventListener('atm-auth-change',()=>render());
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>render());else render();
 })();
