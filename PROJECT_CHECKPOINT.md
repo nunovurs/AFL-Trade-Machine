@@ -475,3 +475,151 @@ If the conversation disappears, resume from here:
 3. Verify AFL Hub / Top 40 / news feed / ladder / fan board in production.
 4. Continue improving player profiles and club hubs.
 5. Continue comparing functionality against TrueFooty, but preserve our own design identity.
+
+
+# 27 Sep 2026 — Supabase backend milestone
+
+## Supabase project
+A free Supabase project was created successfully:
+- Project name: afl-trade-machine
+- Project ref: petuunopkuywnxoorzek
+- Region: ap-southeast-2 (Sydney)
+- Cost confirmed by Supabase before creation: 0/month
+- Status at creation: ACTIVE_HEALTHY
+
+## Database schema created
+Migration: initial_afl_platform_schema
+
+Tables:
+- public.profiles
+- public.saved_items
+- public.fan_votes
+- public.news_posts
+
+Additional table:
+- public.admin_users
+
+All exposed public tables have Row Level Security enabled.
+
+Security model:
+- profiles: users can only read/write their own profile
+- saved_items: users can read/write their own saves; public-save support reserved
+- fan_votes: public can read consensus data; signed-in users can only write/update/delete their own votes
+- news_posts: public can read published news; only authenticated users listed in admin_users can insert/update/delete news
+- admin_users cannot be enumerated publicly; authenticated users can only check their own admin status
+
+Supabase security advisor after setup:
+- 0 security lints / warnings
+
+Performance advisor:
+- only unused-index informational notices on the brand-new empty database
+- no outstanding foreign-key index issue
+
+## Frontend Supabase integration
+Added:
+- account.js
+- pinned Supabase JS browser SDK 2.117.1
+- publishable frontend key only; no service-role or secret key is exposed
+- account controls in site header
+- magic-link email sign-in flow
+- SAVE button
+- MY SAVES library
+- sign out
+- cloud save/restore
+
+Supported cloud-save types:
+- Trade Machine scenarios
+- Live Mock Draft state
+- Best 23 / VFL builder state
+- Ladder Predictor
+
+Trade Machine now exposes setTrade() for restore.
+Best23 now exposes getState()/setState() for save/restore.
+MockDraft already exposes getState()/setState().
+
+## Shared Fan Board
+Fan voting was upgraded from local-only to shared community voting for signed-in users.
+
+Behaviour:
+- signed-in users write one vote score per prospect to Supabase
+- community ranking aggregates signed-in fan scores
+- each user can see their own current contribution
+- guests can still make a local browser-only ballot
+- guest/local voting remains a fallback and does not pollute shared consensus
+
+## Global News editing
+News system now supports Supabase-backed global curated posts.
+
+Admin behaviour:
+- site admin can edit a global news post
+- admin edits are visible to everyone
+- an aggregated feed item can be promoted into a global Supabase news post by editing it as admin
+- global curated item is placed ahead of matching RSS/editorial duplicates
+- global posts can be unpublished/hidden by admin
+
+Non-admin behaviour:
+- existing local edit/hide mode remains browser-local
+
+## Admin setup still pending
+The user's site account does not exist yet, so no admin user has been assigned.
+
+After the user successfully signs in to the live site for the first time:
+1. inspect auth.users for the new account
+2. add that user's UUID to public.admin_users
+3. verify account.js detects SITE ADMIN
+4. test global news edit/publish
+
+Do not use user_metadata for admin authorization.
+Admin authorization is stored in public.admin_users and enforced by RLS.
+
+## Auth URL configuration still required
+Magic-link login uses:
+- emailRedirectTo: location.origin + location.pathname
+
+Supabase Auth must allow the production site URL as an authorised redirect URL / Site URL.
+
+Expected production site from project history:
+- https://afl-trade-machine-six.vercel.app/
+
+If the live canonical domain changes, use that domain instead.
+
+User should set Supabase:
+Authentication / URL Configuration:
+- Site URL = live AFL Trade Machine URL
+- Redirect URL = live AFL Trade Machine URL (wildcard/path as appropriate)
+
+No payment is required for this step.
+
+## Recent backend/frontend commits
+- 8d230ca405d5812635d15490d967ca8dd06533ab — Allow saved trades to be restored
+- 97d6de22024f520d3f644de4c9717200f8173db2 — Allow saved Best 23 teams to be restored
+- 1af744aad8c527efb8fa74a3f8ced8c7180b48e8 — Add Supabase accounts and cloud saves
+- de439278e9d2324d89e3d03bfc0d970d05efbe17 — Make fan voting shared with signed-in accounts
+- 9cf92f19442afc53624bf36b35cc084c7b86371c — Add global news publishing helpers
+- 82e3f6df6757ec336869ed5a0a8949b5b7996f1a — Make admin news edits global
+- a948a8f24ae6a0aacc364b4756598ffc49f036a5 — Load Supabase account layer
+- 258da46bdfc5418aab46e5739647568c61c2493c — Style accounts saves and community voting
+- 7f1375e0a6158d8edb5b66c1ef2ff7775250635e — Polish mobile account controls
+
+## Verification
+Static JavaScript syntax check passed for:
+- account.js
+- hub.js
+- app.js
+- best23.js
+- mock-2026-current.js
+
+Vercel production deployments for account/backend integration commits were reporting READY, with the latest mobile polish deployment building at the last check.
+
+## Immediate resume point
+1. Configure Supabase Auth production Site URL / redirect URL.
+2. User signs into AFL Trade Machine with their email.
+3. Add their auth UUID to admin_users.
+4. Test:
+   - save/restore trade
+   - save/restore mock
+   - save/restore Best 23
+   - save/restore ladder
+   - shared fan vote
+   - global news edit
+5. Verify latest Vercel deployment is READY.
