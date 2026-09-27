@@ -213,6 +213,8 @@
     $('#addDraftProspectBtn')&&($('#addDraftProspectBtn').onclick=addDraftProspect);
     render();
   }
-  window.Best23={render,clear:clearAll};
+  function getState(){return {clubId,teams:JSON.parse(JSON.stringify(teams)),extras:JSON.parse(JSON.stringify(extras)),delisted:Object.fromEntries(Object.entries(delisted).map(([k,v])=>[k,[...v]]))};}
+  function setState(next){if(!next)return;clubId=next.clubId||clubId;Object.keys(teams).forEach(k=>delete teams[k]);Object.assign(teams,next.teams||{});Object.keys(extras).forEach(k=>delete extras[k]);Object.assign(extras,next.extras||{});Object.keys(delisted).forEach(k=>delete delisted[k]);Object.entries(next.delisted||{}).forEach(([k,v])=>delisted[k]=new Set(v));activeTarget=null;render();}
+  window.Best23={render,clear:clearAll,getState,setState};
   init();
 })();
