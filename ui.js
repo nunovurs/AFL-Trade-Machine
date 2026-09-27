@@ -26,6 +26,7 @@
     if(mode==='trade')window.TradeMachine?.render?.();
     if(mode==='draft'){window.MockDraft?.render?.();setDraftView('live');}
     if(mode==='best23')window.Best23?.render?.();
+    if(mode==='hub')window.AFLHub?.render?.();
     window.scrollTo({top:0,behavior:'instant'});
   }
   buttons.forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
