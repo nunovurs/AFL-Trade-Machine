@@ -854,3 +854,20 @@ body{background:linear-gradient(180deg,#e2e7eb 0,#eaedf0 34%,#e4e8ec 100%);color
 .ladder-board{display:grid;gap:5px;padding:10px}.ladder-row{display:grid;grid-template-columns:42px 42px 1fr auto;align-items:center;gap:8px;min-height:50px;padding:6px 9px;background:#eef1f3;border:1px solid #cdd5dc;border-radius:5px;cursor:grab}.ladder-row>strong{font-family:"Arial Black",Arial,sans-serif;font-size:16px}.ladder-row>img{width:34px;height:34px;object-fit:contain}.ladder-row>span{font-size:11px;font-weight:900;color:#172337}.ladder-row>div{display:flex;gap:4px}.ladder-row button{width:32px;height:32px;border:1px solid #bdc6ce;background:#fff;border-radius:4px;font-weight:1000;color:#273647}.ladder-row button:disabled{opacity:.25}
 .fan-board{display:grid;padding:10px;gap:5px}.fan-row{display:grid;grid-template-columns:40px minmax(180px,1fr) 70px 40px 40px;align-items:center;gap:7px;min-height:54px;padding:7px 9px;background:#eef1f3;border:1px solid #cbd3da;border-radius:5px}.fan-row>strong{font-family:"Arial Black",Arial,sans-serif;font-size:15px}.fan-row>div:nth-child(2){display:flex;flex-direction:column}.fan-row b{font-size:10px;color:#172337}.fan-row span{font-size:8px;color:#788591}.fan-score{text-align:center;font-size:13px;font-weight:1000;color:#172337}.fan-row button{height:34px;border:1px solid #bdc7cf;background:#fff;border-radius:4px;font-weight:1000}
 @media(max-width:900px){.news-feed{grid-template-columns:1fr}.club-hub-grid{grid-template-columns:1fr}.club-list-block{grid-column:auto}.club-list-grid{grid-template-columns:repeat(2,1fr)}.club-hub-hero{grid-template-columns:70px 1fr}.club-hub-hero>img{width:62px;height:62px}.club-hub-actions{grid-column:1/-1}.hub-order-head,.hub-draft-row{grid-template-columns:48px 74px 1fr}.hub-order-head span:last-child,.hub-draft-row>div:last-child{display:none}}
+
+
+/* Supabase account + cloud saves */
+.account-controls{display:flex;align-items:center;gap:5px;margin-left:auto}
+.saved-items-list{display:grid;gap:7px;margin:14px 0}
+.saved-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 11px;border:1px solid #cbd3da;border-radius:6px;background:#eef1f3}
+.saved-item>div:first-child{display:flex;flex-direction:column;gap:3px;min-width:0}
+.saved-item strong{font-size:10px;color:#172337}
+.saved-item span{font-size:8px;color:#74818d}
+.saved-item>div:last-child{display:flex;gap:5px;flex:0 0 auto}
+.admin-badge{display:inline-flex;margin:8px 0;padding:5px 8px;border-radius:999px;background:#172337;color:#fff;font-size:8px;font-weight:1000;letter-spacing:.08em}
+.fan-board-note{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:9px 10px;border:1px solid #c8d0d7;border-radius:5px;background:#e3e8ec}
+.fan-board-note strong{font-size:8px;letter-spacing:.08em;color:#172337}
+.fan-board-note span{font-size:8px;color:#667481}
+.fan-score{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.fan-score b{font-size:13px;color:#172337}
+.fan-score small{font-size:6.5px;color:#788591;white-space:nowrap}
