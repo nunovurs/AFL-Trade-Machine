@@ -142,7 +142,10 @@
     if(!isAdmin)return {error:new Error('Admin access required')};
     const payload=(rows||[]).map(r=>({
       pick:Number(r.pick),
-      player:r.player,
+      club_id:r.club_id??r.clubId??null,
+      player:r.player??null,
+      path:r.path??null,
+      mechanism:r.mechanism??null,
       updated_by:session.user.id,
       updated_at:new Date().toISOString()
     }));
