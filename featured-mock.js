@@ -28,6 +28,16 @@
       if(r.mechanism!=null)o.mechanism=r.mechanism;
       return [Number(r.pick),o];
     }));
+    const staleShift=
+      rowOverrides[16]?.player==='Jake Eime' &&
+      rowOverrides[17]?.player==null &&
+      rowOverrides[18]?.player==null &&
+      rowOverrides[19]?.player==null &&
+      rowOverrides[20]?.player==='Harrison Chapman';
+    if(staleShift){
+      for(let pick=16;pick<=43;pick++)delete rowOverrides[pick];
+      console.warn('Ignored stale mock reorder overrides from previous player-only drag implementation');
+    }
     profileOverrides=Object.fromEntries((data.profiles||[]).map(p=>[p.player,{
       comparison:p.comparison??undefined,why:p.why??undefined,description:p.description??undefined,
       position:p.position??undefined,pathway:p.pathway??undefined
