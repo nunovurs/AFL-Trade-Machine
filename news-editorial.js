@@ -1,5 +1,15 @@
 window.ATM_EDITORIAL_NEWS = [
   {
+    id:'2026-10-05-zach-merrett-hawthorn',
+    title:'Zach Merrett joins Hawthorn in three-pick deal',
+    summary:'Essendon have traded Zach Merrett to Hawthorn for Picks 15 and 25 in the 2026 draft plus Hawthorn’s 2028 second-round selection.',
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1628685/zach-merrett-gets-long-held-wish-after-hawthorn-hawks-up-offer-to-essendon-bombers',
+    publishedAt:'2026-10-05T16:00:00+10:00',
+    tag:'CONFIRMED',
+    clubs:['ess','haw']
+  },
+  {
     id:'2026-10-02-toby-greene-geelong',
     title:'Toby Greene joins Geelong as GWS receives pick 26 compensation',
     summary:'Toby Greene has joined Geelong as an unrestricted free agent. Greater Western Sydney received a second-round compensation selection, currently pick 26 in the 2026 draft order.',
