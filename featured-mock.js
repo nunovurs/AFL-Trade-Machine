@@ -32,8 +32,8 @@
       const o={};
       if(movedBidSequence && r.club_id!=null)o.clubId=r.club_id;
       if(Object.prototype.hasOwnProperty.call(r,'player'))o.player=r.player;
-      if(r.path!=null)o.path=r.path;
-      if(r.mechanism!=null)o.mechanism=r.mechanism;
+      if(movedBidSequence && r.path!=null)o.path=r.path;
+      if(movedBidSequence && r.mechanism!=null)o.mechanism=r.mechanism;
       return [Number(r.pick),o];
     }));
     const staleShift=
@@ -148,8 +148,8 @@
     card.innerHTML='<div class="modal-kicker">SITE ADMIN • PUBLISHED MOCK</div><h3>Edit Pick '+pick+'</h3>'+
       '<div class="mock-admin-form"><label><span>PLAYER</span><select id="mockEditPlayer" class="modal-select">'+players+'</select></label>'+
       '<label><span>CLUB / PICK OWNER</span><input class="modal-input" value="'+esc(c?.name||r.clubId||'TBC')+'" disabled title="Club ownership is controlled by the current draft order"></label>'+
-      '<label class="wide"><span>PICK / TRADE PATH</span><input id="mockEditPath" class="modal-input" value="'+esc(r.path||'')+'"></label>'+
-      '<label class="wide"><span>HOW THE PICK HAPPENS</span><textarea id="mockEditMechanism" class="modal-input mock-admin-textarea">'+esc(r.mechanism||'')+'</textarea></label>'+
+      '<label class="wide"><span>PICK / TRADE PATH</span><input class="modal-input" value="'+esc(r.path||'')+'" disabled title="System-controlled from current draft order / approved mock mechanics"></label>'+
+      '<label class="wide"><span>HOW THE PICK HAPPENS</span><textarea class="modal-input mock-admin-textarea" disabled title="System-controlled from current draft order / approved mock mechanics">'+esc(r.mechanism||'')+'</textarea></label>'+
       '<label class="wide"><span>WHY THIS PICK?</span><textarea id="mockEditWhy" class="modal-input mock-admin-textarea">'+esc(p.why||'')+'</textarea></label>'+
       '<label><span>PLAYER COMPARISON</span><input id="mockEditComparison" class="modal-input" value="'+esc(p.comparison||'')+'"></label>'+
       '<label><span>POSITION</span><input id="mockEditPosition" class="modal-input" value="'+esc(p.position||'')+'"></label>'+
@@ -160,11 +160,7 @@
     document.querySelector('#mockEditCancel').onclick=()=>{modal.hidden=true;card.innerHTML=''};
     document.querySelector('#mockEditSave').onclick=async()=>{
       const player=document.querySelector('#mockEditPlayer').value;
-      const rowRes=await window.ATMCloud.saveMockRow(pick,{
-        player,
-        path:document.querySelector('#mockEditPath').value.trim(),
-        mechanism:document.querySelector('#mockEditMechanism').value.trim()
-      });
+      const rowRes=await window.ATMCloud.saveMockRow(pick,{player});
       if(rowRes?.error)return toast(rowRes.error.message||'Unable to publish pick');
       const profRes=await window.ATMCloud.saveMockProfile(player,{
         why:document.querySelector('#mockEditWhy').value.trim(),
