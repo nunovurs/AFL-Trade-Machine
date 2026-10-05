@@ -918,8 +918,9 @@ body{background:linear-gradient(180deg,#e2e7eb 0,#eaedf0 34%,#e4e8ec 100%);color
 .mock-admin-drop{transition:transform .12s ease,box-shadow .12s ease,outline-color .12s ease}
 .mock-admin-drop.drag-over{outline:3px solid rgba(23,35,55,.25);outline-offset:-3px;box-shadow:0 8px 20px rgba(23,35,55,.14)}
 .mock-admin-drop.dragging{opacity:.55;transform:scale(.995)}
-.mock-player-summary[draggable="true"]{cursor:grab}
-.mock-player-summary[draggable="true"]:active{cursor:grabbing}
+.my-mock-row[draggable="true"]{cursor:grab}
+.my-mock-row[draggable="true"]:active{cursor:grabbing}
+.my-mock-row[draggable="true"] .mock-player-summary{cursor:pointer}
 @media(max-width:760px){
   .mock-asset-head{display:none}
   .mock-asset-row{grid-template-columns:42px 70px 1fr;gap:7px}
