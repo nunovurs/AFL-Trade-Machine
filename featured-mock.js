@@ -57,10 +57,10 @@
     }
     const p=mergedProfile(r.player)||{},c=club(r.clubId),clubLabel=r.path||c?.name||r.note||'Club TBC',clubColor=c?.color||'#657281',clubText=c?.clubText||'#fff';
     const admin=!!window.ATMCloud?.isAdmin;
-    return '<article class="my-mock-row '+(admin?'mock-admin-drop':'')+'" data-mock-row="'+r.pick+'" style="--club:'+clubColor+';--clubText:'+clubText+'">'+
+    return '<article class="my-mock-row '+(admin?'mock-admin-drop':'')+'" data-mock-row="'+r.pick+'" '+(admin?'draggable="true" data-drag-mock="'+r.pick+'" title="Drag this entire club + player selection to another pick"':'')+' style="--club:'+clubColor+';--clubText:'+clubText+'">'+
       '<div class="mock-pick-no"><strong>'+r.pick+'</strong><small>'+dvi(r.pick)+' pts</small></div>'+
       '<div class="mock-club-band">'+(c?'<img src="'+esc(c.logo)+'" alt="">':'')+'<span>'+esc(clubLabel)+'</span></div>'+
-      '<button class="mock-player-summary" data-profile="'+esc(r.player)+'" data-club="'+esc(r.clubId||'')+'" data-pick="'+r.pick+'" '+(admin?'draggable="true" data-drag-mock="'+r.pick+'" title="Drag this player/profile to another pick"':'')+'><img src="'+esc(p.photo||'assets/player-placeholder.svg')+'" onerror="this.src=\'assets/player-placeholder.svg\'" alt="'+esc(r.player)+'"><span><strong>'+esc(r.player)+'</strong><small>'+esc(p.position||'')+' • '+esc(p.pathway||r.note||'')+'</small></span></button>'+
+      '<button class="mock-player-summary" data-profile="'+esc(r.player)+'" data-club="'+esc(r.clubId||'')+'" data-pick="'+r.pick+'"><img draggable="false" src="'+esc(p.photo||'assets/player-placeholder.svg')+'" onerror="this.src=\'assets/player-placeholder.svg\'" alt="'+esc(r.player)+'"><span><strong>'+esc(r.player)+'</strong><small>'+esc(p.position||'')+' • '+esc(p.pathway||r.note||'')+'</small></span></button>'+
       '<div class="mock-comparison"><span>PLAYER COMPARISON</span><strong>'+esc(p.comparison||'—')+'</strong></div>'+
       '<div class="mock-why"><span>WHY THIS PICK?</span><p>'+esc(p.why||r.note||'')+'</p></div>'+
       '<div class="mock-mechanism"><span>HOW THE PICK HAPPENS</span><p>'+esc(r.mechanism||r.note||'Direct selection')+'</p></div>'+
@@ -78,19 +78,32 @@
     return '<details class="mock-asset-ledger"><summary><span><strong>DRAFT ASSET LEDGER</strong><small>All starting selections and compensation assets are shown, including picks later consumed by bids.</small></span><b>1–40</b></summary><div class="mock-ledger-assumptions"><strong>CURRENT MOCK ASSUMPTIONS</strong><ul>'+assumptions+'</ul></div><div class="mock-asset-head"><span>PICK</span><span>CLUB</span><span>ASSET / WHAT HAPPENS</span><span>STATUS</span></div><div class="mock-asset-rows">'+rows+'</div></details>';
   }
 
-  async function reorderPlayers(fromPick,toPick){
+  async function reorderSelections(fromPick,toPick){
     if(!window.ATMCloud?.isAdmin||Number(fromPick)===Number(toPick))return;
     const rows=M.board.map(mergedRow).sort((a,b)=>Number(a.pick)-Number(b.pick));
     const from=rows.findIndex(r=>Number(r.pick)===Number(fromPick)),to=rows.findIndex(r=>Number(r.pick)===Number(toPick));
     if(from<0||to<0)return;
-    const players=rows.map(r=>r.player||null);
-    const moved=players.splice(from,1)[0];
+    const selections=rows.map(r=>r.player?{
+      club_id:r.clubId||null,
+      player:r.player,
+      path:r.path||null,
+      mechanism:r.mechanism||null
+    }:null);
+    const moved=selections.splice(from,1)[0];
     if(!moved)return;
-    players.splice(to,0,moved);
-    const payload=rows.map((r,i)=>({pick:r.pick,player:players[i]||null}));
+    selections.splice(to,0,moved);
+    const payload=rows.map((slot,i)=>({
+      pick:slot.pick,
+      club_id:selections[i]?.club_id??null,
+      player:selections[i]?.player??null,
+      path:selections[i]?.path??null,
+      mechanism:selections[i]?.mechanism??null
+    }));
     const res=await window.ATMCloud.saveMockPlayerOrder(payload);
     if(res?.error)return toast(res.error.message||'Unable to reorder mock');
-    loaded=false;await loadOverrides();await render();toast(moved+' moved to Pick '+toPick+' • published globally');
+    loaded=false;await loadOverrides();await render();
+    const movedClub=club(moved.club_id);
+    toast((movedClub?.name?movedClub.name+' — ':'')+moved.player+' moved to Pick '+toPick+' • whole selection published globally');
   }
 
   function openEditor(pick){
@@ -143,18 +156,24 @@
     const el=document.querySelector('#featuredMockList');if(!el)return;
     if(!loaded)await loadOverrides();
     const rows=[];M.board.forEach(base=>{rows.push(playerRow(base));eventsAfter(base.pick).forEach(e=>rows.push(eventRow(e)))});
-    el.innerHTML='<div class="mock-audit-note"><strong>PREDICTED SELECTIONS</strong><span>This is the published mock draft. Player selections stay front and centre; the detailed absorbed/compo pick accounting is available underneath.</span>'+(window.ATMCloud?.isAdmin?'<span class="admin-badge">ADMIN • DRAG PLAYER CARDS TO REORDER</span>':'')+'</div><div class="my-mock-board">'+rows.join('')+'</div>'+renderAssetLedger();
+    el.innerHTML='<div class="mock-audit-note"><strong>PREDICTED SELECTIONS</strong><span>This is the published mock draft. Player selections stay front and centre; the detailed absorbed/compo pick accounting is available underneath.</span>'+(window.ATMCloud?.isAdmin?'<span class="admin-badge">ADMIN • DRAG WHOLE CLUB + PLAYER CARDS TO REORDER</span>':'')+'</div><div class="my-mock-board">'+rows.join('')+'</div>'+renderAssetLedger();
     document.querySelectorAll('#featuredMockList [data-profile]').forEach(b=>b.onclick=()=>window.ATMProfiles?.open?.(b.dataset.profile,{clubId:b.dataset.club||null,pick:b.dataset.pick}));
     document.querySelectorAll('#featuredMockList [data-edit-mock]').forEach(b=>b.onclick=()=>openEditor(Number(b.dataset.editMock)));
     if(window.ATMCloud?.isAdmin){
-      document.querySelectorAll('#featuredMockList [data-drag-mock]').forEach(card=>{
-        card.ondragstart=e=>{dragPick=Number(card.dataset.dragMock);e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',String(dragPick));requestAnimationFrame(()=>card.closest('.my-mock-row')?.classList.add('dragging'));};
-        card.ondragend=()=>{dragPick=null;document.querySelectorAll('#featuredMockList .dragging,#featuredMockList .drag-over').forEach(x=>x.classList.remove('dragging','drag-over'));};
+      document.querySelectorAll('#featuredMockList [data-drag-mock]').forEach(row=>{
+        row.ondragstart=e=>{
+          if(e.target.closest('[data-edit-mock],.profile-link-btn')){e.preventDefault();return;}
+          dragPick=Number(row.dataset.dragMock);
+          e.dataTransfer.effectAllowed='move';
+          e.dataTransfer.setData('text/plain',String(dragPick));
+          requestAnimationFrame(()=>row.classList.add('dragging'));
+        };
+        row.ondragend=()=>{dragPick=null;document.querySelectorAll('#featuredMockList .dragging,#featuredMockList .drag-over').forEach(x=>x.classList.remove('dragging','drag-over'));};
       });
       document.querySelectorAll('#featuredMockList [data-mock-row]').forEach(row=>{
         row.ondragover=e=>{if(dragPick==null)return;e.preventDefault();row.classList.add('drag-over');e.dataTransfer.dropEffect='move';};
         row.ondragleave=e=>{if(!row.contains(e.relatedTarget))row.classList.remove('drag-over');};
-        row.ondrop=async e=>{e.preventDefault();row.classList.remove('drag-over');const from=dragPick;dragPick=null;if(from!=null)await reorderPlayers(from,Number(row.dataset.mockRow));};
+        row.ondrop=async e=>{e.preventDefault();row.classList.remove('drag-over');const from=dragPick;dragPick=null;if(from!=null)await reorderSelections(from,Number(row.dataset.mockRow));};
       });
     }
   }
