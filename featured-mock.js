@@ -28,10 +28,22 @@
       const base=M.board.find(b=>resolve(b.player)===resolve(r.player));
       return base && Number(base.pick)!==Number(r.pick);
     });
+    const staleWcMelSequence=rawRows.some(r=>
+      [5,6,7,12].includes(Number(r.pick)) &&
+      /west coast.*melbourne|melbourne.*west coast|split-pick/i.test(String(r.path||'')+' '+String(r.mechanism||''))
+    );
     rowOverrides=Object.fromEntries(rawRows.map(r=>{
       const o={};
-      const base=M.board.find(b=>Number(b.pick)===Number(r.pick));
+      const pick=Number(r.pick),base=M.board.find(b=>Number(b.pick)===pick);
       const staleWcMelTrade=/west coast.*melbourne|melbourne.*west coast|split-pick/i.test(String(r.path||'')+' '+String(r.mechanism||''));
+      const restoreWcMelBlock=staleWcMelSequence && [5,6,7,12].includes(pick);
+      if(restoreWcMelBlock && base){
+        o.clubId=base.clubId;
+        o.player=base.player;
+        o.path=base.path;
+        o.mechanism=base.mechanism;
+        return [pick,o];
+      }
       if(movedBidSequence && !staleWcMelTrade && r.club_id!=null)o.clubId=r.club_id;
       if(Object.prototype.hasOwnProperty.call(r,'player'))o.player=r.player;
       if(movedBidSequence && !staleWcMelTrade && r.path!=null)o.path=r.path;
@@ -41,7 +53,7 @@
         o.path=base.path;
         o.mechanism=base.mechanism;
       }
-      return [Number(r.pick),o];
+      return [pick,o];
     }));
     const staleShift=
       rowOverrides[16]?.player==='Jake Eime' &&
