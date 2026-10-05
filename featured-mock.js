@@ -30,10 +30,17 @@
     });
     rowOverrides=Object.fromEntries(rawRows.map(r=>{
       const o={};
-      if(movedBidSequence && r.club_id!=null)o.clubId=r.club_id;
+      const base=M.board.find(b=>Number(b.pick)===Number(r.pick));
+      const staleWcMelTrade=/west coast.*melbourne|melbourne.*west coast|split-pick/i.test(String(r.path||'')+' '+String(r.mechanism||''));
+      if(movedBidSequence && !staleWcMelTrade && r.club_id!=null)o.clubId=r.club_id;
       if(Object.prototype.hasOwnProperty.call(r,'player'))o.player=r.player;
-      if(movedBidSequence && r.path!=null)o.path=r.path;
-      if(movedBidSequence && r.mechanism!=null)o.mechanism=r.mechanism;
+      if(movedBidSequence && !staleWcMelTrade && r.path!=null)o.path=r.path;
+      if(movedBidSequence && !staleWcMelTrade && r.mechanism!=null)o.mechanism=r.mechanism;
+      if(staleWcMelTrade && base){
+        o.clubId=base.clubId;
+        o.path=base.path;
+        o.mechanism=base.mechanism;
+      }
       return [Number(r.pick),o];
     }));
     const staleShift=
