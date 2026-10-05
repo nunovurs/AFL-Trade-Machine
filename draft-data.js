@@ -3,11 +3,11 @@ window.ATM_DRAFT_DATA = (() => {
   ade:[13,32,33,41,54,90],
   bri:[18,39,40,51,57,77,95],
   car:[11,16,23,24,59,70,88],
-  col:[9,28,66,68,86],
+  col:[9,28,65,66,68,86],
   ess:[1,19,60,78],
   fre:[17,38,58,76,94],
   gee:[14,34,55,73,91],
-  gcs:[65,79,83],
+  gcs:[79,83],
   gws:[7,26,29,48,75,84],
   haw:[15,25,27,35,69,92],
   mel:[6,10,47,87],
@@ -32,7 +32,8 @@ window.ATM_DRAFT_DATA = (() => {
     33:'Jordon Butts compensation',
     37:'Joel Amartey compensation',
     40:'Lachie Neale compensation',
-    48:'Kieren Briggs compensation'
+    48:'Kieren Briggs compensation',
+    65:'via Greater Western Sydney'
   };
   const bidSlideCompensations = [
     {afterOfficialPick:19,club:'ess',label:'Essendon bid-slide compensation'},
