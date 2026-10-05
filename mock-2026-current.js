@@ -7,14 +7,14 @@
   fill('Cody Walker',{why:'Carlton match the father-son bid and add a dynamic foundation player for their next era.'});
   fill('Arki Butler',{why:'Essendon take the explosive forward/midfielder with their first open-pool selection.'});
   fill('Harry Van Hattum',{why:'Richmond prioritise the draft’s standout ruck/forward physical profile and long-term upside.'});
-  fill('Ethan Drever',{why:'Melbourne trade up for midfield power, burst and a player who can turn stoppage wins into attack.'});
+  fill('Ethan Drever',{why:'West Coast use their retained top-end selection on midfield power, burst and a player who can turn stoppage wins into attack.'});
   fill('Gus Teixeira',{why:'North Melbourne add speed, polish and forward-half damage rather than another pure accumulator.'});
-  fill('Heath Mellody',{why:'West Coast use the split-pick strategy to add a high-end WA runner and creator.'});
+  fill('Heath Mellody',{why:'Melbourne use the Gold Coast-origin first-round selection they already hold to add a high-end runner and creator.'});
   fill('Caylen Murray',{why:'Gold Coast use the Ben King compensation selection on Murray in this scenario, with Brisbane unable to match the bid.',tiedClub:'bri',tieType:'Brisbane Academy'});
   fill('Ethan Matthews',{why:'GWS add one of their own Academy midfielders to the next generation of the engine room.'});
   fill('Clancy Snell',{why:'St Kilda add a long-term key defender with mature-body/VFL exposure.'});
   fill('Mitchell Harris',{why:'Collingwood invest in a long-term key-defensive option with genuine size and upside.'});
-  fill('George Gale',{why:'West Coast complete the split-pick strategy with another versatile local prospect.'});
+  fill('George Gale',{why:'Melbourne use their retained natural first-round selection on a versatile prospect with upside.'});
   fill('Kodah Edwards',{why:'Adelaide keep the South Australian captain and add leadership, competitiveness and scoreboard impact.'});
   fill('Albert MacGowan',{why:'Geelong add another versatile midfielder/forward to their next-generation midfield mix.'});
   fill('Tyson Bradley',{why:'Essendon use the Hawthorn/Merrett-related first-round asset on a strong key defender with intercept value.'});
@@ -67,14 +67,14 @@
     {pick:2,clubId:'car',player:'Cody Walker',path:'Carlton — matched father-son bid',mechanism:'MATCHED FATHER-SON BID • Carlton match the bid on Cody Walker. The North-origin first moves to the bid and supporting Carlton assets are consumed for points.'},
     {pick:3,clubId:'ess',player:'Arki Butler',path:'Essendon',mechanism:'ESSENDON SELECTION • Butler is Essendon’s first open-pool selection after the two opening matched bids.'},
     {pick:4,clubId:'ric',player:'Harry Van Hattum',path:'Richmond',mechanism:'RICHMOND SELECTION • Richmond take the leading ruck/forward in the open pool.'},
-    {pick:5,clubId:'mel',player:'Ethan Drever',path:'Melbourne via West Coast trade',mechanism:'WEST COAST / MELBOURNE TRADE • Melbourne acquire West Coast’s premium first-round asset and move up for Drever.'},
+    {pick:5,clubId:'wce',player:'Ethan Drever',path:'West Coast',mechanism:'WEST COAST SELECTION • West Coast retain their premium first-round asset and use it on Drever.'},
     {pick:6,clubId:'nm',player:'Gus Teixeira',path:'North Melbourne',mechanism:'NORTH MELBOURNE SELECTION • North add speed, polish and forward-half impact.'},
-    {pick:7,clubId:'wce',player:'Heath Mellody',path:'West Coast via Melbourne / Gold Coast',mechanism:'TRADE-CHAIN SELECTION • West Coast use one of the selections received in the Melbourne split-pick scenario.'},
+    {pick:7,clubId:'mel',player:'Heath Mellody',path:'Melbourne via Gold Coast',mechanism:'MELBOURNE SELECTION • Melbourne use the Gold Coast-origin first-round asset already held by the club.'},
     {pick:8,clubId:'gcs',player:'Caylen Murray',path:'Gold Coast compensation — Brisbane cannot match',mechanism:'PROJECTED BEN KING COMPENSATION • Gold Coast bid on Brisbane Academy prospect Caylen Murray with the King compensation selection. In this mock Brisbane cannot complete the match, so Murray becomes a Sun.'},
     {pick:9,clubId:'gws',player:'Ethan Matthews',path:'GWS',mechanism:'GWS SELECTION • The Giants take their Academy midfielder with their own live selection.'},
     {pick:10,clubId:'stk',player:'Clancy Snell',path:'St Kilda',mechanism:'ST KILDA SELECTION • The Saints invest in a long-term key defender.'},
     {pick:11,clubId:'col',player:'Mitchell Harris',path:'Collingwood',mechanism:'COLLINGWOOD SELECTION • Collingwood add another high-end key-defensive prospect.'},
-    {pick:12,clubId:'wce',player:'George Gale',path:'West Coast via Melbourne',mechanism:'MELBOURNE / WEST COAST TRADE • West Coast use the second major asset from the projected split.'},
+    {pick:12,clubId:'mel',player:'George Gale',path:'Melbourne',mechanism:'MELBOURNE SELECTION • Melbourne retain and use their natural first-round selection.'},
     {pick:13,clubId:'ade',player:'Kodah Edwards',path:'Adelaide',mechanism:'ADELAIDE SELECTION • Adelaide retain the South Australian captain and forward/midfielder.'},
     {pick:14,clubId:'gee',player:'Albert MacGowan',path:'Geelong',mechanism:'GEELONG SELECTION • Geelong add a versatile midfielder/forward.'},
     {pick:15,clubId:'ess',player:'Tyson Bradley',path:'Essendon via Hawthorn / Merrett trade',mechanism:'ZACH MERRETT TRADE • Essendon use Hawthorn first-round capital received in the projected Merrett deal.'},
@@ -121,7 +121,7 @@
   ];
 
   const assetLedger={
-    updated:'27 Sep 2026',
+    updated:'5 Oct 2026',
     assumptions:[
       'Brisbane won the 2026 Grand Final, so its natural first-round selection is Pick 18 before free-agency compensation or bid matching; Fremantle is Pick 17.',
       'This scenario applies projected Band 1 compensation for Zak Butters and Ben King if their reported free-agency moves proceed. Those insertions move Brisbane’s pre-bid live slot from 18 to 20.',
@@ -131,10 +131,10 @@
     rows:[
       {pick:1,clubId:'ess',origin:'Essendon natural R1',status:'BID',detail:'Essendon use the opening selection to bid on Dougie Cochrane.'},
       {pick:2,clubId:'ric',origin:'Richmond natural R1',status:'LIVE',detail:'Slides as matched bids are inserted ahead.'},
-      {pick:3,clubId:'wce',origin:'West Coast natural R1',status:'TRADE',detail:'Mock assumption: traded to Melbourne for later first-round assets.'},
+      {pick:3,clubId:'wce',origin:'West Coast natural R1',status:'LIVE',detail:'West Coast retain this selection. No West Coast–Melbourne split trade is applied.'},
       {pick:4,clubId:'pa',origin:'Port Adelaide natural R1',status:'ABSORBED',detail:'1962 DVI. Used in Port’s Pick 1 match for Dougie Cochrane.'},
       {pick:5,clubId:'pa',origin:'Projected Zak Butters Band 1 compensation',status:'PART USED',detail:'1795 DVI. 738 points complete the Cochrane match; 1057 DVI remains and converts into a later live selection.'},
-      {pick:6,clubId:'nm',origin:'North Melbourne natural R1',status:'LIVE',detail:'Pre-bid / pre-trade slot after the Butters compensation insertion.'},
+      {pick:6,clubId:'nm',origin:'North Melbourne natural R1',status:'LIVE',detail:'Pre-bid slot after the applied compensation insertion.'},
       {pick:7,clubId:'mel',origin:'Gold Coast natural R1 → Melbourne',status:'LIVE',detail:'Gold Coast’s traded natural first.'},
       {pick:8,clubId:'gcs',origin:'Projected Ben King Band 1 compensation',status:'COMPO',detail:'Gold Coast compensation immediately after its natural first-round position.'},
       {pick:9,clubId:'gws',origin:'GWS natural R1',status:'LIVE',detail:''},
