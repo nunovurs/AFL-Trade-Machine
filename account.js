@@ -142,21 +142,18 @@
     if(!isAdmin)return {error:new Error('Admin access required')};
     const payload=(rows||[]).map(r=>({
       pick:Number(r.pick),
-      club_id:r.club_id??r.clubId??null,
       player:r.player??null,
-      path:r.path??null,
-      mechanism:r.mechanism??null,
       updated_by:session.user.id,
       updated_at:new Date().toISOString()
     }));
     if(!payload.length)return {data:[]};
     return client.from('mock_draft_overrides').upsert(payload,{onConflict:'pick'});
   }
+
   async function saveMockRow(pick,patch){
     if(!isAdmin)return {error:new Error('Admin access required')};
     return client.from('mock_draft_overrides').upsert({
       pick:Number(pick),
-      club_id:patch.club_id||null,
       player:patch.player||null,
       path:patch.path||null,
       mechanism:patch.mechanism||null,
