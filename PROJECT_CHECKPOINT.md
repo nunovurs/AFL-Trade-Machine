@@ -839,3 +839,21 @@ Commit:
 - 3cc5830519b44bcae4b57169ba4bde396ac009d5 — Restore predicted selections as primary My Mock view
 
 Vercel production deployment for this correction: READY.
+
+
+# 5 Oct 2026 — West Coast / Melbourne trade assumption removed
+
+User explicitly cancelled the hypothetical West Coast ↔ Melbourne split-pick trade.
+
+My Mock now keeps:
+- West Coast's premium first-round asset with West Coast.
+- Melbourne's Gold Coast-origin first-round asset with Melbourne.
+- Melbourne's natural first-round asset with Melbourne.
+- Existing player predictions stay at their numbered mock positions unless the user moves them.
+
+Current affected rows:
+- Pick 5 — West Coast — Ethan Drever.
+- Pick 7 — Melbourne via Gold Coast — Heath Mellody.
+- Pick 12 — Melbourne — George Gale.
+
+Do not reintroduce the WC/Melbourne split trade unless the user explicitly asks for it again.
