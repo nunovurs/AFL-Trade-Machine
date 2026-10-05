@@ -857,3 +857,33 @@ Current affected rows:
 - Pick 12 — Melbourne — George Gale.
 
 Do not reintroduce the WC/Melbourne split trade unless the user explicitly asks for it again.
+
+
+# 5 Oct 2026 — My Mock club order synced to current draft order
+
+User clarified the separation of responsibilities:
+- Club/pick ownership is system-controlled from the current AFL indicative draft order plus approved draft-night bid mechanics.
+- Player selections and scouting profiles are user-controlled.
+- Ordinary player drag does not carry a club asset.
+- Matched-bid players (Dougie Cochrane, Cody Walker, Khaled El Souki) carry their matching club with them; moving the matched player changes where that bid occurs and ordinary club slots reflow around it.
+
+Current baseline now removes stale hypothetical club ownership from:
+- Ben King/Gold Coast compensation as a numbered My Mock club slot.
+- Essendon/Hawthorn Merrett mock pick ownership.
+- Richmond/Fremantle Sean Darcy mock pick ownership.
+- West Coast/Melbourne split-pick trade.
+
+Current confirmed free-agency compensation is reflected in the live order layer:
+- GWS — Toby Greene compensation.
+- Adelaide — Jordon Butts compensation.
+- Sydney — Joel Amartey compensation.
+- Brisbane — Lachie Neale compensation.
+
+Projected 2026 bid-slide compensation remains in the mock for:
+- Essendon.
+- Richmond.
+- West Coast.
+- North Melbourne.
+Port Adelaide is excluded from the extra bid-slide pick because its first-round asset is used in the Cochrane match.
+
+The live My Mock renderer now derives club/path/mechanism from the current slot order while applying only player overrides from Supabase, preventing stale club/trade overrides from reappearing.
