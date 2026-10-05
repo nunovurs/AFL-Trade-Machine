@@ -9,62 +9,50 @@
   let rowOverrides={},profileOverrides={},loaded=false,dragPick=null;
 
   const resolve=n=>M.resolve?.(n)||n;
-  const eventsAfter=pick=>(M.events||[]).filter(e=>Number(e.afterPick)===Number(pick));
   const isMatchedBid=r=>/^MATCHED\s/i.test(String(r?.mechanism||''));
-  const mergedRow=r=>{
-    const o=rowOverrides[Number(r.pick)]||{},out={...r,...o};
-    if(Object.prototype.hasOwnProperty.call(o,'player'))out.placeholder=!o.player;
-    return out;
+  const buildRows=()=>{
+    const bases=M.board.slice().sort((a,b)=>Number(a.pick)-Number(b.pick));
+    const matchedTemplates=new Map(
+      M.board.filter(isMatchedBid).map(r=>[resolve(r.player),r])
+    );
+    const ordinaryTemplates=M.board.filter(r=>!isMatchedBid(r)).map(r=>({
+      clubId:r.clubId,path:r.path,mechanism:r.mechanism,note:r.note||'',placeholder:!!r.placeholder
+    }));
+    let ordinaryIndex=0;
+    return bases.map(base=>{
+      const o=rowOverrides[Number(base.pick)]||{};
+      const player=Object.prototype.hasOwnProperty.call(o,'player')?o.player:base.player;
+      const matched=player?matchedTemplates.get(resolve(player)):null;
+      const meta=matched||ordinaryTemplates[ordinaryIndex++]||{};
+      return {
+        ...base,
+        clubId:meta.clubId??base.clubId,
+        path:meta.path??base.path,
+        mechanism:meta.mechanism??base.mechanism,
+        note:meta.note??base.note,
+        player,
+        placeholder:!player
+      };
+    });
   };
+  const mergedRow=r=>buildRows().find(x=>Number(x.pick)===Number(r.pick))||r;
+  const eventsAfter=pick=>(M.events||[]).filter(e=>{
+    if(e.player){
+      const row=buildRows().find(r=>resolve(r.player)===resolve(e.player));
+      return Number(row?.pick)===Number(pick);
+    }
+    return Number(e.afterPick)===Number(pick);
+  });
   const mergedProfile=name=>({...P[resolve(name)],...(profileOverrides[resolve(name)]||profileOverrides[name]||{})});
 
   async function loadOverrides(){
     if(!window.ATMCloud?.loadMockOverrides){loaded=true;return;}
     const data=await window.ATMCloud.loadMockOverrides();
-    const rawRows=(data.rows||[]);
-    const matchedPlayers=new Set(M.board.filter(isMatchedBid).map(r=>resolve(r.player)));
-    const movedBidSequence=rawRows.some(r=>{
-      if(!matchedPlayers.has(resolve(r.player)))return false;
-      const base=M.board.find(b=>resolve(b.player)===resolve(r.player));
-      return base && Number(base.pick)!==Number(r.pick);
-    });
-    const staleWcMelSequence=rawRows.some(r=>
-      [5,6,7,12].includes(Number(r.pick)) &&
-      /west coast.*melbourne|melbourne.*west coast|split-pick/i.test(String(r.path||'')+' '+String(r.mechanism||''))
-    );
-    rowOverrides=Object.fromEntries(rawRows.map(r=>{
+    rowOverrides=Object.fromEntries((data.rows||[]).map(r=>{
       const o={};
-      const pick=Number(r.pick),base=M.board.find(b=>Number(b.pick)===pick);
-      const staleWcMelTrade=/west coast.*melbourne|melbourne.*west coast|split-pick/i.test(String(r.path||'')+' '+String(r.mechanism||''));
-      const restoreWcMelBlock=staleWcMelSequence && [5,6,7,12].includes(pick);
-      if(restoreWcMelBlock && base){
-        o.clubId=base.clubId;
-        o.player=base.player;
-        o.path=base.path;
-        o.mechanism=base.mechanism;
-        return [pick,o];
-      }
-      if(movedBidSequence && !staleWcMelTrade && r.club_id!=null)o.clubId=r.club_id;
       if(Object.prototype.hasOwnProperty.call(r,'player'))o.player=r.player;
-      if(movedBidSequence && !staleWcMelTrade && r.path!=null)o.path=r.path;
-      if(movedBidSequence && !staleWcMelTrade && r.mechanism!=null)o.mechanism=r.mechanism;
-      if(staleWcMelTrade && base){
-        o.clubId=base.clubId;
-        o.path=base.path;
-        o.mechanism=base.mechanism;
-      }
-      return [pick,o];
+      return [Number(r.pick),o];
     }));
-    const staleShift=
-      rowOverrides[16]?.player==='Jake Eime' &&
-      rowOverrides[17]?.player==null &&
-      rowOverrides[18]?.player==null &&
-      rowOverrides[19]?.player==null &&
-      rowOverrides[20]?.player==='Harrison Chapman';
-    if(staleShift){
-      for(let pick=16;pick<=43;pick++)delete rowOverrides[pick];
-      console.warn('Ignored stale mock reorder overrides from previous player-only drag implementation');
-    }
     profileOverrides=Object.fromEntries((data.profiles||[]).map(p=>[p.player,{
       comparison:p.comparison??undefined,why:p.why??undefined,description:p.description??undefined,
       position:p.position??undefined,pathway:p.pathway??undefined
@@ -117,7 +105,7 @@
 
   async function reorderPlayers(fromPick,toPick){
     if(!window.ATMCloud?.isAdmin||Number(fromPick)===Number(toPick))return;
-    const rows=M.board.map(mergedRow).sort((a,b)=>Number(a.pick)-Number(b.pick));
+    const rows=buildRows();
     const from=rows.findIndex(r=>Number(r.pick)===Number(fromPick)),to=rows.findIndex(r=>Number(r.pick)===Number(toPick));
     if(from<0||to<0)return;
     const players=rows.map(r=>r.player||null);
@@ -128,34 +116,9 @@
     const res=await window.ATMCloud.saveMockPlayerOrder(payload);
     if(res?.error)return toast(res.error.message||'Unable to reorder mock');
     loaded=false;await loadOverrides();await render();
-    toast(moved+' moved to Pick '+toPick+' • club ownership unchanged');
+    toast(moved+' moved to Pick '+toPick+' • matched-bid clubs follow their tied player automatically');
   }
 
-  async function reorderBidEvent(fromPick,toPick){
-    if(!window.ATMCloud?.isAdmin||Number(fromPick)===Number(toPick))return;
-    const rows=M.board.map(mergedRow).sort((a,b)=>Number(a.pick)-Number(b.pick));
-    const from=rows.findIndex(r=>Number(r.pick)===Number(fromPick)),to=rows.findIndex(r=>Number(r.pick)===Number(toPick));
-    if(from<0||to<0||!isMatchedBid(rows[from]))return;
-    const sequence=rows.map(r=>({
-      club_id:r.clubId||null,
-      player:r.player||null,
-      path:r.path||null,
-      mechanism:r.mechanism||null
-    }));
-    const moved=sequence.splice(from,1)[0];
-    sequence.splice(to,0,moved);
-    const payload=rows.map((slot,idx)=>({
-      pick:slot.pick,
-      club_id:sequence[idx].club_id,
-      player:sequence[idx].player,
-      path:sequence[idx].path,
-      mechanism:sequence[idx].mechanism
-    }));
-    const res=await window.ATMCloud.saveMockBidSequence(payload);
-    if(res?.error)return toast(res.error.message||'Unable to move matched bid');
-    loaded=false;await loadOverrides();await render();
-    toast(moved.player+' matched bid moved to Pick '+toPick+' • selections renumbered');
-  }
 
   function openEditor(pick){
     if(!window.ATMCloud?.isAdmin)return;
@@ -203,7 +166,7 @@
     const el=document.querySelector('#featuredMockList');if(!el)return;
     if(!loaded)await loadOverrides();
     const rows=[];M.board.forEach(base=>{rows.push(playerRow(base));eventsAfter(base.pick).forEach(e=>rows.push(eventRow(e)))});
-    el.innerHTML='<div class="mock-audit-note"><strong>PREDICTED SELECTIONS</strong><span>This is the published mock draft. Player selections stay front and centre; the detailed absorbed/compo pick accounting is available underneath.</span>'+(window.ATMCloud?.isAdmin?'<span class="admin-badge">ADMIN • DRAG PLAYERS • MATCHED BIDS MOVE AS WHOLE EVENTS</span>':'')+'</div><div class="my-mock-board">'+rows.join('')+'</div>'+renderAssetLedger();
+    el.innerHTML='<div class="mock-audit-note"><strong>PREDICTED SELECTIONS</strong><span>This is the published mock draft. Player selections stay front and centre; the detailed absorbed/compo pick accounting is available underneath.</span>'+(window.ATMCloud?.isAdmin?'<span class="admin-badge">ADMIN • DRAG PLAYERS/PROFILES • CLUB ORDER AUTO-SYNCS • MATCHED CLUBS FOLLOW BIDS</span>':'')+'</div><div class="my-mock-board">'+rows.join('')+'</div>'+renderAssetLedger();
     document.querySelectorAll('#featuredMockList [data-profile]').forEach(b=>b.onclick=()=>window.ATMProfiles?.open?.(b.dataset.profile,{clubId:b.dataset.club||null,pick:b.dataset.pick}));
     document.querySelectorAll('#featuredMockList [data-edit-mock]').forEach(b=>b.onclick=()=>openEditor(Number(b.dataset.editMock)));
     if(window.ATMCloud?.isAdmin){
@@ -219,11 +182,7 @@
       document.querySelectorAll('#featuredMockList [data-mock-row]').forEach(row=>{
         row.ondragover=e=>{if(dragPick==null)return;e.preventDefault();row.classList.add('drag-over');e.dataTransfer.dropEffect='move';};
         row.ondragleave=e=>{if(!row.contains(e.relatedTarget))row.classList.remove('drag-over');};
-        row.ondrop=async e=>{e.preventDefault();row.classList.remove('drag-over');const from=dragPick;dragPick=null;if(from!=null){
-          const source=M.board.map(mergedRow).find(r=>Number(r.pick)===Number(from));
-          if(isMatchedBid(source))await reorderBidEvent(from,Number(row.dataset.mockRow));
-          else await reorderPlayers(from,Number(row.dataset.mockRow));
-        }};
+        row.ondrop=async e=>{e.preventDefault();row.classList.remove('drag-over');const from=dragPick;dragPick=null;if(from!=null)await reorderPlayers(from,Number(row.dataset.mockRow));};
       });
     }
   }
