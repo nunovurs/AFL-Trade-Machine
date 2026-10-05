@@ -78,8 +78,8 @@
   function renderDraftOrder(){
     var host=q('#hubDraftOrder');if(!host)return;
     var rows=[];for(var i=1;i<=40;i++){
-      var oid=DD&&DD.ownerByPick&&DD.ownerByPick[i], rid=natural[(i-1)%18], o=club(oid), r=club(rid), traded=oid&&rid&&oid!==rid;
-      rows.push('<div class="hub-draft-row"><strong>'+i+'</strong><span>'+dvi(i)+' pts</span><div>'+(o?'<img src="'+esc(o.logo)+'" alt=""><b>'+esc(o.name)+'</b>':'—')+'</div><div class="'+(traded?'traded':'')+'">'+(traded?'via '+esc(r?r.name:'original club'):'Natural selection')+'</div></div>');
+      var oid=DD&&DD.ownerByPick&&DD.ownerByPick[i], o=club(oid), origin=(DD&&DD.originByPick&&DD.originByPick[i])||'Natural selection', traded=origin!=='Natural selection';
+      rows.push('<div class="hub-draft-row"><strong>'+i+'</strong><span>'+dvi(i)+' pts</span><div>'+(o?'<img src="'+esc(o.logo)+'" alt=""><b>'+esc(o.name)+'</b>':'—')+'</div><div class="'+(traded?'traded':'')+'">'+esc(origin)+'</div></div>');
     }
     host.innerHTML='<div class="hub-order-head"><span>PICK</span><span>DVI</span><span>CURRENT OWNER</span><span>ORIGIN</span></div>'+rows.join('');
     if(q('#draftOrderUpdated'))q('#draftOrderUpdated').textContent='Updated '+((DD&&DD.updated)||'27 Sep 2026')+' • factual baseline only';
