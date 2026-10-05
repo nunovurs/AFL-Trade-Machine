@@ -1,10 +1,12 @@
 const FALLBACK={
   ade:[13,32,33,41,54,90],bri:[18,39,40,51,57,77,95],car:[11,16,23,24,59,70,88],col:[9,28,65,66,68,86],
-  ess:[1,19,60,78],fre:[17,38,58,76,94],gee:[14,34,55,73,91],gcs:[79,83],gws:[7,26,29,48,75,84],
-  haw:[15,25,27,35,69,92],mel:[6,10,47,87],nm:[5,45,64,72,82],pa:[4,22,30,44,46,63,81],
+  ess:[1,15,19,25,60,78],fre:[17,38,58,76,94],gee:[14,34,55,73,91],gcs:[79,83],gws:[7,26,29,48,75,84],
+  haw:[27,35,69,92],mel:[6,10,47,87],nm:[5,45,64,72,82],pa:[4,22,30,44,46,63,81],
   ric:[2,20,42,61],stk:[8,49,67,85],syd:[36,37,50,52,74,93],wce:[3,21,43,56,62,71,80],wbd:[12,31,53,89]
 };
 const NOTES={
+  15:'Zach Merrett trade from Hawthorn',
+  25:'Zach Merrett trade from Hawthorn (originally via GWS)',
   26:'Toby Greene compensation',
   33:'Jordon Butts compensation',
   37:'Joel Amartey compensation',
