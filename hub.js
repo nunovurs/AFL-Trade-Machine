@@ -1,6 +1,6 @@
 (function(){
   var D=window.ATM_DATA, DD=window.ATM_DRAFT_DATA, M=window.ATM_MY_MOCK;
-  var DVI=[0,3000,2481,2178,1962,1795,1659,1543,1443,1355,1276,1205,1140,1080,1024,973,924,879,836,796,757,721,686,653,621,590,561,533,505,479,454,429,405,382,360,338,317,297,277,257,238];
+  var DVI=[0,3000,2481,2178,1962,1795,1659,1543,1443,1355,1276,1205,1140,1080,1024,973,924,879,836,796,757,721,686,653,621,590,561,533,505,479,454,429,405,382,360,338,317,297,277,257,238,220,202,184,167,150,134,118,102,86,71,57,42,28,14];
   var natural=['ess','ric','wce','pa','nm','gcs','gws','stk','col','mel','car','wbd','ade','gee','haw','syd','fre','bri'];
   var newsItems=[], editMode=false, newsLoaded=false;
   function q(s,r){return (r||document).querySelector(s)}
@@ -77,12 +77,13 @@
   }
   function renderDraftOrder(){
     var host=q('#hubDraftOrder');if(!host)return;
-    var rows=[];for(var i=1;i<=40;i++){
+    var rows=[],limit=(DD&&DD.displayThrough)||44;for(var i=1;i<=limit;i++){
       var oid=DD&&DD.ownerByPick&&DD.ownerByPick[i], o=club(oid), origin=(DD&&DD.originByPick&&DD.originByPick[i])||'Natural selection', traded=origin!=='Natural selection';
       rows.push('<div class="hub-draft-row"><strong>'+i+'</strong><span>'+dvi(i)+' pts</span><div>'+(o?'<img src="'+esc(o.logo)+'" alt=""><b>'+esc(o.name)+'</b>':'—')+'</div><div class="'+(traded?'traded':'')+'">'+esc(origin)+'</div></div>');
     }
-    host.innerHTML='<div class="hub-order-head"><span>PICK</span><span>DVI</span><span>CURRENT OWNER</span><span>ORIGIN</span></div>'+rows.join('');
-    if(q('#draftOrderUpdated'))q('#draftOrderUpdated').textContent='Updated '+((DD&&DD.updated)||'27 Sep 2026')+' • factual baseline only';
+    var note=(DD&&DD.projectionNote)?'<div class="hub-draft-note"><strong>PROJECTED NIGHT-TWO ORDER</strong><span>'+esc(DD.projectionNote)+'</span></div>':'';
+    host.innerHTML=note+'<div class="hub-order-head"><span>PICK</span><span>DVI</span><span>CURRENT OWNER</span><span>ORIGIN</span></div>'+rows.join('');
+    if(q('#draftOrderUpdated'))q('#draftOrderUpdated').textContent='Updated '+((DD&&DD.updated)||'5 Oct 2026')+' • official free-agency order + projected bid-slide compensation';
   }
   function mockRows(id){return ((M&&M.board)||[]).filter(function(r){return r.clubId===id&&!r.placeholder})}
   function renderClubHub(){
