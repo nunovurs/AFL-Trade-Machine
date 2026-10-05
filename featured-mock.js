@@ -107,7 +107,7 @@
   function openEditor(pick){
     if(!window.ATMCloud?.isAdmin)return;
     const base=M.board.find(r=>Number(r.pick)===Number(pick));if(!base)return;
-    const r=mergedRow(base),p=mergedProfile(r.player)||{};
+    const r=mergedRow(base),p=mergedProfile(r.player)||{},c=club(r.clubId);
     const modal=document.querySelector('#draftModal'),card=document.querySelector('#draftModalCard');if(!modal||!card)return;
     const clubOpts=D.clubs.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(c=>'<option value="'+esc(c.id)+'" '+(c.id===r.clubId?'selected':'')+'>'+esc(c.name)+'</option>').join('');
     const players=[...new Set([...(M.pool||[]),...Object.keys(P),r.player])].sort((a,b)=>a.localeCompare(b)).map(n=>'<option value="'+esc(n)+'" '+(n===r.player?'selected':'')+'>'+esc(n)+'</option>').join('');
