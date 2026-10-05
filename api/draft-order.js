@@ -11,10 +11,35 @@ const NOTES={
   40:'Lachie Neale compensation',
   48:'Kieren Briggs compensation'
 };
-function picks(){
+const BID_SLIDE=[
+  {afterOfficialPick:19,owner:'ess',note:'Essendon bid-slide compensation'},
+  {afterOfficialPick:20,owner:'ric',note:'Richmond bid-slide compensation'},
+  {afterOfficialPick:21,owner:'wce',note:'West Coast bid-slide compensation'},
+  {afterOfficialPick:23,owner:'nm',note:'North Melbourne bid-slide compensation'}
+];
+function officialPicks(){
   const out=[];
   Object.entries(FALLBACK).forEach(([owner,nums])=>nums.forEach(pick=>out.push({pick,owner,note:NOTES[pick]||null})));
   return out.sort((a,b)=>a.pick-b.pick);
+}
+function projectedPicks(){
+  const out=[];let inserted=0;
+  officialPicks().forEach(row=>{
+    out.push({...row,officialPick:row.pick,pick:row.pick+inserted,conditional:false});
+    const comp=BID_SLIDE.find(x=>x.afterOfficialPick===row.pick);
+    if(comp){
+      inserted+=1;
+      out.push({
+        pick:row.pick+inserted,
+        officialPick:null,
+        owner:comp.owner,
+        note:comp.note+' — projected under 2026 matched-bid rule',
+        conditional:true,
+        compensationType:'bid-slide'
+      });
+    }
+  });
+  return out;
 }
 module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Origin','*');
