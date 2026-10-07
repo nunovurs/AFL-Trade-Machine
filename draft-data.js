@@ -4,9 +4,9 @@ window.ATM_DRAFT_DATA = (() => {
   bri:[18,39,40,51,57,77,95],
   car:[11,16,23,24,59,70,88],
   col:[9,28,65,66,68,86],
-  ess:[1,15,19,25,60,78],
+  ess:[1,15,19,25,78],
   fre:[17,38,58,61,76,94],
-  gee:[14,34,55,73,91],
+  gee:[14,34,55,60,73,91],
   gcs:[79,83],
   gws:[7,26,29,48,75,84],
   haw:[27,35,69,92],
@@ -34,6 +34,7 @@ window.ATM_DRAFT_DATA = (() => {
     37:'Joel Amartey compensation',
     40:'Lachie Neale compensation',
     48:'Kieren Briggs compensation',
+    60:'via Essendon — Jordan Ridley / Jack Bowes trade',
     61:'via Richmond — Nathan O\'Driscoll trade',
     65:'via Greater Western Sydney'
   };
