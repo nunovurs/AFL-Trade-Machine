@@ -1,5 +1,15 @@
 window.ATM_EDITORIAL_NEWS = [
   {
+    id:'2026-10-07-will-mclachlan-melbourne-request',
+    title:'Will McLachlan requests trade to Melbourne',
+    summary:'Brisbane forward Will McLachlan has chosen Melbourne and requested a trade after also meeting Essendon. Callum Twomey reports the out-of-contract 21-year-old is seeking greater senior opportunity with the Demons.',
+    source:'AFL.com.au - Callum Twomey',
+    link:'https://www.afl.com.au/news/1628905/brisbane-lions-forward-will-mclachlan-requests-trade-to-melbourne-demons',
+    publishedAt:'2026-10-07T15:00:00+11:00',
+    tag:'REPORTED',
+    clubs:['bri','mel']
+  },
+  {
     id:'2026-10-06-nathan-odriscoll-richmond',
     title:"Nathan O'Driscoll traded to Richmond",
     summary:"Richmond have acquired Fremantle winger Nathan O'Driscoll, with the Dockers receiving Richmond's fourth-round selection, currently pick 61.",
@@ -12,10 +22,10 @@ window.ATM_EDITORIAL_NEWS = [
   {
     id:'2026-10-07-ridley-bowes-trade',
     title:'Jordan Ridley joins Geelong as Jack Bowes lands at Essendon',
-    summary:'Geelong and Essendon have completed a deal sending Jordan Ridley to the Cats and Jack Bowes to the Bombers. The package includes a 2027 first-round pick and other pick swaps.',
-    source:'AFL.com.au',
+    summary:'Geelong receive Jordan Ridley, pick 60 and a 2028 fourth-round pick. Essendon receive Jack Bowes, Geelong’s 2027 first-round pick and a 2028 second-round pick in the completed trade.',
+    source:'AFL.com.au / Callum Twomey',
     link:'https://www.afl.com.au/news/1628710/geelong-cats-secure-defender-jordan-ridley-essendon-bombers-land-utility-jack-bowes-in-trade',
-    publishedAt:'2026-10-07T11:50:00+10:00',
+    publishedAt:'2026-10-07T11:50:00+11:00',
     tag:'CONFIRMED',
     clubs:['ess','gee']
   },
