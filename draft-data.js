@@ -5,7 +5,7 @@ window.ATM_DRAFT_DATA = (() => {
   car:[11,16,23,24,59,70,88],
   col:[9,28,65,66,68,86],
   ess:[1,15,19,25,60,78],
-  fre:[17,38,58,76,94],
+  fre:[17,38,58,61,76,94],
   gee:[14,34,55,73,91],
   gcs:[79,83],
   gws:[7,26,29,48,75,84],
@@ -13,7 +13,7 @@ window.ATM_DRAFT_DATA = (() => {
   mel:[6,10,47,87],
   nm:[5,45,64,72,82],
   pa:[4,22,30,44,46,63,81],
-  ric:[2,20,42,61],
+  ric:[2,20,42],
   stk:[8,49,67,85],
   syd:[36,37,50,52,74,93],
   wce:[3,21,43,56,62,71,80],
@@ -34,6 +34,7 @@ window.ATM_DRAFT_DATA = (() => {
     37:'Joel Amartey compensation',
     40:'Lachie Neale compensation',
     48:'Kieren Briggs compensation',
+    61:'via Richmond — Nathan O\'Driscoll trade',
     65:'via Greater Western Sydney'
   };
   const bidSlideCompensations = [
