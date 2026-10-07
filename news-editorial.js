@@ -1,5 +1,25 @@
 window.ATM_EDITORIAL_NEWS = [
   {
+    id:'2026-10-06-nathan-odriscoll-richmond',
+    title:"Nathan O'Driscoll traded to Richmond",
+    summary:"Richmond have acquired Fremantle winger Nathan O'Driscoll, with the Dockers receiving Richmond's fourth-round selection, currently pick 61.",
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1628864/fremantle-dockers-winger-nathan-odriscoll-traded-to-richmond-tigers',
+    publishedAt:'2026-10-06T15:50:00+10:00',
+    tag:'CONFIRMED',
+    clubs:['ric','fre']
+  },
+  {
+    id:'2026-10-07-ridley-bowes-trade',
+    title:'Jordan Ridley joins Geelong as Jack Bowes lands at Essendon',
+    summary:'Geelong and Essendon have completed a deal sending Jordan Ridley to the Cats and Jack Bowes to the Bombers. The package includes a 2027 first-round pick and other pick swaps.',
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1628710/geelong-cats-secure-defender-jordan-ridley-essendon-bombers-land-utility-jack-bowes-in-trade',
+    publishedAt:'2026-10-07T11:50:00+10:00',
+    tag:'CONFIRMED',
+    clubs:['ess','gee']
+  },
+  {
     id:'2026-10-05-zach-merrett-hawthorn',
     title:'Zach Merrett joins Hawthorn in three-pick deal',
     summary:'Essendon have traded Zach Merrett to Hawthorn for Picks 15 and 25 in the 2026 draft plus Hawthorn’s 2028 second-round selection.',
