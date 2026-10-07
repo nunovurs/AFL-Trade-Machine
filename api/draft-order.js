@@ -5,6 +5,7 @@ const FALLBACK={
   ric:[2,20,42],stk:[8,49,67,85],syd:[36,37,50,52,74,93],wce:[3,21,43,56,62,71,80],wbd:[12,31,53,89]
 };
 const NOTES={
+  61:'Nathan O\'Driscoll trade from Richmond',
   15:'Zach Merrett trade from Hawthorn',
   25:'Zach Merrett trade from Hawthorn (originally via GWS)',
   26:'Toby Greene compensation',
