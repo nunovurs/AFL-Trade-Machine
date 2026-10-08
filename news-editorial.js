@@ -1,5 +1,15 @@
 window.ATM_EDITORIAL_NEWS = [
   {
+    id:'2026-10-08-rowan-marshall-geelong',
+    title:'Rowan Marshall traded to Geelong for pick 14',
+    summary:'Geelong have secured ruckman Rowan Marshall from St Kilda. The Saints receive pick 14, while Geelong receive Marshall and St Kilda’s 2028 third-round selection.',
+    source:'St Kilda Football Club',
+    link:'https://www.saints.com.au/news/2148440/saints-farewell-marshall',
+    publishedAt:'2026-10-08T12:30:00+11:00',
+    tag:'CONFIRMED',
+    clubs:['stk','gee']
+  },
+  {
     id:'2026-10-07-will-mclachlan-melbourne-request',
     title:'Will McLachlan requests trade to Melbourne',
     summary:'Brisbane forward Will McLachlan has chosen Melbourne and requested a trade after also meeting Essendon. Callum Twomey reports the out-of-contract 21-year-old is seeking greater senior opportunity with the Demons.',
