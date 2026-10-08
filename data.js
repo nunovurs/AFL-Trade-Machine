@@ -18,6 +18,7 @@ const ATM_CLUBS = [
     'Sam Sturt',"Jaeger O'Meara",'Caleb Serong','Sean Darcy','Heath Chapman','Jordan Clark','Andrew Brayshaw','Luke Jackson','Shai Bolton','Tobyn Murray','Hugh Davies','Luke Ryan','Jeremy Sharp','Adam Sweid','Murphy Reid','Judd McVee','Mason Cox','Leon Kickett','Patrick Voss','Oscar McDonald','Charlie Nicholls','Karl Worner','Jye Amiss','Alex Pearce','Hayden Young','Toby Whan','Neil Erasmus','Cooper Simpson','Brandon Walker','Michael Frederick','Ollie Murphy','Corey Wagner','Josh Treacy','Brennan Cox','Joshua Draper','Jaren Carr','Sam Switkowski','Ryda Luke','Bailey Banfield','Aiden Riddle','Isaiah Dudley','Matthew Johnson','Christopher Scerri'
   ]},
   {id:'gee',name:'Geelong',abbr:'GEE',zh:'GEEL',color:'#002b5c',clubText:'#fff',logo:'assets/logos/gee.svg',listCap:44,players:[
+    'Rowan Marshall',
     'Rhys Stanley','Jay Polkinghorne','Bailey Smith','Tanner Bruhn','Jeremy Cameron','Toby Conway','Shaun Mannagh','Jake Kolodjashnij','Max Holmes','Mitch Knevitt','Mitchell Edwards','Jhye Clark',"Connor O'Sullivan",'George Stevens','Sam De Koning','Lawson Humphries','Tyson Stengle','Jack Martin','Jacob Molier','Oliver Wiltshire','Hunter Holmes','Lennox Hofmann','Jed Bews','Jesse Mellor','Harley Barker','Nicholas Driscoll','Oliver Dempsey','James Worpel','Tom Atkins','Keighton Matofai-Forbes','Gryan Miers','Shannon Neale','Oisin Mullin','Patrick Dangerfield','Oliver Henry','Joe Pike','Jack Henry','Zach Guthrie','Cillian Burke',"Mark O'Connor",'Tom Stewart','Brad Close','Mark Blicavs', 'Toby Greene', 'Jordan Ridley'
   ]},
   {id:'gcs',name:'Gold Coast',abbr:'GCS',zh:'GC',color:'#e7192d',clubText:'#fff',logo:'assets/logos/gcs.svg',listCap:44,players:[
@@ -42,7 +43,7 @@ const ATM_CLUBS = [
     'Nick Vlastuin','Jacob Hopper','Dion Prestia','Sam Lalor','Jack Ross','Sam Banks','Rhyan Mansell','Jonty Faull','Taj Hotton','Luke Trainor','Ben Miller','Hugo Ralphsmith','Tim Taranto','Jayden Short','Josh Smillie','Maurice Rioli','Josh Gibcus','Tom Lynch','Noah Balta','Sam Cumming','Judson Clarke','Sam Grlj','Toby Nankervis','Zane Peucker','Noah Roberts-Thomson','Kane McAuliffe','Jasper Alger','Tom Brown','Samson Ryan','Patrick Retschko','Harry Armstrong','Nathan Broad','James Trezise','Tom Sims','Tyler Sonsie','Kye Annand','Mykelti Lefau','Liam Fawcett','Seth Campbell','Tom Burton','Patrick Carr','Oliver Hayes-Brown','Steely Green','Kaleb Smith','Campbell Gray',"Nathan O'Driscoll", 'Kieren Briggs'
   ]},
   {id:'stk',name:'St Kilda',abbr:'STK',zh:'STK',color:'#ed1b2f',clubText:'#fff',logo:'assets/logos/stk.svg',listCap:44,players:[
-    'Jack Higgins','Marcus Windhager','Jack Silvagni','Lance Collard','Tobie Travaglia','Jack Macrae','Nasiah Wanganeen-Milera','Bradley Hill','Sam Flanders','Mitch Owens','Hunter Clark','Max King','Ryan Byrnes','Liam Stocker','Paddy Dow','Dan Butler','Isaac Keeler','Jack Carroll','Rowan Marshall','Dougal Howard','Tom De Koning','Darcy Wilson','Liam Henry','Angus Hastie','Mattaes Phillipou','Alix Tauru','James Barrat','Alex Dodson','Liam Ryan','Mason Wood','Patrick Said','Hugo Garcia','Jack Sinclair','Charlie Banfield','Kye Fincher','Hugh Boxshall','Campbell Lake','Max Hall','Kobe McDonald','Cooper Sharman','Callum Wilkie',"Liam O'Connell",'Eamonn Armstrong','Anthony Caminiti'
+    'Jack Higgins','Marcus Windhager','Jack Silvagni','Lance Collard','Tobie Travaglia','Jack Macrae','Nasiah Wanganeen-Milera','Bradley Hill','Sam Flanders','Mitch Owens','Hunter Clark','Max King','Ryan Byrnes','Liam Stocker','Paddy Dow','Dan Butler','Isaac Keeler','Jack Carroll','Dougal Howard','Tom De Koning','Darcy Wilson','Liam Henry','Angus Hastie','Mattaes Phillipou','Alix Tauru','James Barrat','Alex Dodson','Liam Ryan','Mason Wood','Patrick Said','Hugo Garcia','Jack Sinclair','Charlie Banfield','Kye Fincher','Hugh Boxshall','Campbell Lake','Max Hall','Kobe McDonald','Cooper Sharman','Callum Wilkie',"Liam O'Connell",'Eamonn Armstrong','Anthony Caminiti'
   ]},
   {id:'syd',name:'Sydney',abbr:'SYD',zh:'SYD',color:'#e31b23',clubText:'#fff',logo:'assets/logos/syd.svg',listCap:44,players:[
     'Chad Warner','Hayden McLean','Taylor Adams','Brodie Grundy','Isaac Heeney','Logan McDonald','Harry Cunningham','James Rowbottom','Jesse Dattoli','Malcolm Rosas','Tom Papley','Angus Sheldrick','Jai Serong','Callum Mills','Sam Wicks','Braeden Campbell','James Jordon','Jevan Phillipou','Peter Ladhams','Riak Andrew','Errol Gulden','Nick Blakey','Ned Bowman','Dane Rampe','Billy Cootee','Riley Bice','Justin McInerney','William Edwards','Joel Hamling','Tom McCartin','Max King','Harry Kyle','Caiden Cleary','Matt Roberts','Charlie Curnow','Corey Warner','Liam Hetherton','Tom Hanily','Patrick Snell','Noah Chamberlain','Lewis Melican','Jake Lloyd','William Green'
@@ -58,7 +59,10 @@ const ATM_CLUBS = [
 const DVI = {1:3000,2:2481,3:2178,4:1962,5:1795,6:1659,7:1543,8:1443,9:1355,10:1276,11:1205,12:1140,13:1080,14:1024,15:973,16:924,17:879,18:836,19:796,20:757,21:721,22:686,23:653,24:621,25:590,26:561,27:533,28:505,29:479,30:454,31:429,32:405,33:382,34:360,35:338,36:317,37:297,38:277,39:257,40:238,41:220,42:202,43:184,44:167,45:150,46:134,47:118,48:102,49:86,50:71,51:57,52:42,53:28,54:14};
 
 const PICKS_2026 = {
-  ade:[13,31,37,49], bri:[17,35,46,51,71], car:[11,16,23,24,53,65], col:[9,27,61,63,70], ess:[1,19,55], fre:[18,36,54,72], gee:[14,32,50,68], gcs:[60], gws:[7,28], haw:[15,25,26,33,64], mel:[6,10,43], nm:[5,41,59,67], pa:[4,22,29,40,42,58], ric:[2,20,38,56], stk:[8,44,62], syd:[34,45,47,69], wce:[3,21,39,52,57,66], wbd:[12,30,48]
+  ade:[13,32,33,41,54,90],bri:[18,39,40,51,57,77,95],car:[11,16,23,24,59,70,88],col:[9,28,65,66,68,86],
+  ess:[1,15,19,25,78],fre:[17,38,58,61,76,94],gee:[34,55,60,73,91],gcs:[79,83],gws:[7,26,29,48,75,84],
+  haw:[27,35,69,92],mel:[6,10,47,87],nm:[5,45,64,72,82],pa:[4,22,30,44,46,63,81],
+  ric:[2,20,42],stk:[8,14,49,67,85],syd:[36,37,50,52,74,93],wce:[3,21,43,56,62,71,80],wbd:[12,31,53,89]
 };
 const PICK_ORIGIN_2026 = {6:'gcs',16:'syd',23:'nm',24:'gcs',25:'gws',26:'stk',28:'mel',29:'car',37:'ess',42:'gcs',43:'gws',45:'col',46:'mel',47:'car',51:'haw',52:'syd',53:'bri',61:'gws',64:'mel',66:'wbd',67:'ade',69:'haw',70:'syd'};
 
@@ -84,7 +88,7 @@ const PICKS_2027 = {
 };
 
 window.ATM_DATA = {
-  updated:'7 Oct 2026 — confirmed player movement catch-up',
+  updated:'8 Oct 2026 — Marshall trade and official draft order',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
