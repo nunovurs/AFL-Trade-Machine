@@ -76,7 +76,7 @@
     {pick:11,clubId:'mel',player:'Mitchell Harris',path:'Melbourne',mechanism:'MELBOURNE SELECTION • Melbourne retain their natural first-round selection.'},
     {pick:12,clubId:'wbd',player:'George Gale',path:'Western Bulldogs',mechanism:'WESTERN BULLDOGS SELECTION • Current-order selection.'},
     {pick:13,clubId:'ade',player:'Kodah Edwards',path:'Adelaide',mechanism:'ADELAIDE SELECTION • Current-order selection.'},
-    {pick:14,clubId:'gee',player:'Albert MacGowan',path:'Geelong',mechanism:'GEELONG SELECTION • Current-order selection.'},
+    {pick:14,clubId:'stk',player:'Albert MacGowan',path:'St Kilda via Geelong — Rowan Marshall trade',mechanism:'ROWAN MARSHALL TRADE • St Kilda receive Geelong’s Pick 14.'},
     {pick:15,clubId:'ess',player:'Tyson Bradley',path:'Essendon via Hawthorn — Zach Merrett trade',mechanism:'ZACH MERRETT TRADE • Essendon receive Hawthorn’s Pick 15 in the confirmed Merrett deal.'},
     {pick:16,clubId:'fre',player:'Harrison Chapman',path:'Fremantle',mechanism:'FREMANTLE SELECTION • Carlton’s two first-round assets are treated as Walker matching assets in this mock, so Fremantle is the next live ordinary selection.'},
     {pick:17,clubId:'bri',player:'Jake Eime',path:'Brisbane',mechanism:'BRISBANE SELECTION • Brisbane’s premiership first-round selection.'},
