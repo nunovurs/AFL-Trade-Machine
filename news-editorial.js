@@ -1,5 +1,85 @@
 window.ATM_EDITORIAL_NEWS = [
   {
+    id:'2026-10-10-richmond-port-pick5-interest',
+    title:'Richmond among clubs pursuing Port\'s pick 5',
+    summary:'AFL.com.au reports Richmond, Essendon, Carlton and West Coast are interested in Port Adelaide\'s pick 5, received for Zak Butters. The Tigers could offer future draft capital but no trade has been agreed.',
+    source:'AFL.com.au - Callum Twomey',
+    link:'https://www.afl.com.au/news/1629068/inside-trading-bombers-weigh-up-interest-in-cat-tigers-hunt-port-pick-pies-list-squeeze-in-short-chase',
+    publishedAt:'2026-10-10T17:00:00+11:00',
+    tag:'REPORTED',
+    clubs:['ric','pa']
+  },
+  {
+    id:'2026-10-10-hawks-bulldogs-future-pick-swap',
+    title:'Hawthorn and Bulldogs complete future pick swap',
+    summary:'Hawthorn send their 2028 third-round selection to the Bulldogs for a 2027 third-round pick tied to Gold Coast. The exchange does not alter the 2026 draft order.',
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1629330/hawthorn-hawks-busy-trade-period-continues-with-western-bulldogs-pick-swap',
+    publishedAt:'2026-10-10T13:00:00+11:00',
+    tag:'CONFIRMED',
+    clubs:['haw','wbd']
+  },
+  {
+    id:'2026-10-09-sam-marshall-stk-trade',
+    title:'Sam Marshall traded from Brisbane to St Kilda',
+    summary:'St Kilda receive premiership midfielder Sam Marshall and Brisbane\'s 2026 second-round selection, currently pick 41. The Lions receive the Saints\' 2027 first-round pick.',
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1628961/disgruntled-flag-brisbane-lion-sam-marshall-secures-move-to-st-kilda-saints-in-victoria',
+    publishedAt:'2026-10-09T17:00:00+11:00',
+    tag:'CONFIRMED',
+    clubs:['stk','bri']
+  },
+  {
+    id:'2026-10-09-butters-bulldogs-compo',
+    title:'Butters becomes a Bulldog; Port receive pick 5',
+    summary:'Port Adelaide did not match the Western Bulldogs\' free-agency offer for Zak Butters. Port receive first-round compensation, currently pick 5, alongside their separate five-club trade haul.',
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1628929/western-bulldogs-lodge-zak-butters-paperwork-as-blockbuster-move-nears',
+    publishedAt:'2026-10-09T16:50:00+11:00',
+    tag:'CONFIRMED',
+    clubs:['pa','wbd']
+  },
+  {
+    id:'2026-10-09-five-club-mega-pick-trade',
+    title:'Five-club trade reshuffles early picks and players',
+    summary:'Port, Melbourne, the Bulldogs, Hawthorn and Carlton complete a mega deal. The Power secure multiple top picks and future first-rounders; Melbourne gain pick 4, while the Dogs add Finn Maginness and Hudson O\'Keeffe.',
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1629042/five-club-mega-deal-lands-as-dogs-land-duo-power-load-up',
+    publishedAt:'2026-10-09T16:30:00+11:00',
+    tag:'CONFIRMED',
+    clubs:['pa','mel','wbd','haw','car']
+  },
+  {
+    id:'2026-10-09-ben-king-hawthorn',
+    title:'Ben King joins Hawthorn; Suns gain top-eight pick',
+    summary:'Gold Coast elected not to match Hawthorn\'s free-agency bid for key forward Ben King. The Suns receive first-round compensation, now pick 8 in the updated indicative order.',
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1626399/ben-kings-hawthorn-hawks-move-complete-as-gold-coast-suns-take-compo-pick/',
+    publishedAt:'2026-10-09T15:00:00+11:00',
+    tag:'CONFIRMED',
+    clubs:['gcs','haw']
+  },
+  {
+    id:'2026-10-09-richmond-delist-three',
+    title:'Richmond delist Sonsie, Ryan and Trezise',
+    summary:'The Tigers have confirmed Tyler Sonsie, Samson Ryan and James Trezise will not receive contracts for 2027. All three have been removed from the site\'s active Richmond squad.',
+    source:'AFL.com.au',
+    link:'https://www.afl.com.au/news/1629061/richmond-tigers-delist-three-tyler-sonsie-samson-ryan-james-trezise-as-list-overhaul-continues',
+    publishedAt:'2026-10-09T14:00:00+11:00',
+    tag:'CONFIRMED',
+    clubs:['ric']
+  },
+  {
+    id:'2026-10-09-nick-blakey-north-request',
+    title:'Nick Blakey chooses North Melbourne as trade destination',
+    summary:'AFL.com.au reports Nick Blakey has requested a move from Sydney to North Melbourne. No deal has been completed, so he remains on the Sydney list until a trade is approved.',
+    source:'AFL.com.au - Callum Twomey',
+    link:'https://www.afl.com.au/news/1628990/star-sydney-swans-defender-nick-blakey-makes-call-on-future-amid-rival-interest',
+    publishedAt:'2026-10-09T13:00:00+11:00',
+    tag:'REPORTED',
+    clubs:['syd','nm']
+  },
+  {
     id:'2026-10-08-rowan-marshall-geelong',
     title:'Rowan Marshall traded to Geelong for pick 14',
     summary:'Geelong have secured ruckman Rowan Marshall from St Kilda. The Saints receive pick 14, while Geelong receive Marshall and St Kilda’s 2028 third-round selection.',
