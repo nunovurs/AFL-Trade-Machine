@@ -1,26 +1,54 @@
 const FALLBACK={
-  ade:[13,32,33,41,54,90],bri:[18,39,40,51,57,77,95],car:[11,16,23,24,59,70,88],col:[9,28,65,66,68,86],
-  ess:[1,15,19,25,78],fre:[17,38,58,61,76,94],gee:[34,55,60,73,91],gcs:[79,83],gws:[7,26,29,48,75,84],
-  haw:[27,35,69,92],mel:[6,10,47,87],nm:[5,45,64,72,82],pa:[4,22,30,44,46,63,81],
-  ric:[2,20,42],stk:[8,14,49,67,85],syd:[36,37,50,52,74,93],wce:[3,21,43,56,62,71,80],wbd:[12,31,53,89]
+  ade:[15,34,35,43,56,92],
+  bri:[20,42,53,59,79,97],
+  car:[13,18,25,26,61,72,90],
+  col:[11,30,67,68,70,88],
+  ess:[1,17,21,27,80],
+  fre:[19,40,60,63,78,96],
+  gee:[36,57,62,75,93],
+  gcs:[8,81,85],
+  gws:[9,28,31,50,77,86],
+  haw:[29,37,71,94],
+  mel:[4,14,33,48,49],
+  nm:[6,47,66,74,84],
+  pa:[5,7,12,24,32,46,65],
+  ric:[2,22,44],
+  stk:[10,16,41,51,69,87],
+  syd:[38,39,52,54,76,95],
+  wce:[3,23,45,58,64,73,82],
+  wbd:[55,83,89,91]
 };
 const NOTES={
-  61:'Nathan O\'Driscoll trade from Richmond',
-  15:'Zach Merrett trade from Hawthorn',
-  25:'Zach Merrett trade from Hawthorn (originally via GWS)',
-  26:'Toby Greene compensation',
-  33:'Jordon Butts compensation',
-  37:'Joel Amartey compensation',
-  40:'Lachie Neale compensation',
-  48:'Kieren Briggs compensation',
-  60:'Jordan Ridley / Jack Bowes trade from Essendon to Geelong',
-  61:"Nathan O'Driscoll trade from Richmond to Fremantle"
+  4:'via Port Adelaide - five-club trade',
+  5:'Zak Butters compensation',
+  7:'via Gold Coast - five-club trade',
+  8:'Ben King compensation',
+  12:'via Melbourne - five-club trade',
+  14:'via Western Bulldogs - five-club trade',
+  16:'via Geelong - Rowan Marshall trade',
+  17:'via Hawthorn - Zach Merrett trade',
+  18:'via Sydney',
+  25:'via North Melbourne',
+  26:'via Gold Coast',
+  27:'via Greater Western Sydney / Hawthorn - Zach Merrett trade',
+  28:'Toby Greene compensation',
+  29:'via St Kilda',
+  31:'via Melbourne',
+  32:'via Carlton',
+  33:'via Western Bulldogs - five-club trade',
+  35:'Jordon Butts compensation',
+  39:'Joel Amartey compensation',
+  41:'via Brisbane - Sam Marshall trade',
+  42:'Lachie Neale compensation',
+  50:'Kieren Briggs compensation',
+  62:'via Essendon - Ridley / Bowes trade',
+  63:'via Richmond - O\'Driscoll trade'
 };
 const BID_SLIDE=[
-  {afterOfficialPick:19,owner:'ess',note:'Essendon bid-slide compensation'},
-  {afterOfficialPick:20,owner:'ric',note:'Richmond bid-slide compensation'},
-  {afterOfficialPick:21,owner:'wce',note:'West Coast bid-slide compensation'},
-  {afterOfficialPick:23,owner:'nm',note:'North Melbourne bid-slide compensation'}
+  {afterOfficialPick:21,owner:'ess',note:'Essendon bid-slide compensation'},
+  {afterOfficialPick:22,owner:'ric',note:'Richmond bid-slide compensation'},
+  {afterOfficialPick:23,owner:'wce',note:'West Coast bid-slide compensation'},
+  {afterOfficialPick:25,owner:'nm',note:'North Melbourne bid-slide compensation'}
 ];
 function officialPicks(){
   const out=[];
@@ -52,8 +80,8 @@ module.exports=async function handler(req,res){
   if(req.method==='OPTIONS') return res.status(204).end();
   return res.status(200).json({
     source:'AFL Trade Machine verified order',
-    updated:'2026-10-08',
-    note:'Confirmed 2026 indicative order updated through 8 October, including free-agency compensation and completed pick trades. Hypothetical bids and user trades are applied separately in the simulator.',
+    updated:'2026-10-11',
+    note:'2026 indicative draft order updated through 9 October using AFL club data, including the Butters and King free agency compensation, five-club mega trade and Sam Marshall swap. Projected matched bids remain separate.',
     picks:projectedPicks()
   });
 };
