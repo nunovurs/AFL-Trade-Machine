@@ -1,5 +1,75 @@
 window.ATM_EDITORIAL_NEWS = [
   {
+    id:"2026-10-11-hawthorn-north-goater-talks",
+    title:"Hawthorn and North begin Josh Goater trade talks",
+    summary:"AFL.com.au reports Hawthorn and North Melbourne have begun negotiations for Josh Goater, who has requested a move to the Hawks. Future 2027 selections or a later 2026 pick are being discussed; no deal is complete.",
+    source:"AFL.com.au - Callum Twomey",
+    link:"https://www.afl.com.au/news/1629068/inside-trading-bombers-weigh-up-interest-in-cat-tigers-hunt-port-pick-pies-list-squeeze-in-short-chase",
+    publishedAt:"2026-10-11T14:00:00+11:00",
+    tag:"REPORTED",
+    clubs:["haw","nm"]
+  },
+  {
+    id:"2026-10-10-essendon-miers-interest",
+    title:"Essendon explores potential move for Gryan Miers",
+    summary:"Callum Twomey reports Essendon is considering whether to pursue contracted Geelong forward Gryan Miers. Talks remain preliminary and his manager has said Miers is content to stay at Geelong; no trade has been agreed.",
+    source:"AFL.com.au - Callum Twomey",
+    link:"https://www.afl.com.au/news/1629068/inside-trading-bombers-weigh-up-interest-in-cat-tigers-hunt-port-pick-pies-list-squeeze-in-short-chase",
+    publishedAt:"2026-10-10T16:00:00+11:00",
+    tag:"REPORTED",
+    clubs:["ess","gee"]
+  },
+  {
+    id:"2026-10-10-jayden-short-pies-list-squeeze",
+    title:"Collingwood list squeeze complicates Jayden Short pursuit",
+    summary:"AFL.com.au reports Collingwood is weighing list spots and draft obligations while negotiating for Richmond defender Jayden Short. The Pies want to retain their first two draft picks and Short remains contracted to Richmond; no trade is final.",
+    source:"AFL.com.au - Callum Twomey",
+    link:"https://www.afl.com.au/news/1629068/inside-trading-bombers-weigh-up-interest-in-cat-tigers-hunt-port-pick-pies-list-squeeze-in-short-chase",
+    publishedAt:"2026-10-10T15:30:00+11:00",
+    tag:"REPORTED",
+    clubs:["ric","col"]
+  },
+  {
+    id:"2026-10-05-jesse-hogan-collingwood",
+    title:"Jesse Hogan traded from GWS to Collingwood",
+    summary:"Collingwood have acquired former Coleman Medallist Jesse Hogan from Greater Western Sydney for pick 75. Hogan joins the Magpies on a two-year contract.",
+    source:"AFL.com.au",
+    link:"https://www.afl.com.au/news/1627079/collingwood-magpies-complete-deal-with-greater-western-sydney-giants-for-former-coleman-medal-winner-jesse-hogan",
+    publishedAt:"2026-10-05T15:00:00+11:00",
+    tag:"CONFIRMED",
+    clubs:["col","gws"]
+  },
+  {
+    id:"2026-10-05-scott-pendlebury-gold-coast",
+    title:"Scott Pendlebury traded to Gold Coast",
+    summary:"Gold Coast have secured Collingwood veteran Scott Pendlebury in exchange for pick 65. The clubs arranged a trade rather than free agency, preserving Gold Coast's compensation position.",
+    source:"AFL.com.au - Trade Talk",
+    link:"https://www.afl.com.au/news/1628705",
+    publishedAt:"2026-10-05T15:00:00+11:00",
+    tag:"CONFIRMED",
+    clubs:["gcs","col"]
+  },
+  {
+    id:"2026-10-02-kieren-briggs-richmond",
+    title:"Richmond signs Kieren Briggs as free agent",
+    summary:"Richmond have signed Greater Western Sydney ruckman Kieren Briggs as an unrestricted free agent on a four-year deal. GWS receive a third-round compensation selection.",
+    source:"AFL.com.au",
+    link:"https://www.afl.com.au/news/1625735/richmond-tigers-land-greater-western-sydney-giant-kieren-briggs-to-bolster-ruck-stocks",
+    publishedAt:"2026-10-02T16:00:00+10:00",
+    tag:"CONFIRMED",
+    clubs:["ric","gws"]
+  },
+  {
+    id:"2026-10-02-joel-amartey-carlton",
+    title:"Joel Amartey joins Carlton from Sydney",
+    summary:"Carlton have signed Sydney key forward Joel Amartey as an unrestricted free agent. Sydney receive second-round compensation for his departure.",
+    source:"AFL.com.au",
+    link:"https://www.afl.com.au/news/1625737/new-blue-tall-forward-joel-amartey-joins-carlton-from-sydney-swans",
+    publishedAt:"2026-10-02T15:00:00+10:00",
+    tag:"CONFIRMED",
+    clubs:["car","syd"]
+  },
+  {
     id:'2026-10-10-richmond-port-pick5-interest',
     title:'Richmond among clubs pursuing Port\'s pick 5',
     summary:'AFL.com.au reports Richmond, Essendon, Carlton and West Coast are interested in Port Adelaide\'s pick 5, received for Zak Butters. The Tigers could offer future draft capital but no trade has been agreed.',
