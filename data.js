@@ -104,7 +104,7 @@ const PICKS_2027 = {
 const PICKS_2028 = {
   ade:[[1,'ade'],[2,'ade'],[3,'ade'],[4,'ade']],
   bri:[[1,'bri'],[2,'bri'],[3,'bri'],[4,'bri']],
-  car:[[1,'car'],[3,'car'],[4,'car'],[4,'pa']],
+  car:[[1,'car'],[2,'car'],[3,'car'],[4,'car'],[4,'pa']],
   col:[[1,'col'],[2,'col'],[3,'col'],[4,'col']],
   ess:[[1,'ess'],[2,'ess'],[2,'gee'],[2,'haw'],[3,'ess']],
   fre:[[1,'fre'],[2,'fre'],[3,'fre'],[4,'fre']],
@@ -118,7 +118,7 @@ const PICKS_2028 = {
   ric:[[1,'ric'],[2,'ric'],[3,'ric'],[4,'ric']],
   stk:[[1,'stk'],[2,'stk'],[4,'stk']],
   syd:[[1,'syd'],[2,'syd'],[3,'syd'],[4,'syd']],
-  wce:[[2,'wce'],[3,'wce'],[4,'wce']],
+  wce:[[1,'wce'],[2,'wce'],[3,'wce'],[4,'wce']],
   wbd:[[2,'wbd'],[2,'pa'],[3,'wbd'],[3,'haw'],[3,'pa'],[4,'wbd'],[4,'mel']]
 };
 
