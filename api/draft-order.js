@@ -9,18 +9,19 @@ const FALLBACK={
   gcs:[8,81,85],
   gws:[9,28,31,50,77,86],
   haw:[29,37,71,94],
-  mel:[4,14,33,48,49],
-  nm:[6,47,66,74,84],
+  mel:[4,14,48,52],
+  nm:[33,49,66,74,84],
   pa:[5,7,12,24,32,46,65],
   ric:[2,22,44],
   stk:[10,16,41,51,69,87],
-  syd:[38,39,52,54,76,95],
+  syd:[6,38,39,47,54,76,95],
   wce:[3,23,45,58,64,73,82],
   wbd:[55,83,89,91]
 };
 const NOTES={
   4:'via Port Adelaide - five-club trade',
   5:'Zak Butters compensation',
+  6:'via North Melbourne - Nick Blakey trade',
   7:'via Gold Coast - five-club trade',
   8:'Ben King compensation',
   12:'via Melbourne - five-club trade',
@@ -35,11 +36,14 @@ const NOTES={
   29:'via St Kilda',
   31:'via Melbourne',
   32:'via Carlton',
-  33:'via Western Bulldogs - five-club trade',
+  33:'via Melbourne - Zane Duursma trade (originally Western Bulldogs)',
   35:'Jordon Butts compensation',
   39:'Joel Amartey compensation',
   41:'via Brisbane - Sam Marshall trade',
   42:'Lachie Neale compensation',
+  47:'via North Melbourne - Nick Blakey trade',
+  49:'via Melbourne - Zane Duursma trade (originally Greater Western Sydney)',
+  52:'via North Melbourne - Zane Duursma trade (originally Sydney/Collingwood)',
   50:'Kieren Briggs compensation',
   62:'via Essendon - Ridley / Bowes trade',
   63:'via Richmond - O\'Driscoll trade'
@@ -47,8 +51,7 @@ const NOTES={
 const BID_SLIDE=[
   {afterOfficialPick:21,owner:'ess',note:'Essendon bid-slide compensation'},
   {afterOfficialPick:22,owner:'ric',note:'Richmond bid-slide compensation'},
-  {afterOfficialPick:23,owner:'wce',note:'West Coast bid-slide compensation'},
-  {afterOfficialPick:25,owner:'nm',note:'North Melbourne bid-slide compensation'}
+  {afterOfficialPick:23,owner:'wce',note:'West Coast bid-slide compensation'}
 ];
 function officialPicks(){
   const out=[];
@@ -80,8 +83,8 @@ module.exports=async function handler(req,res){
   if(req.method==='OPTIONS') return res.status(204).end();
   return res.status(200).json({
     source:'AFL Trade Machine verified order',
-    updated:'2026-10-11',
-    note:'2026 indicative draft order updated through 9 October using AFL club data, including the Butters and King free agency compensation, five-club mega trade and Sam Marshall swap. Projected matched bids remain separate.',
+    updated:'2026-10-13',
+    note:'2026 indicative draft order verified against AFL official 13 October register, including Nick Blakey and Zane Duursma trades. Three projected bid-slide compensation picks remain conditional and separate from the official order.',
     picks:projectedPicks()
   });
 };
