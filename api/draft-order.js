@@ -1,13 +1,13 @@
 const FALLBACK={
   ade:[15,34,35,43,56,92],
   bri:[20,42,53,59,79,97],
-  car:[13,18,25,26,61,72,90],
+  car:[13,18,31,50,61,72,90],
   col:[11,30,67,68,70,88],
   ess:[1,17,21,27,80],
   fre:[19,40,60,63,78,96],
   gee:[36,57,62,75,93],
   gcs:[8,81,85],
-  gws:[9,28,31,50,77,86],
+  gws:[9,25,26,28,77,86],
   haw:[29,37,71,94],
   mel:[4,14,48,52],
   nm:[33,49,66,74,84],
@@ -29,12 +29,12 @@ const NOTES={
   16:'via Geelong - Rowan Marshall trade',
   17:'via Hawthorn - Zach Merrett trade',
   18:'via Sydney',
-  25:'via North Melbourne',
-  26:'via Gold Coast',
+  25:'via Carlton - Lachie Whitfield trade (originally North Melbourne)',
+  26:'via Carlton - Lachie Whitfield trade (originally Gold Coast)',
   27:'via Greater Western Sydney / Hawthorn - Zach Merrett trade',
   28:'Toby Greene compensation',
   29:'via St Kilda',
-  31:'via Melbourne',
+  31:'via Greater Western Sydney - Lachie Whitfield trade (originally Melbourne)',
   32:'via Carlton',
   33:'via Melbourne - Zane Duursma trade (originally Western Bulldogs)',
   35:'Jordon Butts compensation',
@@ -44,7 +44,7 @@ const NOTES={
   47:'via North Melbourne - Nick Blakey trade',
   49:'via Melbourne - Zane Duursma trade (originally Greater Western Sydney)',
   52:'via North Melbourne - Zane Duursma trade (originally Sydney/Collingwood)',
-  50:'Kieren Briggs compensation',
+  50:'via Greater Western Sydney - Lachie Whitfield trade (originally Kieren Briggs compensation)',
   62:'via Essendon - Ridley / Bowes trade',
   63:'via Richmond - O\'Driscoll trade'
 };
@@ -84,7 +84,7 @@ module.exports=async function handler(req,res){
   return res.status(200).json({
     source:'AFL Trade Machine verified order',
     updated:'2026-10-13',
-    note:'2026 indicative draft order verified against AFL official 13 October register, including Nick Blakey and Zane Duursma trades. Three projected bid-slide compensation picks remain conditional and separate from the official order.',
+    note:'2026 indicative draft order verified against AFL official 13 October register, including Nick Blakey, Zane Duursma and Lachie Whitfield trades. Three projected bid-slide compensation picks remain conditional and separate from the official order.',
     picks:projectedPicks()
   });
 };
