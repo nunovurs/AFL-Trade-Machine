@@ -117,7 +117,7 @@ const PICKS_2028 = {
   pa:[[1,'pa'],[1,'wbd']],
   ric:[[1,'ric'],[2,'ric'],[3,'ric'],[4,'ric']],
   stk:[[1,'stk'],[2,'stk'],[4,'stk']],
-  syd:[[1,'syd'],[1,'nm'],[2,'nm'],[3,'syd'],[4,'syd']]
+  syd:[[1,'syd'],[1,'nm'],[2,'nm'],[3,'syd'],[4,'syd']],
   wce:[[1,'wce'],[2,'wce'],[3,'wce'],[4,'wce']],
   wbd:[[2,'wbd'],[2,'pa'],[3,'wbd'],[3,'haw'],[3,'pa'],[4,'wbd'],[4,'mel']]
 };
