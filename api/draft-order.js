@@ -1,22 +1,22 @@
 const FALLBACK={
-  ade:[15,34,35,43,56,92],
-  bri:[25,28,42,53,79,97],
-  car:[13,18,31,50,61,72,90],
-  col:[11,30,67,68,70,88],
-  ess:[1,17,21,27,80],
-  fre:[19,40,60,63,78,96],
-  gee:[36,57,62,75,93],
-  gcs:[8,81,85],
-  gws:[9,20,26,59,77,86],
-  haw:[29,37,71,94],
+  ade:[15,32,35,43,56,92,110],
+  bri:[21,27,28,45,79,97,115],
+  car:[13,18,31,50,61,72,90,108],
+  col:[11,30,67,68,70,88,106],
+  ess:[1,17,25,80,98],
+  fre:[19,40,60,63,78,96,114],
+  gee:[36,57,62,75,93,111],
+  gcs:[8,81,85,103],
+  gws:[9,20,26,59,77,86,104],
+  haw:[29,37,71,94,107,112],
   mel:[4,14,48,52],
-  nm:[33,49,66,74,84],
-  pa:[7,12,22,24,32,46,65],
-  ric:[2,5,44],
-  stk:[10,16,41,51,69,87],
-  syd:[6,38,39,47,54,76,95],
-  wce:[3,23,45,58,64,73,82],
-  wbd:[55,83,89,91]
+  nm:[33,49,66,74,84,102],
+  pa:[7,12,22,24,34,46,65,101],
+  ric:[2,5,44,99],
+  stk:[10,16,41,51,69,87,105],
+  syd:[6,38,39,47,54,76,95,113],
+  wce:[3,23,58,64,73,82,100],
+  wbd:[42,53,55,83,89,91,109]
 };
 const NOTES={
   4:'via Port Adelaide - five-club trade',
@@ -31,25 +31,30 @@ const NOTES={
   18:'via Sydney',
   22:'via Richmond - Port Adelaide pick swap',
   20:'via Brisbane - GWS pick swap',
-  25:'via GWS - Brisbane pick swap (originally Carlton / North Melbourne via Lachie Whitfield trade)',
+  25:'via Brisbane - Keidean Coleman trade (via GWS pick swap and Carlton / Lachie Whitfield trade)',
   26:'via Carlton - Lachie Whitfield trade (originally Gold Coast)',
-  27:'via Greater Western Sydney / Hawthorn - Zach Merrett trade',
+  27:'via Essendon - Keidean Coleman trade (via Hawthorn / Zach Merrett trade)',
   28:'via GWS - Brisbane pick swap (originally Toby Greene compensation)',
   29:'via St Kilda',
   31:'via Greater Western Sydney - Lachie Whitfield trade (originally Melbourne)',
-  32:'via Carlton',
+  32:'via Port Adelaide - Luke Pedlar trade (tied to Carlton)',
   33:'via Melbourne - Zane Duursma trade (originally Western Bulldogs)',
   35:'Jordon Butts compensation',
   39:'Joel Amartey compensation',
   41:'via Brisbane - Sam Marshall trade',
-  42:'Lachie Neale compensation',
+  42:'via Brisbane - Western Bulldogs pick swap (Lachie Neale compensation)',
   47:'via North Melbourne - Nick Blakey trade',
   49:'via Melbourne - Zane Duursma trade (originally Greater Western Sydney)',
   52:'via North Melbourne - Zane Duursma trade (originally Sydney/Collingwood)',
   50:'via Greater Western Sydney - Lachie Whitfield trade (originally Kieren Briggs compensation)',
   59:'via Brisbane - GWS pick swap (originally Sydney)',
   62:'via Essendon - Ridley / Bowes trade',
-  63:'via Richmond - O\'Driscoll trade'
+  63:'via Richmond - O\'Driscoll trade',
+  21:'via Essendon - Keidean Coleman trade',
+  34:'via Adelaide - Luke Pedlar trade',
+  45:'via Melbourne - Will McLachlan trade (West Coast / Jack Viney and Trent Rivers trade)',
+  53:'via Brisbane - Western Bulldogs pick swap',
+  107:'via Melbourne - Bodie Ryan trade'
 };
 const BID_SLIDE=[
   {afterOfficialPick:21,owner:'ess',note:'Essendon bid-slide compensation'},
@@ -86,8 +91,8 @@ module.exports=async function handler(req,res){
   if(req.method==='OPTIONS') return res.status(204).end();
   return res.status(200).json({
     source:'AFL Trade Machine verified order',
-    updated:'2026-10-14',
-    note:'2026 indicative draft order verified against AFL official 14 October register, including the Brisbane-GWS and Richmond-Port Adelaide pick swaps, and Nick Blakey, Zane Duursma and Lachie Whitfield trades. Three projected bid-slide compensation picks remain conditional and separate from the official order.',
+    updated:'2026-10-15',
+    note:'Official AFL post-trade-period 2026 draft order: 115 picks. Three bid-slide compensation picks remain conditional projections.',
     picks:projectedPicks()
   });
 };
