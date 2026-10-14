@@ -59,14 +59,14 @@ const DVI = {1:3000,2:2481,3:2178,4:1962,5:1795,6:1659,7:1543,8:1443,9:1355,10:1
 
 const PICKS_2026 = {
   ade:[15,34,35,43,56,92],
-  bri:[20,42,53,59,79,97],
+  bri:[25,28,42,53,79,97],
   car:[13,18,31,50,61,72,90],
   col:[11,30,67,68,70,88],
   ess:[1,17,21,27,80],
   fre:[19,40,60,63,78,96],
   gee:[36,57,62,75,93],
   gcs:[8,81,85],
-  gws:[9,25,26,28,77,86],
+  gws:[9,20,26,59,77,86],
   haw:[29,37,71,94],
   mel:[4,14,48,52],
   nm:[33,49,66,74,84],
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'14 Oct 2026 — AFL verified draft order, confirmed trades and future picks',
+  updated:'14 Oct 2026 — AFL verified draft order including Brisbane-GWS pick swap, confirmed trades and future picks',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
