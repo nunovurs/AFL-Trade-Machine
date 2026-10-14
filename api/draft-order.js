@@ -11,8 +11,8 @@ const FALLBACK={
   haw:[29,37,71,94],
   mel:[4,14,48,52],
   nm:[33,49,66,74,84],
-  pa:[5,7,12,24,32,46,65],
-  ric:[2,22,44],
+  pa:[7,12,22,24,32,46,65],
+  ric:[2,5,44],
   stk:[10,16,41,51,69,87],
   syd:[6,38,39,47,54,76,95],
   wce:[3,23,45,58,64,73,82],
@@ -20,7 +20,7 @@ const FALLBACK={
 };
 const NOTES={
   4:'via Port Adelaide - five-club trade',
-  5:'Zak Butters compensation',
+  5:'via Port Adelaide - Richmond pick swap (originally Zak Butters compensation)',
   6:'via North Melbourne - Nick Blakey trade',
   7:'via Gold Coast - five-club trade',
   8:'Ben King compensation',
@@ -29,6 +29,7 @@ const NOTES={
   16:'via Geelong - Rowan Marshall trade',
   17:'via Hawthorn - Zach Merrett trade',
   18:'via Sydney',
+  22:'via Richmond - Port Adelaide pick swap',
   25:'via Carlton - Lachie Whitfield trade (originally North Melbourne)',
   26:'via Carlton - Lachie Whitfield trade (originally Gold Coast)',
   27:'via Greater Western Sydney / Hawthorn - Zach Merrett trade',
@@ -83,8 +84,8 @@ module.exports=async function handler(req,res){
   if(req.method==='OPTIONS') return res.status(204).end();
   return res.status(200).json({
     source:'AFL Trade Machine verified order',
-    updated:'2026-10-13',
-    note:'2026 indicative draft order verified against AFL official 13 October register, including Nick Blakey, Zane Duursma and Lachie Whitfield trades. Three projected bid-slide compensation picks remain conditional and separate from the official order.',
+    updated:'2026-10-14',
+    note:'2026 indicative draft order verified against AFL official 14 October register, including Richmond-Port Adelaide pick swap and Nick Blakey, Zane Duursma and Lachie Whitfield trades. Three projected bid-slide compensation picks remain conditional and separate from the official order.',
     picks:projectedPicks()
   });
 };

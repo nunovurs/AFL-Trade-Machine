@@ -6,7 +6,7 @@ const ATM_CLUBS = [
     'Kai Lohmann','Sam Draper','Jaspa Fletcher','Oscar Allen','Josh Dunkley','Hugh McCluggage','Jarrod Berry','Will Ashcroft','Levi Ashcroft','Lincoln McCarthy','Tom Doedee','Logan Morris','Daniel Annable','Dayne Zorko','Cam Rayner','Luke Beecken','Keidean Coleman','Luke Lloyd','Zane Zakostelsky','Ty Gallop','Charlie Cameron','Koby Evans','Henry Smith','Conor McKenna','Darcy Gardiner','Will McLachlan','James Tunstill','Eric Hipwood','Harris Andrews','Darcy Fort','Zac Bailey','Shadeau Brain','Ryan Lester','Reece Torrent','Cody Curtin','Bruce Reville','Ben Murphy','Jack Payne','Darragh Joyce','Tai Hayes','Noah Answerth','Darcy Wilmot'
   ]},
   {id:'car',name:'Carlton',abbr:'CAR',zh:'CARL',color:'#071c3d',clubText:'#fff',logo:'assets/logos/car.svg',listCap:44,players:[
-    'Lachlan Cowan','Jesse Motlop','Oliver Hollands','Adam Cerra','Jagga Smith','Patrick Cripps','Harry McKay','Mitch McGovern','Ben Ainsworth','Blake Acres','Oliver Florent','Billy Wilson','Brodie Kemp','Sam Walsh','Will Hayward',"Harry O'Farrell",'Jacob Weitering','Nic Newman','Liam Reidy','Nick Haynes','Marc Pittonet','George Hewett','Jack Ison','Campbell Chesser','Matthew Carroll','Rob Monahan','Harry Dean','Cooper Lord','Talor Byrne','Adam Saad','Ashton Moir','Francis Evans','Matthew Cottrell','Wade Derksen','Joel Amartey'
+    'Lachlan Cowan','Jesse Motlop','Oliver Hollands','Adam Cerra','Jagga Smith','Patrick Cripps','Harry McKay','Mitch McGovern','Ben Ainsworth','Blake Acres','Oliver Florent','Billy Wilson','Brodie Kemp','Sam Walsh','Will Hayward',"Harry O'Farrell",'Jacob Weitering','Nic Newman','Liam Reidy','Nick Haynes','Marc Pittonet','George Hewett','Jack Ison','Campbell Chesser','Matthew Carroll','Rob Monahan','Harry Dean','Cooper Lord','Talor Byrne','Adam Saad','Ashton Moir','Francis Evans','Matthew Cottrell','Wade Derksen','Joel Amartey','Lachie Whitfield'
   ]},
   {id:'col',name:'Collingwood',abbr:'COL',zh:'COLL',color:'#111111',clubText:'#fff',logo:'assets/logos/col.svg',listCap:44,players:[
     'Patrick Lipinski','Jordan De Goey','Isaac Quaynor','Brayden Maynard','Jamie Elliott','Josh Daicos','Lachie Schultz','Dan Houston','Daniel McStay','Harry Perryman','Harry DeMattia','Darcy Cameron','Edward Allan','Billy Frampton','Tyan Prindable','Tew Jiath','Oscar Steene','Jack Crisp','Reef McInnes','Tim Membrey','Charlie West','Darcy Moore','Beau McCreery','Sam Swadling','Jack Buller','Nick Daicos','Harvey Harrison','Zac McCarthy','Jeremy Howe','William Hayes','Noah Howes','Angus Anderson','Jai Saxena','Ned Long','Roan Steele','Liam Puncher','Harrison Coe','Lachie Neale','Jesse Hogan', 'Flynn Riley'
@@ -24,7 +24,7 @@ const ATM_CLUBS = [
     'Mac Andrew','John Noble','Christian Petracca','Jed Walter','Alex Davies','Bodhi Uwland','Leonardo Lombard','Jamarra Ugle-Hagan','Charlie Ballard','Touk Miller','Elliott Himmelberg','Lachie Weller','Noah Anderson','Joel Jeffrey','Daniel Rioli','Matt Rowell','Bailey Humphrey','Ethan Read','Ben Long','Ned Moyle','Sam Collins','Will Graham','Wil Powell','Jarrod Witts','Jake Rogers','Dylan Patterson','Zeke Uwland','Sam Clohesy','Jai Murray','Zak Evans','Max Knobel','Beau Addinsall','Lachlan Gulbin','Avery Thomas','Koby Coulson','Ben Jepson','Caleb Lewis','Oscar Adams','Jy Farrar','Scott Pendlebury','Aidan Schubert','Sam Butler'
   ]},
   {id:'gws',name:'GWS Giants',abbr:'GWS',zh:'GWS',color:'#f15a22',clubText:'#111',logo:'assets/logos/gws.svg',listCap:44,players:[
-    'Harvey Thomas','Darcy Jones','Stephen Coniglio','Aaron Cadman','Lachie Whitfield','Lachie Ash','Ryan Angwin','Clayton Oliver','Phoenix Gothard','Tom Green','Oliver Hannaford','Toby Bedford','Sam Taylor','Brent Daniels','Finn Callaghan','Conor Stone','Harrison Oliver','Leek Aleer','Josh Kelly','Harry Rowston','Jayden Laverde','Jake Riccardi','Harry Himmelberg','Jack Ough','Cody Angove','James Leake','Toby McMullin',"Xavier O'Halloran",'Oskar Taylor','Max Gruzewski','Logan Smith','Joe Fonti','Josaia Delana','Connor Idun','Nicholas Madden','Nathan Wardius','Riley Hamilton','Jack Buckley','Finnegan Davis','Callum Brown'
+    'Harvey Thomas','Darcy Jones','Stephen Coniglio','Aaron Cadman','Lachie Ash','Ryan Angwin','Clayton Oliver','Phoenix Gothard','Tom Green','Oliver Hannaford','Toby Bedford','Sam Taylor','Brent Daniels','Finn Callaghan','Conor Stone','Harrison Oliver','Leek Aleer','Josh Kelly','Harry Rowston','Jayden Laverde','Jake Riccardi','Harry Himmelberg','Jack Ough','Cody Angove','James Leake','Toby McMullin',"Xavier O'Halloran",'Oskar Taylor','Max Gruzewski','Logan Smith','Joe Fonti','Josaia Delana','Connor Idun','Nicholas Madden','Nathan Wardius','Riley Hamilton','Jack Buckley','Finnegan Davis','Callum Brown'
   ]},
   {id:'haw',name:'Hawthorn',abbr:'HAW',zh:'HAW',color:'#4d2004',clubText:'#fff',logo:'assets/logos/haw.svg',listCap:44,players:[
     'Harry Morrison','Mitch Lewis','Jai Newcombe','Jarman Impey','Nick Watson','James Sicily','Ned Reeves','Dylan Moore','Connor Macdonald','Karl Amon','Conor Nash','Will Day','Calsher Dear','Jack Scrimshaw','Blake Hardwick',"Massimo D'Ambrosio",'Lloyd Meek','Mabior Chol','Jack Gunston','Noah Mraz','Cameron Nairn','Josh Weddle','Josh Battle','Josh Ward','William McCabe','Cam Mackenzie','Matthew LeRay','Jack Ginnivan','Jack Dalton','Oliver Greeves','Tom Barrass','Max Ramsden','Flynn Perez','Max Beattie','Matt Hill','Bailey Macdonald','Zach Merrett','Ollie Purcell','Ben King'
@@ -60,24 +60,24 @@ const DVI = {1:3000,2:2481,3:2178,4:1962,5:1795,6:1659,7:1543,8:1443,9:1355,10:1
 const PICKS_2026 = {
   ade:[15,34,35,43,56,92],
   bri:[20,42,53,59,79,97],
-  car:[13,18,25,26,61,72,90],
+  car:[13,18,31,50,61,72,90],
   col:[11,30,67,68,70,88],
   ess:[1,17,21,27,80],
   fre:[19,40,60,63,78,96],
   gee:[36,57,62,75,93],
   gcs:[8,81,85],
-  gws:[9,28,31,50,77,86],
+  gws:[9,25,26,28,77,86],
   haw:[29,37,71,94],
   mel:[4,14,48,52],
   nm:[33,49,66,74,84],
-  pa:[5,7,12,24,32,46,65],
-  ric:[2,22,44],
+  pa:[7,12,22,24,32,46,65],
+  ric:[2,5,44],
   stk:[10,16,41,51,69,87],
   syd:[6,38,39,47,54,76,95],
   wce:[3,23,45,58,64,73,82],
   wbd:[55,83,89,91]
 };
-const PICK_ORIGIN_2026 = {6:'nm',47:'nm',4:'pa',7:'gcs',12:'mel',14:'wbd',16:'gee',17:'haw',18:'syd',25:'nm',26:'gcs',27:'gws',29:'stk',31:'mel',32:'car',33:'wbd',43:'ess',48:'gcs',49:'gws',52:'col',53:'mel',54:'car',58:'haw',59:'syd',61:'bri',62:'ess',63:'ric',67:'gcs',68:'gws',71:'mel',73:'wbd',74:'ade',76:'haw',77:'syd',81:'ric',83:'pa',89:'mel'};
+const PICK_ORIGIN_2026 = {5:'pa',6:'nm',47:'nm',4:'pa',7:'gcs',12:'mel',14:'wbd',16:'gee',17:'haw',18:'syd',22:'ric',25:'nm',26:'gcs',27:'gws',29:'stk',31:'mel',32:'car',33:'wbd',43:'ess',48:'gcs',49:'gws',52:'col',53:'mel',54:'car',58:'haw',59:'syd',61:'bri',62:'ess',63:'ric',67:'gcs',68:'gws',71:'mel',73:'wbd',74:'ade',76:'haw',77:'syd',81:'ric',83:'pa',89:'mel'};
 
 const PICKS_2027 = {
   ade:[[1,'ade'],[2,'ade'],[3,'ade'],[4,'ade']],
@@ -92,25 +92,25 @@ const PICKS_2027 = {
   haw:[[1,'haw'],[2,'haw'],[2,'gcs'],[3,'pa'],[4,'haw']],
   mel:[[2,'mel']],
   nm:[[1,'nm'],[3,'nm'],[4,'nm']],
-  pa:[[1,'pa'],[1,'mel']],
-  ric:[[1,'ric'],[2,'ric'],[3,'ric'],[4,'ric']],
+  pa:[[1,'pa'],[1,'mel'],[1,'ric'],[2,'ric'],[4,'ric']],
+  ric:[[3,'ric']],
   stk:[[2,'stk'],[3,'mel'],[3,'stk'],[3,'wce'],[4,'mel'],[4,'stk']],
   syd:[[2,'car'],[2,'syd'],[2,'nm'],[3,'syd'],[4,'syd']],
   wce:[[1,'wce'],[2,'wce'],[3,'haw'],[4,'wce']],
   wbd:[[1,'wbd'],[2,'wbd'],[2,'pa'],[3,'wbd'],[4,'wbd'],[4,'pa']]
 };
 
-// Confirmed future-pick ownership, AFL official register updated 13 Oct 2026.
+// Confirmed future-pick ownership, AFL official register updated 14 Oct 2026.
 const PICKS_2028 = {
   ade:[[1,'ade'],[2,'ade'],[3,'ade'],[4,'ade']],
   bri:[[1,'bri'],[2,'bri'],[3,'bri'],[4,'bri']],
-  car:[[1,'car'],[2,'car'],[3,'car'],[3,'col'],[4,'car'],[4,'pa']],
+  car:[[1,'car'],[2,'car'],[3,'col'],[4,'car'],[4,'pa']],
   col:[[1,'col'],[2,'col'],[4,'col']],
   ess:[[1,'ess'],[2,'ess'],[2,'gee'],[2,'haw'],[3,'ess']],
   fre:[[1,'fre'],[2,'fre'],[3,'fre'],[4,'fre']],
   gee:[[1,'gee'],[3,'gee'],[3,'stk'],[4,'gee'],[4,'ess']],
   gcs:[[1,'haw'],[3,'gcs'],[4,'gcs']],
-  gws:[[1,'gws'],[2,'gws'],[3,'gws'],[4,'gws']],
+  gws:[[1,'gws'],[2,'gws'],[3,'gws'],[3,'car'],[4,'gws']],
   haw:[[1,'gcs'],[2,'gcs'],[4,'haw']],
   mel:[[1,'mel'],[2,'mel'],[3,'mel']],
   nm:[[2,'syd'],[3,'nm'],[4,'nm']],
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'13 Oct 2026 — AFL verified draft order, confirmed trades and future picks',
+  updated:'14 Oct 2026 — AFL verified draft order, confirmed trades and future picks',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
