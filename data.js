@@ -27,7 +27,7 @@ const ATM_CLUBS = [
     'Harvey Thomas','Darcy Jones','Stephen Coniglio','Aaron Cadman','Lachie Ash','Ryan Angwin','Clayton Oliver','Phoenix Gothard','Tom Green','Oliver Hannaford','Toby Bedford','Sam Taylor','Brent Daniels','Finn Callaghan','Conor Stone','Harrison Oliver','Leek Aleer','Josh Kelly','Harry Rowston','Jayden Laverde','Jake Riccardi','Harry Himmelberg','Jack Ough','Cody Angove','James Leake','Toby McMullin',"Xavier O'Halloran",'Oskar Taylor','Max Gruzewski','Logan Smith','Joe Fonti','Josaia Delana','Connor Idun','Nicholas Madden','Nathan Wardius','Riley Hamilton','Jack Buckley','Finnegan Davis','Callum Brown'
   ]},
   {id:'haw',name:'Hawthorn',abbr:'HAW',zh:'HAW',color:'#4d2004',clubText:'#fff',logo:'assets/logos/haw.svg',listCap:44,players:[
-    'Harry Morrison','Mitch Lewis','Jai Newcombe','Jarman Impey','Nick Watson','James Sicily','Ned Reeves','Dylan Moore','Connor Macdonald','Karl Amon','Conor Nash','Will Day','Calsher Dear','Jack Scrimshaw','Blake Hardwick',"Massimo D'Ambrosio",'Lloyd Meek','Mabior Chol','Jack Gunston','Noah Mraz','Cameron Nairn','Josh Weddle','Josh Battle','Josh Ward','William McCabe','Cam Mackenzie','Matthew LeRay','Jack Ginnivan','Jack Dalton','Oliver Greeves','Tom Barrass','Max Ramsden','Flynn Perez','Max Beattie','Matt Hill','Bailey Macdonald','Zach Merrett','Ollie Purcell','Ben King','Josh Goater'
+    'Harry Morrison','Mitch Lewis','Jai Newcombe','Jarman Impey','Nick Watson','James Sicily','Ned Reeves','Dylan Moore','Connor Macdonald','Karl Amon','Conor Nash','Will Day','Calsher Dear','Jack Scrimshaw','Blake Hardwick',"Massimo D'Ambrosio",'Lloyd Meek','Mabior Chol','Jack Gunston','Noah Mraz','Cameron Nairn','Josh Weddle','Josh Battle','Josh Ward','William McCabe','Cam Mackenzie','Matthew LeRay','Jack Ginnivan','Jack Dalton','Oliver Greeves','Tom Barrass','Max Beattie','Matt Hill','Bailey Macdonald','Zach Merrett','Ollie Purcell','Ben King','Josh Goater'
   ]},
   {id:'mel',name:'Melbourne',abbr:'MEL',zh:'MELB',color:'#061a33',clubText:'#fff',logo:'assets/logos/mel.svg',listCap:44,players:[
     'Jacob van Rooyen','Christian Salem','Harvey Langford','Xavier Lindsay','Caleb Windsor','Jake Lever','Jack Steele','Daniel Turner','Max Gawn','Koltyn Tholstrup','Jai Culley','Changkuoth Jiath','Ed Langdon','Bailey Laurie','Jake Bowey','Xavier Taylor','Thomas Matthews','Matthew Jefferson','Blake Howes','Jed Adams','Max Heath','Brody Mihocek','Harry Sharp','Bayley Fritsch','Tom Sparrow','Latrelle Pickett','Harrison Petty','Kysaiah Pickett','Kade Chandler','Oscar Berry','Ricky Mentha','Paddy Cross','Luker Kentfield','Lukas Cooke','Joel Fitzgerald','Max Mapley', 'Zane Duursma','Will McLachlan','Bodie Ryan'
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'15 Oct 2026 — official AFL post-trade 115-pick order and verified future picks and player moves',
+  updated:'16 Oct 2026 — official AFL post-trade 115-pick order, verified future picks and Hawthorn list changes',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
