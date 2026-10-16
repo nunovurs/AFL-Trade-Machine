@@ -48,7 +48,7 @@ const ATM_CLUBS = [
     'Chad Warner','Hayden McLean','Brodie Grundy','Isaac Heeney','Logan McDonald','James Rowbottom','Jesse Dattoli','Malcolm Rosas','Tom Papley','Angus Sheldrick','Jai Serong','Callum Mills','Sam Wicks','Braeden Campbell','James Jordon','Jevan Phillipou','Peter Ladhams','Riak Andrew','Errol Gulden','Ned Bowman','Dane Rampe','Billy Cootee','Riley Bice','Justin McInerney','William Edwards','Joel Hamling','Tom McCartin','Max King','Harry Kyle','Caiden Cleary','Matt Roberts','Charlie Curnow','Corey Warner','Liam Hetherton','Tom Hanily','Patrick Snell','Noah Chamberlain','Lewis Melican','Jake Lloyd','William Green'
   ]},
   {id:'wce',name:'West Coast',abbr:'WCE',zh:'WCE',color:'#003087',clubText:'#fff',logo:'assets/logos/wce.svg',listCap:48,players:[
-    'Willem Duursma','Jake Waterman','Liam Baker','Brandon Starcevich','Josh Lindsay','Elliot Yeo','Reuben Ginbey','Elijah Hewett','Harley Reid','Tim Kelly','Sam Allen','Noah Long','Liam Duggan','Matthew Owies','Jack Graham','Tom McCarthy','Brady Hough','Tylar Young','Cooper Duff-Tytler','Archer Reid','Ryan Maric','Matt Flynn','Bo Allan','Tom Gross','Tom Cole','Clay Hall','Lucca Grego','Bailey J. Williams','Rhett Bazzo','Jack Williams','Jobe Shanahan','Tylah Williams','Malakai Champion','Hamish Davis','Fred Rodriguez','Deven Robertson','Sandy Brock','Harry Edwards','Tyrell Dewar','Jack Hutchinson','Finlay Macrae','Jacob Newton','Milan Murdock','Harry Schoenberg','Jake Miles-Wrency','Oliver Francou','Marcus Herbert','Jack Viney','Trent Rivers'
+    'Willem Duursma','Jake Waterman','Liam Baker','Brandon Starcevich','Josh Lindsay','Elliot Yeo','Reuben Ginbey','Elijah Hewett','Harley Reid','Tim Kelly','Sam Allen','Noah Long','Liam Duggan','Matthew Owies','Jack Graham','Tom McCarthy','Brady Hough','Tylar Young','Cooper Duff-Tytler','Archer Reid','Ryan Maric','Matt Flynn','Bo Allan','Tom Gross','Tom Cole','Lucca Grego','Bailey J. Williams','Rhett Bazzo','Jobe Shanahan','Tylah Williams','Malakai Champion','Hamish Davis','Fred Rodriguez','Deven Robertson','Sandy Brock','Harry Edwards','Tyrell Dewar','Jack Hutchinson','Finlay Macrae','Jacob Newton','Milan Murdock','Jake Miles-Wrency','Oliver Francou','Marcus Herbert','Jack Viney','Trent Rivers'
   ]},
   {id:'wbd',name:'Western Bulldogs',abbr:'WBD',zh:'WB',color:'#1b4f9c',clubText:'#fff',logo:'assets/logos/wbd.svg',listCap:44,players:[
     'Lachlan Carmichael','Cody Weightman','Marcus Bontempelli','Jedd Busslinger','Cooper Hynes','Rory Lobb','Matthew Kennedy','Ryley Sanders','Sam Darcy','Lachie Jaques','Rhylee West','Will Darcy','Jordan Croft',"James O'Donnell",'Connor Budarick','Ed Richards','Caleb May','Laitham Vandermeer','Buku Khamis','Louis Emmett','Josh Dolan','Joel Freijah','Will Lewis','Lachlan Bramble','Bailey Dale','Arthur Jones','Aaron Naughton','Bailey Williams','Luke Kennedy','Luke Cleary','Michael Sellwood','Riley Garcia','Sam Davidson','Tim English','Jordon Butts','Zak Butters','Finn Maginness','Hudson O\'Keeffe'
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'16 Oct 2026 — official AFL post-trade 115-pick order, verified future picks and Hawthorn list changes',
+  updated:'16 Oct 2026 — official AFL post-trade 115-pick order, verified future picks and Hawthorn/West Coast list changes',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
