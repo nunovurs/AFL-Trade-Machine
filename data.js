@@ -12,7 +12,7 @@ const ATM_CLUBS = [
     'Patrick Lipinski','Jordan De Goey','Isaac Quaynor','Brayden Maynard','Jamie Elliott','Josh Daicos','Lachie Schultz','Dan Houston','Daniel McStay','Harry Perryman','Harry DeMattia','Darcy Cameron','Edward Allan','Billy Frampton','Tyan Prindable','Tew Jiath','Oscar Steene','Jack Crisp','Reef McInnes','Tim Membrey','Charlie West','Darcy Moore','Beau McCreery','Sam Swadling','Jack Buller','Nick Daicos','Harvey Harrison','Zac McCarthy','Jeremy Howe','William Hayes','Noah Howes','Angus Anderson','Jai Saxena','Ned Long','Roan Steele','Liam Puncher','Harrison Coe','Lachie Neale','Jesse Hogan', 'Flynn Riley','Finnbarr Roarty'
   ]},
   {id:'ess',name:'Essendon',abbr:'ESS',zh:'ESS',color:'#cc2031',clubText:'#fff',logo:'assets/logos/ess.svg',listCap:44,players:[
-    'Andrew McGrath','Jacob Farrow','Darcy Parish','Kyle Langford','Jye Caldwell','Brayden Fiorini','Sullivan Robey','Isaac Kako','Will Setterfield','Nik Cox','Dyson Sharp','Archie Perkins','Vigo Visentini','Lewis Hayes','Kayle Gerreyn','Peter Wright','Archie Roberts','Sam Durham','Harrison Jones','Nick Bryan','Jaxon Prior','Archer May','Mason Redman','Xavier Duursma','Max Kondogiannis','Nate Caddy','Zach Reid','Ben McKay','Hussien El Achkar','Jaxon Artemis','Angus Clarke','Nic Martin','Rhys Unwin','Cillian Bourke','Zak Johnson','Jayden Nguyen','Archer Day-Wicks','Thomas Edwards','Lachlan Blakiston','Jack Bowes','Keidean Coleman'
+    'Andrew McGrath','Jacob Farrow','Darcy Parish','Kyle Langford','Jye Caldwell','Brayden Fiorini','Sullivan Robey','Isaac Kako','Will Setterfield','Dyson Sharp','Archie Perkins','Vigo Visentini','Lewis Hayes','Peter Wright','Archie Roberts','Sam Durham','Harrison Jones','Nick Bryan','Jaxon Prior','Archer May','Mason Redman','Xavier Duursma','Max Kondogiannis','Nate Caddy','Zach Reid','Ben McKay','Hussien El Achkar','Jaxon Artemis','Angus Clarke','Nic Martin','Rhys Unwin','Cillian Bourke','Zak Johnson','Jayden Nguyen','Archer Day-Wicks','Lachlan Blakiston','Jack Bowes','Keidean Coleman'
   ]},
   {id:'fre',name:'Fremantle',abbr:'FRE',zh:'FRE',color:'#5b2b82',clubText:'#fff',logo:'assets/logos/fre.svg',listCap:44,players:[
     "Jaeger O'Meara",'Caleb Serong','Sean Darcy','Heath Chapman','Jordan Clark','Andrew Brayshaw','Luke Jackson','Shai Bolton','Tobyn Murray','Hugh Davies','Luke Ryan','Jeremy Sharp','Adam Sweid','Murphy Reid','Judd McVee','Mason Cox','Leon Kickett','Patrick Voss','Oscar McDonald','Charlie Nicholls','Karl Worner','Jye Amiss','Alex Pearce','Hayden Young','Toby Whan','Neil Erasmus','Cooper Simpson','Brandon Walker','Michael Frederick','Corey Wagner','Josh Treacy','Brennan Cox','Joshua Draper','Jaren Carr','Aiden Riddle','Isaiah Dudley','Matthew Johnson','Christopher Scerri','Dominic Bedendo'
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'16 Oct 2026 — official AFL post-trade 115-pick order, verified future picks and Hawthorn/West Coast list changes',
+  updated:'17 Oct 2026 — official AFL post-trade 115-pick order, verified future picks and Hawthorn/West Coast/Essendon list changes',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
