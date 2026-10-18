@@ -431,15 +431,16 @@
     flex-direction:column;
     isolation:isolate;
     overflow:hidden;
-    padding:22px 8px 12px;
-    border:2px solid #347d50;
-    border-radius:48% 48% 12px 12px / 12% 12% 12px 12px;
+    /* A true, vertically oriented ellipse rather than rounded-top rectangle. */
+    padding:74px 5px 74px;
+    border:3px solid rgba(248,255,249,.9);
+    border-radius:50% / 50%;
     background:repeating-linear-gradient(0deg,#358c54 0 45px,#40965d 45px 90px);
   }
   #best23Mode .starting-oval::before{
     content:"";position:absolute;inset:8px 7px;
     border:1.5px solid rgba(255,255,255,.6);
-    border-radius:48% 48% 11px 11px / 12% 12% 11px 11px;
+    border-radius:50% / 50%;
     pointer-events:none;z-index:0;
   }
   #best23Mode .starting-oval::after{
@@ -449,7 +450,19 @@
     border:1.5px solid rgba(255,255,255,.55);
     border-radius:50%;pointer-events:none;z-index:0;
   }
-  #best23Mode .starting-oval .field-line{position:relative;z-index:1}
+  /* Taper the outer lines to keep all 18 photo/name tiles inside the curved boundary. */
+  #best23Mode .starting-oval .field-line{
+    position:relative;z-index:1;
+    align-self:center;
+    width:96%;
+    margin-bottom:5px!important;
+  }
+  #best23Mode .starting-oval .field-line:first-child,
+  #best23Mode .starting-oval .field-line:nth-child(6){width:60%}
+  #best23Mode .starting-oval .field-line:nth-child(2),
+  #best23Mode .starting-oval .field-line:nth-child(5){width:82%}
+  #best23Mode .starting-oval .field-line:nth-child(3),
+  #best23Mode .starting-oval .field-line:nth-child(4){width:96%}
   #best23Mode .interchange-bench{
     display:block!important;
     margin-top:12px;
