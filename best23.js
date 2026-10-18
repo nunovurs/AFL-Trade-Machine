@@ -112,7 +112,7 @@
 
   function renderField(team,selector){
     const el=$(selector); if(!el)return;
-    el.innerHTML=groups.map(g=>`<div class="field-line ${g.interchange?'interchange':''}">
+    const fieldLines=groups.map(g=>`<div class="field-line ${g.interchange?'interchange':''}">
       <div class="field-line-label">${esc(g.label)}</div>
       <div class="field-line-slots">${g.slots.map(([key,label])=>{
         const value=lineup(team)[key],meta=value?playerMeta(value):null;
@@ -121,7 +121,9 @@
           <div class="position-name">${esc(label)}</div>
           ${value?`<div class="position-player-tag">${photoImg(value,'position-player-photo')}<span><strong>${esc(value)}</strong>${meta&&meta.source!=='Club list'?`<small>${esc(meta.source)}</small>`:''}</span></div>`:`<div class="position-player-tag empty-tag"><span><strong>DROP PLAYER</strong></span></div>`}
         </div>`;
-      }).join('')}</div></div>`).join('');
+      }).join('')}</div></div>`);
+    // Only the starting eighteen belong on the grass; interchange remains a separate bench.
+    el.innerHTML=`<div class="starting-oval">${fieldLines.slice(0,6).join('')}</div><div class="interchange-bench">${fieldLines.slice(6).join('')}</div>`;
     el.querySelectorAll('[data-slot-card]').forEach(card=>{
       const key=card.dataset.slotCard,fieldTeam=card.dataset.teamField;
       card.onclick=()=>{activeTarget={team:fieldTeam,key};renderFieldsOnly();};
