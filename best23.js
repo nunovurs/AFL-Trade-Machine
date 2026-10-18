@@ -122,8 +122,8 @@
           ${value?`<div class="position-player-tag">${photoImg(value,'position-player-photo')}<span><strong>${esc(value)}</strong>${meta&&meta.source!=='Club list'?`<small>${esc(meta.source)}</small>`:''}</span></div>`:`<div class="position-player-tag empty-tag"><span><strong>DROP PLAYER</strong></span></div>`}
         </div>`;
       }).join('')}</div></div>`);
-    // Only the starting eighteen belong on the grass; interchange remains a separate bench.
-    el.innerHTML=`<div class="starting-oval">${fieldLines.slice(0,6).join('')}</div><div class="interchange-bench">${fieldLines.slice(6).join('')}</div>`;
+    // Reference-style team sheet: five field lines on the oval, with followers and interchange below.
+    el.innerHTML=`<div class="starting-oval">${fieldLines.slice(0,5).join('')}</div><div class="followers-bench">${fieldLines.slice(5,6).join('')}</div><div class="interchange-bench">${fieldLines.slice(6).join('')}</div>`;
     el.querySelectorAll('[data-slot-card]').forEach(card=>{
       const key=card.dataset.slotCard,fieldTeam=card.dataset.teamField;
       card.onclick=()=>{activeTarget={team:fieldTeam,key};renderFieldsOnly();};
