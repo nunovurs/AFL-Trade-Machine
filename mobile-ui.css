@@ -431,9 +431,9 @@
     flex-direction:column;
     isolation:isolate;
     overflow:hidden;
-    /* A true, vertically oriented ellipse rather than rounded-top rectangle. */
-    padding:74px 5px 74px;
-    border:3px solid rgba(248,255,249,.9);
+    /* Compact AFL oval: no oversized end-zone padding. */
+    padding:24px 0;
+    border:2px solid rgba(248,255,249,.9);
     border-radius:50% / 50%;
     background:repeating-linear-gradient(0deg,#358c54 0 45px,#40965d 45px 90px);
   }
@@ -450,19 +450,114 @@
     border:1.5px solid rgba(255,255,255,.55);
     border-radius:50%;pointer-events:none;z-index:0;
   }
-  /* Taper the outer lines to keep all 18 photo/name tiles inside the curved boundary. */
-  #best23Mode .starting-oval .field-line{
+  /* Every on-field position occupies the SAME tile width and height.
+     Do not taper the rows, as that scales the player cards unevenly. */
+  #best23Mode .starting-oval .field-line,
+  #best23Mode .starting-oval .field-line:first-child,
+  #best23Mode .starting-oval .field-line:nth-child(2),
+  #best23Mode .starting-oval .field-line:nth-child(3),
+  #best23Mode .starting-oval .field-line:nth-child(4),
+  #best23Mode .starting-oval .field-line:nth-child(5),
+  #best23Mode .starting-oval .field-line:nth-child(6){
     position:relative;z-index:1;
     align-self:center;
-    width:96%;
-    margin-bottom:5px!important;
+    width:100%!important;
+    margin:0 0 2px!important;
+    padding:0!important;
   }
-  #best23Mode .starting-oval .field-line:first-child,
-  #best23Mode .starting-oval .field-line:nth-child(6){width:60%}
-  #best23Mode .starting-oval .field-line:nth-child(2),
-  #best23Mode .starting-oval .field-line:nth-child(5){width:82%}
-  #best23Mode .starting-oval .field-line:nth-child(3),
-  #best23Mode .starting-oval .field-line:nth-child(4){width:96%}
+  #best23Mode .starting-oval .field-line-label{display:none!important}
+  #best23Mode .starting-oval .field-line-slots{
+    display:grid!important;
+    grid-template-columns:repeat(3,clamp(62px,20vw,78px))!important;
+    justify-content:center!important;
+    gap:3px!important;
+  }
+  #best23Mode .starting-oval .position-slot{
+    box-sizing:border-box!important;
+    width:100%!important;
+    height:64px!important;
+    min-height:64px!important;
+    max-height:64px!important;
+    padding:0!important;
+    gap:2px!important;
+    overflow:visible!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+  }
+  #best23Mode .starting-oval .position-name{
+    box-sizing:border-box!important;
+    display:block!important;
+    height:10px!important;
+    min-height:10px!important;
+    max-height:10px!important;
+    padding:1px 2px!important;
+    margin:0!important;
+    font-size:6px!important;
+    line-height:8px!important;
+    white-space:nowrap!important;
+    text-align:center!important;
+  }
+  #best23Mode .starting-oval .position-player-tag,
+  #best23Mode .starting-oval .position-player-tag.empty-tag{
+    box-sizing:border-box!important;
+    width:100%!important;
+    height:52px!important;
+    min-height:52px!important;
+    max-height:52px!important;
+    margin:0!important;
+    padding:2px!important;
+    gap:1px!important;
+    flex:0 0 52px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    overflow:hidden!important;
+    border-radius:6px!important;
+  }
+  #best23Mode .starting-oval .position-player-photo{
+    display:block!important;
+    box-sizing:border-box!important;
+    width:33px!important;
+    height:32px!important;
+    min-width:33px!important;
+    min-height:32px!important;
+    max-width:33px!important;
+    max-height:32px!important;
+    flex:0 0 32px!important;
+    object-fit:cover!important;
+    object-position:top center!important;
+    border-radius:4px!important;
+  }
+  #best23Mode .starting-oval .position-player-tag span{
+    display:block!important;
+    width:100%!important;
+    height:14px!important;
+    min-height:14px!important;
+    overflow:hidden!important;
+    flex:0 0 14px!important;
+  }
+  #best23Mode .starting-oval .position-player-tag strong{
+    display:-webkit-box!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    overflow:hidden!important;
+    width:100%!important;
+    font-size:7px!important;
+    line-height:7px!important;
+    text-align:center!important;
+    overflow-wrap:anywhere!important;
+  }
+  #best23Mode .starting-oval .position-player-tag small{display:none!important}
+  #best23Mode .starting-oval .position-player-tag.empty-tag{
+    justify-content:center!important;
+    background:rgba(255,255,255,.2)!important;
+  }
+  #best23Mode .starting-oval .position-player-tag.empty-tag span{
+    height:auto!important;min-height:0!important;flex:0 0 auto!important;
+  }
   #best23Mode .interchange-bench{
     display:block!important;
     margin-top:12px;
