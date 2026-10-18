@@ -407,3 +407,61 @@
   #best23Mode .position-slot.active-slot .position-player-tag{outline:3px solid #ffd84d!important}
   #best23Mode .position-slot:focus-visible{outline:2px solid #ffd84d!important}
 }
+
+/* Separate the starting eighteen from the interchange bench in the mobile team sheets.
+   Keep desktop's existing field appearance and preserve all slot interactions. */
+#best23Mode .starting-oval,
+#best23Mode .interchange-bench{display:contents}
+
+@media(max-width:760px){
+  #best23Mode .football-field{
+    display:block!important;
+    min-height:0!important;
+    overflow:visible!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    background:transparent!important;
+  }
+  #best23Mode .football-field::before,
+  #best23Mode .football-field::after{display:none!important;content:none!important}
+  #best23Mode .starting-oval{
+    display:flex!important;
+    position:relative;
+    flex-direction:column;
+    isolation:isolate;
+    overflow:hidden;
+    padding:22px 8px 12px;
+    border:2px solid #347d50;
+    border-radius:48% 48% 12px 12px / 12% 12% 12px 12px;
+    background:repeating-linear-gradient(0deg,#358c54 0 45px,#40965d 45px 90px);
+  }
+  #best23Mode .starting-oval::before{
+    content:"";position:absolute;inset:8px 7px;
+    border:1.5px solid rgba(255,255,255,.6);
+    border-radius:48% 48% 11px 11px / 12% 12% 11px 11px;
+    pointer-events:none;z-index:0;
+  }
+  #best23Mode .starting-oval::after{
+    content:"";position:absolute;
+    left:50%;top:50%;width:110px;height:110px;
+    transform:translate(-50%,-50%);
+    border:1.5px solid rgba(255,255,255,.55);
+    border-radius:50%;pointer-events:none;z-index:0;
+  }
+  #best23Mode .starting-oval .field-line{position:relative;z-index:1}
+  #best23Mode .interchange-bench{
+    display:block!important;
+    margin-top:12px;
+    padding:9px 7px;
+    border:1px solid #d0dcd3;
+    border-radius:10px;
+    background:#e8eee9;
+  }
+  #best23Mode .interchange-bench .field-line.interchange{
+    margin:0!important;
+    padding:0!important;
+    background:transparent!important;
+  }
+  #best23Mode .interchange-bench .position-player-tag{background:#fff!important}
+}
