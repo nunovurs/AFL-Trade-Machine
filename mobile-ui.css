@@ -362,9 +362,9 @@
   #best23Mode .field-line:nth-child(1){order:1}
   #best23Mode .field-line:nth-child(2){order:2}
   #best23Mode .field-line:nth-child(3){order:3}
-  #best23Mode .field-line:nth-child(6){order:4}
-  #best23Mode .field-line:nth-child(4){order:5}
-  #best23Mode .field-line:nth-child(5){order:6}
+  #best23Mode .field-line:nth-child(4){order:4}
+  #best23Mode .field-line:nth-child(5){order:5}
+  #best23Mode .field-line:nth-child(6){order:6}
   #best23Mode .field-line:nth-child(7){order:7}
   #best23Mode .field-line-label{font-size:8px!important;letter-spacing:.16em!important;padding:1px 0 3px!important}
   #best23Mode .field-line-slots{gap:4px!important}
