@@ -133,6 +133,7 @@ window.ATM_DATA = {
   // Announced agreements not yet eligible for AFL delisted free-agent registration.
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
+    {player:'Alex Mirkov',from:'williamstown',to:'gws',mechanism:'pre-season supplemental selection period',status:'club-committed; registration pending',announced:'2026-10-08',registrationWindowOpens:'after November 2026 AFL Draft',source:'https://www.afl.com.au/news/1628963/former-carlton-blues-big-man-alex-mirkov-lands-second-chance-with-greater-western-sydney-giants'},
     {
       player:'Jake Stringer',
       from:'gws',
