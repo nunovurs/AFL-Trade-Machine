@@ -129,5 +129,19 @@ window.ATM_DATA = {
   picks2026:PICKS_2026,
   pickOrigin2026:PICK_ORIGIN_2026,
   picks2027:PICKS_2027,
-  picks2028:PICKS_2028
+  picks2028:PICKS_2028,
+  // Announced agreements not yet eligible for AFL delisted free-agent registration.
+  // Do not include these players in their destination club's registered roster until confirmed.
+  pendingMovements:[
+    {
+      player:'Jake Stringer',
+      from:'gws',
+      to:'stk',
+      mechanism:'delisted free agent',
+      status:'club-announced; registration pending',
+      announced:'2026-10-19',
+      registrationWindowOpens:'2026-11-02',
+      source:'https://www.afl.com.au/news/1634074/jake-stringer-lands-at-fourth-club-st-kilda-saints-after-departing-greater-western-sydney-giants-for-family-reasons'
+    }
+  ]
 };
