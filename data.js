@@ -18,7 +18,7 @@ const ATM_CLUBS = [
     "Jaeger O'Meara",'Caleb Serong','Sean Darcy','Heath Chapman','Jordan Clark','Andrew Brayshaw','Luke Jackson','Shai Bolton','Tobyn Murray','Hugh Davies','Luke Ryan','Jeremy Sharp','Adam Sweid','Murphy Reid','Judd McVee','Mason Cox','Leon Kickett','Patrick Voss','Oscar McDonald','Charlie Nicholls','Karl Worner','Jye Amiss','Alex Pearce','Hayden Young','Toby Whan','Neil Erasmus','Cooper Simpson','Brandon Walker','Michael Frederick','Corey Wagner','Josh Treacy','Brennan Cox','Joshua Draper','Jaren Carr','Aiden Riddle','Isaiah Dudley','Matthew Johnson','Christopher Scerri','Dominic Bedendo'
   ]},
   {id:'gee',name:'Geelong',abbr:'GEE',zh:'GEEL',color:'#002b5c',clubText:'#fff',logo:'assets/logos/gee.svg',listCap:44,players:[
-    'Rowan Marshall','Jay Polkinghorne','Bailey Smith','Tanner Bruhn','Jeremy Cameron','Toby Conway','Shaun Mannagh','Max Holmes','Mitch Knevitt','Mitchell Edwards','Jhye Clark',"Connor O'Sullivan",'Sam De Koning','Lawson Humphries','Jack Martin','Jacob Molier','Oliver Wiltshire','Hunter Holmes','Lennox Hofmann','Jesse Mellor','Harley Barker','Nicholas Driscoll','Oliver Dempsey','James Worpel','Tom Atkins','Gryan Miers','Shannon Neale','Oisin Mullin','Patrick Dangerfield','Oliver Henry','Joe Pike','Jack Henry','Zach Guthrie','Cillian Burke',"Mark O'Connor",'Tom Stewart','Brad Close','Mark Blicavs','Toby Greene','Jordan Ridley'
+    'Rowan Marshall','Jay Polkinghorne','Bailey Smith','Tanner Bruhn','Jeremy Cameron','Toby Conway','Shaun Mannagh','Max Holmes','Mitchell Edwards','Jhye Clark',"Connor O'Sullivan",'Sam De Koning','Lawson Humphries','Jack Martin','Jacob Molier','Oliver Wiltshire','Hunter Holmes','Lennox Hofmann','Jesse Mellor','Harley Barker','Nicholas Driscoll','Oliver Dempsey','James Worpel','Tom Atkins','Gryan Miers','Shannon Neale','Oisin Mullin','Patrick Dangerfield','Oliver Henry','Joe Pike','Jack Henry','Zach Guthrie','Cillian Burke',"Mark O'Connor",'Tom Stewart','Brad Close','Mark Blicavs','Toby Greene','Jordan Ridley'
   ]},
   {id:'gcs',name:'Gold Coast',abbr:'GCS',zh:'GC',color:'#e7192d',clubText:'#fff',logo:'assets/logos/gcs.svg',listCap:44,players:[
     'Mac Andrew','John Noble','Christian Petracca','Jed Walter','Alex Davies','Bodhi Uwland','Leonardo Lombard','Jamarra Ugle-Hagan','Charlie Ballard','Touk Miller','Elliott Himmelberg','Lachie Weller','Noah Anderson','Joel Jeffrey','Daniel Rioli','Matt Rowell','Bailey Humphrey','Ethan Read','Ben Long','Ned Moyle','Sam Collins','Will Graham','Wil Powell','Jarrod Witts','Jake Rogers','Dylan Patterson','Zeke Uwland','Sam Clohesy','Jai Murray','Zak Evans','Max Knobel','Beau Addinsall','Lachlan Gulbin','Avery Thomas','Koby Coulson','Ben Jepson','Caleb Lewis','Oscar Adams','Jy Farrar','Scott Pendlebury','Aidan Schubert','Sam Butler'
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'17 Oct 2026 — official AFL post-trade 115-pick order, verified future picks and Hawthorn/West Coast/Essendon list changes',
+  updated:'19 Oct 2026 — 115-pick AFL order verified unchanged; Geelong confirmed Mitch Knevitt delisted',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
