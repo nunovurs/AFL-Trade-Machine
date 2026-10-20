@@ -1,6 +1,6 @@
 const ATM_CLUBS = [
   {id:'ade',name:'Adelaide',abbr:'ADE',zh:'ADEL',color:'#002b5c',clubText:'#fff',logo:'assets/logos/ade.svg',listCap:44,players:[
-    'Ben Keays','Sam Berry','Callum Ah Chee','Sid Draper','Daniel Curtin','Riley Thilthorpe','Josh Rachele','Nick Murray','Charlie Edwards','Jordan Dawson','Jake Soligo','Brayden Cook','Max Michalanney','Zac Taylor','Mitchell Hinge','Hugh Bond','Oscar Ryan','Izak Rankine','Josh Worrell','James Peatling','Mitchell Marsh','Luke Nankervis','Alex Neal-Bullen','Rory Laird','Wayne Milera','Billy Dowling','Darcy Fogarty','Indy Cotton','Archie Ludowyke','James Borlase','Finnbar Maley','Toby Murray','Hugo Hall-Kahan','Lachlan McAndrew',"Reilly O'Brien",'Isaac Cumming','Mark Keane','Harry Cunningham'
+    'Ben Keays','Sam Berry','Callum Ah Chee','Sid Draper','Daniel Curtin','Riley Thilthorpe','Josh Rachele','Nick Murray','Charlie Edwards','Jordan Dawson','Jake Soligo','Brayden Cook','Max Michalanney','Zac Taylor','Mitchell Hinge','Hugh Bond','Oscar Ryan','Izak Rankine','Josh Worrell','James Peatling','Mitchell Marsh','Luke Nankervis','Alex Neal-Bullen','Rory Laird','Wayne Milera','Billy Dowling','Darcy Fogarty','Indy Cotton','Archie Ludowyke','James Borlase','Finnbar Maley','Toby Murray','Hugo Hall-Kahan','Lachlan McAndrew',"Reilly O'Brien",'Isaac Cumming','Mark Keane'
   ]},
   {id:'bri',name:'Brisbane',abbr:'BRI',zh:'BL',color:'#7b002c',clubText:'#fff',logo:'assets/logos/bri.svg',listCap:44,players:[
     'Kai Lohmann','Sam Draper','Jaspa Fletcher','Oscar Allen','Josh Dunkley','Hugh McCluggage','Jarrod Berry','Will Ashcroft','Levi Ashcroft','Lincoln McCarthy','Tom Doedee','Logan Morris','Daniel Annable','Dayne Zorko','Cam Rayner','Luke Beecken','Luke Lloyd','Zane Zakostelsky','Ty Gallop','Charlie Cameron','Koby Evans','Henry Smith','Conor McKenna','Darcy Gardiner','James Tunstill','Eric Hipwood','Harris Andrews','Darcy Fort','Zac Bailey','Shadeau Brain','Ryan Lester','Reece Torrent','Cody Curtin','Bruce Reville','Ben Murphy','Jack Payne','Darragh Joyce','Tai Hayes','Noah Answerth','Darcy Wilmot'
@@ -33,7 +33,7 @@ const ATM_CLUBS = [
     'Jacob van Rooyen','Christian Salem','Harvey Langford','Xavier Lindsay','Caleb Windsor','Jake Lever','Jack Steele','Daniel Turner','Max Gawn','Koltyn Tholstrup','Jai Culley','Changkuoth Jiath','Ed Langdon','Bailey Laurie','Jake Bowey','Xavier Taylor','Thomas Matthews','Matthew Jefferson','Blake Howes','Jed Adams','Max Heath','Brody Mihocek','Harry Sharp','Bayley Fritsch','Tom Sparrow','Latrelle Pickett','Harrison Petty','Kysaiah Pickett','Kade Chandler','Oscar Berry','Ricky Mentha','Paddy Cross','Luker Kentfield','Lukas Cooke','Joel Fitzgerald','Max Mapley', 'Zane Duursma','Will McLachlan','Bodie Ryan'
   ]},
   {id:'nm',name:'North Melbourne',abbr:'NM',zh:'NMFC',color:'#00529b',clubText:'#fff',logo:'assets/logos/nm.svg',listCap:44,players:[
-    'Lachy Dovaston',"Finn O'Sullivan",'Harry Sheezel','Aidan Corr','Caleb Daniel','George Wardlaw','Luke Davies-Uniacke','Colby McKercher','Luke McDonald','Jy Simpkin','Charlie Spargo','Luke Urquhart','Dylan Stephens','Zac Fisher','Riley Hardeman','Wil Dawson','Griffin Logue','Nick Larkey','Taylor Goad','Blake Thredgold','Tom Powell','Paul Curtis','Luke Parker','Jack Darling','Hugo Mikunda','Charlie Comben','Toby Pink','Jackson Archer','Matt Whitlock','River Stevens','Cooper Harvey','Tristan Xerri','Tom Blamires','Lachy Brewer','Jacob Konstanty','Oliver Griffin','Cameron Zurhaar','Zac Banch','Cooper Trembath', 'Nick Blakey'
+    'Lachy Dovaston',"Finn O'Sullivan",'Harry Sheezel','Aidan Corr','Caleb Daniel','George Wardlaw','Luke Davies-Uniacke','Colby McKercher','Luke McDonald','Jy Simpkin','Charlie Spargo','Dylan Stephens','Riley Hardeman','Wil Dawson','Griffin Logue','Nick Larkey','Taylor Goad','Blake Thredgold','Tom Powell','Paul Curtis','Luke Parker','Jack Darling','Hugo Mikunda','Charlie Comben','Toby Pink','Jackson Archer','Matt Whitlock','River Stevens','Tristan Xerri','Tom Blamires','Lachy Brewer','Jacob Konstanty','Oliver Griffin','Cameron Zurhaar','Zac Banch','Cooper Trembath', 'Nick Blakey'
   ]},
   {id:'pa',name:'Port Adelaide',abbr:'PA',zh:'PORT',color:'#008aab',clubText:'#111',logo:'assets/logos/pa.svg',listCap:44,players:[
     'Connor Rozee','Sam Powell-Pepper','Todd Marshall','Joe Berry','Kane Farrell','Jase Burgoyne','Josh Sinn','Christian Moraes','Jack Lukosius','Miles Bergman','Jacob Wehr','Ollie Wines','Jack Whitlock','Jason Horne-Francis','Mitch Georgiades','Aliir Aliir','Logan Evans','Jordon Sweet','Brandon Zerk-Thatcher','Tom Cochrane','Esava Ratugolea','Willem Drew','Ewan Mackinlay','Harrison Ramm','Darcy Byrne-Jones','Lachie Jones','Joe Richards','Jack Watkins','Dante Visentini','Mitch Zadow',"Balyn O'Brien",'Josh Lai','Corey Durdin','Xavier Bamert','Alex Van Wyk','Luke Pedlar'
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'19 Oct 2026 — 115-pick AFL order verified unchanged; Geelong confirmed Mitch Knevitt delisted',
+  updated:'20 Oct 2026 — 115-pick AFL order verified unchanged; North Melbourne delistings confirmed; Cunningham rookie-draft move pending',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -133,6 +133,7 @@ window.ATM_DATA = {
   // Announced agreements not yet eligible for AFL delisted free-agent registration.
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
+    {player:'Harry Cunningham',from:'syd',to:'ade',mechanism:'rookie draft',status:'club-committed; registration pending',announced:'2026-10-09',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1629056/cunningham-to-adelaide'},
     {player:'Alex Mirkov',from:'williamstown',to:'gws',mechanism:'pre-season supplemental selection period',status:'club-committed; registration pending',announced:'2026-10-08',registrationWindowOpens:'after November 2026 AFL Draft',source:'https://www.afl.com.au/news/1628963/former-carlton-blues-big-man-alex-mirkov-lands-second-chance-with-greater-western-sydney-giants'},
     {
       player:'Jake Stringer',
