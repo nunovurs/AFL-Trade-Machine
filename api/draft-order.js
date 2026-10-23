@@ -54,7 +54,7 @@ const NOTES={
   34:'via Adelaide - Luke Pedlar trade',
   45:'via Melbourne - Will McLachlan trade (West Coast / Jack Viney and Trent Rivers trade)',
   53:'via Brisbane - Western Bulldogs pick swap (tied to Melbourne)',
-  107:'via Melbourne - Bodie Ryan trade'
+  107:'via Melbourne - Bodie Ryan trade',
   43:'via Gold Coast (tied to Essendon)',
   48:'via Port Adelaide - five-club mega deal (tied to Gold Coast)',
   54:'tied to Carlton (Sydney holds the selection)',
