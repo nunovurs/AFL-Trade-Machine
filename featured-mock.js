@@ -2,7 +2,7 @@
   const D=window.ATM_DATA,P=window.ATM_PLAYER_PROFILES||{}; if(!D?.clubs||!window.ATM_MY_MOCK)return;
   const M=window.ATM_MY_MOCK;
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-  const DVI=[0,3000,2481,2178,1962,1795,1659,1543,1443,1355,1276,1205,1140,1080,1024,973,924,879,836,796,757,721,686,653,621,590,561,533,505,479,454,429,405,382,360,338,317,297,277,257,238];
+  const DVI=[0,3000,2481,2178,1962,1795,1659,1543,1443,1355,1276,1205,1140,1080,1024,973,924,879,836,796,757,721,686,653,621,590,561,533,505,479,454,429,405,382,360,338,317,297,277,257,238,220,202,184,167,150,134,118,102,86,71,57,42,28,14];
   const dvi=n=>DVI[Number(n)]??0;
   const club=id=>D.clubs.find(c=>c.id===id);
   const toast=msg=>window.ATMToast?window.ATMToast(msg):alert(msg);
