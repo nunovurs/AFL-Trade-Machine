@@ -104,7 +104,7 @@
       const c=club(r.clubId),cls=String(r.status||'LIVE').toLowerCase().replace(/\s+/g,'-');
       return '<div class="mock-asset-row '+cls+'"><div class="mock-asset-pick">'+esc(r.pick)+'</div><div class="mock-asset-club">'+(c?'<img src="'+esc(c.logo)+'" alt="">':'')+'<strong>'+esc(c?.abbr||r.clubId||'—')+'</strong></div><div class="mock-asset-origin"><strong>'+esc(r.origin||'')+'</strong><span>'+esc(r.detail||'')+'</span></div><div class="mock-asset-status">'+esc(r.status||'LIVE')+'</div></div>';
     }).join('');
-    return '<details class="mock-asset-ledger"><summary><span><strong>DRAFT ASSET LEDGER</strong><small>All starting selections and compensation assets are shown, including picks later consumed by bids.</small></span><b>1–40</b></summary><div class="mock-ledger-assumptions"><strong>CURRENT MOCK ASSUMPTIONS</strong><ul>'+assumptions+'</ul></div><div class="mock-asset-head"><span>PICK</span><span>CLUB</span><span>ASSET / WHAT HAPPENS</span><span>STATUS</span></div><div class="mock-asset-rows">'+rows+'</div></details>';
+    return '<details class="mock-asset-ledger"><summary><span><strong>DRAFT ASSET LEDGER</strong><small>Selections and assumed compensation picks are shown, with assumed bid, compensation and live-pick statuses.</small></span><b>1–41</b></summary><div class="mock-ledger-assumptions"><strong>CURRENT MOCK ASSUMPTIONS</strong><ul>'+assumptions+'</ul></div><div class="mock-asset-head"><span>PICK</span><span>CLUB</span><span>ASSET / WHAT HAPPENS</span><span>STATUS</span></div><div class="mock-asset-rows">'+rows+'</div></details>';
   }
 
   async function reorderPlayers(fromPick,toPick){
