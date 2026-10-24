@@ -48,12 +48,16 @@
   async function loadOverrides(){
     if(!window.ATMCloud?.loadMockOverrides){loaded=true;return;}
     const data=await window.ATMCloud.loadMockOverrides();
-    rowOverrides=Object.fromEntries((data.rows||[]).map(r=>{
+    // New published mock supersedes older admin draft/profile overrides.
+    // Admin edits created after the published revision still apply normally.
+    const cutoff=Date.parse(M.cloudOverrideCutoff||0)||0;
+    const fresh=item=>Date.parse(item.updated_at||0)>cutoff;
+    rowOverrides=Object.fromEntries((data.rows||[]).filter(fresh).map(r=>{
       const o={};
       if(Object.prototype.hasOwnProperty.call(r,'player'))o.player=r.player;
       return [Number(r.pick),o];
     }));
-    profileOverrides=Object.fromEntries((data.profiles||[]).map(p=>[p.player,{
+    profileOverrides=Object.fromEntries((data.profiles||[]).filter(fresh).map(p=>[p.player,{
       comparison:p.comparison??undefined,why:p.why??undefined,description:p.description??undefined,
       position:p.position??undefined,pathway:p.pathway??undefined
     }]));
