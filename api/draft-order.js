@@ -35,7 +35,7 @@ const NOTES={
   26:'via Carlton - Lachie Whitfield trade (tied to Gold Coast)',
   27:'via Essendon - Keidean Coleman trade (via Hawthorn / Zach Merrett trade; tied to Greater Western Sydney)',
   28:'via GWS - Brisbane pick swap (originally Toby Greene compensation)',
-  29:'tied to St Kilda (Hawthorn holds the selection)',
+  29:'via West Coast (originally tied to St Kilda; Hawthorn holds the selection)',
   31:'via Greater Western Sydney - Lachie Whitfield trade (tied to Melbourne)',
   32:'via Port Adelaide - Luke Pedlar trade (tied to Carlton)',
   33:'via Melbourne - Zane Duursma trade (tied to Western Bulldogs; Melbourne received via five-club mega deal)',
@@ -47,7 +47,7 @@ const NOTES={
   49:'via Melbourne - Zane Duursma trade (tied to Greater Western Sydney)',
   52:'via North Melbourne - Zane Duursma trade (North Melbourne received from Sydney in Nick Blakey trade; tied to Collingwood)',
   50:'via Greater Western Sydney - Lachie Whitfield trade (originally Kieren Briggs compensation)',
-  59:'via Brisbane - GWS pick swap (tied to Sydney)',
+  59:'via Brisbane - GWS pick swap (Brisbane received from Hawthorn; originally tied to Sydney)',
   62:'via Essendon - Ridley / Bowes trade',
   63:'via Richmond - O\'Driscoll trade',
   21:'via Essendon - Keidean Coleman trade',
@@ -106,7 +106,7 @@ module.exports=async function handler(req,res){
   if(req.method==='OPTIONS') return res.status(204).end();
   return res.status(200).json({
     source:'AFL Trade Machine verified order',
-    updated:'2026-10-23',
+    updated:'2026-10-25',
     note:'Official AFL post-trade-period 2026 draft order: 115 picks. Three bid-slide compensation picks remain conditional projections.',
     picks:projectedPicks()
   });
