@@ -51,7 +51,7 @@ const ATM_CLUBS = [
     'Willem Duursma','Jake Waterman','Liam Baker','Brandon Starcevich','Josh Lindsay','Elliot Yeo','Reuben Ginbey','Elijah Hewett','Harley Reid','Tim Kelly','Sam Allen','Noah Long','Liam Duggan','Jack Graham','Tom McCarthy','Brady Hough','Tylar Young','Cooper Duff-Tytler','Archer Reid','Ryan Maric','Matt Flynn','Bo Allan','Tom Gross','Tom Cole','Lucca Grego','Bailey J. Williams','Rhett Bazzo','Jobe Shanahan','Tylah Williams','Malakai Champion','Hamish Davis','Fred Rodriguez','Deven Robertson','Sandy Brock','Harry Edwards','Tyrell Dewar','Jack Hutchinson','Finlay Macrae','Jacob Newton','Milan Murdock','Jake Miles-Wrency','Oliver Francou','Marcus Herbert','Jack Viney','Trent Rivers'
   ]},
   {id:'wbd',name:'Western Bulldogs',abbr:'WBD',zh:'WB',color:'#1b4f9c',clubText:'#fff',logo:'assets/logos/wbd.svg',listCap:44,players:[
-    'Lachlan Carmichael','Cody Weightman','Marcus Bontempelli','Jedd Busslinger','Cooper Hynes','Rory Lobb','Matthew Kennedy','Ryley Sanders','Sam Darcy','Lachie Jaques','Rhylee West','Will Darcy','Jordan Croft',"James O'Donnell",'Connor Budarick','Ed Richards','Caleb May','Laitham Vandermeer','Buku Khamis','Louis Emmett','Josh Dolan','Joel Freijah','Will Lewis','Lachlan Bramble','Bailey Dale','Arthur Jones','Aaron Naughton','Bailey Williams','Luke Kennedy','Luke Cleary','Michael Sellwood','Riley Garcia','Sam Davidson','Tim English','Jordon Butts','Zak Butters','Finn Maginness','Hudson O\'Keeffe'
+    'Lachlan Carmichael','Cody Weightman','Marcus Bontempelli','Jedd Busslinger','Cooper Hynes','Rory Lobb','Matthew Kennedy','Ryley Sanders','Sam Darcy','Lachie Jaques','Rhylee West','Will Darcy','Jordan Croft',"James O'Donnell",'Connor Budarick','Ed Richards','Caleb May','Laitham Vandermeer','Buku Khamis','Louis Emmett','Josh Dolan','Joel Freijah','Will Lewis','Lachlan Bramble','Bailey Dale','Arthur Jones','Aaron Naughton','Bailey Williams','Luke Kennedy','Luke Cleary','Michael Sellwood','Sam Davidson','Tim English','Jordon Butts','Zak Butters','Finn Maginness','Hudson O\'Keeffe'
   ]}
 ];
 
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'23 Oct 2026 — official 115-pick ownership unchanged; Brisbane, Carlton and St Kilda delistings of 22 Oct applied; Lloyd and Evans rookie re-draft commitments pending',
+  updated:'27 Oct 2026 — official 115-pick ownership unchanged; Western Bulldogs Riley Garcia delisted with rookie re-draft commitment pending',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -133,6 +133,7 @@ window.ATM_DATA = {
   // Announced agreements not yet eligible for AFL delisted free-agent registration.
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
+    {player:'Riley Garcia',from:'wbd',to:'wbd',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-27',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1636335/luckless-western-bulldog-riley-garcia-delisted-set-to-get-rookie-lifeline'},
     {player:'Luke Lloyd',from:'bri',to:'bri',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-22',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month'},
     {player:'Koby Evans',from:'bri',to:'bri',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-22',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month'},
     {player:'Harry DeMattia',from:'col',to:'col',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-21',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1634392/collingwood-magpies-confirm-further-list-changes-as-mid-season-recruits-noah-howes-harrison-coe-axed'},
