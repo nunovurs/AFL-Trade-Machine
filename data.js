@@ -15,7 +15,7 @@ const ATM_CLUBS = [
     'Andrew McGrath','Jacob Farrow','Darcy Parish','Kyle Langford','Jye Caldwell','Brayden Fiorini','Sullivan Robey','Isaac Kako','Will Setterfield','Dyson Sharp','Archie Perkins','Vigo Visentini','Lewis Hayes','Peter Wright','Archie Roberts','Sam Durham','Harrison Jones','Nick Bryan','Jaxon Prior','Archer May','Mason Redman','Xavier Duursma','Max Kondogiannis','Nate Caddy','Zach Reid','Ben McKay','Hussien El Achkar','Jaxon Artemis','Angus Clarke','Nic Martin','Rhys Unwin','Cillian Bourke','Zak Johnson','Jayden Nguyen','Archer Day-Wicks','Lachlan Blakiston','Jack Bowes','Keidean Coleman'
   ]},
   {id:'fre',name:'Fremantle',abbr:'FRE',zh:'FRE',color:'#5b2b82',clubText:'#fff',logo:'assets/logos/fre.svg',listCap:44,players:[
-    "Jaeger O'Meara",'Caleb Serong','Sean Darcy','Heath Chapman','Jordan Clark','Andrew Brayshaw','Luke Jackson','Shai Bolton','Tobyn Murray','Hugh Davies','Luke Ryan','Jeremy Sharp','Adam Sweid','Murphy Reid','Judd McVee','Mason Cox','Leon Kickett','Patrick Voss','Oscar McDonald','Charlie Nicholls','Karl Worner','Jye Amiss','Alex Pearce','Hayden Young','Toby Whan','Neil Erasmus','Cooper Simpson','Brandon Walker','Michael Frederick','Corey Wagner','Josh Treacy','Brennan Cox','Joshua Draper','Aiden Riddle','Isaiah Dudley','Matthew Johnson','Christopher Scerri','Dominic Bedendo'
+    "Jaeger O'Meara",'Caleb Serong','Sean Darcy','Heath Chapman','Jordan Clark','Andrew Brayshaw','Luke Jackson','Shai Bolton','Tobyn Murray','Hugh Davies','Luke Ryan','Jeremy Sharp','Adam Sweid','Murphy Reid','Judd McVee','Mason Cox','Leon Kickett','Patrick Voss','Oscar McDonald','Charlie Nicholls','Karl Worner','Jye Amiss','Alex Pearce','Hayden Young','Toby Whan','Neil Erasmus','Cooper Simpson','Brandon Walker','Michael Frederick','Corey Wagner','Josh Treacy','Brennan Cox','Joshua Draper','Aiden Riddle','Isaiah Dudley','Matthew Johnson','Christopher Scerri','Dominic Bedendo','Jaren Carr'
   ]},
   {id:'gee',name:'Geelong',abbr:'GEE',zh:'GEEL',color:'#002b5c',clubText:'#fff',logo:'assets/logos/gee.svg',listCap:44,players:[
     'Rowan Marshall','Jay Polkinghorne','Bailey Smith','Tanner Bruhn','Jeremy Cameron','Toby Conway','Shaun Mannagh','Max Holmes','Mitchell Edwards','Jhye Clark',"Connor O'Sullivan",'Sam De Koning','Lawson Humphries','Jack Martin','Jacob Molier','Oliver Wiltshire','Hunter Holmes','Lennox Hofmann','Jesse Mellor','Harley Barker','Nicholas Driscoll','Oliver Dempsey','James Worpel','Tom Atkins','Gryan Miers','Shannon Neale','Oisin Mullin','Patrick Dangerfield','Oliver Henry','Joe Pike','Jack Henry','Zach Guthrie','Cillian Burke',"Mark O'Connor",'Tom Stewart','Brad Close','Mark Blicavs','Toby Greene','Jordan Ridley'
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'28 Oct 2026 — official 115-pick ownership unchanged; Fremantle Jaren Carr delisted with rookie re-draft commitment pending',
+  updated:'28 Oct 2026 — official 115-pick ownership unchanged; unverified Jaren Carr delisting reverted pending club/AFL confirmation',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -133,7 +133,6 @@ window.ATM_DATA = {
   // Announced agreements not yet eligible for AFL delisted free-agent registration.
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
-    {player:'Jaren Carr',from:'fre',to:'fre',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-28',registrationWindowOpens:'2026-11-23',source:'https://www.fremantlefc.com.au/news/2157795/list-update-carr-delisted-freo-commit-to-re-drafting-as-rookie'},
     {player:'Riley Garcia',from:'wbd',to:'wbd',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-27',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1636335/luckless-western-bulldog-riley-garcia-delisted-set-to-get-rookie-lifeline'},
     {player:'Luke Lloyd',from:'bri',to:'bri',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-22',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month'},
     {player:'Koby Evans',from:'bri',to:'bri',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-22',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month'},
