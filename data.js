@@ -21,7 +21,7 @@ const ATM_CLUBS = [
     'Rowan Marshall','Jay Polkinghorne','Bailey Smith','Tanner Bruhn','Jeremy Cameron','Toby Conway','Shaun Mannagh','Max Holmes','Mitchell Edwards','Jhye Clark',"Connor O'Sullivan",'Sam De Koning','Lawson Humphries','Jack Martin','Jacob Molier','Oliver Wiltshire','Hunter Holmes','Lennox Hofmann','Jesse Mellor','Harley Barker','Nicholas Driscoll','Oliver Dempsey','James Worpel','Tom Atkins','Gryan Miers','Shannon Neale','Oisin Mullin','Patrick Dangerfield','Oliver Henry','Joe Pike','Jack Henry','Zach Guthrie','Cillian Burke',"Mark O'Connor",'Tom Stewart','Brad Close','Mark Blicavs','Toby Greene','Jordan Ridley'
   ]},
   {id:'gcs',name:'Gold Coast',abbr:'GCS',zh:'GC',color:'#e7192d',clubText:'#fff',logo:'assets/logos/gcs.svg',listCap:44,players:[
-    'Mac Andrew','John Noble','Christian Petracca','Jed Walter','Alex Davies','Bodhi Uwland','Leonardo Lombard','Jamarra Ugle-Hagan','Charlie Ballard','Touk Miller','Elliott Himmelberg','Lachie Weller','Noah Anderson','Joel Jeffrey','Daniel Rioli','Matt Rowell','Bailey Humphrey','Ethan Read','Ben Long','Ned Moyle','Sam Collins','Will Graham','Wil Powell','Jarrod Witts','Jake Rogers','Dylan Patterson','Zeke Uwland','Sam Clohesy','Jai Murray','Zak Evans','Max Knobel','Beau Addinsall','Lachlan Gulbin','Avery Thomas','Koby Coulson','Ben Jepson','Caleb Lewis','Oscar Adams','Jy Farrar','Scott Pendlebury','Aidan Schubert','Sam Butler'
+    'Mac Andrew','John Noble','Christian Petracca','Jed Walter','Alex Davies','Bodhi Uwland','Leonardo Lombard','Charlie Ballard','Touk Miller','Lachie Weller','Noah Anderson','Joel Jeffrey','Daniel Rioli','Matt Rowell','Bailey Humphrey','Ethan Read','Ben Long','Ned Moyle','Sam Collins','Will Graham','Wil Powell','Jarrod Witts','Jake Rogers','Dylan Patterson','Zeke Uwland','Sam Clohesy','Jai Murray','Zak Evans','Max Knobel','Beau Addinsall','Lachlan Gulbin','Avery Thomas','Koby Coulson','Ben Jepson','Caleb Lewis','Oscar Adams','Jy Farrar','Scott Pendlebury','Aidan Schubert','Sam Butler'
   ]},
   {id:'gws',name:'GWS Giants',abbr:'GWS',zh:'GWS',color:'#f15a22',clubText:'#111',logo:'assets/logos/gws.svg',listCap:44,players:[
     'Harvey Thomas','Darcy Jones','Stephen Coniglio','Aaron Cadman','Lachie Ash','Ryan Angwin','Clayton Oliver','Phoenix Gothard','Tom Green','Oliver Hannaford','Toby Bedford','Sam Taylor','Brent Daniels','Finn Callaghan','Harrison Oliver','Leek Aleer','Josh Kelly','Harry Rowston','Jayden Laverde','Jake Riccardi','Harry Himmelberg','Jack Ough','Cody Angove','James Leake','Toby McMullin',"Xavier O'Halloran",'Oskar Taylor','Max Gruzewski','Logan Smith','Joe Fonti','Josaia Delana','Connor Idun','Nicholas Madden','Nathan Wardius','Riley Hamilton','Jack Buckley','Finnegan Davis','Callum Brown'
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'28 Oct 2026 — official 115-pick ownership unchanged; Jaren Carr confirmed delisted, rookie re-draft pending',
+  updated:'30 Oct 2026 — Gold Coast list lodgement: Jamarra Ugle-Hagan and Elliott Himmelberg delisted, national-draft re-selection pending; official draft picks unchanged',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -133,6 +133,8 @@ window.ATM_DATA = {
   // Announced agreements not yet eligible for AFL delisted free-agent registration.
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
+    {player:'Jamarra Ugle-Hagan',from:'gcs',to:'gcs',mechanism:'national draft',status:'delisted; reported club intention to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-19',source:'https://www.heraldsun.com.au/sport/afl/news/gold-coast-commits-to-redrafting-jamarra-uglehagan-after-cutting-him-ahead-of-afl-list-lodgement-deadline/news-story/37831cb044f87d08a333603c77aa64f7'},
+    {player:'Elliott Himmelberg',from:'gcs',to:'gcs',mechanism:'national draft',status:'delisted; reported club intention to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-19',source:'https://www.heraldsun.com.au/sport/afl/news/gold-coast-commits-to-redrafting-jamarra-uglehagan-after-cutting-him-ahead-of-afl-list-lodgement-deadline/news-story/37831cb044f87d08a333603c77aa64f7'},
     {player:'Jaren Carr',from:'fre',to:'fre',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-28',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1636402/fremantle-dockers-delist-father-son-jaren-carr-commit-to-rookie-lifeline'},
     {player:'Riley Garcia',from:'wbd',to:'wbd',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-27',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1636335/luckless-western-bulldog-riley-garcia-delisted-set-to-get-rookie-lifeline'},
     {player:'Luke Lloyd',from:'bri',to:'bri',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-22',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month'},
