@@ -42,7 +42,7 @@ const ATM_CLUBS = [
     'Nick Vlastuin','Jacob Hopper','Sam Lalor','Jack Ross','Sam Banks','Rhyan Mansell','Jonty Faull','Taj Hotton','Luke Trainor','Ben Miller','Hugo Ralphsmith','Tim Taranto','Jayden Short','Josh Smillie','Maurice Rioli','Josh Gibcus','Tom Lynch','Noah Balta','Sam Cumming','Judson Clarke','Sam Grlj','Toby Nankervis','Zane Peucker','Noah Roberts-Thomson','Kane McAuliffe','Jasper Alger','Tom Brown','Patrick Retschko','Harry Armstrong','Tom Sims','Kye Annand','Mykelti Lefau','Seth Campbell','Tom Burton','Patrick Carr','Campbell Gray',"Nathan O'Driscoll",'Kieren Briggs'
   ]},
   {id:'stk',name:'St Kilda',abbr:'STK',zh:'STK',color:'#ed1b2f',clubText:'#fff',logo:'assets/logos/stk.svg',listCap:44,players:[
-    'Jack Higgins','Marcus Windhager','Jack Silvagni','Lance Collard','Tobie Travaglia','Jack Macrae','Nasiah Wanganeen-Milera','Bradley Hill','Sam Flanders','Mitch Owens','Hunter Clark','Max King','Ryan Byrnes','Liam Stocker','Dan Butler','Tom De Koning','Darcy Wilson','Liam Henry','Angus Hastie','Mattaes Phillipou','Alix Tauru','James Barrat','Alex Dodson','Liam Ryan','Mason Wood','Hugo Garcia','Jack Sinclair','Charlie Banfield','Kye Fincher','Hugh Boxshall','Campbell Lake','Max Hall','Kobe McDonald','Cooper Sharman','Callum Wilkie',"Liam O'Connell",'Eamonn Armstrong','Anthony Caminiti','Sam Marshall'
+    'Jack Higgins','Marcus Windhager','Jack Silvagni','Lance Collard','Tobie Travaglia','Jack Macrae','Nasiah Wanganeen-Milera','Bradley Hill','Sam Flanders','Mitch Owens','Hunter Clark','Max King','Liam Stocker','Tom De Koning','Darcy Wilson','Liam Henry','Angus Hastie','Mattaes Phillipou','Alix Tauru','James Barrat','Alex Dodson','Liam Ryan','Mason Wood','Hugo Garcia','Jack Sinclair','Charlie Banfield','Kye Fincher','Hugh Boxshall','Campbell Lake','Max Hall','Kobe McDonald','Cooper Sharman','Callum Wilkie',"Liam O'Connell",'Eamonn Armstrong','Anthony Caminiti','Sam Marshall'
   ]},
   {id:'syd',name:'Sydney',abbr:'SYD',zh:'SYD',color:'#e31b23',clubText:'#fff',logo:'assets/logos/syd.svg',listCap:44,players:[
     'Chad Warner','Hayden McLean','Brodie Grundy','Isaac Heeney','Logan McDonald','James Rowbottom','Jesse Dattoli','Malcolm Rosas','Tom Papley','Angus Sheldrick','Jai Serong','Callum Mills','Sam Wicks','Braeden Campbell','James Jordon','Jevan Phillipou','Peter Ladhams','Riak Andrew','Errol Gulden','Ned Bowman','Billy Cootee','Riley Bice','Justin McInerney','William Edwards','Joel Hamling','Tom McCartin','Max King','Harry Kyle','Caiden Cleary','Matt Roberts','Charlie Curnow','Corey Warner','Liam Hetherton','Tom Hanily','Patrick Snell','Noah Chamberlain','Lewis Melican','Jake Lloyd','William Green'
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'30 Oct 2026 — Dane Rampe retired (Sydney); Gold Coast delisted Jamarra Ugle-Hagan and Elliott Himmelberg, national-draft re-selection pending; official draft picks unchanged',
+  updated:'30 Oct 2026 — St Kilda delisted Dan Butler and Ryan Byrnes (rookie re-draft pending); Dane Rampe retired (Sydney); Gold Coast delisted Jamarra Ugle-Hagan and Elliott Himmelberg (national-draft re-selection pending); official draft picks unchanged',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -133,6 +133,8 @@ window.ATM_DATA = {
   // Announced agreements not yet eligible for AFL delisted free-agent registration.
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
+    {player:'Dan Butler',from:'stk',to:'stk',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-23',source:'https://www.saints.com.au/news/2158505/saints-commit-to-byrnes-and-butler-for-2027'},
+    {player:'Ryan Byrnes',from:'stk',to:'stk',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-23',source:'https://www.saints.com.au/news/2158505/saints-commit-to-byrnes-and-butler-for-2027'},
     {player:'Jamarra Ugle-Hagan',from:'gcs',to:'gcs',mechanism:'national draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-19',source:'https://www.afl.com.au/news/1636548/gold-coast-suns-to-delist-former-no1-pick-jamarra-ugle-hagan-but-commit-to-re-draft'},
     {player:'Elliott Himmelberg',from:'gcs',to:'gcs',mechanism:'national draft',status:'delisted; reported club intention to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-19',source:'https://www.heraldsun.com.au/sport/afl/news/gold-coast-commits-to-redrafting-jamarra-uglehagan-after-cutting-him-ahead-of-afl-list-lodgement-deadline/news-story/37831cb044f87d08a333603c77aa64f7'},
     {player:'Jaren Carr',from:'fre',to:'fre',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-28',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1636402/fremantle-dockers-delist-father-son-jaren-carr-commit-to-rookie-lifeline'},
