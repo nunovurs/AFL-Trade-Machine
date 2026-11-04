@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'2 Nov 2026 — AFL reports Darragh Joyce to North Melbourne as a delisted free agent (paperwork pending); 30 Oct delistings, re-draft commitments and Dane Rampe retirement retained; official draft picks unchanged',
+  updated:'4 Nov 2026 — Max Ramsden to St Kilda reported signed (registration unverified); 2 Nov 2026 — AFL reports Darragh Joyce to North Melbourne as a delisted free agent (paperwork pending); 30 Oct delistings, re-draft commitments and Dane Rampe retirement retained; official draft picks unchanged',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -133,6 +133,7 @@ window.ATM_DATA = {
   // Announced or AFL-reported moves awaiting formal registration (including draft re-selections).
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
+    {player:'Max Ramsden',from:'haw',to:'stk',mechanism:'delisted free agent',status:'4 Nov media reports St Kilda signing; AFL registration not independently verified',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.heraldsun.com.au/sport/afl/jake-stringer-seals-st-kilda-deal-as-kangaroos-lock-in-trio/news-story/4da5ef237a5d96ef09dd0a57cd715784'},
     {player:'Dan Butler',from:'stk',to:'stk',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-23',source:'https://www.saints.com.au/news/2158505/saints-commit-to-byrnes-and-butler-for-2027'},
     {player:'Ryan Byrnes',from:'stk',to:'stk',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-23',source:'https://www.saints.com.au/news/2158505/saints-commit-to-byrnes-and-butler-for-2027'},
     {player:'Jamarra Ugle-Hagan',from:'gcs',to:'gcs',mechanism:'national draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-19',source:'https://www.afl.com.au/news/1636548/gold-coast-suns-to-delist-former-no1-pick-jamarra-ugle-hagan-but-commit-to-re-draft'},
