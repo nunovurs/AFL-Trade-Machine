@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'4 Nov 2026 — Max Ramsden to St Kilda reported signed (registration unverified); 2 Nov 2026 — AFL reports Darragh Joyce to North Melbourne as a delisted free agent (paperwork pending); 30 Oct delistings, re-draft commitments and Dane Rampe retirement retained; official draft picks unchanged',
+  updated:'4 Nov 2026 — confirmed DFA signings: St Kilda (Jake Stringer, Max Ramsden), North Melbourne (Elijah Tsatas, Samson Ryan, Darragh Joyce), Carlton (Wil Parker); 30 Oct delistings, re-draft commitments and Dane Rampe retirement retained; official draft picks unchanged',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -133,7 +133,10 @@ window.ATM_DATA = {
   // Announced or AFL-reported moves awaiting formal registration (including draft re-selections).
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
-    {player:'Max Ramsden',from:'haw',to:'stk',mechanism:'delisted free agent',status:'4 Nov media reports St Kilda signing; AFL registration not independently verified',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.heraldsun.com.au/sport/afl/jake-stringer-seals-st-kilda-deal-as-kangaroos-lock-in-trio/news-story/4da5ef237a5d96ef09dd0a57cd715784'},
+    {player:'Elijah Tsatas',from:'ess',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
+    {player:'Samson Ryan',from:'ric',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
+    {player:'Wil Parker',from:'col',to:'car',mechanism:'delisted free agent',status:'confirmed signed by Carlton',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.foxsports.com.au/afl/afl-2026-offseason-news-offseason-central-all-afl-list-changes-delisted-players-retirements-trades-draft-picks-and-draft-order-rookies-free-agents/news-story/60749636007fae6005535ca3bc5906a9'},
+    {player:'Max Ramsden',from:'haw',to:'stk',mechanism:'delisted free agent',status:'confirmed signed by St Kilda as delisted free agent',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.saints.com.au/news/2161366/saints-bolster-tall-stocks-with-stringer-and-ramsden'},
     {player:'Dan Butler',from:'stk',to:'stk',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-23',source:'https://www.saints.com.au/news/2158505/saints-commit-to-byrnes-and-butler-for-2027'},
     {player:'Ryan Byrnes',from:'stk',to:'stk',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-23',source:'https://www.saints.com.au/news/2158505/saints-commit-to-byrnes-and-butler-for-2027'},
     {player:'Jamarra Ugle-Hagan',from:'gcs',to:'gcs',mechanism:'national draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-30',registrationWindowOpens:'2026-11-19',source:'https://www.afl.com.au/news/1636548/gold-coast-suns-to-delist-former-no1-pick-jamarra-ugle-hagan-but-commit-to-re-draft'},
@@ -145,16 +148,16 @@ window.ATM_DATA = {
     {player:'Harry DeMattia',from:'col',to:'col',mechanism:'rookie draft',status:'delisted; club-committed to re-draft; registration pending',announced:'2026-10-21',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1634392/collingwood-magpies-confirm-further-list-changes-as-mid-season-recruits-noah-howes-harrison-coe-axed'},
     {player:'Harry Cunningham',from:'syd',to:'ade',mechanism:'rookie draft',status:'club-committed; registration pending',announced:'2026-10-09',registrationWindowOpens:'2026-11-23',source:'https://www.afl.com.au/news/1629056/cunningham-to-adelaide'},
     {player:'Alex Mirkov',from:'williamstown',to:'gws',mechanism:'pre-season supplemental selection period',status:'club-committed; registration pending',announced:'2026-10-08',registrationWindowOpens:'after November 2026 AFL Draft',source:'https://www.afl.com.au/news/1628963/former-carlton-blues-big-man-alex-mirkov-lands-second-chance-with-greater-western-sydney-giants'},
-    {player:'Darragh Joyce',from:'bri',to:'nm',mechanism:'delisted free agent',status:'AFL-reported agreement; registration paperwork pending',announced:'2026-11-02',registrationWindowOpens:'2026-11-02',source:'https://www.afl.com.au/news/1638538/north-melbourne-kangaroos-to-sign-ex-brisbane-lion-darragh-joyce-to-bolster-defensive-depth'},
+    {player:'Darragh Joyce',from:'bri',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne as delisted free agent',announced:'2026-11-02',registrationWindowOpens:'2026-11-02',source:'https://www.afl.com.au/news/1638538/north-melbourne-kangaroos-to-sign-ex-brisbane-lion-darragh-joyce-to-bolster-defensive-depth'},
     {
       player:'Jake Stringer',
       from:'gws',
       to:'stk',
       mechanism:'delisted free agent',
-      status:'club-announced; registration pending',
-      announced:'2026-10-19',
+      status:'confirmed signed by St Kilda as delisted free agent',
+      announced:'2026-11-04',
       registrationWindowOpens:'2026-11-02',
-      source:'https://www.afl.com.au/news/1634074/jake-stringer-lands-at-fourth-club-st-kilda-saints-after-departing-greater-western-sydney-giants-for-family-reasons'
+      source:'https://www.saints.com.au/news/2161366/saints-bolster-tall-stocks-with-stringer-and-ramsden'
     }
   ]
 };
