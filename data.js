@@ -58,26 +58,26 @@ const ATM_CLUBS = [
 const DVI = {1:3000,2:2481,3:2178,4:1962,5:1795,6:1659,7:1543,8:1443,9:1355,10:1276,11:1205,12:1140,13:1080,14:1024,15:973,16:924,17:879,18:836,19:796,20:757,21:721,22:686,23:653,24:621,25:590,26:561,27:533,28:505,29:479,30:454,31:429,32:405,33:382,34:360,35:338,36:317,37:297,38:277,39:257,40:238,41:220,42:202,43:184,44:167,45:150,46:134,47:118,48:102,49:86,50:71,51:57,52:42,53:28,54:14};
 
 const PICKS_2026 = {
-  ade:[15,32,35,43,56,92,110],
-  bri:[21,27,28,45,79,97,115],
-  car:[13,18,31,50,61,72,90,108],
-  col:[11,30,67,68,70,88,106],
-  ess:[1,17,25,80,98],
-  fre:[19,40,60,63,78,96,114],
-  gee:[36,57,62,75,93,111],
-  gcs:[8,81,85,103],
-  gws:[9,20,26,59,77,86,104],
-  haw:[29,37,71,94,107,112],
-  mel:[4,14,48,52],
-  nm:[33,49,66,74,84,102],
-  pa:[7,12,22,24,34,46,65,101],
-  ric:[2,5,44,99],
-  stk:[10,16,41,51,69,87,105],
-  syd:[6,38,39,47,54,76,95,113],
-  wce:[3,23,58,64,73,82,100],
-  wbd:[42,53,55,83,89,91,109]
+  ade:[15,32,35,43,54],
+  bri:[21,27,28,45],
+  car:[13,18,31,50,59,67,73],
+  col:[11,30,63,64,65],
+  ess:[1,17,25,69,75,78,80],
+  fre:[19,40,58,61,68],
+  gee:[36,55,60],
+  gcs:[8,70,72,77],
+  gws:[9,20,26,57],
+  haw:[29,37,66,74],
+  mel:[4,14,48,51,79],
+  nm:[33,49,62],
+  pa:[7,12,22,24,34,46],
+  ric:[2,5,44,76],
+  stk:[10,16,41],
+  syd:[6,38,39,47],
+  wce:[3,23,56],
+  wbd:[42,52,53,71],
 };
-const PICK_ORIGIN_2026 = {21:'ess',34:'ade',45:'wce',107:'mel',5:'pa',6:'nm',47:'nm',4:'pa',7:'gcs',12:'mel',14:'wbd',16:'gee',17:'haw',18:'syd',22:'ric',25:'nm',26:'gcs',27:'gws',29:'stk',31:'mel',32:'car',33:'wbd',43:'ess',48:'gcs',49:'gws',52:'col',53:'mel',54:'car',58:'haw',59:'syd',61:'bri',62:'ess',63:'ric',67:'gcs',68:'gws',71:'mel',73:'wbd',74:'ade',76:'haw',77:'syd',81:'ric',83:'pa',89:'mel'};
+const PICK_ORIGIN_2026 = {4:'pa',5:'pa',6:'nm',7:'gcs',8:'gcs',12:'mel',14:'wbd',16:'gee',17:'haw',18:'syd',20:'bri',21:'ess',22:'ric',25:'nm',26:'gcs',27:'gws',28:'gws',29:'stk',31:'mel',32:'car',33:'wbd',34:'ade',35:'ade',39:'syd',41:'bri',42:'bri',43:'ess',45:'wce',47:'nm',48:'gcs',49:'gws',50:'gws',51:'col',52:'mel',56:'haw',57:'syd',59:'bri',60:'ess',61:'ric',63:'gcs',64:'gws',66:'mel',70:'ric',71:'pa'};
 
 const PICKS_2027 = {
   ade:[[1,'ade'],[2,'ade'],[3,'ade'],[4,'ade'],[4,'ric']],
@@ -123,7 +123,7 @@ const PICKS_2028 = {
 };
 
 window.ATM_DATA = {
-  updated:'9 Nov 2026 — confirmed DFA signings integrated into destination rosters: St Kilda (Jake Stringer, Max Ramsden), North Melbourne (Elijah Tsatas, Samson Ryan, Darragh Joyce), Carlton (Wil Parker); 30 Oct delistings, re-draft commitments and Dane Rampe retirement retained; official draft picks unchanged',
+  updated:'11 Nov 2026 — 80-selection final AFL National Draft order synchronised; confirmed DFA signings, delistings, re-draft commitments and Dane Rampe retirement retained',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
