@@ -86,7 +86,7 @@ module.exports=async function handler(req,res){
   return res.status(200).json({
     source:'AFL Trade Machine verified order',
     updated:'2026-11-11',
-    note:'Official AFL post-trade-period 2026 draft order: 80 picks. Three bid-slide compensation picks remain conditional projections.',
+    note:'Official AFL final 2026 National Draft order (11 November): 80 picks. Three bid-slide compensation picks remain conditional projections.',
     picks:projectedPicks()
   });
 };
