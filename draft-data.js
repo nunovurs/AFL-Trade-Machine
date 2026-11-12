@@ -36,7 +36,7 @@ window.ATM_DRAFT_DATA = (() => {
   26:'via Carlton - Lachie Whitfield trade (tied to Gold Coast)',
   27:'via Essendon - Keidean Coleman trade (via Hawthorn / Zach Merrett trade; tied to Greater Western Sydney)',
   28:'via GWS - Brisbane pick swap (originally Toby Greene compensation)',
-  29:'via West Coast (originally tied to St Kilda; Hawthorn holds the selection)',
+  29:'tied to St Kilda (Hawthorn holds the selection)',
   31:'via Greater Western Sydney - Lachie Whitfield trade (tied to Melbourne)',
   32:'via Port Adelaide - Luke Pedlar trade (tied to Carlton)',
   33:'via Melbourne - Zane Duursma trade (tied to Western Bulldogs; Melbourne received via five-club mega deal)',
