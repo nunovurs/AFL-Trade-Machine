@@ -48,7 +48,7 @@ window.ATM_DRAFT_DATA = (() => {
   21:'via Essendon - Keidean Coleman trade',
   34:'via Adelaide - Luke Pedlar trade',
   45:'via Melbourne - Will McLachlan trade (West Coast / Jack Viney and Trent Rivers trade)',
-  43:'via Gold Coast (tied to Essendon)',
+  43:'tied to Essendon (Adelaide holds the selection)',
   48:'via Port Adelaide - five-club mega deal (tied to Gold Coast)',
   49:'via Melbourne - Zane Duursma trade (tied to Greater Western Sydney)',
   50:'via Greater Western Sydney - Lachie Whitfield trade (originally Kieren Briggs compensation)',
