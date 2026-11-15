@@ -11,15 +11,17 @@
    const c=club(ctx.clubId||mockRow?.clubId||p.tiedClub), color=c?.color||'#172337', text=c?.clubText||'#fff';
    const tie=p.tieType?(p.tiedClub?`${p.tieType} • ${club(p.tiedClub)?.name||''}`:p.tieType):'—';
    const img=p.photo||'assets/player-placeholder.svg';
+   const missingPhoto=!p.photo||p.photo==='assets/player-placeholder.svg';
+   const photoPage=p.photoPage||'https://www.afl.com.au/draft/draft-tracker/2026';
    const m=document.querySelector('#draftModal'),card=document.querySelector('#draftModalCard'); if(!m||!card)return;
    card.innerHTML=`<div class="player-profile-modal" style="--club:${esc(color)};--clubText:${esc(text)}">
     <button class="profile-close" id="profileClose" aria-label="Close">×</button>
-    <div class="profile-hero"><div class="profile-photo-wrap"><img src="${esc(img)}" alt="${esc(name)}" onerror="this.src='assets/player-placeholder.svg'"></div><div class="profile-title-block"><div class="profile-kicker">${ctx.pick?`PICK ${esc(ctx.pick)} • `:''}2026 DRAFT PROFILE</div><h3>${esc(resolve(name))}</h3><div class="profile-primary">${esc(p.position)}</div>${c?`<div class="profile-club"><img src="${esc(c.logo)}" alt=""><strong>${esc(c.name)}</strong></div>`:''}</div></div>
+    <div class="profile-hero"><div class="profile-photo-wrap"><img src="${esc(img)}" alt="${esc(name)}" onerror="this.onerror=null;this.src='assets/player-placeholder.svg'"></div><div class="profile-title-block"><div class="profile-kicker">${ctx.pick?`PICK ${esc(ctx.pick)} • `:''}2026 DRAFT PROFILE</div><h3>${esc(resolve(name))}</h3><div class="profile-primary">${esc(p.position)}</div>${c?`<div class="profile-club"><img src="${esc(c.logo)}" alt=""><strong>${esc(c.name)}</strong></div>`:''}</div></div>
     <div class="profile-facts"><div><span>HEIGHT</span><strong>${esc(p.height)}</strong></div><div><span>WEIGHT</span><strong>${esc(p.weight)}</strong></div><div><span>POSITION</span><strong>${esc(p.position)}</strong></div><div><span>PATHWAY / CLUB</span><strong>${esc(p.pathway)}</strong></div><div><span>STATE</span><strong>${esc(p.state)}</strong></div><div><span>ACCESS</span><strong>${esc(tie)}</strong></div></div>
     <div class="profile-section comparison"><div class="profile-section-label">PLAYER COMPARISON</div><p>${esc(p.comparison||'—')}</p></div>
     <div class="profile-section"><div class="profile-section-label">MY SCOUTING PROFILE</div><p>${esc(p.description)}</p></div>
     <div class="profile-section club-fit"><div class="profile-section-label">WHY THIS PICK?</div><p>${esc(p.why)}</p></div>${mockRow?.mechanism?`<div class="profile-section pick-mechanism"><div class="profile-section-label">HOW THE PICK HAPPENS</div><p>${esc(mockRow.mechanism)}</p></div>`:''}
-    <div class="profile-actions"><a class="watch-btn" href="${esc(p.watch)}" target="_blank" rel="noopener">▶ WATCH • FOOTY STUFF HIGHLIGHTS</a></div>
+    <div class="profile-actions">${missingPhoto?`<a class="watch-btn" href="${esc(photoPage)}" target="_blank" rel="noopener">BROWSE OFFICIAL PLAYER PHOTOS</a>`:""}<a class="watch-btn" href="${esc(p.watch)}" target="_blank" rel="noopener">▶ WATCH • FOOTY STUFF HIGHLIGHTS</a></div>
     <div class="profile-data-note">Bio fields are reference data and may change as official measurements are updated. Where a reliable published measurement or photo is unavailable, the profile deliberately uses a blank/fallback rather than inventing one.</div>
    </div>`;
    m.hidden=false;document.querySelector('#profileClose').onclick=close;
