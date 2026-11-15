@@ -124,7 +124,8 @@ window.ATM_DRAFT_DATA = (() => {
     ["Jackson Watkins","Midfielder","Calder Cannons",null,null],
     ["Jack Leys","Midfielder","Woodville-West Torrens",null,null],
     ["Klay Nicholls","Key Defender","GWV Rebels",null,null],
-    ["Cameron Maynard","Forward","South Fremantle",null,null]
+    ["Cameron Maynard","Forward","South Fremantle",null,null],
+    ["Jake Soutar","Defender / Intercept Back","East Perth (WAFL)",null,null]
   ].map((p,i)=>({rank:i+1,name:p[0],position:p[1],pathway:p[2],tiedClub:p[3],tieType:p[4]}));
   return {
     updated:'11 Nov 2026 — AFL final 80-pick draft order and ownership; conditional bid-slide projections separate',
