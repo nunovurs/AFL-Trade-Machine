@@ -57,7 +57,7 @@ const NOTES={
   57:'via Brisbane - GWS pick swap (tied to Sydney)',
   59:'tied to Brisbane (Carlton holds the selection)',
   60:'via Essendon - Jordan Ridley / Jack Bowes trade',
-  61:'via Richmond - Nathan O'Driscoll trade',
+  61:'via Richmond - Nathan O’Driscoll trade',
   63:'via Gold Coast - Scott Pendlebury trade',
   64:'tied to Greater Western Sydney (Collingwood holds the selection)',
   66:'tied to Melbourne (Hawthorn holds the selection)',
