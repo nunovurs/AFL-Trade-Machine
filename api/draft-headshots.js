@@ -26,6 +26,6 @@ module.exports=async function handler(req,res){
       const name=match[1].trim(),url=candidate(attr(tag,'src')||attr(tag,'data-src'));
       if(name&&url&&!found.has(name))found.set(name,url);
     }
-    return res.status(200).json({source:SOURCE,count:found.size,players:[...found].map(([name,url])=>({name,photos:[url]}))});
+    return res.status(200).json({source:SOURCE,count:found.size,diagnostics:{htmlLength:html.length,imgTags:(html.match(/<img\\b/gi)||[]).length,hasHeadshots:html.includes('Headshot photo of'),hasDevers:html.includes('Sam Devers'),sample:html.slice(0,160)},players:[...found].map(([name,url])=>({name,photos:[url]}))});
   }catch(err){return res.status(200).json({source:SOURCE,count:0,players:[],error:'Headshots temporarily unavailable'});}
 };
