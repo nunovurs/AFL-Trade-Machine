@@ -133,6 +133,12 @@ window.ATM_DRAFT_DATA = (() => {
     officialByClub,officialOriginByPick,officialRows,projectedRows,bidSlideCompensations,
     projectionNote:'Projected night-two order assumes Essendon, Richmond and West Coast satisfy the 2026 bid-slide compensation conditions. North Melbourne is excluded because its natural first-round selection was traded to Sydney. Port Adelaide is excluded in this scenario because its natural first-round pick is used to match the Dougie Cochrane bid.',
     displayThrough:44,
+    // Confirmed AFL draft-night selections, independent of user mock predictions.
+    confirmedDraftSelections:[
+      {pick:1,club:'pa',player:'Dougie Cochrane',mechanism:'Essendon bid matched by Port Adelaide',confirmedOn:'2026-11-19',source:'https://www.afl.com.au/news/1642128/power-play-port-adelaide-lands-nga-talent-dougie-cochrane-as-clubs-first-ever-no1-pick'},
+      {pick:2,club:'ess',player:'Ethan Drever',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.afl.com.au/news/1642063/draft-night-live-every-pick-the-best-analysis-from-645pm-aedt'},
+      {pick:null,club:'car',player:'Cody Walker',mechanism:'father-son bid matched; exact selection number not independently confirmed',confirmedOn:'2026-11-19',source:'https://www.afl.com.au/news/1642063/draft-night-live-every-pick-the-best-analysis-from-645pm-aedt'}
+    ],
     prospects,deficitCap:412
   };
 })();
