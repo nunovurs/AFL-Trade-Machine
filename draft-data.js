@@ -137,7 +137,11 @@ window.ATM_DRAFT_DATA = (() => {
     confirmedDraftSelections:[
       {pick:1,club:'pa',player:'Dougie Cochrane',mechanism:'Essendon bid matched by Port Adelaide',confirmedOn:'2026-11-19',source:'https://www.afl.com.au/news/1642128/power-play-port-adelaide-lands-nga-talent-dougie-cochrane-as-clubs-first-ever-no1-pick'},
       {pick:2,club:'ess',player:'Ethan Drever',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.afl.com.au/news/1642063/draft-night-live-every-pick-the-best-analysis-from-645pm-aedt'},
-      {pick:null,club:'car',player:'Cody Walker',mechanism:'father-son bid matched; exact selection number not independently confirmed',confirmedOn:'2026-11-19',source:'https://www.afl.com.au/news/1642063/draft-night-live-every-pick-the-best-analysis-from-645pm-aedt'}
+      {pick:3,club:'car',player:'Cody Walker',mechanism:'Richmond father-son bid matched by Carlton',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:4,club:'ric',player:'Arki Butler',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:5,club:'wce',player:'Heath Mellody',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:6,club:'gws',player:'Ethan Matthews',mechanism:'Melbourne Academy bid matched by GWS',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:7,club:'mel',player:'Mitch Harris',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'}
     ],
     prospects,deficitCap:412
   };
