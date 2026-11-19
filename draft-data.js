@@ -141,7 +141,19 @@ window.ATM_DRAFT_DATA = (() => {
       {pick:4,club:'ric',player:'Arki Butler',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
       {pick:5,club:'wce',player:'Heath Mellody',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
       {pick:6,club:'gws',player:'Ethan Matthews',mechanism:'Melbourne Academy bid matched by GWS',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
-      {pick:7,club:'mel',player:'Mitch Harris',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'}
+      {pick:7,club:'mel',player:'Mitch Harris',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:8,club:'ric',player:'Harry Van Hattum',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:9,club:'syd',player:'Caylen Murray',mechanism:'Sydney bid on Brisbane Academy player; Brisbane did not match',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:10,club:'gcs',player:'Leo Steed',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:11,club:'stk',player:'Gustavo Teixeira',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:12,club:'col',player:'Sam Gayfer',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:13,club:'gws',player:'Jake Eime',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:14,club:'ade',player:'Toby Krasna',mechanism:'open selection; Adelaide acquired pick from Carlton in draft-night trade',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:15,club:'mel',player:'Lachie Burrows',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:16,club:'stk',player:'Tyson Bradley',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:17,club:'ess',player:'Archie Elliott',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:18,club:'fre',player:'George Dimer',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:19,club:'pa',player:'Clancy Snell',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'}
     ],
     prospects,deficitCap:412
   };
