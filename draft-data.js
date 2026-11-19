@@ -133,6 +133,16 @@ window.ATM_DRAFT_DATA = (() => {
     officialByClub,officialOriginByPick,officialRows,projectedRows,bidSlideCompensations,
     projectionNote:'Projected night-two order assumes Essendon, Richmond and West Coast satisfy the 2026 bid-slide compensation conditions. North Melbourne is excluded because its natural first-round selection was traded to Sydney. Port Adelaide is excluded in this scenario because its natural first-round pick is used to match the Dougie Cochrane bid.',
     displayThrough:44,
+    // Completed 19 November draft-night trades; reported pick identifiers are as published at the time.
+    // This ledger does not replace the pre-draft ownership baseline or user mock assumptions.
+    confirmedDraftNightTrades:[
+      {clubs:['GWS','Port Adelaide'],details:"GWS received pick 12; Port Adelaide received pick 26 and 2027 and 2028 second-round selections",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'},
+      {clubs:['Adelaide','Carlton'],details:"Adelaide received picks 13 and 58; Carlton received picks 15, 34 and 53",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'},
+      {clubs:['Gold Coast','GWS'],details:"Gold Coast received pick 10 and a 2028 third-round selection; GWS received pick 9",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'},
+      {clubs:['GWS','Sydney'],details:"GWS received pick 8; Sydney received pick 9 and a 2028 third-round selection",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'},
+      {clubs:['Brisbane','GWS'],details:"Brisbane received a 2027 second-round selection; GWS received pick 43 and a 2028 third-round selection",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'},
+      {clubs:['Brisbane','Port Adelaide'],details:"Brisbane received picks 24 and 32; Port Adelaide received pick 20",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'}
+    ],
     // Confirmed AFL draft-night selections, independent of user mock predictions.
     confirmedDraftSelections:[
       {pick:1,club:'pa',player:'Dougie Cochrane',mechanism:'Essendon bid matched by Port Adelaide',confirmedOn:'2026-11-19',source:'https://www.afl.com.au/news/1642128/power-play-port-adelaide-lands-nga-talent-dougie-cochrane-as-clubs-first-ever-no1-pick'},
