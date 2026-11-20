@@ -93,7 +93,7 @@ function projectedPicks(){
   });
   return out;
 }
-const VERIFIED_NIGHT_TWO_BY_CLUB={"ade":[33,44,60,82],"bri":[27,28,29,35],"car":[32,36,51,55,68,81],"col":[31,64,65,66],"ess":[21,26,70,75,78,80],"fre":[41,59,62,69],"gee":[37,56,61],"gcs":[71,73,77],"gws":[46,58],"haw":[30,38,67,74],"mel":[49,52,79],"nm":[34,50,63],"pa":[20,24,47,83],"ric":[23,45,76],"stk":[42],"syd":[39,40,48],"wce":[22,25,57],"wbd":[43,53,54,72]};
+const VERIFIED_NIGHT_TWO_BY_CLUB={"ade":[33,44,60,82],"bri":[27,28,29,35],"car":[32,36,51,55,68,81],"col":[31,64,65,66],"ess":[21,26,70,75,78,80],"fre":[41,59,62,69],"gee":[37,56,61],"gcs":[71,73,77],"gws":[46,58],"haw":[30,38,67,74],"mel":[49,52,79],"nm":[23,34,50,63],"pa":[20,25,47,83],"ric":[22,45,76],"stk":[42],"syd":[39,40,48],"wce":[24,57],"wbd":[43,53,54,72]};
 const VERIFIED_NIGHT_TWO_ROWS=Object.entries(VERIFIED_NIGHT_TWO_BY_CLUB).flatMap(([owner,picks])=>picks.map(pick=>({pick,owner}))).sort((a,b)=>a.pick-b.pick);
 module.exports=async function handler(req,res){
   res.setHeader('Access-Control-Allow-Origin','*');
