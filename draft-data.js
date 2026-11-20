@@ -181,7 +181,9 @@ window.ATM_DRAFT_DATA = (() => {
       {pick:22,club:'ric',player:'Noah Williams',mechanism:'bid-slide compensation selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
       {pick:23,club:'nm',player:'George Gale',mechanism:'North Melbourne traded 2027 first-round pick to West Coast for pick 23 and a future third-rounder',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
       {pick:24,club:'wce',player:'Jake Soutar',mechanism:'bid-slide compensation selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
-      {pick:25,club:'pa',player:'Wil Antrobus',mechanism:'open selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'}
+      {pick:25,club:'pa',player:'Wil Antrobus',mechanism:'open selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
+      {pick:26,club:'ess',player:'Jack Pickett',mechanism:'open selection',confirmedOn:'2026-11-20',source:'https://sen.com.au/news/2026/11/15/afl-national-draft-2026-draft-order-top-prospects-every-selection-pick-by-pick'},
+      {pick:27,club:'bri',player:'Kodah Edwards',mechanism:'open selection',confirmedOn:'2026-11-20',source:'https://sen.com.au/news/2026/11/15/afl-national-draft-2026-draft-order-top-prospects-every-selection-pick-by-pick'}
     ],
     prospects,deficitCap:412
   };
