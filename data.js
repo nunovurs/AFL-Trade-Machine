@@ -91,12 +91,12 @@ const PICKS_2027 = {
   gws:[[1,'gws'],[2,'gws'],[3,'gws'],[4,'gws']],
   haw:[[1,'haw'],[2,'haw'],[2,'gcs'],[4,'haw']],
   mel:[[2,'bri'],[2,'wce'],[4,'wce']],
-  nm:[[1,'nm'],[3,'nm'],[3,'pa'],[4,'nm']],
+  nm:[[3,'nm'],[3,'pa'],[4,'nm']],
   pa:[[1,'pa'],[1,'mel'],[1,'ric'],[2,'ric']],
   ric:[[3,'ric']],
   stk:[[2,'stk'],[3,'mel'],[3,'stk'],[3,'wce'],[4,'mel'],[4,'stk']],
   syd:[[2,'car'],[2,'syd'],[2,'nm'],[3,'syd'],[4,'syd']],
-  wce:[[1,'wce'],[3,'haw']],
+  wce:[[1,'wce'],[1,'nm'],[3,'haw']],
   wbd:[[1,'wbd'],[2,'pa'],[3,'wbd'],[4,'wbd'],[4,'pa']]
 };
 
@@ -113,12 +113,12 @@ const PICKS_2028 = {
   gws:[[1,'gws'],[2,'gws'],[3,'gws'],[3,'car'],[4,'gws']],
   haw:[[1,'gcs'],[2,'gcs'],[4,'haw']],
   mel:[[1,'mel'],[2,'wce'],[3,'mel']],
-  nm:[[2,'syd'],[3,'nm'],[4,'nm']],
+  nm:[[2,'syd'],[3,'nm'],[3,'wce'],[4,'nm']],
   pa:[[1,'pa'],[1,'wbd']],
   ric:[[1,'ric'],[2,'ric'],[3,'ric'],[4,'ric']],
   stk:[[1,'stk'],[2,'stk'],[4,'stk']],
   syd:[[1,'syd'],[1,'nm'],[2,'nm'],[3,'syd'],[4,'syd']],
-  wce:[[1,'wce'],[2,'mel'],[3,'wce'],[4,'wce']],
+  wce:[[1,'wce'],[2,'mel'],[4,'wce']],
   wbd:[[2,'wbd'],[2,'pa'],[3,'wbd'],[3,'haw'],[3,'pa'],[4,'wbd'],[4,'mel']]
 };
 
