@@ -81,49 +81,49 @@ const PICK_ORIGIN_2026 = {4:'pa',5:'pa',6:'nm',7:'gcs',8:'gcs',12:'mel',14:'wbd'
 
 const PICKS_2027 = {
   ade:[[1,'ade'],[2,'ade'],[3,'ade'],[4,'ade'],[4,'ric']],
-  bri:[[1,'bri'],[1,'stk'],[2,'mel'],[2,'wbd'],[3,'bri'],[4,'bri']],
+  bri:[[1,'bri'],[1,'stk'],[2,'mel'],[2,'wbd'],[2,'ric'],[3,'bri'],[4,'bri']],
   car:[[1,'car'],[1,'syd'],[3,'car'],[4,'car']],
   col:[[1,'col'],[2,'col'],[3,'col'],[4,'col']],
   ess:[[1,'ess'],[1,'gee'],[2,'ess'],[3,'ess'],[4,'ess']],
   fre:[[1,'fre'],[2,'fre'],[3,'fre'],[4,'fre']],
   gee:[[2,'gee'],[3,'gee'],[4,'gee']],
   gcs:[[1,'gcs'],[3,'gcs'],[4,'gcs']],
-  gws:[[1,'gws'],[2,'gws'],[3,'gws'],[4,'gws']],
-  haw:[[1,'haw'],[2,'haw'],[2,'gcs'],[4,'haw']],
+  gws:[[1,'gws'],[3,'gws'],[4,'gws']],
+  haw:[[1,'haw'],[2,'haw'],[2,'gcs'],[2,'gws'],[4,'haw']],
   mel:[[2,'bri'],[2,'wce'],[4,'wce']],
   nm:[[3,'nm'],[3,'pa'],[4,'nm']],
-  pa:[[1,'pa'],[1,'mel'],[1,'ric'],[2,'ric']],
+  pa:[[1,'pa'],[1,'mel'],[1,'ric'],[2,'nm']],
   ric:[[3,'ric']],
   stk:[[2,'stk'],[3,'mel'],[3,'stk'],[3,'wce'],[4,'mel'],[4,'stk']],
-  syd:[[2,'car'],[2,'syd'],[2,'nm'],[3,'syd'],[4,'syd']],
+  syd:[[2,'car'],[2,'syd'],[3,'syd'],[4,'syd']],
   wce:[[1,'wce'],[1,'nm'],[3,'haw']],
   wbd:[[1,'wbd'],[2,'pa'],[3,'wbd'],[4,'wbd'],[4,'pa']]
 };
 
-// Confirmed future-pick ownership, AFL official register updated 14 Oct 2026.
+// Confirmed future-pick ownership, reconciled against AFL post-draft register (21 Nov 2026).
 const PICKS_2028 = {
   ade:[[1,'ade'],[2,'ade'],[3,'ade'],[4,'ade']],
   bri:[[1,'bri'],[2,'bri'],[3,'bri'],[4,'bri']],
-  car:[[1,'car'],[2,'car'],[3,'col'],[4,'car'],[4,'pa']],
+  car:[[1,'car'],[2,'car'],[4,'car'],[4,'pa']],
   col:[[1,'col'],[2,'col'],[4,'col']],
   ess:[[1,'ess'],[2,'ess'],[2,'gee'],[2,'haw'],[3,'ess']],
   fre:[[1,'fre'],[2,'fre'],[3,'fre'],[4,'fre']],
   gee:[[1,'gee'],[3,'gee'],[3,'stk'],[4,'gee'],[4,'ess']],
   gcs:[[1,'haw'],[3,'gcs'],[4,'gcs']],
-  gws:[[1,'gws'],[2,'gws'],[3,'gws'],[3,'car'],[4,'gws']],
+  gws:[[1,'gws'],[2,'gws'],[3,'gws'],[4,'gws']],
   haw:[[1,'gcs'],[2,'gcs'],[4,'haw']],
   mel:[[1,'mel'],[2,'wce'],[3,'mel']],
   nm:[[2,'syd'],[3,'nm'],[3,'wce'],[4,'nm']],
   pa:[[1,'pa'],[1,'wbd']],
-  ric:[[1,'ric'],[2,'ric'],[3,'ric'],[4,'ric']],
+  ric:[[1,'ric'],[2,'ric'],[3,'ric'],[3,'col'],[3,'bri'],[4,'ric']],
   stk:[[1,'stk'],[2,'stk'],[4,'stk']],
-  syd:[[1,'syd'],[1,'nm'],[2,'nm'],[3,'syd'],[4,'syd']],
+  syd:[[1,'syd'],[1,'nm'],[2,'nm'],[2,'col'],[2,'gws'],[3,'syd'],[3,'car'],[4,'syd']],
   wce:[[1,'wce'],[2,'mel'],[4,'wce']],
   wbd:[[2,'wbd'],[2,'pa'],[3,'wbd'],[3,'haw'],[3,'pa'],[4,'wbd'],[4,'mel']]
 };
 
 window.ATM_DATA = {
-  updated:'11 Nov 2026 — 80-selection final AFL National Draft order synchronised; confirmed DFA signings, delistings, re-draft commitments and Dane Rampe retirement retained',
+  updated:'21 Nov 2026 — 2027/2028 future-pick ownership reconciled against AFL post-draft register; existing roster and mock data preserved',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
