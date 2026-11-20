@@ -103,7 +103,7 @@ window.ATM_DRAFT_DATA = (() => {
   });
 
   // AFL official 20 November night-two order; kept separate from user mock and 11 November baseline.
-  const verifiedNightTwoByClub={"ade":[33,44,60,82],"bri":[27,28,29,35],"car":[32,36,51,55,68,81],"col":[31,64,65,66],"ess":[21,26,70,75,78,80],"fre":[41,59,62,69],"gee":[37,56,61],"gcs":[71,73,77],"gws":[46,58],"haw":[30,38,67,74],"mel":[49,52,79],"nm":[34,50,63],"pa":[20,24,47,83],"ric":[23,45,76],"stk":[42],"syd":[39,40,48],"wce":[22,25,57],"wbd":[43,53,54,72]};
+  const verifiedNightTwoByClub={"ade":[33,44,60,82],"bri":[27,28,29,35],"car":[32,36,51,55,68,81],"col":[31,64,65,66],"ess":[21,26,70,75,78,80],"fre":[41,59,62,69],"gee":[37,56,61],"gcs":[71,73,77],"gws":[46,58],"haw":[30,38,67,74],"mel":[49,52,79],"nm":[23,34,50,63],"pa":[20,25,47,83],"ric":[22,45,76],"stk":[42],"syd":[39,40,48],"wce":[24,57],"wbd":[43,53,54,72]};
   const verifiedNightTwoRows=Object.entries(verifiedNightTwoByClub).flatMap(([owner,picks])=>picks.map(pick=>({pick,owner}))).sort((a,b)=>a.pick-b.pick);
   const verifiedNightTwoSource='https://www.afl.com.au/draft/draft-order';
   const prospects = [
@@ -141,6 +141,7 @@ window.ATM_DRAFT_DATA = (() => {
     // Completed 19 November draft-night trades; reported pick identifiers are as published at the time.
     // This ledger does not replace the pre-draft ownership baseline or user mock assumptions.
     confirmedDraftNightTrades:[
+      {clubs:['North Melbourne','West Coast'],details:'North Melbourne received pick 23 and a future third-round selection; West Coast received North Melbourne 2027 first-round selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
       {clubs:['GWS','Port Adelaide'],details:"GWS received pick 12; Port Adelaide received pick 26 and 2027 and 2028 second-round selections",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'},
       {clubs:['GWS','Port Adelaide'],details:"GWS received a 2027 second-round selection; Port Adelaide received pick 20",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'},
       {clubs:['Adelaide','Carlton'],details:"Adelaide received picks 13 and 58; Carlton received picks 15, 34 and 53",confirmedOn:'2026-11-19',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p'},
@@ -174,7 +175,13 @@ window.ATM_DRAFT_DATA = (() => {
       {pick:16,club:'stk',player:'Tyson Bradley',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
       {pick:17,club:'ess',player:'Archie Elliott',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
       {pick:18,club:'fre',player:'George Dimer',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
-      {pick:19,club:'pa',player:'Clancy Snell',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'}
+      {pick:19,club:'pa',player:'Clancy Snell',mechanism:'open selection',confirmedOn:'2026-11-19',source:'https://www.abc.net.au/news/2026-11-19/afl-draft-night-one-live-blog-cocrane-drever-walker-butler/107405924'},
+      {pick:20,club:'pa',player:'Wil Malady',mechanism:'open selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
+      {pick:21,club:'ess',player:'Harvie Cooke',mechanism:'bid-slide compensation selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
+      {pick:22,club:'ric',player:'Noah Williams',mechanism:'bid-slide compensation selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
+      {pick:23,club:'nm',player:'George Gale',mechanism:'North Melbourne traded 2027 first-round pick to West Coast for pick 23 and a future third-rounder',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
+      {pick:24,club:'wce',player:'Jake Soutar',mechanism:'bid-slide compensation selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'},
+      {pick:25,club:'pa',player:'Wil Antrobus',mechanism:'open selection',confirmedOn:'2026-11-20',source:'https://www.afl.com.au/news/1642270/port-adelaide-power-add-electric-forward-wil-malady-to-draft-haul-north-melbourne-kangaroos-make-move'}
     ],
     prospects,deficitCap:412
   };
