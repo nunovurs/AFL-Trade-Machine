@@ -45,7 +45,7 @@ const ATM_CLUBS = [
   ]},
   {id:'nm',name:'North Melbourne',abbr:'NM',zh:'NMFC',color:'#00529b',clubText:'#fff',logo:'assets/logos/nm.svg',listCap:44,players:[
     'Lachy Dovaston',"Finn O'Sullivan",'Harry Sheezel','Aidan Corr','Caleb Daniel','George Wardlaw','Luke Davies-Uniacke','Colby McKercher','Luke McDonald','Jy Simpkin','Charlie Spargo','Dylan Stephens','Riley Hardeman','Wil Dawson','Griffin Logue','Nick Larkey','Taylor Goad','Blake Thredgold','Tom Powell','Paul Curtis','Luke Parker','Jack Darling','Hugo Mikunda','Charlie Comben','Toby Pink','Jackson Archer','Matt Whitlock','River Stevens','Tristan Xerri','Tom Blamires','Lachy Brewer','Jacob Konstanty','Oliver Griffin','Cameron Zurhaar','Zac Banch','Cooper Trembath', 'Nick Blakey', 'Elijah Tsatas', 'Samson Ryan', 'Darragh Joyce',
-    'George Gale', 'Seb Marsic', 'Aidan McCarthy'
+    'George Gale', 'Seb Marsic', 'Aidan McCartney'
   ]},
   {id:'pa',name:'Port Adelaide',abbr:'PA',zh:'PORT',color:'#008aab',clubText:'#111',logo:'assets/logos/pa.svg',listCap:44,players:[
     'Connor Rozee','Sam Powell-Pepper','Todd Marshall','Joe Berry','Kane Farrell','Jase Burgoyne','Josh Sinn','Christian Moraes','Jack Lukosius','Miles Bergman','Jacob Wehr','Ollie Wines','Jack Whitlock','Jason Horne-Francis','Mitch Georgiades','Aliir Aliir','Logan Evans','Jordon Sweet','Brandon Zerk-Thatcher','Tom Cochrane','Esava Ratugolea','Willem Drew','Ewan Mackinlay','Harrison Ramm','Darcy Byrne-Jones','Lachie Jones','Joe Richards','Jack Watkins','Dante Visentini','Mitch Zadow',"Balyn O'Brien",'Josh Lai','Corey Durdin','Xavier Bamert','Alex Van Wyk','Luke Pedlar',
