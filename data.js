@@ -122,14 +122,37 @@ const PICKS_2028 = {
   wbd:[[2,'wbd'],[2,'pa'],[3,'wbd'],[3,'haw'],[3,'pa'],[4,'wbd'],[4,'mel']]
 };
 
+// Official AFL post-2026-draft register: all 2029 R1-R4 selections remain with their originating clubs.
+const PICKS_2029 = {
+  ade:[[1,'ade'],[2,'ade'],[3,'ade'],[4,'ade']],
+  bri:[[1,'bri'],[2,'bri'],[3,'bri'],[4,'bri']],
+  car:[[1,'car'],[2,'car'],[3,'car'],[4,'car']],
+  col:[[1,'col'],[2,'col'],[3,'col'],[4,'col']],
+  ess:[[1,'ess'],[2,'ess'],[3,'ess'],[4,'ess']],
+  fre:[[1,'fre'],[2,'fre'],[3,'fre'],[4,'fre']],
+  gee:[[1,'gee'],[2,'gee'],[3,'gee'],[4,'gee']],
+  gcs:[[1,'gcs'],[2,'gcs'],[3,'gcs'],[4,'gcs']],
+  gws:[[1,'gws'],[2,'gws'],[3,'gws'],[4,'gws']],
+  haw:[[1,'haw'],[2,'haw'],[3,'haw'],[4,'haw']],
+  mel:[[1,'mel'],[2,'mel'],[3,'mel'],[4,'mel']],
+  nm:[[1,'nm'],[2,'nm'],[3,'nm'],[4,'nm']],
+  pa:[[1,'pa'],[2,'pa'],[3,'pa'],[4,'pa']],
+  ric:[[1,'ric'],[2,'ric'],[3,'ric'],[4,'ric']],
+  stk:[[1,'stk'],[2,'stk'],[3,'stk'],[4,'stk']],
+  syd:[[1,'syd'],[2,'syd'],[3,'syd'],[4,'syd']],
+  wce:[[1,'wce'],[2,'wce'],[3,'wce'],[4,'wce']],
+  wbd:[[1,'wbd'],[2,'wbd'],[3,'wbd'],[4,'wbd']]
+};
+
 window.ATM_DATA = {
-  updated:'21 Nov 2026 — 2027/2028 future-pick ownership reconciled against AFL post-draft register; existing roster and mock data preserved',
+  updated:'21 Nov 2026 — 2027–2029 future-pick ownership reconciled against AFL post-draft register; existing roster and mock data preserved',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
   pickOrigin2026:PICK_ORIGIN_2026,
   picks2027:PICKS_2027,
   picks2028:PICKS_2028,
+  picks2029:PICKS_2029,
   // Announced or AFL-reported moves awaiting formal registration (including draft re-selections).
   // Do not include these players in their destination club's registered roster until confirmed.
   pendingMovements:[
