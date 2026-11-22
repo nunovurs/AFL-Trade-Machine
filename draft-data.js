@@ -221,7 +221,7 @@ window.ATM_DRAFT_DATA = (() => {
       {"pick":62,"club":"col","player":"Koby Lecras","mechanism":"open selection","confirmedOn":"2026-11-20","source":"https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p"},
       {"pick":63,"club":"gcs","player":"Elliott Himmelberg","mechanism":"open selection","confirmedOn":"2026-11-20","source":"https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p"},
       {"pick":64,"club":"gcs","player":"Jamarra Ugle-Hagan","mechanism":"open selection","confirmedOn":"2026-11-20","source":"https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p"},
-      {"pick":65,"club":"wce","player":"Harper Banfield","mechanism":"open selection","confirmedOn":"2026-11-20","source":"https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p"}
+      {"pick":65,"club":"wce","player":"Harper Banfield","mechanism":"father-son selection (no bid)","confirmedOn":"2026-11-20","source":"https://www.foxsports.com.au/en-AU/news/australian-rules/afl-draft-tracker-2026-every-pick-and-trade-full-order-dvi-points/1vtjh1vbvstv9161hzxfd8sz4p"}
     ],
     prospects,deficitCap:412
   };
