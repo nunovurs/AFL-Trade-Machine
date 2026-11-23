@@ -28,7 +28,7 @@ const ATM_CLUBS = [
     "Jaeger O'Meara",'Caleb Serong','Sean Darcy','Heath Chapman','Jordan Clark','Andrew Brayshaw','Luke Jackson','Shai Bolton','Tobyn Murray','Hugh Davies','Luke Ryan','Jeremy Sharp','Adam Sweid','Murphy Reid','Judd McVee','Mason Cox','Leon Kickett','Patrick Voss','Oscar McDonald','Charlie Nicholls','Karl Worner','Jye Amiss','Alex Pearce','Hayden Young','Toby Whan','Neil Erasmus','Cooper Simpson','Brandon Walker','Michael Frederick','Corey Wagner','Josh Treacy','Brennan Cox','Joshua Draper','Aiden Riddle','Isaiah Dudley','Matthew Johnson','Christopher Scerri','Dominic Bedendo',
     'George Dimer', 'Kane Johnston', 'Jake Medved'
   ,
-    'Jaren Carr']},
+    'Jaren Carr', 'Finlay Yeo']},
   {id:'gee',name:'Geelong',abbr:'GEE',zh:'GEEL',color:'#002b5c',clubText:'#fff',logo:'assets/logos/gee.svg',listCap:44,players:[
     'Rowan Marshall','Jay Polkinghorne','Bailey Smith','Tanner Bruhn','Jeremy Cameron','Toby Conway','Shaun Mannagh','Max Holmes','Mitchell Edwards','Jhye Clark',"Connor O'Sullivan",'Sam De Koning','Lawson Humphries','Jack Martin','Jacob Molier','Oliver Wiltshire','Hunter Holmes','Lennox Hofmann','Jesse Mellor','Harley Barker','Nicholas Driscoll','Oliver Dempsey','James Worpel','Tom Atkins','Gryan Miers','Shannon Neale','Oisin Mullin','Patrick Dangerfield','Oliver Henry','Joe Pike','Jack Henry','Zach Guthrie','Cillian Burke',"Mark O'Connor",'Tom Stewart','Brad Close','Mark Blicavs','Toby Greene','Jordan Ridley',
     'Lachlan Hicks', 'Anthony Long', 'Zach Stevens'
@@ -76,7 +76,7 @@ const ATM_CLUBS = [
   ]},
   {id:'wce',name:'West Coast',abbr:'WCE',zh:'WCE',color:'#003087',clubText:'#fff',logo:'assets/logos/wce.svg',listCap:48,players:[
     'Willem Duursma','Jake Waterman','Liam Baker','Brandon Starcevich','Josh Lindsay','Elliot Yeo','Reuben Ginbey','Elijah Hewett','Harley Reid','Tim Kelly','Sam Allen','Noah Long','Liam Duggan','Jack Graham','Tom McCarthy','Brady Hough','Tylar Young','Cooper Duff-Tytler','Archer Reid','Ryan Maric','Matt Flynn','Bo Allan','Tom Gross','Tom Cole','Lucca Grego','Bailey J. Williams','Rhett Bazzo','Jobe Shanahan','Tylah Williams','Malakai Champion','Hamish Davis','Fred Rodriguez','Deven Robertson','Sandy Brock','Harry Edwards','Tyrell Dewar','Jack Hutchinson','Finlay Macrae','Jacob Newton','Milan Murdock','Jake Miles-Wrency','Oliver Francou','Marcus Herbert','Jack Viney','Trent Rivers',
-    'Heath Mellody', 'Jake Soutar', 'Harper Banfield'
+    'Heath Mellody', 'Jake Soutar', 'Harper Banfield', 'Cody Lee'
   ]},
   {id:'wbd',name:'Western Bulldogs',abbr:'WBD',zh:'WB',color:'#1b4f9c',clubText:'#fff',logo:'assets/logos/wbd.svg',listCap:44,players:[
     'Lachlan Carmichael','Cody Weightman','Marcus Bontempelli','Jedd Busslinger','Cooper Hynes','Rory Lobb','Matthew Kennedy','Ryley Sanders','Sam Darcy','Lachie Jaques','Rhylee West','Will Darcy','Jordan Croft',"James O'Donnell",'Connor Budarick','Ed Richards','Caleb May','Laitham Vandermeer','Buku Khamis','Louis Emmett','Josh Dolan','Joel Freijah','Will Lewis','Lachlan Bramble','Bailey Dale','Arthur Jones','Aaron Naughton','Bailey Williams','Luke Kennedy','Luke Cleary','Michael Sellwood','Sam Davidson','Tim English','Jordon Butts','Zak Butters','Finn Maginness','Hudson O\'Keeffe',
@@ -175,7 +175,7 @@ const PICKS_2029 = {
 };
 
 window.ATM_DATA = {
-  updated:'23 Nov 2026 — confirmed rookie draft selections added; future-pick ownership and user mock preserved',
+  updated:'23 Nov 2026 — rookie draft and confirmed category B NGA pre-listings added; future-pick ownership and user mock preserved',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -185,6 +185,8 @@ window.ATM_DATA = {
   picks2029:PICKS_2029,
   // Announced or AFL-reported moves awaiting formal registration (including draft re-selections).
   // Do not include these players in their destination club's registered roster until confirmed.
+  // Confirmed 23 November 2026 Category B NGA pre-listings (outside the Rookie Draft selections).
+  categoryBRookies2026:{date:'2026-11-23',source:'https://www.afl.com.au/news/1643642/rookie-draft-news-yarn-essendon-bombers-select-vfl-ruck-boston-dowling-with-no1-pick-at-rookie-draft/',selections:[{club:'wce',player:'Cody Lee',mechanism:'Next Generation Academy category B pre-listing'},{club:'fre',player:'Finlay Yeo',mechanism:'Next Generation Academy category B pre-listing'}]},
   rookieDraft2026:{date:'2026-11-23',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-rookie-draft-2026-live-updates-results-best-remaining-prospects-profiles-analysis/12s29aelicui41x3r606jn3t9v',selections:[{"pick":1,"club":"ess","player":"Boston Dowling"},{"pick":2,"club":"ric","player":"Steely Green"},{"pick":4,"club":"gws","player":"Jacob Marron"},{"pick":5,"club":"stk","player":"Dan Butler"},{"pick":6,"club":"col","player":"Harry DeMattia"},{"pick":8,"club":"car","player":"Marcus Prasad"},{"pick":9,"club":"wbd","player":"Riley Garcia"},{"pick":10,"club":"ade","player":"Cody Templeton"},{"pick":11,"club":"gee","player":"Max Downes"},{"pick":12,"club":"haw","player":"Albert MacGowan"},{"pick":14,"club":"fre","player":"Jaren Carr"},{"pick":15,"club":"bri","player":"Kai Parker"},{"pick":17,"club":"gws","player":"Kallan Dawson"},{"pick":18,"club":"stk","player":"Ryan Byrnes"},{"pick":22,"club":"gee","player":"Charlie Robbins"},{"pick":25,"club":"bri","player":"Koby Evans"},{"pick":31,"club":"bri","player":"Luke Lloyd"}],passes:[3,7,13,16,19,20,21,23,24,26,27,28,29,30]},
   pendingMovements:[
     {player:'Elijah Tsatas',from:'ess',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
