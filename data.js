@@ -58,7 +58,7 @@ const ATM_CLUBS = [
   ]},
   {id:'pa',name:'Port Adelaide',abbr:'PA',zh:'PORT',color:'#008aab',clubText:'#111',logo:'assets/logos/pa.svg',listCap:44,players:[
     'Connor Rozee','Sam Powell-Pepper','Todd Marshall','Joe Berry','Kane Farrell','Jase Burgoyne','Josh Sinn','Christian Moraes','Jack Lukosius','Miles Bergman','Jacob Wehr','Ollie Wines','Jack Whitlock','Jason Horne-Francis','Mitch Georgiades','Aliir Aliir','Logan Evans','Jordon Sweet','Brandon Zerk-Thatcher','Tom Cochrane','Esava Ratugolea','Willem Drew','Ewan Mackinlay','Harrison Ramm','Darcy Byrne-Jones','Lachie Jones','Joe Richards','Jack Watkins','Dante Visentini','Mitch Zadow',"Balyn O'Brien",'Josh Lai','Corey Durdin','Xavier Bamert','Alex Van Wyk','Luke Pedlar',
-    'Dougie Cochrane', 'Clancy Snell', 'Wil Malady', 'Wil Antrobus', 'Gabe Patterson', 'Angus White'
+    'Dougie Cochrane', 'Clancy Snell', 'Wil Malady', 'Wil Antrobus', 'Gabe Patterson', 'Angus White', 'Isaac Keeler'
   ]},
   {id:'ric',name:'Richmond',abbr:'RIC',zh:'RICH',color:'#f2d318',clubText:'#111',logo:'assets/logos/ric.svg',listCap:44,players:[
     'Nick Vlastuin','Jacob Hopper','Sam Lalor','Jack Ross','Sam Banks','Rhyan Mansell','Jonty Faull','Taj Hotton','Luke Trainor','Ben Miller','Hugo Ralphsmith','Tim Taranto','Jayden Short','Josh Smillie','Maurice Rioli','Josh Gibcus','Tom Lynch','Noah Balta','Sam Cumming','Judson Clarke','Sam Grlj','Toby Nankervis','Zane Peucker','Noah Roberts-Thomson','Kane McAuliffe','Jasper Alger','Tom Brown','Patrick Retschko','Harry Armstrong','Tom Sims','Kye Annand','Mykelti Lefau','Seth Campbell','Tom Burton','Patrick Carr','Campbell Gray',"Nathan O'Driscoll",'Kieren Briggs',
@@ -175,7 +175,7 @@ const PICKS_2029 = {
 };
 
 window.ATM_DATA = {
-  updated:'24 Nov 2026 — Cooper Craig-Peters Category B signing added; future-pick ownership and user mock preserved',
+  updated:'24 Nov 2026 — Isaac Keeler and Cooper Craig-Peters Category B signings added; future-pick ownership and user mock preserved',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -189,6 +189,7 @@ window.ATM_DATA = {
   categoryBRookies2026:{date:'2026-11-23',source:'https://www.afl.com.au/news/1643642/rookie-draft-news-yarn-essendon-bombers-select-vfl-ruck-boston-dowling-with-no1-pick-at-rookie-draft/',selections:[{club:'wce',player:'Cody Lee',mechanism:'Next Generation Academy category B pre-listing'},{club:'fre',player:'Finlay Yeo',mechanism:'Next Generation Academy category B pre-listing'}]},
   rookieDraft2026:{date:'2026-11-23',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-rookie-draft-2026-live-updates-results-best-remaining-prospects-profiles-analysis/12s29aelicui41x3r606jn3t9v',selections:[{"pick":1,"club":"ess","player":"Boston Dowling"},{"pick":2,"club":"ric","player":"Steely Green"},{"pick":4,"club":"gws","player":"Jacob Marron"},{"pick":5,"club":"stk","player":"Dan Butler"},{"pick":6,"club":"col","player":"Harry DeMattia"},{"pick":8,"club":"car","player":"Marcus Prasad"},{"pick":9,"club":"wbd","player":"Riley Garcia"},{"pick":10,"club":"ade","player":"Cody Templeton"},{"pick":11,"club":"gee","player":"Max Downes"},{"pick":12,"club":"haw","player":"Albert MacGowan"},{"pick":14,"club":"fre","player":"Jaren Carr"},{"pick":15,"club":"bri","player":"Kai Parker"},{"pick":17,"club":"gws","player":"Kallan Dawson"},{"pick":18,"club":"stk","player":"Ryan Byrnes"},{"pick":22,"club":"gee","player":"Charlie Robbins"},{"pick":25,"club":"bri","player":"Koby Evans"},{"pick":31,"club":"bri","player":"Luke Lloyd"}],passes:[3,7,13,16,19,20,21,23,24,26,27,28,29,30]},
   pendingMovements:[
+    {player:'Isaac Keeler',from:'stk',to:'pa',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1636611/port-adelaide-power-bolster-tall-stocks-with-signing-of-former-st-kilda-saint-isaac-keeler/amp'},
     {player:'Cooper Craig-Peters',from:'footscray',to:'wbd',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1644407/western-bulldogs-eye-another-ex-por-adelaide-power-mid-will-lorenz-overlooked-youngster-marcus-motton-in-pre-season-trial'},
     {player:'Elijah Tsatas',from:'ess',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
     {player:'Samson Ryan',from:'ric',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
