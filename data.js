@@ -82,7 +82,7 @@ const ATM_CLUBS = [
     'Lachlan Carmichael','Cody Weightman','Marcus Bontempelli','Jedd Busslinger','Cooper Hynes','Rory Lobb','Matthew Kennedy','Ryley Sanders','Sam Darcy','Lachie Jaques','Rhylee West','Will Darcy','Jordan Croft',"James O'Donnell",'Connor Budarick','Ed Richards','Caleb May','Laitham Vandermeer','Buku Khamis','Louis Emmett','Josh Dolan','Joel Freijah','Will Lewis','Lachlan Bramble','Bailey Dale','Arthur Jones','Aaron Naughton','Bailey Williams','Luke Kennedy','Luke Cleary','Michael Sellwood','Sam Davidson','Tim English','Jordon Butts','Zak Butters','Finn Maginness','Hudson O\'Keeffe',
     'Khaled El-Souki', 'Jack Riding', 'Sam Devers'
   ,
-    'Riley Garcia']}
+    'Riley Garcia', 'Cooper Craig-Peters']}
 ];
 
 const DVI = {1:3000,2:2481,3:2178,4:1962,5:1795,6:1659,7:1543,8:1443,9:1355,10:1276,11:1205,12:1140,13:1080,14:1024,15:973,16:924,17:879,18:836,19:796,20:757,21:721,22:686,23:653,24:621,25:590,26:561,27:533,28:505,29:479,30:454,31:429,32:405,33:382,34:360,35:338,36:317,37:297,38:277,39:257,40:238,41:220,42:202,43:184,44:167,45:150,46:134,47:118,48:102,49:86,50:71,51:57,52:42,53:28,54:14};
@@ -175,7 +175,7 @@ const PICKS_2029 = {
 };
 
 window.ATM_DATA = {
-  updated:'23 Nov 2026 — rookie draft and confirmed category B NGA pre-listings added; future-pick ownership and user mock preserved',
+  updated:'24 Nov 2026 — Cooper Craig-Peters Category B signing added; future-pick ownership and user mock preserved',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -189,6 +189,7 @@ window.ATM_DATA = {
   categoryBRookies2026:{date:'2026-11-23',source:'https://www.afl.com.au/news/1643642/rookie-draft-news-yarn-essendon-bombers-select-vfl-ruck-boston-dowling-with-no1-pick-at-rookie-draft/',selections:[{club:'wce',player:'Cody Lee',mechanism:'Next Generation Academy category B pre-listing'},{club:'fre',player:'Finlay Yeo',mechanism:'Next Generation Academy category B pre-listing'}]},
   rookieDraft2026:{date:'2026-11-23',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-rookie-draft-2026-live-updates-results-best-remaining-prospects-profiles-analysis/12s29aelicui41x3r606jn3t9v',selections:[{"pick":1,"club":"ess","player":"Boston Dowling"},{"pick":2,"club":"ric","player":"Steely Green"},{"pick":4,"club":"gws","player":"Jacob Marron"},{"pick":5,"club":"stk","player":"Dan Butler"},{"pick":6,"club":"col","player":"Harry DeMattia"},{"pick":8,"club":"car","player":"Marcus Prasad"},{"pick":9,"club":"wbd","player":"Riley Garcia"},{"pick":10,"club":"ade","player":"Cody Templeton"},{"pick":11,"club":"gee","player":"Max Downes"},{"pick":12,"club":"haw","player":"Albert MacGowan"},{"pick":14,"club":"fre","player":"Jaren Carr"},{"pick":15,"club":"bri","player":"Kai Parker"},{"pick":17,"club":"gws","player":"Kallan Dawson"},{"pick":18,"club":"stk","player":"Ryan Byrnes"},{"pick":22,"club":"gee","player":"Charlie Robbins"},{"pick":25,"club":"bri","player":"Koby Evans"},{"pick":31,"club":"bri","player":"Luke Lloyd"}],passes:[3,7,13,16,19,20,21,23,24,26,27,28,29,30]},
   pendingMovements:[
+    {player:'Cooper Craig-Peters',from:'footscray',to:'wbd',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1644407/western-bulldogs-eye-another-ex-por-adelaide-power-mid-will-lorenz-overlooked-youngster-marcus-motton-in-pre-season-trial'},
     {player:'Elijah Tsatas',from:'ess',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
     {player:'Samson Ryan',from:'ric',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
     {player:'Wil Parker',from:'col',to:'car',mechanism:'delisted free agent',status:'confirmed signed by Carlton',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.foxsports.com.au/afl/afl-2026-offseason-news-offseason-central-all-afl-list-changes-delisted-players-retirements-trades-draft-picks-and-draft-order-rookies-free-agents/news-story/60749636007fae6005535ca3bc5906a9'},
