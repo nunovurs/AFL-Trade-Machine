@@ -4,7 +4,7 @@
     console.error('ATM_DATA missing');
     return;
   }
-  const clubs = [...D.clubs].sort((a,b)=>a.name.localeCompare(b.name));
+  const clubs = [...D.clubs, ...(window.ATMExpansion?[window.ATMExpansion.club]:[])].sort((a,b)=>a.name.localeCompare(b.name));
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
   const playerPhoto=(name,cls='asset-player-photo')=>`<img class="${cls}" data-player-photo="${esc(name)}" src="assets/player-placeholder.svg" alt="${esc(name)}">`;
@@ -37,22 +37,23 @@
 
   let selected = ['fre','ric'];
   let trade = [];
-  const tabs = {};
+  const tabs = {tas:'picks'};
 
   function club(id){ return clubs.find(c=>c.id===id); }
   function playerValue(name){ return elite.has(name)?3600:stars.has(name)?2850:2200; }
   function futureIndicativeValue(round){ return ({1:1300,2:500,3:150,4:0})[round] ?? 0; }
   function roundForPick(n){ return Math.ceil(n/18); }
-  function contractText(name){
-    const c = contracts[name]; if(!c) return '';
+  function getContract(name,id){ const reported=window.ATMContracts?.lookup(name,id), known=contracts[name]; return known?{...reported,...known,status:reported?.expiry===known.expiry?reported.status:known.status}:reported; }
+  function contractText(name,id){
+    const c = getContract(name,id||clubs.find(x=>x.players.includes(name))?.id); if(!c) return '';
     const bits=[];
-    if(c.expiry) bits.push(`contract to ${c.expiry}`);
+    if(c.expiry) bits.push(`contract to ${c.expiry}`); if(c.provisional)bits.push('reported'); if(c.status&&c.status!=='Contracted')bits.push(c.status);
     if(c.salaryLow && c.salaryHigh) bits.push(`est. ${money(c.salaryLow)}–${money(c.salaryHigh)} p.a.`);
     else if(c.salaryEstimate) bits.push(`est. ${money(c.salaryEstimate)} p.a.`);
     return bits.join(' • ');
   }
   function playerAssets(c){
-    return [...c.players].sort((a,b)=>a.localeCompare(b)).map((name,i)=>({id:`${c.id}-p-${i}`,type:'player',name,value:playerValue(name),contract:contracts[name]||null,meta:`2026 listed player${contractText(name)?` • ${contractText(name)}`:''}`}));
+    return [...c.players].sort((a,b)=>a.localeCompare(b)).map((name,i)=>({id:`${c.id}-p-${i}`,type:'player',name,value:playerValue(name),contract:getContract(name,c.id)||null,meta:`2026 listed player${contractText(name)?` • ${contractText(name)}`:''}`}));
   }
   function originLabel(originId,ownerId){
     if(!club(originId)) return `owned by ${club(ownerId).name}`;
@@ -65,10 +66,11 @@
     });
   }
   function futurePickAssets(c,year){
-    const owned=year===2027?(D.picks2027?.[c.id]||[]):[1,2,3,4].map(r=>[r,c.id]);
+    if(c.id==='tas')return window.ATMExpansion.picks(year);
+    const owned=D['picks'+year]?.[c.id]||[];
     return owned.map(([round,origin],i)=>({id:`${c.id}-${year}-r${round}-${origin}-${i}`,type:'pick',year,round,origin,pick:null,points:null,value:futureIndicativeValue(round),name:`${year} ${club(origin)?.abbr||''} Round ${round}`,meta:`Future Round ${round} • DVI points TBD • ${originLabel(origin,c.id)}`}));
   }
-  function assets(c){ return [...playerAssets(c),...currentPickAssets(c),...futurePickAssets(c,2027),...futurePickAssets(c,2028)]; }
+  function assets(c){ return [...playerAssets(c),...futurePickAssets(c,2027),...futurePickAssets(c,2028),...futurePickAssets(c,2029)]; }
   function toast(msg){const t=$('#toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),1800);}
 
   function renderPicker(){
@@ -100,8 +102,8 @@
     const tab=tabs[c.id]||'players'; tabs[c.id]=tab;
     const list=assets(c).filter(a=>tab==='players'?a.type==='player':a.type==='pick');
     const outgoing=trade.filter(t=>t.from===c.id), incoming=trade.filter(t=>t.to===c.id);
-    const first=currentPickAssets(c).find(p=>p.round===1);
-    return `<article class="team-card" style="--club:${c.color};--clubText:${c.clubText||'#fff'}"><div class="team-card-head"><div class="team-title"><div class="team-logo-box"><span class="logo-fallback">${esc(c.abbr)}</span><img class="team-logo" src="${esc(c.logo)}" alt="${esc(c.name)} logo" onerror="this.style.display='none'"></div><div><div class="team-name">${esc(c.name)}</div><div class="team-rank">${first?`Current 2026 R1: Pick ${first.pick} • ${first.points.toLocaleString()} pts`:'No 2026 first-round pick currently owned'}</div></div></div>${selected.length>2?`<button class="remove-team" data-remove-team="${c.id}">×</button>`:''}</div><div class="team-tabs"><button class="team-tab ${tab==='players'?'active':''}" data-team="${c.id}" data-tab="players">PLAYERS</button><button class="team-tab ${tab==='picks'?'active':''}" data-team="${c.id}" data-tab="picks">DRAFT PICKS</button></div><div class="asset-tools"><input class="asset-search" data-team="${c.id}" placeholder="Search ${tab==='players'?'players':'2026 / 2027 / 2028 picks'}…"></div><div class="asset-list">${list.map(a=>assetRow(c,a)).join('')}</div><div class="movement-grid">${movementColumn('Incoming',incoming,'in')}${movementColumn('Outgoing',outgoing,'out')}</div></article>`;
+    const first=null;
+    return `<article class="team-card" style="--club:${c.color};--clubText:${c.clubText||'#fff'}"><div class="team-card-head"><div class="team-title"><div class="team-logo-box"><span class="logo-fallback">${esc(c.abbr)}</span><img class="team-logo" src="${esc(c.logo)}" alt="${esc(c.name)} logo" onerror="this.style.display='none'"></div><div><div class="team-name">${esc(c.name)}</div><div class="team-rank">${first?`Current 2026 R1: Pick ${first.pick} • ${first.points.toLocaleString()} pts`:c.id==='tas'?'2028 expansion • select draft picks':'2027–2029 future selections'}</div></div></div>${selected.length>2?`<button class="remove-team" data-remove-team="${c.id}">×</button>`:''}</div><div class="team-tabs"><button class="team-tab ${tab==='players'?'active':''}" data-team="${c.id}" data-tab="players">PLAYERS</button><button class="team-tab ${tab==='picks'?'active':''}" data-team="${c.id}" data-tab="picks">DRAFT PICKS</button></div><div class="asset-tools"><input class="asset-search" data-team="${c.id}" placeholder="Search ${tab==='players'?'players':'2027 / 2028 / 2029 picks'}…"></div><div class="asset-list">${list.map(a=>assetRow(c,a)).join('')}</div><div class="movement-grid">${movementColumn('Incoming',incoming,'in')}${movementColumn('Outgoing',outgoing,'out')}</div></article>`;
   }
   function renderBoard(){
     const board=$('#tradeBoard'); board.className=`trade-board cols-${selected.length}`; board.innerHTML=selected.map(id=>teamCard(club(id))).join('');
@@ -127,7 +129,7 @@
   }
   function renderRules(){
     const future=trade.filter(t=>t.asset.type==='pick'&&t.asset.year>2026).length;
-    const rules=[...selected.map(id=>listRule(club(id))),{s:'warn',t:'Player consent',x:'AFL player trades require player agreement. The simulator cannot verify consent.'},{s:future?'warn':'pass',t:'Future-pick rules',x:future?'Future selections are shown by current ownership; final trading restrictions and any later swaps still require official confirmation.':'No future selections included.'},{s:'warn',t:'Contracts / salary',x:'Contract expiry is shown where verified. Salary figures are media estimates unless a club or player has publicly disclosed them.'},{s:'warn',t:'Official approval',x:'AFL approval, final list categories, contract renegotiation and other mechanisms are not automatically verified.'}];
+    const rules=[...selected.map(id=>listRule(club(id))),...(selected.includes('tas')?[{s:'warn',t:'Tasmania expansion',x:'2027–29 concession picks and mini-draft rights are included. Marked assets must be traded or rolled forward where allowed; separate uncontracted signing allowance is not a player trade. 2028 list cap 46 excluding Category B and exempt pre-selections.'}]:[]),{s:'warn',t:'Player consent',x:'AFL player trades require player agreement. The simulator cannot verify consent.'},{s:future?'warn':'pass',t:'Future-pick rules',x:future?'Future selections are shown by current ownership; final trading restrictions and any later swaps still require official confirmation.':'No future selections included.'},{s:'warn',t:'Contracts / salary',x:'Contract expiry is shown where verified. Salary figures are media estimates unless a club or player has publicly disclosed them.'},{s:'warn',t:'Official approval',x:'AFL approval, final list categories, contract renegotiation and other mechanisms are not automatically verified.'}];
     $('#rulesPanel').innerHTML=rules.map(r=>`<div class="rule ${r.s}"><div class="rule-icon">${r.s==='pass'?'✓':r.s==='fail'?'×':'!'}</div><div><div class="rule-title">${esc(r.t)}</div><div class="rule-text">${esc(r.x)}</div></div></div>`).join('');
   }
   function renderSummary(){
@@ -188,8 +190,10 @@
   window.ATMToast = toast;
   window.TradeMachine = {
     render: renderAll,
+    getContract,
+    startTasTrade(id,name){if(!club(id)||id==='tas')return; if(!selected.includes(id)||!selected.includes('tas')){if(trade.length&&!window.confirm('Replace current trade with Tasmania and '+club(id).name+'?'))return;selected=[id,'tas'];trade=[];}const a=playerAssets(club(id)).find(x=>x.name===name);if(a&&!trade.some(t=>t.asset.id===a.id))trade.push({uid:crypto.randomUUID?crypto.randomUUID():String(Date.now()),from:id,to:'tas',asset:a});renderAll();},
     getTrade(){ return trade.map(t=>({from:t.from,to:t.to,asset:{...t.asset}})); },
-    setTrade(next){ trade=Array.isArray(next)?next.map(t=>({from:t.from,to:t.to,asset:{...t.asset}})):[]; const ids=[...new Set(trade.flatMap(t=>[t.from,t.to]).filter(Boolean))]; if(ids.length>=2)selected=ids.slice(0,4); renderAll(); },
+    setTrade(next){ trade=Array.isArray(next)?next.filter(t=>club(t.from)&&club(t.to)).map(t=>({uid:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),from:t.from,to:t.to,asset:{...t.asset}})):[]; const ids=[...new Set(trade.flatMap(t=>[t.from,t.to]).filter(Boolean))]; if(ids.length>=2)selected=ids.slice(0,4); renderAll(); },
     getIncomingPlayers(clubId){ return trade.filter(t=>t.to===clubId&&t.asset.type==='player').map(t=>({...t.asset,from:t.from})); },
     reset(){ trade=[]; selected=['fre','ric']; renderAll(); toast('Trade reset'); }
   };

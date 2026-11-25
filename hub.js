@@ -19,6 +19,7 @@
     if(view==='clubs')renderClubHub();
     if(view==='ladder')renderLadder();
     if(view==='fan')renderFan();
+    if(view==='contracts')window.ATMContracts?.render?.();
   }
   function edits(){return load('atm-news-edits-v1',{})}
   function applyEdit(n){var e=edits()[n.id]||{};return Object.assign({},n,e)}

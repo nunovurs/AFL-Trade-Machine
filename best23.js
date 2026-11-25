@@ -4,10 +4,11 @@
   const $=s=>document.querySelector(s);
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
   const toast=msg=>window.ATMToast?window.ATMToast(msg):console.log(msg);
-  const clubs=[...D.clubs].sort((a,b)=>a.name.localeCompare(b.name));
+  const clubs=[...D.clubs,...(window.ATMExpansion?[window.ATMExpansion.club]:[])].sort((a,b)=>a.name.localeCompare(b.name));
   const club=id=>clubs.find(c=>c.id===id);
 
   const CLUB_THEME={
+    tas:{primary:'#174c35',secondary:'#f3cf49',text:'#fff',selectorBg:'#174c35',selectorText:'#fff',bands:['#174c35','#f3cf49','#a9252b']},
     ade:{primary:'#f2c500',secondary:'#002b5c',text:'#111',selectorBg:'#002b5c',selectorText:'#fff',bands:['#002b5c','#d71920','#f2c500']},
     bri:{primary:'#f5c400',secondary:'#7b002c',text:'#111',selectorBg:'#7b002c',selectorText:'#fff',bands:['#7b002c','#0055a4','#f5c400']},
     car:{primary:'#071c3d',secondary:'#071c3d',text:'#fff',selectorBg:'#071c3d',selectorText:'#fff',bands:['#071c3d','#071c3d','#071c3d']},
@@ -78,6 +79,7 @@
       mode.style.setProperty('--selectorBg',t.selectorBg);mode.style.setProperty('--selectorText',t.selectorText);mode.style.setProperty('--selectorA',t.bands[0]);mode.style.setProperty('--selectorB',t.bands[1]);mode.style.setProperty('--selectorC',t.bands[2]);
     }
     el.innerHTML=`<span class="builder-logo-box"><img src="${esc(c.logo)}" alt="${esc(c.name)} logo"></span><span><strong>${esc(c.name)}</strong><small>${customList().length?`${customList().length} hypothetical player${customList().length!==1?'s':''} added`:'Current club list'}${delistedSet().size?` • ${delistedSet().size} delisted`:''}</small></span>`;
+    if(clubId==='tas'){const pool=allPlayers(),n=pool.filter(p=>p.source==='Expansion uncontracted assumption').length;el.querySelector('small').textContent='2028 hypothetical squad • '+pool.length+'/46 • expansion signings '+n+'/18';}
     if($('#best23Count'))$('#best23Count').textContent=`AFL ${selectedCount('afl')} / 23`;
     if($('#vflBest23Count'))$('#vflBest23Count').textContent=`VFL ${selectedCount('vfl')} / 23`;
   }
@@ -181,7 +183,7 @@
   function openModal(html){const m=$('#draftModal'),c=$('#draftModalCard');if(!m||!c)return;c.innerHTML=html;m.hidden=false;}
   function closeModal(){const m=$('#draftModal'),c=$('#draftModalCard');if(m)m.hidden=true;if(c)c.innerHTML='';}
   function addCustomPlayer(){
-    openModal(`<div class="modal-kicker">TEAM BUILDER ASSUMPTION</div><h3>Add a player to ${esc(club(clubId).name)}</h3><p>Add someone who is not on the current list so you can model a trade, draft or other hypothetical.</p><label class="modal-label">PLAYER NAME</label><input id="customPlayerName" class="modal-input" placeholder="Player name"><label class="modal-label">POSITION / ROLE</label><input id="customPlayerPosition" class="modal-input" placeholder="e.g. Key forward, midfielder"><label class="modal-label">ASSUMPTION SOURCE</label><select id="customPlayerSource" class="modal-select"><option>Trade assumption</option><option>Draft assumption</option><option>Custom assumption</option></select><div class="modal-actions"><button id="cancelCustomPlayer" class="ghost-btn">CANCEL</button><button id="saveCustomPlayer" class="primary-btn">ADD PLAYER</button></div>`);
+    openModal(`<div class="modal-kicker">TEAM BUILDER ASSUMPTION</div><h3>Add a player to ${esc(club(clubId).name)}</h3><p>Add someone who is not on the current list so you can model a trade, draft or other hypothetical.</p><label class="modal-label">PLAYER NAME</label><input id="customPlayerName" class="modal-input" placeholder="Player name"><label class="modal-label">POSITION / ROLE</label><input id="customPlayerPosition" class="modal-input" placeholder="e.g. Key forward, midfielder"><label class="modal-label">ASSUMPTION SOURCE</label><select id="customPlayerSource" class="modal-select"><option>Trade assumption</option><option>Draft assumption</option><option>Free agency assumption</option><option>Academy assumption</option><option>Pre-selection assumption</option><option>Undrafted assumption</option><option>VFL promotion assumption</option><option>Custom assumption</option></select><div class="modal-actions"><button id="cancelCustomPlayer" class="ghost-btn">CANCEL</button><button id="saveCustomPlayer" class="primary-btn">ADD PLAYER</button></div>`);
     $('#cancelCustomPlayer').onclick=closeModal;
     $('#saveCustomPlayer').onclick=()=>{const name=$('#customPlayerName').value.trim(),position=$('#customPlayerPosition').value.trim(),source=$('#customPlayerSource').value;if(!name)return toast('Enter a player name');if(rawAllPlayers().some(p=>p.name.toLowerCase()===name.toLowerCase()))return toast(`${name} is already in the squad`);customList().push({name,position,source});closeModal();render();toast(`${name} added to ${club(clubId).name}`);};
   }
@@ -203,7 +205,8 @@
   }
   function clearTeam(team){clubTeams()[team]=blank();activeTarget=null;render();toast(`${club(clubId).name} ${team==='afl'?'AFL':'VFL'} 23 cleared`);}
   function clearAll(){teams[clubId]={afl:blank(),vfl:blank()};activeTarget=null;render();toast(`${club(clubId).name} AFL and VFL teams cleared`);}
-  function render(){renderClubOptions();renderIdentity();renderFieldsOnly();renderPool();}
+  function render(){renderClubOptions();renderIdentity();renderFieldsOnly();renderPool();try{localStorage.setItem('atm-tas-builder-v1',JSON.stringify({team:teams.tas,extras:extras.tas,delisted:[...(delisted.tas||[])]}));}catch{}}
+  function addRecruit(p){clubId='tas';const existing=rawAllPlayers().find(x=>x.name.toLowerCase()===p.name.toLowerCase());if(existing){toast('Already in Tasmania squad');render();return true;}if(allPlayers().length>=46){toast('Indicative 46-player list cap reached');return false;}if(p.source==='Expansion uncontracted assumption'){const used=allPlayers().filter(x=>x.source===p.source);if(used.length>=18||used.some(x=>x.from===p.from)){toast('Expansion signing allowance already used for this club; use a trade or ordinary free agency if eligible.');return false;}}customList().push(p);activeTarget=null;render();toast(p.name+' added to Tasmania mock squad');return true;}
   function init(){
     $('#best23Search')&&($('#best23Search').oninput=renderPool);
     $('#copyBest23Btn')&&($('#copyBest23Btn').onclick=copyTeam);
@@ -217,6 +220,7 @@
   }
   function getState(){return {clubId,teams:JSON.parse(JSON.stringify(teams)),extras:JSON.parse(JSON.stringify(extras)),delisted:Object.fromEntries(Object.entries(delisted).map(([k,v])=>[k,[...v]]))};}
   function setState(next){if(!next)return;clubId=next.clubId||clubId;Object.keys(teams).forEach(k=>delete teams[k]);Object.assign(teams,next.teams||{});Object.keys(extras).forEach(k=>delete extras[k]);Object.assign(extras,next.extras||{});Object.keys(delisted).forEach(k=>delete delisted[k]);Object.entries(next.delisted||{}).forEach(([k,v])=>delisted[k]=new Set(v));activeTarget=null;render();}
-  window.Best23={render,clear:clearAll,getState,setState};
+  try{const saved=JSON.parse(localStorage.getItem('atm-tas-builder-v1')||'null');if(saved){if(saved.team)teams.tas=saved.team;if(Array.isArray(saved.extras))extras.tas=saved.extras;if(Array.isArray(saved.delisted))delisted.tas=new Set(saved.delisted);}}catch{}
+  window.Best23={render,clear:clearAll,getState,setState,addRecruit};
   init();
 })();
