@@ -138,23 +138,23 @@ const PICKS_2027 = {
 // Confirmed future-pick ownership, reconciled against AFL post-draft register (21 Nov 2026).
 const PICKS_2028 = {
   ade:[[1,'ade'],[2,'ade'],[3,'ade'],[4,'ade']],
-  bri:[[1,'bri'],[2,'bri'],[3,'bri'],[4,'bri']],
+  bri:[[1,'bri'],[2,'bri'],[4,'bri']],
   car:[[1,'car'],[2,'car'],[4,'car'],[4,'pa']],
-  col:[[1,'col'],[2,'col'],[4,'col']],
+  col:[[1,'col'],[4,'col']],
   ess:[[1,'ess'],[2,'ess'],[2,'gee'],[2,'haw'],[3,'ess']],
   fre:[[1,'fre'],[2,'fre'],[3,'fre'],[4,'fre']],
   gee:[[1,'gee'],[3,'gee'],[3,'stk'],[4,'gee'],[4,'ess']],
-  gcs:[[1,'haw'],[3,'gcs'],[4,'gcs']],
-  gws:[[1,'gws'],[2,'gws'],[3,'gws'],[4,'gws']],
+  gcs:[[1,'haw'],[3,'gcs'],[3,'gws'],[4,'gcs']],
+  gws:[[1,'gws'],[4,'gws']],
   haw:[[1,'gcs'],[2,'gcs'],[4,'haw']],
   mel:[[1,'mel'],[2,'wce'],[3,'mel']],
-  nm:[[2,'syd'],[3,'nm'],[3,'wce'],[4,'nm']],
+  nm:[[2,'syd'],[3,'nm'],[3,'wce'],[3,'pa'],[4,'nm']],
   pa:[[1,'pa'],[1,'wbd']],
   ric:[[1,'ric'],[2,'ric'],[3,'ric'],[3,'col'],[3,'bri'],[4,'ric']],
   stk:[[1,'stk'],[2,'stk'],[4,'stk']],
   syd:[[1,'syd'],[1,'nm'],[2,'nm'],[2,'col'],[2,'gws'],[3,'syd'],[3,'car'],[4,'syd']],
   wce:[[1,'wce'],[2,'mel'],[4,'wce']],
-  wbd:[[2,'wbd'],[2,'pa'],[3,'wbd'],[3,'haw'],[3,'pa'],[4,'wbd'],[4,'mel']]
+  wbd:[[2,'wbd'],[2,'pa'],[3,'wbd'],[3,'haw'],[4,'wbd'],[4,'mel']]
 };
 
 // Official AFL post-2026-draft register: all 2029 R1-R4 selections remain with their originating clubs.
@@ -180,7 +180,7 @@ const PICKS_2029 = {
 };
 
 window.ATM_DATA = {
-  updated:'27 Nov 2026 — Kobe Williams added; Cooper Craig-Peters signing confirmed; user mock preserved',
+  updated:'28 Nov 2026 — corrected 2028 future-pick ownership against AFL post-draft register; user mock preserved',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
