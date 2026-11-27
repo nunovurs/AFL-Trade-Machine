@@ -3,7 +3,7 @@ const ATM_CLUBS = [
     'Ben Keays','Sam Berry','Callum Ah Chee','Sid Draper','Daniel Curtin','Riley Thilthorpe','Josh Rachele','Nick Murray','Charlie Edwards','Jordan Dawson','Jake Soligo','Brayden Cook','Max Michalanney','Zac Taylor','Mitchell Hinge','Hugh Bond','Oscar Ryan','Izak Rankine','Josh Worrell','James Peatling','Mitchell Marsh','Luke Nankervis','Alex Neal-Bullen','Rory Laird','Wayne Milera','Billy Dowling','Darcy Fogarty','Indy Cotton','Archie Ludowyke','James Borlase','Finnbar Maley','Toby Murray','Hugo Hall-Kahan','Lachlan McAndrew',"Reilly O'Brien",'Isaac Cumming','Mark Keane',
     'Toby Krasna', 'Xavier Ladbrook', 'Sam Tassone'
   ,
-    'Cody Templeton', 'Harry Cunningham'
+    'Cody Templeton', 'Harry Cunningham', 'Kobe Williams'
   ]},
   {id:'bri',name:'Brisbane',abbr:'BRI',zh:'BL',color:'#7b002c',clubText:'#fff',logo:'assets/logos/bri.svg',listCap:44,players:[
     'Kai Lohmann','Sam Draper','Jaspa Fletcher','Oscar Allen','Josh Dunkley','Hugh McCluggage','Jarrod Berry','Will Ashcroft','Levi Ashcroft','Lincoln McCarthy','Tom Doedee','Logan Morris','Daniel Annable','Dayne Zorko','Cam Rayner','Zane Zakostelsky','Ty Gallop','Charlie Cameron','Henry Smith','Conor McKenna','Darcy Gardiner','James Tunstill','Eric Hipwood','Harris Andrews','Darcy Fort','Zac Bailey','Shadeau Brain','Ryan Lester','Reece Torrent','Cody Curtin','Bruce Reville','Ben Murphy','Jack Payne','Tai Hayes','Noah Answerth','Darcy Wilmot',
@@ -180,7 +180,7 @@ const PICKS_2029 = {
 };
 
 window.ATM_DATA = {
-  updated:'25 Nov 2026 — nine additional confirmed 24 November signings added; user mock preserved',
+  updated:'27 Nov 2026 — Kobe Williams added; Cooper Craig-Peters signing confirmed; user mock preserved',
   clubs:ATM_CLUBS,
   dvi:DVI,
   picks2026:PICKS_2026,
@@ -194,6 +194,7 @@ window.ATM_DATA = {
   categoryBRookies2026:{date:'2026-11-23',source:'https://www.afl.com.au/news/1643642/rookie-draft-news-yarn-essendon-bombers-select-vfl-ruck-boston-dowling-with-no1-pick-at-rookie-draft/',selections:[{club:'wce',player:'Cody Lee',mechanism:'Next Generation Academy category B pre-listing'},{club:'fre',player:'Finlay Yeo',mechanism:'Next Generation Academy category B pre-listing'}]},
   rookieDraft2026:{date:'2026-11-23',source:'https://www.foxsports.com.au/en-AU/news/australian-rules/afl-rookie-draft-2026-live-updates-results-best-remaining-prospects-profiles-analysis/12s29aelicui41x3r606jn3t9v',selections:[{"pick":1,"club":"ess","player":"Boston Dowling"},{"pick":2,"club":"ric","player":"Steely Green"},{"pick":4,"club":"gws","player":"Jacob Marron"},{"pick":5,"club":"stk","player":"Dan Butler"},{"pick":6,"club":"col","player":"Harry DeMattia"},{"pick":8,"club":"car","player":"Marcus Prasad"},{"pick":9,"club":"wbd","player":"Riley Garcia"},{"pick":10,"club":"ade","player":"Cody Templeton"},{"pick":11,"club":"gee","player":"Max Downes"},{"pick":12,"club":"haw","player":"Albert MacGowan"},{"pick":14,"club":"fre","player":"Jaren Carr"},{"pick":15,"club":"bri","player":"Kai Parker"},{"pick":17,"club":"gws","player":"Kallan Dawson"},{"pick":18,"club":"stk","player":"Ryan Byrnes"},{"pick":22,"club":"gee","player":"Charlie Robbins"},{"pick":25,"club":"bri","player":"Koby Evans"},{"pick":31,"club":"bri","player":"Luke Lloyd"}],passes:[3,7,13,16,19,20,21,23,24,26,27,28,29,30]},
   pendingMovements:[
+    {player:'Kobe Williams',from:'Western Jets',to:'ade',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-27',source:'https://www.afc.com.au/news/2170321/adelaide-signs-category-b-rookie-kobe-williams'},
     {player:'Cameron Maynard',from:'south fremantle',to:'ric',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1644586/ten-players-find-new-afl-homes-in-signing-flurry'},
     {player:'James Bell',from:'syd',to:'gws',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1644586/ten-players-find-new-afl-homes-in-signing-flurry'},
     {player:'Liam Jones',from:'wbd',to:'gcs',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1644586/ten-players-find-new-afl-homes-in-signing-flurry'},
@@ -203,7 +204,7 @@ window.ATM_DATA = {
     {player:'Sonny Smiler',from:'nt academy',to:'col',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1644586/ten-players-find-new-afl-homes-in-signing-flurry'},
     {player:'Jai Leach',from:'Oakleigh Chargers',to:'car',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-26',source:'https://www.carltonfc.com.au/news/2169869/jais-a-blue-carlton-welcomes-jai-leach'},
     {player:'Isaac Keeler',from:'stk',to:'pa',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1636611/port-adelaide-power-bolster-tall-stocks-with-signing-of-former-st-kilda-saint-isaac-keeler/amp'},
-    {player:'Cooper Craig-Peters',from:'footscray',to:'wbd',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-24',source:'https://www.afl.com.au/news/1644407/western-bulldogs-eye-another-ex-por-adelaide-power-mid-will-lorenz-overlooked-youngster-marcus-motton-in-pre-season-trial'},
+    {player:'Cooper Craig-Peters',from:'footscray',to:'wbd',mechanism:'Category B First Nations rookie',status:'confirmed signed',announced:'2026-11-27',source:'https://www.westernbulldogs.com.au/news/2170230/afl-list-update-cooper-craig-peters'},
     {player:'Elijah Tsatas',from:'ess',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
     {player:'Samson Ryan',from:'ric',to:'nm',mechanism:'delisted free agent',status:'confirmed signed by North Melbourne',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.zerohanger.com/north-melbourne-confirm-trios-arrival-as-afl-delisted-free-agents-186941/'},
     {player:'Wil Parker',from:'col',to:'car',mechanism:'delisted free agent',status:'confirmed signed by Carlton',announced:'2026-11-04',registrationWindowOpens:'2026-11-02',source:'https://www.foxsports.com.au/afl/afl-2026-offseason-news-offseason-central-all-afl-list-changes-delisted-players-retirements-trades-draft-picks-and-draft-order-rookies-free-agents/news-story/60749636007fae6005535ca3bc5906a9'},
